@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^(www\.)?proarc\.ae
+RewriteRule ^(.*)$ https://www.proarc.ae/$1 [R,L]
