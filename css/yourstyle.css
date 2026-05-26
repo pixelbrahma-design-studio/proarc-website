@@ -423,11 +423,46 @@ footer {
   .dec-text { font-size: 26px; padding-top: 28px; }
 }
 @media only screen and (max-width: 756px) {
-  .header-title { display: block; }  /* keep but centered */
+  .header-title { display: block; }
   .footer-social li a i { display: block; font-size: 13px; }
   .footer-social li a { width: 36px; height: 36px; }
   .wrapper-inner { padding: 0 28px; }
   .dec-text { font-size: 22px; padding-top: 24px; }
+
+  /* Footer social — top & bottom breathing room */
+  .footer-social { padding: 6px 0; }
+
+  /* About — reduce top padding from 80px to 20px on mobile */
+  .align-content { padding-top: 20px; padding-bottom: 40px; }
+
+  /* Portfolio filter tabs — wrap cleanly with consistent gaps */
+  .filter-vis-line .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding: 14px 16px !important;
+    align-items: center;
+  }
+  .filter-vis-line .gallery-filters a { margin-right: 0 !important; line-height: 1.6; }
+
+  /* Portfolio grid labels — left spacing */
+  .grid-item { padding-left: 12px; }
+
+  /* Portfolio detail — equal top & bottom padding (top was 60px, bottom 40px) */
+  .fixed-info-container { padding: 40px 20px !important; }
+
+  /* Services — full-bleed images, first image touches header, content padding */
+  .services-holder { margin-top: 0; margin-bottom: 16px; }
+  .services-item { padding: 0 0 28px 0 !important; }
+  .serv-img {
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 56vw;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+  .services-box-info { padding: 0 20px; }
 }
 @media only screen and (max-width: 540px) {
   .nav-button { left: 20px; }
