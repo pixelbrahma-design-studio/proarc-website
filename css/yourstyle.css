@@ -429,6 +429,9 @@ footer {
   .wrapper-inner { padding: 0 28px; }
   .dec-text { font-size: 22px; padding-top: 24px; }
 
+  /* Nav menu — larger font on mobile */
+  .nav-inner nav li a { font-size: 16px; letter-spacing: 0.12em; }
+
   /* Footer social — top & bottom breathing room */
   .footer-social { padding: 6px 0; }
 
