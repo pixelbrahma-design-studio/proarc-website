@@ -439,11 +439,15 @@ footer {
   .filter-vis-line .gallery-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px 28px;
-    padding: 16px !important;
+    gap: 14px 32px;
+    padding: 20px 16px !important;
     align-items: center;
   }
-  .filter-vis-line .gallery-filters a { margin-right: 0 !important; line-height: 1.6; }
+  .filter-vis-line .gallery-filters a {
+    margin-right: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.6;
+  }
 
   /* Portfolio grid labels — left spacing */
   .grid-item { padding-left: 12px; }
