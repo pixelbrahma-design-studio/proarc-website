@@ -152,9 +152,6 @@ footer {
 .anim-button span, .anim-button i { transition: all 0.25s ease; }
 
 /* ------- Portfolio Grid ------- */
-/* 3-column default (more spacious than original 4) */
-.gallery-item, .grid-sizer { width: 33.333%; }
-
 /* Filter tabs */
 .filter-vis-line { padding-left: 0; margin-bottom: 0; }
 .filter-vis-line .gallery-filters { background: var(--bg); padding: 16px; border-bottom: 1px solid var(--line); }
