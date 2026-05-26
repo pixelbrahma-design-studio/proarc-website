@@ -206,8 +206,21 @@ footer {
    CONTENT / BODY AREAS
    ================================================ */
 .content { background: var(--bg); }
-.wrapper-inner { background: var(--bg); padding: 0 72px; }
-.align-content { top: 50%; }
+.wrapper-inner {
+  background: var(--bg);
+  padding: 0 72px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* Disable JS vertical centering — use padding for top/bottom breathing room */
+.align-content {
+  top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 80px;
+  padding-bottom: 72px;
+  float: left;
+  width: 100%;
+}
 .small-container { max-width: 540px; }
 
 /* ================================================
