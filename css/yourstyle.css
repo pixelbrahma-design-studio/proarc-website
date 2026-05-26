@@ -58,32 +58,39 @@ header {
 .nav-button.cmenu .ncs { transform: rotate(45deg) translate(-4px, -5px); margin-bottom: 0; }
 .nav-button.cmenu .nbs { opacity: 0; width: 0; }
 
-/* Center MENU label — hide the rogue anchor arrow */
+/* MENU label — left side, close to hamburger */
 .header-title {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 70px;   /* 28px offset + 24px hamburger width + 18px gap */
+  right: auto;
   top: 0;
   line-height: 60px;
-  text-align: center;
+  text-align: left;
   pointer-events: none;
   z-index: 5;
 }
 .header-title h2 {
   display: inline;
   font-family: var(--font);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.5);
   pointer-events: auto;
 }
-/* Hide the empty anchor that renders an orange arrow from theme plugins */
+/* Kill the rogue empty anchor that renders as an orange arrow from theme plugins */
 .header-title h2 a {
   display: none !important;
-  visibility: hidden;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  font-size: 0 !important;
 }
+.header-title h2 a::before,
+.header-title h2 a::after { display: none !important; content: none !important; }
 .header-title h2:hover { text-decoration: none; }
 
 /* ================================================
@@ -126,7 +133,8 @@ footer {
 }
 
 /* Social icons — circular pill style */
-.footer-social { display: flex; align-items: center; gap: 8px; }
+.footer-social { display: block; }
+.footer-social ul { display: flex; flex-direction: row; align-items: center; gap: 8px; list-style: none; padding: 0; margin: 0; }
 .footer-social li { float: none; display: flex; }
 .footer-social li a {
   display: flex; align-items: center; justify-content: center;
@@ -208,13 +216,14 @@ footer {
    ================================================ */
 .dec-text {
   font-family: var(--font);
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: 30px;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
   text-transform: none;
   color: var(--text);
-  padding-bottom: 28px;
+  padding-top: 36px;
+  padding-bottom: 20px;
   float: left;
   width: 100%;
   text-align: left;
@@ -304,7 +313,7 @@ footer {
 /* ================================================
    SERVICES PAGE
    ================================================ */
-.services-holder { margin-top: 48px; }
+.services-holder { margin-top: 48px; margin-bottom: 48px; }
 .services-item { background: var(--bg); padding: 80px 0; margin-bottom: 0; border-bottom: 1px solid var(--line); }
 .services-item:last-child { border-bottom: none; }
 .services-box-info h4 {
@@ -398,14 +407,14 @@ footer {
   .gallery-item { width: 50% !important; }
   .wrapper-inner { padding: 0 40px; }
   .fixed-info-container { padding: 60px 24px 40px; }
-  .dec-text { font-size: clamp(2rem, 4vw, 3rem); }
+  .dec-text { font-size: 26px; padding-top: 28px; }
 }
 @media only screen and (max-width: 756px) {
   .header-title { display: block; }  /* keep but centered */
   .footer-social li a i { display: block; font-size: 13px; }
   .footer-social li a { width: 36px; height: 36px; }
   .wrapper-inner { padding: 0 28px; }
-  .dec-text { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+  .dec-text { font-size: 22px; padding-top: 24px; }
 }
 @media only screen and (max-width: 540px) {
   .nav-button { left: 20px; }
