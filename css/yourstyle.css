@@ -435,12 +435,12 @@ footer {
   /* About — reduce top padding from 80px to 20px on mobile */
   .align-content { padding-top: 20px; padding-bottom: 40px; }
 
-  /* Portfolio filter tabs — wrap cleanly with consistent gaps */
+  /* Portfolio filter tabs — wrap with generous spacing */
   .filter-vis-line .gallery-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 18px;
-    padding: 14px 16px !important;
+    gap: 12px 28px;
+    padding: 16px !important;
     align-items: center;
   }
   .filter-vis-line .gallery-filters a { margin-right: 0 !important; line-height: 1.6; }
@@ -463,6 +463,9 @@ footer {
     margin-top: 0;
   }
   .services-box-info { padding: 0 20px; }
+
+  /* Portfolio detail — full-bleed images (remove scroll-box side padding) */
+  .scroll-box { padding: 10px 0; }
 }
 @media only screen and (max-width: 540px) {
   .nav-button { left: 20px; }
