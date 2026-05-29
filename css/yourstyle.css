@@ -294,7 +294,8 @@ footer {
   transition: color 0.2s, border-color 0.2s;
 }
 .res-filter:hover,
-.res-filter.res-filter-active {
+.res-filter.res-filter-active,
+.res-filter.gallery-filter-active {
   color: var(--text);
   border-bottom-color: var(--text);
   text-decoration: none;

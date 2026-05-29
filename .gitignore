@@ -14,3 +14,7 @@ php/error_log
 cgi-bin/error_log
 error_log
 .ftpquota
+
+# Raw source asset folders (cleaned copies live in images/folio/projects)
+/Apartment building/
+/High rise residential towers/
