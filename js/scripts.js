@@ -305,6 +305,7 @@ function initDogma() {
     };
     $("#wrapper").niceScroll(wn);
 // Map  ------------------
+    if ($("#map-canvas").length && window.google && window.google.maps) {
     $("#map-canvas").gmap3({
         action: "init",
         marker: {
@@ -435,6 +436,7 @@ function initDogma() {
             }
         }
     });
+    }
 //  Contact form ------------------
     $("#contactform").submit(function() {
         var a = $(this).attr("action");
@@ -457,10 +459,10 @@ function initDogma() {
     $("#contactform input, #contactform textarea").keyup(function() {
         $("#message").slideUp(1500);
     });
-    $(".close-contact").on("click", function() {
+    $(".close-contact").off("click.contact").on("click.contact", function() {
         $(".contact-form-holder").removeClass("visform");
     });
-    $(".showform").on("click", function(a) {
+    $(".showform").off("click.contact").on("click.contact", function(a) {
         a.preventDefault();
         $(".contact-form-holder").addClass("visform");
     });
@@ -482,11 +484,11 @@ function initDogma() {
         nh.removeClass("vismen");
         no.removeClass("visover");
     }
-    cm.on("click", function() {
+    cm.off("click.navmenu").on("click.navmenu", function() {
         if (nh.hasClass("isDown")) showmenu(); else hidemenu();
         hideShare();
     });
-    no.on("click", function() {
+    no.off("click.navmenu").on("click.navmenu", function() {
         hidemenu();
         hideShare();
     });
@@ -519,7 +521,7 @@ function initDogma() {
             $(".share-container ").addClass("vissc");
         }, 400);
     }
-    $(".show-share").on("click", function(a) {
+    $(".show-share").off("click.navmenu").on("click.navmenu", function(a) {
         hidemenu();
         showShare();
     });
