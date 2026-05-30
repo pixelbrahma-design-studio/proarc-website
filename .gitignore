@@ -18,3 +18,5 @@ error_log
 # Raw source asset folders (cleaned copies live in images/folio/projects)
 /Apartment building/
 /High rise residential towers/
+/Commercial/
+node_modules/

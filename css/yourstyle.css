@@ -484,9 +484,25 @@ footer {
   /* About — reduce top padding from 80px to 20px on mobile */
   .align-content { padding-top: 20px; padding-bottom: 40px; }
 
-  /* Residential sub-filters on mobile */
-  .residential-subfilters { padding: 10px 12px; }
-  .res-filter { font-size: 9px; margin-right: 16px; }
+  /* Residential sub-filters on mobile — bigger, spaced, like main tabs */
+  .residential-subfilters {
+    display: none;
+    padding: 16px;
+  }
+  .residential-subfilters.is-visible,
+  .gallery-filters:has(.gallery-filter[data-filter=".residential"].gallery-filter-active) + .residential-subfilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: center;
+  }
+  .res-filter {
+    float: none;
+    margin-right: 0;
+    font-size: 11px;
+    line-height: 1.6;
+    padding-bottom: 5px;
+  }
 
   /* Portfolio filter tabs — wrap with generous spacing */
   .filter-vis-line .gallery-filters {
