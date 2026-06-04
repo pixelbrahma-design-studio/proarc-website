@@ -7,7 +7,8 @@
 
 /* ------- Tokens ------- */
 :root {
-  --font:    'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  /* Apple-style stack: real SF Pro on Apple devices, Inter elsewhere */
+  --font:    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --bg:      #ffffff;
   --text:    #1d1d1f;
   --muted:   #6e6e73;
@@ -19,16 +20,40 @@
 }
 
 /* ------- Base ------- */
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { font-family: var(--font); font-weight: 400; font-size: 15px; color: var(--text); background: var(--bg); }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.4706;
+  letter-spacing: -0.022em;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Apple-style optical kerning & ligatures */
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-kerning: normal;
+}
 
-/* ------- Typography ------- */
+/* ------- Typography — Apple HIG type ramp -------
+   Apple scales tracking with size: tighter (more negative) as text grows.
+   Body = SF Pro Text 17px / 1.53 / -0.022em. Display headings = SF Pro Display. */
 h1,h2,h3,h4,h5,h6 { font-family: var(--font); color: var(--text); }
-h1 { font-size: clamp(2.8rem,6vw,5.5rem);  font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; }
-h2 { font-size: clamp(2.2rem,4.5vw,4rem);  font-weight: 600; line-height: 1.1;  letter-spacing: -0.035em; }
-h3 { font-size: clamp(1.6rem,3vw,2.4rem);  font-weight: 600; line-height: 1.18; letter-spacing: -0.025em; }
-h4 { font-size: 1.1rem; font-weight: 500;  line-height: 1.35; letter-spacing: -0.01em; }
-p  { font-family: var(--font); font-size: 16px; line-height: 1.8; color: var(--muted); font-weight: 400; padding-bottom: 14px; text-align: left; }
+/* Large Title */
+h1 { font-size: clamp(2.8rem,6vw,5.5rem);  font-weight: 700; line-height: 1.05;  letter-spacing: -0.015em; }
+/* Title 1 */
+h2 { font-size: clamp(2.2rem,4.5vw,4rem);  font-weight: 600; line-height: 1.08;  letter-spacing: -0.014em; }
+/* Title 2 / 3 */
+h3 { font-size: clamp(1.6rem,3vw,2.4rem);  font-weight: 600; line-height: 1.14;  letter-spacing: -0.012em; }
+/* Headline */
+h4 { font-size: 1.0625rem; font-weight: 600; line-height: 1.4706; letter-spacing: -0.022em; }
+/* Body */
+p  { font-family: var(--font); font-size: 17px; line-height: 1.5294; color: var(--muted); font-weight: 400; letter-spacing: -0.022em; padding-bottom: 1.2em; text-align: left; }
 
 /* ------- Loader ------- */
 .tm-loader { animation: pa-spin 0.75s linear infinite; }
@@ -379,7 +404,7 @@ footer {
   text-transform: none; letter-spacing: -0.025em;
   color: var(--text); padding-bottom: 16px;
 }
-.services-box-info p { font-size: 15px; line-height: 1.75; }
+.services-box-info p { font-size: 16px; line-height: 1.5; letter-spacing: -0.02em; }
 .services-box-info ul { padding-left: 0; }
 .services-box-info ul li {
   font-family: var(--font); font-size: 14px; font-weight: 400;
