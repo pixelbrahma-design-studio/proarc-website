@@ -694,4 +694,49 @@ $(function() {
 function readyFunctions() {
     initDogma();
     initvideo();
+    initGolden();
+}
+
+// Golden refresh — nav scroll border + opacity-only fade-in.
+// Opacity only (never transform) so Isotope masonry positioning is untouched.
+function initGolden() {
+    "use strict";
+    var header = document.querySelector("header");
+
+    // Nav border on scroll. The theme scrolls inside #wrapper (niceScroll) on
+    // some pages and on window for others — listen to both, guarded once.
+    function onScroll(y) {
+        if (header) header.classList.toggle("scrolled", y > 20);
+    }
+    if (!window._goldenScroll) {
+        window._goldenScroll = true;
+        window.addEventListener("scroll", function () { onScroll(window.scrollY || 0); }, { passive: true });
+        document.addEventListener("scroll", function (e) {
+            var t = e.target;
+            if (t && t.scrollTop != null) onScroll(t.scrollTop);
+        }, true);
+    }
+
+    // Fade-in content sections (NOT .gallery-item — protects masonry).
+    var targets = document.querySelectorAll(
+        ".fixed-info-container, .services-item, .align-content section, .dec-text"
+    );
+    if (!targets.length) return;
+    if (!("IntersectionObserver" in window)) {
+        targets.forEach(function (el) { el.classList.add("golden-fade", "in"); });
+        return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    targets.forEach(function (el) {
+        if (el.classList.contains("golden-fade")) return;
+        el.classList.add("golden-fade");
+        io.observe(el);
+        // Hard safety: never leave content invisible, even if the observer
+        // root is a niceScroll-transformed container that doesn't intersect.
+        setTimeout(function () { el.classList.add("in"); }, 900);
+    });
 }
