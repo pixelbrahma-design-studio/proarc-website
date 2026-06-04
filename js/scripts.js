@@ -689,6 +689,16 @@ $(function() {
             readyFunctions();
         }
     });
+    // Residential sub-filter tabs (portfolio). Bound here — AFTER jQuery is
+    // loaded — and delegated on document, so it works on direct page loads
+    // (the old inline #wrapper script ran before jQuery and silently failed)
+    // and survives AJAX navigation.
+    $(document).off("click.resfilt").on("click.resfilt", ".res-filter", function() {
+        var filter = $(this).data("filter");
+        $(".gallery-items").isotope({ filter: filter });
+        $(".res-filter").removeClass("gallery-filter-active");
+        $(this).addClass("gallery-filter-active");
+    });
 });
 // Init all functions  ------------------
 function readyFunctions() {

@@ -398,6 +398,14 @@ footer {
 /* ================================================
    PROJECTS GRID
    ================================================ */
+/* Keep the filter bar (and residential sub-tabs) above the Isotope grid so
+   clicks always land on the tabs, never on an overlapping absolutely-
+   positioned gallery item. */
+.filter-holder, .filter-vis-line { position: relative; z-index: 6; }
+.residential-subfilters { position: relative; z-index: 6; }
+.res-filter { position: relative; z-index: 6; pointer-events: auto; }
+.gallery-items { position: relative; z-index: 1; clear: both; }
+
 /* Filter tabs (brief .filter-tab → .gallery-filter) */
 .filter-vis-line { padding-left: 0; margin-bottom: 0; }
 .filter-vis-line .gallery-filters {

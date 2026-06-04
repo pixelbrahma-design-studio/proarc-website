@@ -652,15 +652,6 @@
                     <!-- share end -->
                 </div>
                 <!-- Content holder  end -->
-            <!-- Sub-filter script inside #wrapper so core.js executes it on every AJAX load -->
-            <script type="text/javascript">
-            $(document).off('click.resfilt').on('click.resfilt', '.res-filter', function() {
-                var filter = $(this).data('filter');
-                $('.gallery-items').isotope({ filter: filter });
-                $('.res-filter').removeClass('gallery-filter-active');
-                $(this).addClass('gallery-filter-active');
-            });
-            </script>
             </div>
             <!-- wrapper end -->
             <!--=============== footer ===============-->
