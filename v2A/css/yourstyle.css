@@ -701,3 +701,91 @@ footer {
   .cs-related-grid { grid-template-columns: 1fr; gap: var(--space-3); }
   .cs-intent { padding: 0 var(--space-3); }
 }
+
+/* ====================================================================
+   v2A — ABOUT AUTHORITY REBUILD (Step 4B)
+   ==================================================================== */
+.content.about-v2 { float: left; width: 100%; background: var(--bg); }
+.ab-statement { background: #111; min-height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: var(--space-6) var(--space-7); }
+.ab-quote { font-family: var(--display); font-style: italic; font-weight: 300; font-size: var(--text-xl); line-height: 1.4; color: #fff; max-width: 48ch; margin: 0; text-align: center; }
+.ab-attrib { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-top: var(--space-4); }
+.ab-numbers { display: flex; max-width: 1240px; margin: var(--space-6) auto; padding: 0 var(--space-5); gap: var(--space-5); }
+.ab-number { flex: 1; border-top: 0.5px solid var(--line); padding-top: var(--space-3); }
+.ab-num { display: block; font-family: var(--display); font-weight: 300; font-size: 56px; color: #111; line-height: 1; }
+.ab-num-label { display: block; font-family: var(--font); font-weight: 300; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #888; margin-top: var(--space-2); }
+.ab-story { display: flex; max-width: 1240px; margin: var(--space-6) auto; padding: 0 var(--space-5); gap: var(--space-5); align-items: stretch; }
+.ab-story-img { flex: 0 0 61.8%; min-height: 460px; background-size: cover; background-position: center; }
+.ab-story-text { flex: 0 0 calc(38.2% - var(--space-5)); }
+.ab-story-head { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); margin: 0 0 var(--space-3); letter-spacing: 0.04em; }
+.ab-story-text p { font-size: var(--text-base); line-height: 1.75; max-width: 52ch; }
+.ab-expertise { background: #f8f7f5; padding: var(--space-6) var(--space-5); margin: var(--space-6) 0; }
+.ab-sectors { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); max-width: 1240px; margin: var(--space-4) auto 0; }
+.ab-sector { border-left: 1px solid rgba(139,32,16,0.3); padding-left: var(--space-3); transition: border-color 0.3s ease; }
+.ab-sector:hover { border-left-color: rgba(139,32,16,0.8); }
+.ab-sector-name { font-family: var(--font); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: 0 0 6px; }
+.ab-sector-desc { font-size: 14px; color: #666; max-width: none; padding: 0; }
+.ab-timeline-wrap { max-width: 1240px; margin: var(--space-6) auto; padding: 0 var(--space-5); }
+.ab-timeline { display: flex; gap: var(--space-5); overflow-x: auto; border-top: 0.5px solid #ddd; padding-top: var(--space-4); margin-top: var(--space-4); }
+.ab-milestone { flex: 0 0 auto; min-width: 150px; }
+.ab-year { display: block; font-family: var(--display); font-weight: 300; font-size: 28px; color: #111; }
+.ab-proj { display: block; font-family: var(--font); font-weight: 400; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-top: 6px; }
+.ab-note { display: block; font-family: var(--font); font-weight: 300; font-size: 12px; color: #888; margin-top: 4px; }
+.ab-approach { max-width: 1000px; margin: var(--space-6) auto var(--space-7); padding: 0 var(--space-5); }
+.ab-principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--space-4); }
+.ab-principle { padding: 0 var(--space-4); border-left: 0.5px solid var(--line); }
+.ab-principle:first-child { border-left: none; padding-left: 0; }
+.ab-principle-title { font-family: var(--font); font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #111; margin: 0 0 var(--space-2); }
+.ab-principle-desc { font-size: 14px; color: #666; max-width: none; padding: 0; }
+@media (max-width: 768px) {
+  .ab-statement { padding: var(--space-5) var(--space-4); }
+  .ab-quote { font-size: var(--text-lg); }
+  .ab-numbers { flex-wrap: wrap; gap: var(--space-4); }
+  .ab-number { flex: 0 0 calc(50% - var(--space-2)); }
+  .ab-story { flex-direction: column; }
+  .ab-story-img { min-height: 300px; }
+  .ab-sectors { grid-template-columns: 1fr; }
+  .ab-principles { grid-template-columns: 1fr; gap: var(--space-4); }
+  .ab-principle { border-left: none; padding-left: 0; }
+}
+
+/* ====================================================================
+   v2A — JOURNAL (Step 4C)
+   ==================================================================== */
+.content.journal-listing, .content.journal-article { float: left; width: 100%; background: var(--bg); }
+.jr-listing-head { text-align: center; padding: var(--space-7) var(--space-5) var(--space-5); }
+.jr-listing-title { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); margin: 0; letter-spacing: 0.04em; }
+.jr-listing-sub { font-family: var(--font); font-weight: 300; font-size: var(--text-base); color: #888; max-width: none; margin: var(--space-2) auto 0; }
+.jr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-5); max-width: 1240px; margin: 0 auto var(--space-7); padding: 0 var(--space-5); }
+.jr-card { display: block; text-decoration: none; }
+.jr-card-img { aspect-ratio: 16/9; background: #e8e6e1; margin-bottom: var(--space-3); }
+.jr-card-cat { font-family: var(--font); font-weight: 400; font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #888; }
+.jr-card-title { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.3; color: #111; margin: var(--space-2) 0; transition: color 0.3s ease; }
+.jr-card:hover .jr-card-title { color: rgba(139,32,16,0.8); }
+.jr-card-excerpt { font-family: var(--font); font-weight: 300; font-size: 14px; color: #666; line-height: 1.6; max-width: none; padding: 0; }
+.jr-card-date { font-family: var(--font); font-weight: 300; font-size: 11px; color: #aaa; }
+/* article */
+.jr-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: rgba(139,32,16,0.8); z-index: 9999; }
+.jr-hero { position: relative; min-height: 50vh; background: #111; display: flex; align-items: flex-end; }
+.jr-hero-inner { position: relative; z-index: 2; padding: var(--space-6) var(--space-5); max-width: 900px; margin: 0 auto; width: 100%; }
+.jr-meta { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.jr-cat { color: rgba(255,255,255,0.85); }
+.jr-title { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); color: #fff; line-height: 1.1; letter-spacing: 0.02em; margin: var(--space-2) 0 0; max-width: none; }
+.jr-body { max-width: 68ch; margin: var(--space-6) auto; padding: 0 var(--space-5); }
+.jr-body p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.85; color: var(--body); max-width: none; margin-bottom: var(--space-3); }
+.jr-quote { font-family: var(--display); font-style: italic; font-weight: 300; font-size: var(--text-lg); line-height: 1.45; color: rgba(139,32,16,0.7); border-left: 2px solid rgba(139,32,16,0.3); padding-left: var(--space-4); margin: var(--space-4) 0; }
+.jr-related { max-width: 1240px; margin: var(--space-7) auto var(--space-6); padding: 0 var(--space-5); }
+.jr-related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+.jr-related-card { display: block; text-decoration: none; padding-top: var(--space-3); border-top: 0.5px solid var(--line); }
+.jr-related-cat { font-family: var(--font); font-weight: 400; font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #888; }
+.jr-related-title { font-family: var(--display); font-weight: 400; font-size: 18px; line-height: 1.3; color: #111; margin: 6px 0 0; transition: color 0.3s; }
+.jr-related-card:hover .jr-related-title { color: rgba(139,32,16,0.8); }
+@media (max-width: 768px) {
+  .jr-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .jr-related-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+  .jr-title { font-size: var(--text-lg); }
+}
+
+/* v2A — Contact OpenStreetMap embed (Step 4F) */
+.map-box { width: 100%; height: 100%; min-height: 420px; }
+.osm-map { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; }
+@media (max-width: 1036px){ .map-box, .osm-map { min-height: 320px; } }

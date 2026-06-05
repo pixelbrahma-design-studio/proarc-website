@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pixelbrahma-design-studio.github.io/proarc-website/v2A/sitemap.xml
