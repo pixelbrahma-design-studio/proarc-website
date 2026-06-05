@@ -4,7 +4,7 @@
 
 /* PAGE HERO */
 .pf-hero { background: #f8f7f5; padding: var(--space-7) var(--space-5) var(--space-6); text-align: center; }
-.pf-hero-inner { max-width: 1400px; margin: 0 auto; }
+.pf-hero-inner { max-width: 680px; margin: 0 auto; text-align: center; }
 .pf-hero .rd-label { display: block; margin-bottom: var(--space-3); }
 .pf-hero-heading { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); color: #111; letter-spacing: 0.04em; margin: 0 0 var(--space-2) 0; }
 .pf-hero-subtitle { font-family: var(--font); font-weight: 300; font-size: var(--text-base); color: #666; line-height: 1.7; max-width: 56ch; margin: var(--space-2) auto 0; }
