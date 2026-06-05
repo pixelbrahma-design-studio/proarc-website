@@ -13,7 +13,7 @@
 .sv-hero-text { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(24px, 3vw, 32px); color: rgba(255,255,255,0.8); line-height: 1.5; max-width: 32ch; margin: 0; padding: 0; }
 
 /* STICKY SERVICE NAV */
-.sv-nav-sticky { position: sticky; top: 64px; z-index: 50; background: #fff; border-bottom: 0.5px solid #e0e0e0; }
+.sv-nav-sticky { position: sticky; top: 60px; z-index: 50; background: #fff; border-bottom: 0.5px solid #e0e0e0; }
 .sv-nav-inner { max-width: 1400px; margin: 0 auto; padding: var(--space-3) var(--space-5); display: flex; gap: var(--space-4); flex-wrap: wrap; }
 .sv-nav-link { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.3s; position: relative; padding-bottom: var(--space-1); }
 .sv-nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: #111; transition: width 0.3s; }
