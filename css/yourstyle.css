@@ -634,5 +634,5 @@ footer {
 }
 
 /* v2A preview / cross-version nav link — copper accent */
-.nav-inner nav li a.v2a-preview-link { color: rgba(139,32,16,0.7); letter-spacing: 0.18em; }
-.nav-inner nav li a.v2a-preview-link:hover { color: rgba(139,32,16,1); padding-left: var(--space-2); }
+.nav-inner nav li a.v2a-preview-link { color: rgba(255,255,255,0.7); letter-spacing: 0.18em; }
+.nav-inner nav li a.v2a-preview-link:hover { color: #ffffff; padding-left: var(--space-2); }
