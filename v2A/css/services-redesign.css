@@ -39,9 +39,9 @@
 .sv-disc-list { text-align: left; }
 .sv-disc-item { border-top: 0.5px solid #e8e6e1; padding: 12px 0; transition: border-color 0.3s ease; text-align: left; }
 .sv-disc-item:last-child { border-bottom: 0.5px solid #e8e6e1; }
-.sv-disc-name { font-family: var(--font); font-weight: 500; font-size: 14px; color: #222; transition: color 0.3s; text-align: left; }
+.sv-disc-name { font-family: var(--font); font-weight: 500; font-size: 18px; color: #222; transition: color 0.3s; text-align: left; }
 .sv-disc-item:hover .sv-disc-name { color: rgba(139,32,16,0.8); }
-.sv-disc-desc { font-family: var(--font); font-weight: 300; font-size: 13px; color: #888; margin-top: 3px; line-height: 1.55; text-align: left; }
+.sv-disc-desc { font-family: var(--font); font-weight: 300; font-size: 14px; color: #888; margin-top: 4px; line-height: 1.6; text-align: left; }
 
 /* SERVICES CTA */
 .sv-cta { background: #000; padding: var(--space-6) var(--space-5); }
