@@ -27,6 +27,88 @@
         <link type="text/css" rel="stylesheet" href="css/yourstyle.css">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
+            <style id="rd-inline">
+/* v2A — ABOUT REDESIGN (inlined; structural props !important to win over theme) */
+.content.rd-about { float: left; width: 100%; background: #fff; }
+.rd-about .rd-label { font-family: var(--font); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.18em; text-transform: uppercase; color: #888; display: block; }
+
+/* 1. Hero quote */
+.rd-about .rda-hero { background: #0e0e0e; min-height: 70vh !important; display: flex !important; align-items: center; justify-content: center; text-align: center; padding: var(--space-7) var(--space-5); position: relative; }
+.rd-about .rda-hero::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 1px; height: 120px; background: linear-gradient(180deg, transparent, rgba(139,32,16,0.3), transparent); opacity: 0.5; }
+.rd-about .rda-hero-inner { position: relative; z-index: 1; }
+.rd-about .rda-quote { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(28px, 4vw, var(--text-xl)); line-height: 1.5; color: rgba(255,255,255,0.85); max-width: 18ch; letter-spacing: 0.01em; margin: 0 auto; padding: 0; }
+.rd-about .rda-attr { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-top: var(--space-5); max-width: none; padding: 0; }
+
+/* 2. Numbers */
+.rd-about .rda-numbers { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; }
+.rd-about .rda-numbers-flow { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 0; }
+.rd-about .rda-number { padding: var(--space-5) var(--space-4); border-top: 0.5px solid #e0e0e0; position: relative; }
+.rd-about .rda-number::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 1.5px; background: rgba(139,32,16,0.7); transition: width 0.6s var(--ease); }
+.rd-about .rda-number:hover::before { width: 100%; }
+.rd-about .rda-num { font-family: var(--display); font-weight: 300; font-size: clamp(40px, 5vw, 64px); line-height: 1; color: #111; margin-bottom: var(--space-2); }
+.rd-about .rda-num-label { font-family: var(--font); font-weight: 300; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #888; }
+
+/* 3. Firm story */
+.rd-about .rda-firm { padding: var(--space-6) var(--space-5) var(--space-7); max-width: 1400px; margin: 0 auto; display: grid !important; grid-template-columns: 61.8% 1fr !important; gap: var(--space-5); }
+.rd-about .rda-firm-img { position: relative; overflow: hidden; aspect-ratio: 4/3; background-size: cover; background-position: center; }
+.rd-about .rda-firm-img::after { content: ''; position: absolute; inset: var(--space-3); border: 0.5px solid rgba(255,255,255,0.25); pointer-events: none; }
+.rd-about .rda-firm-text { display: flex; flex-direction: column; justify-content: center; padding: var(--space-4) 0; }
+.rd-about .rda-firm-head { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); letter-spacing: 0.06em; color: #111; margin: var(--space-3) 0 var(--space-4); }
+.rd-about .rda-firm-body p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.75; color: #444; max-width: 48ch; padding: 0; }
+.rd-about .rda-firm-body p + p { margin-top: var(--space-3); }
+
+/* 4. Timeline — vertical */
+.rd-about .rda-timeline { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; }
+.rd-about .rda-timeline-head { margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 0.5px solid #e0e0e0; }
+.rd-about .rda-timeline-list { position: relative !important; padding-left: 140px !important; }
+.rd-about .rda-timeline-list::before { content: ''; position: absolute; left: 120px; top: 0; bottom: 0; width: 0.5px; background: #e0e0e0; }
+.rd-about .rda-milestone { position: relative !important; padding: var(--space-4) 0 var(--space-4) var(--space-5); border-bottom: 0.5px solid #f0f0f0; }
+.rd-about .rda-milestone:last-child { border-bottom: none; }
+.rd-about .rda-milestone::before { content: ''; position: absolute; left: calc(-1 * var(--space-5) - 2px); top: calc(var(--space-4) + 8px); width: 5px; height: 5px; background: rgba(139,32,16,0.3); border-radius: 0; transition: background 0.3s ease; }
+.rd-about .rda-milestone:hover::before { background: rgba(139,32,16,0.8); }
+.rd-about .rda-year { position: absolute !important; left: -140px; top: var(--space-4); font-family: var(--display); font-weight: 300; font-size: 32px; color: #ccc; width: 100px; text-align: right; transition: color 0.3s ease; }
+.rd-about .rda-milestone:hover .rda-year { color: #111; }
+.rd-about .rda-mname { font-family: var(--font); font-weight: 500; font-size: var(--text-sm); letter-spacing: 0.1em; text-transform: uppercase; color: #111; margin-bottom: 4px; }
+.rd-about .rda-mnote { font-family: var(--font); font-weight: 300; font-size: 13px; color: #888; }
+
+/* 5. Expertise */
+.rd-about .rda-expertise { background: #f8f7f5; padding: var(--space-7) var(--space-5); }
+.rd-about .rda-expertise-inner { max-width: 1400px; margin: 0 auto; }
+.rd-about .rda-expertise-head { margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 0.5px solid #ddd; }
+.rd-about .rda-expertise-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0; }
+.rd-about .rda-exp-item { padding: var(--space-4); border-left: 1px solid rgba(139,32,16,0.3); transition: border-color 0.3s ease; }
+.rd-about .rda-exp-item:hover { border-left-color: rgba(139,32,16,0.8); }
+.rd-about .rda-exp-item:nth-child(n+4) { border-top: 0.5px solid #e8e6e1; }
+.rd-about .rda-exp-name { font-family: var(--font); font-weight: 500; font-size: var(--text-sm); letter-spacing: 0.1em; text-transform: uppercase; color: #111; margin-bottom: var(--space-1); }
+.rd-about .rda-exp-desc { font-family: var(--font); font-weight: 300; font-size: 14px; color: #666; line-height: 1.6; max-width: none; padding: 0; }
+
+/* 6. Approach */
+.rd-about .rda-approach { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; }
+.rd-about .rda-approach-head { margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 0.5px solid #e0e0e0; }
+.rd-about .rda-approach-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0; }
+.rd-about .rda-approach-item { padding: var(--space-5) var(--space-4); border-left: 0.5px solid #e0e0e0; }
+.rd-about .rda-approach-item:first-child { border-left: 1px solid rgba(139,32,16,0.3); }
+.rd-about .rda-approach-num { font-family: var(--display); font-weight: 300; font-size: 48px; color: #eee; line-height: 1; margin-bottom: var(--space-3); }
+.rd-about .rda-approach-title { font-family: var(--font); font-weight: 500; font-size: var(--text-sm); letter-spacing: 0.12em; text-transform: uppercase; color: #111; margin-bottom: var(--space-2); }
+.rd-about .rda-approach-desc { font-family: var(--font); font-weight: 300; font-size: 14px; line-height: 1.75; color: #666; max-width: 36ch; padding: 0; }
+
+@media (max-width: 1024px) {
+  .rd-about .rda-numbers-flow { grid-template-columns: 1fr 1fr !important; }
+  .rd-about .rda-firm { grid-template-columns: 1fr !important; }
+  .rd-about .rda-expertise-grid { grid-template-columns: 1fr 1fr !important; }
+  .rd-about .rda-approach-grid { grid-template-columns: 1fr !important; }
+  .rd-about .rda-approach-item { border-left: 1px solid rgba(139,32,16,0.3); border-top: 0.5px solid #e0e0e0; }
+  .rd-about .rda-approach-item:first-child { border-top: none; }
+}
+@media (max-width: 768px) {
+  .rd-about .rda-expertise-grid { grid-template-columns: 1fr !important; }
+  .rd-about .rda-numbers-flow { grid-template-columns: 1fr 1fr !important; }
+  .rd-about .rda-timeline-list { padding-left: 80px !important; }
+  .rd-about .rda-year { left: -80px; font-size: 24px; width: 60px; }
+  .rd-about .rda-timeline-list::before { left: 65px; }
+}
+
+        </style>
     </head>
     <body>
         <div class="loader">
@@ -78,141 +160,154 @@
                     </div>
                     <!--  Navigation end -->
                     <!--  Content -->
-                <div class="content about-v2">
+                                    <!--  Content -->
+                <div class="content rd-about">
 
-                    <!-- 1. HERO STATEMENT -->
-                    <section class="ab-statement">
-                        <p class="ab-quote" data-placeholder="true">We believe architecture is the most visible expression of a society's ambitions. Every line we draw carries that responsibility.</p>
-                        <span class="ab-attrib" data-placeholder="true">&mdash; Founding Principal</span>
-                    </section>
-
-                    <!-- 2. NUMBERS STRIP -->
-                    <section class="ab-numbers">
-                        <div class="ab-number">
-                            <span class="ab-num">20</span>
-                            <span class="ab-num-label">Years of Practice</span>
-                        </div>
-                        <div class="ab-number">
-                            <span class="ab-num">40+</span>
-                            <span class="ab-num-label">Projects Delivered</span>
-                        </div>
-                        <div class="ab-number">
-                            <span class="ab-num" data-placeholder="true">2M+</span>
-                            <span class="ab-num-label">Sq Ft Built</span>
-                        </div>
-                        <div class="ab-number">
-                            <span class="ab-num" data-placeholder="true">7</span>
-                            <span class="ab-num-label">Emirates Served</span>
+                    <!-- 1. HERO QUOTE -->
+                    <section class="rda-hero">
+                        <div class="rda-hero-inner">
+                            <p class="rda-quote" data-placeholder="true">We believe architecture is the most visible expression of a society's ambitions. Every line we draw carries that responsibility.</p>
+                            <p class="rda-attr" data-placeholder="true">&mdash; Founding Principal</p>
                         </div>
                     </section>
 
-                    <!-- 3. FIRM STORY (golden split) -->
-                    <section class="ab-story">
-                        <div class="ab-story-img" style="background-image:url(images/about/about-1.jpg)"></div>
-                        <div class="ab-story-text">
-                            <span class="cs-label">The Practice</span>
-                            <h2 class="ab-story-head">Proarc</h2>
-                            <p>Proarc, one of the leading architectural practices in the UAE, has been an integral contributor to Ajman's emerging iconic skyline since 2006. Our collaborative team of experienced architects, engineers, MEP engineers and site engineers ensure that all designs are executed with utmost thoroughness and commitment.</p>
-                            <p>Over the past few years we have pioneered a sustainable approach to architecture through a strikingly wide range of work — from urban masterplans, public infrastructure, retail spaces, office spaces, health-care, institutional, mixed-use and skyscrapers to private houses. Our varied work allows us to take on any type and scale of project with a great deal of enthusiasm and understanding.</p>
-                            <p>Based in Ajman, we have an international reputation, with buildings across the UAE. We have transformed our clients' businesses and missions, helping to make them leaders in their fields. We aim to create a lasting social, economic and environmental effect with everything that we take upon us.</p>
+                    <!-- 2. NUMBERS -->
+                    <section class="rda-numbers">
+                        <div class="rda-numbers-flow">
+                            <div class="rda-number">
+                                <div class="rda-num">20</div>
+                                <div class="rda-num-label">Years of Practice</div>
+                            </div>
+                            <div class="rda-number">
+                                <div class="rda-num">40+</div>
+                                <div class="rda-num-label">Projects Delivered</div>
+                            </div>
+                            <div class="rda-number">
+                                <div class="rda-num" data-placeholder="true">2M+</div>
+                                <div class="rda-num-label">Sq Ft Built</div>
+                            </div>
+                            <div class="rda-number">
+                                <div class="rda-num" data-placeholder="true">7</div>
+                                <div class="rda-num-label">Emirates Served</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. FIRM STORY -->
+                    <section class="rda-firm">
+                        <div class="rda-firm-img" style="background-image:url(images/about/about-1.jpg)"></div>
+                        <div class="rda-firm-text">
+                            <span class="rd-label">The Practice</span>
+                            <h2 class="rda-firm-head">Proarc</h2>
+                            <div class="rda-firm-body">
+                                <p>Proarc, one of the leading architectural practices in the UAE, has been an integral contributor to Ajman's emerging iconic skyline since 2006.</p>
+                                <p>Over the past two decades we have pioneered a sustainable approach to architecture through a strikingly wide range of work — from urban masterplans and public infrastructure to retail spaces, healthcare facilities, and residential towers.</p>
+                                <p>Based in Ajman with buildings across the Emirates, we have transformed our clients' businesses and missions, helping to make them leaders in their fields.</p>
+                            </div>
                             <a href="portfolio.html" class="btn anim-button trans-btn transition fl-l"><span>Our Projects</span><i class="fa fa-eye"></i></a>
                         </div>
                     </section>
 
-                    <!-- 4. EXPERTISE SECTORS -->
-                    <section class="ab-expertise">
-                        <span class="cs-label cs-label-center">Expertise</span>
-                        <div class="ab-sectors">
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Educational</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Schools, universities, and learning environments across the Emirates.</p>
+                    <!-- 4. TIMELINE (vertical) -->
+                    <section class="rda-timeline">
+                        <div class="rda-timeline-head"><span class="rd-label">Landmark Projects</span></div>
+                        <div class="rda-timeline-list">
+                            <div class="rda-milestone">
+                                <span class="rda-year">2013</span>
+                                <div class="rda-mname">Habitat Al Tallah</div>
+                                <div class="rda-mnote">Educational landmark in Al Tallah</div>
                             </div>
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Commercial</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Corporate headquarters, offices, and workplace architecture.</p>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2015</span>
+                                <div class="rda-mname">Ajman Bank HQ</div>
+                                <div class="rda-mnote">Inclined-glass corporate headquarters — 73,071 sq ft</div>
                             </div>
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Residential</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Towers, villas, and gated communities designed for modern living.</p>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2017</span>
+                                <div class="rda-mname">City University</div>
+                                <div class="rda-mnote">62,000 sqm campus in Ajman</div>
                             </div>
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Mixed-Use &amp; Retail</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Lifestyle malls and retail-residential developments that build community.</p>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2017</span>
+                                <div class="rda-mname">Delhi Private School</div>
+                                <div class="rda-mnote">31,000 sqm learning environment</div>
                             </div>
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Institutional &amp; Healthcare</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Civic, religious, and healthcare buildings that serve the public realm.</p>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2020</span>
+                                <div class="rda-mname">Crown British School</div>
+                                <div class="rda-mnote">British-curriculum campus</div>
                             </div>
-                            <div class="ab-sector">
-                                <h3 class="ab-sector-name">Urban Masterplanning</h3>
-                                <p class="ab-sector-desc" data-placeholder="true">Large-scale planning that shapes neighbourhoods and districts.</p>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2021</span>
+                                <div class="rda-mname">Woodlem Park Hamidiya</div>
+                                <div class="rda-mnote">26,000 sqm school campus</div>
+                            </div>
+                            <div class="rda-milestone">
+                                <span class="rda-year">2024</span>
+                                <div class="rda-mname">North Gate British School</div>
+                                <div class="rda-mnote">Newest educational delivery</div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 5. PROJECT TIMELINE -->
-                    <section class="ab-timeline-wrap">
-                        <span class="cs-label cs-label-center">Landmark Projects</span>
-                        <div class="ab-timeline">
-                            <div class="ab-milestone">
-                                <span class="ab-year">2013</span>
-                                <span class="ab-proj">Habitat Al Tallah</span>
-                                <span class="ab-note">Educational landmark in Al Tallah</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2015</span>
-                                <span class="ab-proj">Ajman Bank HQ</span>
-                                <span class="ab-note">Inclined-glass corporate headquarters</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2017</span>
-                                <span class="ab-proj">City University</span>
-                                <span class="ab-note">62,000 sqm campus in Ajman</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2017</span>
-                                <span class="ab-proj">Delhi Private School</span>
-                                <span class="ab-note">31,000 sqm learning environment</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2020</span>
-                                <span class="ab-proj">Crown British School</span>
-                                <span class="ab-note">British-curriculum campus</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2021</span>
-                                <span class="ab-proj">Woodlempark Hamidiya</span>
-                                <span class="ab-note">26,000 sqm school</span>
-                            </div>
-                            <div class="ab-milestone">
-                                <span class="ab-year">2024</span>
-                                <span class="ab-proj">North Gate British School</span>
-                                <span class="ab-note">Newest educational delivery</span>
+                    <!-- 5. EXPERTISE -->
+                    <section class="rda-expertise">
+                        <div class="rda-expertise-inner">
+                            <div class="rda-expertise-head"><span class="rd-label">Expertise</span></div>
+                            <div class="rda-expertise-grid">
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Educational</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Schools, universities, and learning environments across the Emirates.</p>
+                                </div>
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Commercial</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Corporate headquarters, offices, and workplace architecture.</p>
+                                </div>
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Residential</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Towers, villas, and gated communities for modern living.</p>
+                                </div>
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Mixed-Use &amp; Retail</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Lifestyle malls and retail-residential developments.</p>
+                                </div>
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Institutional</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Civic, religious, and healthcare buildings.</p>
+                                </div>
+                                <div class="rda-exp-item">
+                                    <div class="rda-exp-name">Urban Planning</div>
+                                    <p class="rda-exp-desc" data-placeholder="true">Large-scale planning that shapes neighbourhoods.</p>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     <!-- 6. APPROACH -->
-                    <section class="ab-approach">
-                        <span class="cs-label cs-label-center">Approach</span>
-                        <div class="ab-principles">
-                            <div class="ab-principle">
-                                <h3 class="ab-principle-title">Context First</h3>
-                                <p class="ab-principle-desc" data-placeholder="true">Every project begins with a deep reading of site, climate, and community.</p>
+                    <section class="rda-approach">
+                        <div class="rda-approach-head"><span class="rd-label">Approach</span></div>
+                        <div class="rda-approach-grid">
+                            <div class="rda-approach-item">
+                                <div class="rda-approach-num">01</div>
+                                <div class="rda-approach-title">Context First</div>
+                                <p class="rda-approach-desc" data-placeholder="true">Every project begins with a deep reading of site, climate, and community. Architecture without context is sculpture.</p>
                             </div>
-                            <div class="ab-principle">
-                                <h3 class="ab-principle-title">Material Integrity</h3>
-                                <p class="ab-principle-desc" data-placeholder="true">We select materials for longevity, beauty, and environmental responsibility.</p>
+                            <div class="rda-approach-item">
+                                <div class="rda-approach-num">02</div>
+                                <div class="rda-approach-title">Material Integrity</div>
+                                <p class="rda-approach-desc" data-placeholder="true">We select materials for longevity, beauty, and environmental responsibility. Honesty in construction is honesty in design.</p>
                             </div>
-                            <div class="ab-principle">
-                                <h3 class="ab-principle-title">Lasting Impact</h3>
-                                <p class="ab-principle-desc" data-placeholder="true">We design for decades, not trends — buildings that age with dignity.</p>
+                            <div class="rda-approach-item">
+                                <div class="rda-approach-num">03</div>
+                                <div class="rda-approach-title">Lasting Impact</div>
+                                <p class="rda-approach-desc" data-placeholder="true">We design for decades, not trends. Buildings that age with dignity, serve with generosity, and outlast their architects.</p>
                             </div>
                         </div>
                     </section>
 
                 </div>
                 <!--  Content end -->
+                
                 
                     <!-- share  -->
                     <div class="share-inner">

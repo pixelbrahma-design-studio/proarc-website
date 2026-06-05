@@ -47,6 +47,130 @@
         <link type="text/css" rel="stylesheet" href="css/yourstyle.css">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
+            <style id="rd-inline">
+/* v2A redesign — homepage + about composition (loaded last, page-specific) */
+/* ====================================================================
+   v2A — HOMEPAGE REDESIGN (Chipperfield/Olson Kundig composition)
+   ==================================================================== */
+.content.rd-home { float: left; width: 100%; background: #fff; }
+.rd-label { font-family: var(--font); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+.rd-label-light { color: rgba(255,255,255,0.4); }
+.rd-viewall { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #888; text-decoration: none; position: relative; padding-bottom: 3px; transition: color 0.3s; }
+.rd-viewall::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0.5px; background: #ccc; transition: background 0.3s; }
+.rd-viewall:hover { color: #111; }
+.rd-viewall:hover::after { background: rgba(139,32,16,0.7); }
+
+/* 1. Hero */
+.rd-hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #0a0a0a; background-size: cover; background-position: center; }
+.rd-hero-grad { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, transparent 45%, rgba(0,0,0,0.72) 100%); }
+.rd-hero-accent { position: absolute; bottom: 0; left: var(--space-5); width: 1px; height: 40%; background: linear-gradient(180deg, transparent 0%, rgba(139,32,16,0.3) 40%, rgba(139,32,16,0.7) 100%); }
+.rd-hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 var(--space-5) var(--space-7); z-index: 2; }
+.rd-hero-tag { font-family: var(--font); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: var(--space-2); }
+.rd-hero-title { font-family: var(--display); font-weight: 300; font-size: clamp(48px, 7vw, 96px); line-height: 1.05; color: #fff; letter-spacing: 0.02em; max-width: 10ch; margin: 0; }
+.rd-hero-loc { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.12em; color: rgba(255,255,255,0.4); margin-top: var(--space-3); }
+.rd-hero-scroll { position: absolute; bottom: var(--space-5); right: var(--space-5); display: flex; flex-direction: column; align-items: center; gap: var(--space-1); z-index: 2; }
+.rd-hero-scroll span { font-family: var(--font); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); writing-mode: vertical-rl; }
+.rd-hero-scroll-line { width: 1px; height: 48px; background: rgba(255,255,255,0.15); position: relative; overflow: hidden; }
+.rd-hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.6); animation: rdScrollPulse 2s ease-in-out infinite; }
+@keyframes rdScrollPulse { 0% { top: -100%; } 100% { top: 100%; } }
+
+/* 2. Selected works */
+.rd-works { padding: var(--space-7) var(--space-5) var(--space-6); max-width: 1400px; margin: 0 auto; }
+.rd-works-head, .rd-journal-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 0.5px solid #e0e0e0; }
+.rd-works-row { display: grid; gap: 4px; margin-bottom: 4px; }
+.rd-row-1 { grid-template-columns: 61.8% 1fr; }
+.rd-row-2 { grid-template-columns: 1fr 1fr 1fr; }
+.rd-row-3 { grid-template-columns: 1fr 61.8%; }
+.rd-work { position: relative; overflow: hidden; cursor: pointer; display: block; text-decoration: none; }
+.rd-work-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.88) contrast(1.05); transition: transform 0.8s var(--ease), filter 0.5s ease; }
+.rd-work-large .rd-work-img { aspect-ratio: 16/10; }
+.rd-work-tall .rd-work-img { aspect-ratio: 3/4; }
+.rd-work-square .rd-work-img { aspect-ratio: 1/1; }
+.rd-work:hover .rd-work-img { transform: scale(1.03); filter: saturate(1) contrast(1); }
+.rd-work-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65) 100%); opacity: 0; transition: opacity 0.5s ease; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-4); }
+.rd-work:hover .rd-work-overlay { opacity: 1; }
+.rd-work-name { font-family: var(--display); font-weight: 300; font-size: var(--text-lg); color: #fff; line-height: 1.2; letter-spacing: 0.02em; transform: translateY(8px); transition: transform 0.5s var(--ease); }
+.rd-work:hover .rd-work-name { transform: translateY(0); }
+.rd-work-meta { font-family: var(--font); font-weight: 300; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: var(--space-1); transform: translateY(8px); transition: transform 0.5s var(--ease) 0.05s; }
+.rd-work:hover .rd-work-meta { transform: translateY(0); }
+
+/* 3. Manifesto */
+.rd-manifesto { background: #000; padding: var(--space-7) var(--space-5); }
+.rd-manifesto-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 61.8%; gap: var(--space-6); align-items: center; }
+.rd-manifesto-left { display: flex; flex-direction: column; gap: var(--space-4); }
+.rd-manifesto-num { font-family: var(--display); font-weight: 300; font-size: 120px; line-height: 0.85; color: rgba(255,255,255,0.06); letter-spacing: -0.03em; }
+.rd-manifesto-num-copper { color: rgba(139,32,16,0.10); }
+.rd-manifesto-stat { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.rd-manifesto-text { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(28px, 3.5vw, var(--text-xl)); line-height: 1.45; color: rgba(255,255,255,0.85); letter-spacing: 0.01em; max-width: none; padding: 0; }
+.rd-manifesto-right .rd-label-light { display: block; margin-bottom: var(--space-4); }
+.rd-manifesto-divider { width: 34px; height: 1px; background: rgba(139,32,16,0.3); margin-top: var(--space-4); }
+.rd-manifesto-cta { display: inline-block; font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; margin-top: var(--space-3); position: relative; padding-bottom: 4px; transition: color 0.3s; }
+.rd-manifesto-cta::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: rgba(139,32,16,0.7); transition: width 0.4s var(--ease); }
+.rd-manifesto-cta:hover { color: rgba(255,255,255,0.9); }
+.rd-manifesto-cta:hover::after { width: 100%; }
+
+/* 4. Approach */
+.rd-approach { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; }
+.rd-approach-head { margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 0.5px solid #e0e0e0; }
+.rd-approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.rd-approach-item { padding: var(--space-5) var(--space-4); border-left: 0.5px solid #e0e0e0; }
+.rd-approach-item:first-child { border-left: 1px solid rgba(139,32,16,0.3); }
+.rd-approach-num { font-family: var(--display); font-weight: 300; font-size: 48px; color: #eee; line-height: 1; margin-bottom: var(--space-3); }
+.rd-approach-title { font-family: var(--font); font-weight: 500; font-size: var(--text-sm); letter-spacing: 0.12em; text-transform: uppercase; color: #111; margin-bottom: var(--space-2); }
+.rd-approach-desc { font-family: var(--font); font-weight: 300; font-size: 14px; line-height: 1.75; color: #666; max-width: 36ch; padding: 0; }
+
+/* 5. Journal teaser */
+.rd-journal { background: #f8f7f5; padding: var(--space-7) var(--space-5); }
+.rd-journal-inner { max-width: 1400px; margin: 0 auto; }
+.rd-journal-head { border-bottom-color: #ddd; }
+.rd-journal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+.rd-jcard { cursor: pointer; text-decoration: none; display: block; }
+.rd-jcard-img { width: 100%; aspect-ratio: 16/9; background: #e8e6e1; margin-bottom: var(--space-3); overflow: hidden; }
+.rd-jcard-img-inner { width: 100%; height: 100%; background: linear-gradient(135deg, #d4cfc7, #c8c2b8); transition: transform 0.6s var(--ease); }
+.rd-jcard:hover .rd-jcard-img-inner { transform: scale(1.03); }
+.rd-jcard-cat { font-family: var(--font); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(139,32,16,0.7); margin-bottom: var(--space-1); }
+.rd-jcard-title { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.3; color: #111; margin-bottom: var(--space-2); transition: color 0.3s; }
+.rd-jcard:hover .rd-jcard-title { color: rgba(139,32,16,0.8); }
+.rd-jcard-excerpt { font-family: var(--font); font-weight: 300; font-size: 14px; line-height: 1.65; color: #666; max-width: 50ch; padding: 0; }
+.rd-jcard-date { font-family: var(--font); font-weight: 300; font-size: 11px; color: #aaa; margin-top: var(--space-2); letter-spacing: 0.06em; }
+
+@media (max-width: 1024px) {
+  .rd-row-1, .rd-row-3 { grid-template-columns: 1fr; }
+  .rd-row-2 { grid-template-columns: 1fr 1fr; }
+  .rd-manifesto-inner { grid-template-columns: 1fr; gap: var(--space-5); }
+  .rd-approach-grid { grid-template-columns: 1fr; }
+  .rd-approach-item { border-left: 1px solid rgba(139,32,16,0.3); border-top: 0.5px solid #e0e0e0; }
+  .rd-approach-item:first-child { border-top: none; }
+  .rd-journal-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+}
+@media (max-width: 768px) {
+  .rd-hero-title { font-size: 40px; }
+  .rd-row-2 { grid-template-columns: 1fr; }
+  .rd-manifesto-num { font-size: 88px; }
+  .rd-works, .rd-approach, .rd-manifesto, .rd-journal { padding-left: var(--space-4); padding-right: var(--space-4); }
+}
+
+/* Win over theme fixed-panel context (reset/plugins/style.css) — structural !important */
+.content.rd-home .rd-hero { height: 100vh !important; min-height: 100vh !important; position: relative !important; display: block !important; }
+.content.rd-home .rd-hero-content { position: absolute !important; }
+.content.rd-home .rd-hero-scroll { position: absolute !important; }
+.content.rd-home .rd-row-1 { display: grid !important; grid-template-columns: 61.8% 1fr !important; }
+.content.rd-home .rd-row-2 { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; }
+.content.rd-home .rd-row-3 { display: grid !important; grid-template-columns: 1fr 61.8% !important; }
+.content.rd-home .rd-manifesto-inner { display: grid !important; grid-template-columns: 1fr 61.8% !important; }
+.content.rd-home .rd-approach-grid { display: grid !important; grid-template-columns: repeat(3,1fr) !important; }
+.content.rd-home .rd-journal-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; }
+@media (max-width:1024px){
+  .content.rd-home .rd-row-1, .content.rd-home .rd-row-3 { grid-template-columns: 1fr !important; }
+  .content.rd-home .rd-row-2 { grid-template-columns: 1fr 1fr !important; }
+  .content.rd-home .rd-manifesto-inner, .content.rd-home .rd-approach-grid, .content.rd-home .rd-journal-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width:768px){
+  .content.rd-home .rd-hero { height: 70vh !important; min-height: 70vh !important; }
+  .content.rd-home .rd-row-2 { grid-template-columns: 1fr !important; }
+}
+
+        </style>
     </head>
     <body>
         <div class="loader">
@@ -99,110 +223,160 @@
                         </nav>
                     </div>
                     <!--  Navigation end --> 
-                    <!--  Content -->
-                    <div class="content full-height">
-                        <!--full-height wrap -->
-                        <div class="full-height-wrap">
-                            <div class="full-width-slider-holder">
-                                <div  class="full-width-slider owl_carousel">
-                                    <!-- 1-->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-1.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="rholding.html"><span>R Holding HeadOffice</span> </a>
-                                        
-                                    </div>                                  
-                                    </div>
-                                    <!-- 1 end -->
-                                    <!-- 2 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-2.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="ajmanbank.html"><span>Ajman Bank Head Office</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 2 end -->
-                                    <!-- 3 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-3.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="woodlem.html"><span>Woodlem Park School</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 3 end -->
+                                        <!--  Content -->
+                <div class="content rd-home">
 
-                                    <!-- 4 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-4.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="citylifekhor.html"><span>CityLife, Al-Khor</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 4 end -->
-                                    <!-- 5 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-5.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="cityuniversity.html"><span>City University</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 5 end -->
-                                    <!-- 6-->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-6.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="frontlineschool.html"><span>FrontLine School</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 6 end -->
-                                    <!-- 7 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-7.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="citylifetallah.html"><span>CityLife, Al-Tallah</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 7 end -->
-                                    <!-- 8 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-8.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="blacksquare.html"><span>The BlackSquare</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 8 end -->
+                    <!-- 1. HERO -->
+                    <section class="rd-hero" style="background-image:url(images/folio/projects/ajmanbank1.jpg)">
+                        <div class="rd-hero-grad"></div>
+                        <div class="rd-hero-accent"></div>
+                        <div class="rd-hero-content">
+                            <div class="rd-hero-tag">Commercial &middot; Ajman &middot; 2015</div>
+                            <h1 class="rd-hero-title">Ajman Bank<br>Headquarters</h1>
+                            <div class="rd-hero-loc">Al-Ittihad Street, Ajman &mdash; 73,071 sq ft</div>
+                        </div>
+                        <div class="rd-hero-scroll">
+                            <span>Scroll</span>
+                            <div class="rd-hero-scroll-line"></div>
+                        </div>
+                    </section>
 
-                                    <!-- 9 -->
-                                    <div class="item">
-                                        <div class="bg bg-slider" style="background-image:url(images/home/home-9.jpg)"></div>
-                                        <div class="overlay"></div>
-                                        <div class="show-info">
-                                        <a href="ajmanoxford.html"><span>City Mall, Umm al-Quwain</span> </a>
-                                    </div>   
-                                    </div>
-                                    <!-- 9 end -->
-
-
+                    <!-- 2. SELECTED WORKS -->
+                    <section class="rd-works">
+                        <div class="rd-works-head">
+                            <span class="rd-label">Selected Works</span>
+                            <a href="portfolio.html" class="rd-viewall">View All Projects</a>
+                        </div>
+                        <div class="rd-works-row rd-row-1">
+                            <a href="rholding.html" class="rd-work rd-work-large">
+                                <img src="images/folio/thumbs/rholding.jpg" class="rd-work-img" alt="R Holding Head Office — exterior" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">R Holding Head Office</div>
+                                    <div class="rd-work-meta">Commercial · Ajman</div>
                                 </div>
-                                <!--  navigation -->
-                                <div class="customNavigation">
-                                    <a class="prev-slide transition"><i class="fa fa-angle-left"></i></a>
-                                    <a class="next-slide transition"><i class="fa fa-angle-right"></i></a>
+                            </a>
+                            <a href="cityuniversity.html" class="rd-work rd-work-tall">
+                                <img src="images/folio/thumbs/cityuniversity.jpg" class="rd-work-img" alt="City University — campus exterior" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">City University</div>
+                                    <div class="rd-work-meta">Educational · Ajman · 62,000 sqm</div>
                                 </div>
-                                <!--  navigation end-->
+                            </a>
+                        </div>
+                        <div class="rd-works-row rd-row-2">
+                            <a href="woodlem.html" class="rd-work rd-work-square">
+                                <img src="images/folio/thumbs/woodlem.jpg" class="rd-work-img" alt="Woodlem Park School — exterior" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">Woodlem Park School</div>
+                                    <div class="rd-work-meta">Educational · Al Tallah</div>
+                                </div>
+                            </a>
+                            <a href="citylifekhor.html" class="rd-work rd-work-square">
+                                <img src="images/folio/thumbs/citylifekhor.jpg" class="rd-work-img" alt="CityLife Al-Khor — development" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">CityLife Al-Khor</div>
+                                    <div class="rd-work-meta">Mixed-Use · Ajman</div>
+                                </div>
+                            </a>
+                            <a href="blacksquare.html" class="rd-work rd-work-square">
+                                <img src="images/folio/thumbs/blacksquare.jpg" class="rd-work-img" alt="The BlackSquare — facade" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">The BlackSquare</div>
+                                    <div class="rd-work-meta">Commercial · Ajman</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="rd-works-row rd-row-3">
+                            <a href="frontlineschool.html" class="rd-work rd-work-tall">
+                                <img src="images/folio/thumbs/frontlineschool.jpg" class="rd-work-img" alt="FrontLine School — campus" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">FrontLine School</div>
+                                    <div class="rd-work-meta">Educational · Ajman</div>
+                                </div>
+                            </a>
+                            <a href="citylifetallah.html" class="rd-work rd-work-large">
+                                <img src="images/folio/thumbs/citylifetallah.jpg" class="rd-work-img" alt="CityLife Al-Tallah — development" loading="lazy">
+                                <div class="rd-work-overlay">
+                                    <div class="rd-work-name">CityLife Al-Tallah</div>
+                                    <div class="rd-work-meta">Mixed-Use · Ajman</div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- 3. MANIFESTO -->
+                    <section class="rd-manifesto">
+                        <div class="rd-manifesto-inner">
+                            <div class="rd-manifesto-left">
+                                <div>
+                                    <div class="rd-manifesto-num">20</div>
+                                    <div class="rd-manifesto-stat">Years shaping the UAE skyline</div>
+                                </div>
+                                <div>
+                                    <div class="rd-manifesto-num rd-manifesto-num-copper">40+</div>
+                                    <div class="rd-manifesto-stat">Projects delivered across 7 emirates</div>
+                                </div>
+                            </div>
+                            <div class="rd-manifesto-right">
+                                <div class="rd-label rd-label-light">The Practice</div>
+                                <p class="rd-manifesto-text">Since 2006, Proarc has shaped Ajman's emerging skyline &mdash; from corporate landmarks and university campuses to mixed-use developments that redefine how communities live, work, and learn.</p>
+                                <div class="rd-manifesto-divider"></div>
+                                <a href="about.html" class="rd-manifesto-cta">About the Firm &#8594;</a>
                             </div>
                         </div>
-                        <!-- full-height-wrap end  -->  
-                    </div>
-                    <!-- Content   end -->	 
+                    </section>
+
+                    <!-- 4. APPROACH -->
+                    <section class="rd-approach">
+                        <div class="rd-approach-head"><span class="rd-label">Approach</span></div>
+                        <div class="rd-approach-grid">
+                            <div class="rd-approach-item">
+                                <div class="rd-approach-num">01</div>
+                                <div class="rd-approach-title">Context First</div>
+                                <p class="rd-approach-desc">Every project begins with a deep reading of site, climate, and community. Architecture without context is sculpture.</p>
+                            </div>
+                            <div class="rd-approach-item">
+                                <div class="rd-approach-num">02</div>
+                                <div class="rd-approach-title">Material Integrity</div>
+                                <p class="rd-approach-desc">We select materials for longevity, beauty, and environmental responsibility. Honesty in construction is honesty in design.</p>
+                            </div>
+                            <div class="rd-approach-item">
+                                <div class="rd-approach-num">03</div>
+                                <div class="rd-approach-title">Lasting Impact</div>
+                                <p class="rd-approach-desc">We design for decades, not trends. Buildings that age with dignity, serve with generosity, and outlast their architects.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 5. JOURNAL TEASER -->
+                    <section class="rd-journal">
+                        <div class="rd-journal-inner">
+                            <div class="rd-journal-head">
+                                <span class="rd-label">From the Journal</span>
+                                <a href="journal.html" class="rd-viewall">All Articles</a>
+                            </div>
+                            <div class="rd-journal-grid">
+                                <a href="journal-climate-design.html" class="rd-jcard">
+                                    <div class="rd-jcard-img"><div class="rd-jcard-img-inner"></div></div>
+                                    <div class="rd-jcard-cat">Design Philosophy</div>
+                                    <div class="rd-jcard-title">Designing for the Desert: Architecture in Ajman's Climate</div>
+                                    <p class="rd-jcard-excerpt">How extreme heat, humidity, and light shape every facade, orientation, and material decision in our practice.</p>
+                                    <div class="rd-jcard-date">January 2026</div>
+                                </a>
+                                <a href="journal-landmark-buildings.html" class="rd-jcard">
+                                    <div class="rd-jcard-img"><div class="rd-jcard-img-inner"></div></div>
+                                    <div class="rd-jcard-cat">Project Story</div>
+                                    <div class="rd-jcard-title">Becoming a Landmark: The Making of Ajman Bank HQ</div>
+                                    <p class="rd-jcard-excerpt">The inclined glass facade, the G+M+7 structure, and the challenge of creating an urban landmark on Al-Ittihad Street.</p>
+                                    <div class="rd-jcard-date">December 2025</div>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+                <!--  Content end -->
+                	 
                     <!-- share  -->
                     <div class="share-inner">
                         <div class="share-container  isShare"  data-share="['facebook','googleplus','twitter','linkedin']"></div>
