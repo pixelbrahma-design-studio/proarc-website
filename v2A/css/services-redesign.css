@@ -21,27 +21,27 @@
 .sv-nav-link:hover::after { width: 100%; }
 
 /* SERVICE SECTIONS */
-.sv-section { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; border-top: 0.5px solid #e0e0e0; }
+.sv-section { padding: var(--space-6) var(--space-5); max-width: 1400px; margin: 0 auto; border-top: 0.5px solid #e0e0e0; }
 .sv-section:first-of-type { border-top: none; }
-.sv-section-grid { display: grid !important; gap: var(--space-5); align-items: center; }
-.sv-image { aspect-ratio: 4/3; background-size: cover; background-position: center; filter: saturate(0.9) contrast(1.05); }
-.sv-text { padding: var(--space-4) 0; }
-.sv-num { font-family: var(--display); font-weight: 300; font-size: 48px; color: #eee; line-height: 1; margin-bottom: var(--space-3); }
-.sv-title { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); color: #111; letter-spacing: 0.04em; line-height: 1.15; margin: 0 0 var(--space-3) 0; }
+.sv-section-grid { display: grid !important; gap: var(--space-5); align-items: start; }
+.sv-image { aspect-ratio: 4/3; background-size: cover; background-position: center; filter: saturate(0.9) contrast(1.05); min-height: 380px; }
+.sv-text { padding: var(--space-3) 0; text-align: left; }
+.sv-num { font-family: var(--display); font-weight: 300; font-size: 52px; color: #d0d0d0; line-height: 1; margin-bottom: var(--space-2); text-align: left; }
+.sv-title { font-family: var(--display); font-weight: 300; font-size: clamp(30px, 3.5vw, 42px); color: #111; letter-spacing: 0.04em; line-height: 1.15; margin: 0 0 var(--space-3) 0; text-align: left; }
 .sv-rule { width: 34px; height: 1px; background: rgba(139,32,16,0.3); margin-bottom: var(--space-4); }
-.sv-body { margin-bottom: var(--space-5); }
-.sv-body p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.75; color: #444; max-width: 48ch; margin: 0 0 var(--space-3) 0; padding: 0; }
+.sv-body { margin-bottom: var(--space-4); }
+.sv-body p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.8; color: #444; max-width: 48ch; margin: 0 0 var(--space-3) 0; padding: 0; text-align: left; }
 .sv-body p:last-child { margin-bottom: 0; }
 
 /* SUB-DISCIPLINES */
-.sv-disciplines { }
-.sv-disc-head { font-family: var(--font); font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #888; margin-bottom: var(--space-3); display: block; }
-.sv-disc-list { }
-.sv-disc-item { border-top: 0.5px solid #e8e6e1; padding: var(--space-2) 0; transition: border-color 0.3s ease; }
+.sv-disciplines { text-align: left; }
+.sv-disc-head { font-family: var(--font); font-weight: 400; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: var(--space-3); display: block; text-align: left; }
+.sv-disc-list { text-align: left; }
+.sv-disc-item { border-top: 0.5px solid #e8e6e1; padding: 12px 0; transition: border-color 0.3s ease; text-align: left; }
 .sv-disc-item:last-child { border-bottom: 0.5px solid #e8e6e1; }
-.sv-disc-name { font-family: var(--font); font-weight: 400; font-size: 13px; color: #333; transition: color 0.3s; }
-.sv-disc-item:hover .sv-disc-name { color: #111; }
-.sv-disc-desc { font-family: var(--font); font-weight: 300; font-size: 12px; color: #888; margin-top: 2px; }
+.sv-disc-name { font-family: var(--font); font-weight: 500; font-size: 14px; color: #222; transition: color 0.3s; text-align: left; }
+.sv-disc-item:hover .sv-disc-name { color: rgba(139,32,16,0.8); }
+.sv-disc-desc { font-family: var(--font); font-weight: 300; font-size: 13px; color: #888; margin-top: 3px; line-height: 1.55; text-align: left; }
 
 /* SERVICES CTA */
 .sv-cta { background: #000; padding: var(--space-6) var(--space-5); }
