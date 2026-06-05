@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proarc — Redesign Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text-xs: 10px;
+    --text-sm: 13px;
+    --text-base: 16px;
+    --text-md: 19px;
+    --text-lg: 26px;
+    --text-xl: 42px;
+    --text-2xl: 68px;
+    --text-3xl: 96px;
+
+    --space-1: 8px;
+    --space-2: 13px;
+    --space-3: 21px;
+    --space-4: 34px;
+    --space-5: 55px;
+    --space-6: 89px;
+    --space-7: 144px;
+
+    --copper: #8B2010;
+    --copper-30: rgba(139, 32, 16, 0.3);
+    --copper-70: rgba(139, 32, 16, 0.7);
+    --copper-80: rgba(139, 32, 16, 0.8);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: #111;
+    background: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════════════
+     NAV — Minimal, transparent, fixed
+     ═══════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-5);
+    height: 64px;
+    background: transparent;
+    transition: background 0.4s ease, border-color 0.4s ease;
+    border-bottom: 0.5px solid transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-sm);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover { color: #fff; }
+
+  /* ═══════════════════════════════════════
+     HERO — Single commanding image, full viewport
+     No slider. No dots. No arrows. Just presence.
+     ═══════════════════════════════════════ */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    /* Placeholder — replace with real Ajman Bank HQ or best project photo */
+    background:
+      linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 30%, #1a1612 60%, #0a0908 100%);
+    opacity: 0.9;
+  }
+
+  /* Simulated architectural photograph overlay */
+  .hero-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%);
+  }
+
+  /* Geometric accent — thin copper line, architectural */
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--space-5);
+    width: 1px;
+    height: 40%;
+    background: linear-gradient(180deg, transparent 0%, var(--copper-30) 40%, var(--copper-70) 100%);
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 var(--space-5) var(--space-7);
+  }
+
+  .hero-project-tag {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: var(--space-2);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, var(--text-3xl));
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: 0.02em;
+    max-width: 10ch;
+  }
+
+  .hero-location {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: var(--space-3);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .hero-scroll span {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    writing-mode: vertical-rl;
+  }
+
+  .hero-scroll-line {
+    width: 1px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION LABEL — Universal pattern
+     ═══════════════════════════════════════ */
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .section-label-light {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* ═══════════════════════════════════════
+     SELECTED WORKS — Asymmetric editorial grid
+     NOT a uniform dump. Curated. Intentional.
+     ═══════════════════════════════════════ */
+  .works {
+    padding: var(--space-7) var(--space-5) var(--space-6);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .works-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 0.5px solid #e0e0e0;
+  }
+
+  .works-count {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    color: #aaa;
+    letter-spacing: 0.08em;
+  }
+
+  .works-grid {
+    display: grid;
+    gap: 4px;
+  }
+
+  /* Row 1: Large left + Tall right */
+  .works-row-1 {
+    display: grid;
+    grid-template-columns: 61.8% 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  /* Row 2: Three equal */
+  .works-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  /* Row 3: Reversed — Tall left + Large right */
+  .works-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 61.8%;
+    gap: 4px;
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .work-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.88) contrast(1.05);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                filter 0.5s ease;
+  }
+
+  .work-card-tall .work-card-image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .work-card-square .work-card-image {
+    aspect-ratio: 1 / 1;
+  }
+
+  .work-card:hover .work-card-image {
+    transform: scale(1.03);
+    filter: saturate(1) contrast(1);
+  }
+
+  /* Overlay info — appears on hover */
+  .work-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-4);
+  }
+
+  .work-card:hover .work-card-overlay {
+    opacity: 1;
+  }
+
+  .work-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: var(--text-lg);
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    transform: translateY(8px);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .work-card:hover .work-card-name {
+    transform: translateY(0);
+  }
+
+  .work-card-meta {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: var(--space-1);
+    transform: translateY(8px);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+  }
+
+  .work-card:hover .work-card-meta {
+    transform: translateY(0);
+  }
+
+  /* Placeholder images using architectural tones */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .img-p1 { background: linear-gradient(145deg, #2a2520, #1a1815, #2d2822); }
+  .img-p2 { background: linear-gradient(145deg, #1e2025, #15171c, #1e2025); }
+  .img-p3 { background: linear-gradient(145deg, #252219, #1c1a13, #28251d); }
+  .img-p4 { background: linear-gradient(145deg, #1a1d20, #12151a, #1e2124); }
+  .img-p5 { background: linear-gradient(145deg, #2b2620, #1d1a15, #2e2923); }
+  .img-p6 { background: linear-gradient(145deg, #201e22, #17151a, #231f24); }
+  .img-p7 { background: linear-gradient(145deg, #262320, #1b1916, #292622); }
+  .img-p8 { background: linear-gradient(145deg, #1f2220, #161918, #222523); }
+
+  /* ═══════════════════════════════════════
+     MANIFESTO — One powerful statement
+     ═══════════════════════════════════════ */
+  .manifesto {
+    background: #000;
+    padding: var(--space-7) var(--space-5);
+    position: relative;
+  }
+
+  .manifesto-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 61.8%;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .manifesto-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .manifesto-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 120px;
+    line-height: 0.85;
+    color: rgba(255, 255, 255, 0.06);
+    letter-spacing: -0.03em;
+  }
+
+  .manifesto-stat {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .manifesto-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, var(--text-xl));
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.01em;
+  }
+
+  .manifesto-divider {
+    width: 34px;
+    height: 1px;
+    background: var(--copper-30);
+    margin-top: var(--space-4);
+  }
+
+  .manifesto-cta {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    margin-top: var(--space-3);
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .manifesto-cta::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--copper-70);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .manifesto-cta:hover { color: rgba(255,255,255,0.9); }
+  .manifesto-cta:hover::after { width: 100%; }
+
+
+  /* ═══════════════════════════════════════
+     APPROACH — Three principles, refined
+     ═══════════════════════════════════════ */
+  .approach {
+    padding: var(--space-7) var(--space-5);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .approach-header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 0.5px solid #e0e0e0;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .approach-item {
+    padding: var(--space-5) var(--space-4);
+    border-left: 0.5px solid #e0e0e0;
+  }
+
+  .approach-item:first-child {
+    border-left: 1px solid var(--copper-30);
+    padding-left: var(--space-4);
+  }
+
+  .approach-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    color: #eee;
+    line-height: 1;
+    margin-bottom: var(--space-3);
+  }
+
+  .approach-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: var(--space-2);
+  }
+
+  .approach-desc {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #666;
+    max-width: 36ch;
+  }
+
+  /* ═══════════════════════════════════════
+     JOURNAL — Latest articles, editorial
+     ═══════════════════════════════════════ */
+  .journal {
+    background: #f8f7f5;
+    padding: var(--space-7) var(--space-5);
+  }
+
+  .journal-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 0.5px solid #ddd;
+  }
+
+  .journal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .journal-card {
+    cursor: pointer;
+  }
+
+  .journal-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #e8e6e1;
+    margin-bottom: var(--space-3);
+    overflow: hidden;
+  }
+
+  .journal-card-image-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .journal-card:hover .journal-card-image-inner {
+    transform: scale(1.03);
+  }
+
+  .ji-1 { background: linear-gradient(135deg, #d4cfc7, #c8c2b8); }
+  .ji-2 { background: linear-gradient(135deg, #c9c4bb, #bdb7ad); }
+
+  .journal-card-category {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper-70);
+    margin-bottom: var(--space-1);
+  }
+
+  .journal-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+    color: #111;
+    margin-bottom: var(--space-2);
+    transition: color 0.3s ease;
+  }
+
+  .journal-card:hover .journal-card-title {
+    color: var(--copper-80);
+  }
+
+  .journal-card-excerpt {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #666;
+    max-width: 50ch;
+  }
+
+  .journal-card-date {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: var(--space-2);
+    letter-spacing: 0.06em;
+  }
+
+  /* ═══════════════════════════════════════
+     FOOTER — Minimal
+     ═══════════════════════════════════════ */
+  footer {
+    background: #000;
+    padding: var(--space-5) var(--space-5);
+    border-top: 0.5px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+
+  .footer-logo {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-sm);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .footer-copy {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ═══════════════════════════════════════
+     VIEW ALL LINK pattern
+     ═══════════════════════════════════════ */
+  .view-all {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s ease;
+  }
+
+  .view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 0.5px;
+    background: #ccc;
+    transition: background 0.3s ease;
+  }
+
+  .view-all:hover { color: #111; }
+  .view-all:hover::after { background: var(--copper-70); }
+
+
+  /* ═══════════════════════════════════════
+     ABOUT PAGE
+     ═══════════════════════════════════════ */
+
+  /* PAGE DIVIDER */
+  .page-divider {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+  }
+
+  .page-divider hr {
+    border: none;
+    height: 0.5px;
+    background: #e0e0e0;
+  }
+
+  /* --- About Hero: same as current but refined --- */
+  .about-hero {
+    background: #0e0e0e;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-7) var(--space-5);
+    position: relative;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 120px;
+    background: linear-gradient(180deg, transparent, var(--copper-30), transparent);
+    opacity: 0.5;
+  }
+
+  .about-hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, var(--text-xl));
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 18ch;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-hero-attr {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: var(--space-5);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- Numbers: Woven into the narrative, not a strip --- */
+  .about-numbers {
+    padding: var(--space-7) var(--space-5);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .numbers-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .number-item {
+    padding: var(--space-5) var(--space-4);
+    border-top: 0.5px solid #e0e0e0;
+    position: relative;
+  }
+
+  .number-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--copper-70);
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .number-item:hover::before {
+    width: 100%;
+  }
+
+  .number-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    color: #111;
+    margin-bottom: var(--space-2);
+  }
+
+  .number-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  /* --- Firm Story: Golden split with breathing room --- */
+  .firm-story {
+    padding: var(--space-6) var(--space-5) var(--space-7);
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 61.8% 1fr;
+    gap: var(--space-5);
+  }
+
+  .firm-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .firm-image-inner {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #e8e5e0, #d8d4ce);
+    display: block;
+  }
+
+  /* Thin inset frame */
+  .firm-image::after {
+    content: '';
+    position: absolute;
+    inset: var(--space-3);
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  .firm-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-4) 0;
+  }
+
+  .firm-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: var(--text-xl);
+    letter-spacing: 0.06em;
+    color: #111;
+    margin-bottom: var(--space-4);
+  }
+
+  .firm-body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: #444;
+    max-width: 48ch;
+  }
+
+  .firm-body p + p {
+    margin-top: var(--space-3);
+  }
+
+  /* --- Timeline: VERTICAL. No scrollbar. Ever. --- */
+  .timeline {
+    padding: var(--space-7) var(--space-5);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .timeline-header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 0.5px solid #e0e0e0;
+  }
+
+  .timeline-list {
+    position: relative;
+    padding-left: 140px;
+  }
+
+  /* Vertical connector */
+  .timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 0;
+    bottom: 0;
+    width: 0.5px;
+    background: #e0e0e0;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: var(--space-4) 0 var(--space-4) var(--space-5);
+    border-bottom: 0.5px solid #f0f0f0;
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Dot on the line */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--space-5) - 2px);
+    top: calc(var(--space-4) + 8px);
+    width: 5px;
+    height: 5px;
+    background: var(--copper-30);
+    border-radius: 0;
+    transition: background 0.3s ease;
+  }
+
+  .timeline-item:hover::before {
+    background: var(--copper-80);
+  }
+
+  .timeline-year {
+    position: absolute;
+    left: -140px;
+    top: var(--space-4);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 32px;
+    color: #ccc;
+    width: 100px;
+    text-align: right;
+    transition: color 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-year {
+    color: #111;
+  }
+
+  .timeline-name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 4px;
+  }
+
+  .timeline-note {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: #888;
+  }
+
+  /* --- Expertise: Cleaner, more space --- */
+  .expertise {
+    background: #f8f7f5;
+    padding: var(--space-7) var(--space-5);
+  }
+
+  .expertise-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .expertise-header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 0.5px solid #ddd;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .expertise-item {
+    padding: var(--space-4);
+    border-left: 1px solid var(--copper-30);
+    transition: border-color 0.3s ease;
+  }
+
+  .expertise-item:hover {
+    border-left-color: var(--copper-80);
+  }
+
+  .expertise-item + .expertise-item {
+    border-top: 0.5px solid #e8e6e1;
+  }
+
+  .expertise-item:nth-child(1),
+  .expertise-item:nth-child(2),
+  .expertise-item:nth-child(3) {
+    border-top: none;
+  }
+
+  .expertise-name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: var(--space-1);
+  }
+
+  .expertise-desc {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+
+  /* ═══════════════════════════════════════
+     PAGE SEPARATOR between Homepage and About
+     ═══════════════════════════════════════ */
+  .concept-separator {
+    background: #f8f7f5;
+    padding: var(--space-7) var(--space-5);
+    text-align: center;
+  }
+
+  .concept-separator-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .concept-separator-label::before,
+  .concept-separator-label::after {
+    content: '';
+    width: 60px;
+    height: 0.5px;
+    background: #ccc;
+  }
+
+  /* ═══════════════════════════════════════
+     ANIMATIONS
+     ═══════════════════════════════════════ */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delays */
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .works-row-1,
+    .works-row-3 { grid-template-columns: 1fr; }
+    .works-row-2 { grid-template-columns: 1fr 1fr; }
+    .manifesto-inner { grid-template-columns: 1fr; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-item { border-left: 1px solid var(--copper-30); border-top: 0.5px solid #e0e0e0; }
+    .approach-item:first-child { border-top: none; }
+    .firm-story { grid-template-columns: 1fr; }
+    .expertise-grid { grid-template-columns: 1fr 1fr; }
+    .numbers-flow { grid-template-columns: 1fr 1fr; }
+    .journal-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-title { font-size: 40px; }
+    .works-row-2 { grid-template-columns: 1fr; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .numbers-flow { grid-template-columns: 1fr 1fr; }
+    .timeline-list { padding-left: 80px; }
+    .timeline-year { left: -80px; font-size: 24px; width: 60px; }
+    .timeline-list::before { left: 65px; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════════
+     HOMEPAGE CONCEPT
+     ══════════════════════════════════════════════ -->
+
+<nav id="nav">
+  <a href="#" class="nav-logo">Proarc</a>
+  <ul class="nav-links">
+    <li><a href="#about-section">About</a></li>
+    <li><a href="#works">Projects</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#journal-section">Journal</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+
+<!-- HERO — One image. One project. Full conviction. -->
+<section class="hero">
+  <div class="hero-image"></div>
+  <div class="hero-content">
+    <div class="hero-project-tag">Commercial · Ajman · 2015</div>
+    <h1 class="hero-title">Ajman Bank<br>Headquarters</h1>
+    <div class="hero-location">Al-Ittihad Street, Ajman — 73,071 sq ft</div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- SELECTED WORKS — Curated, not dumped -->
+<section class="works" id="works">
+  <div class="works-header">
+    <span class="section-label">Selected Works</span>
+    <a href="#" class="view-all">View All Projects</a>
+  </div>
+
+  <!-- Row 1: Large + Tall -->
+  <div class="works-row-1">
+    <div class="work-card">
+      <div class="img-placeholder img-p1 work-card-image" style="aspect-ratio:16/10;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">R Holding Head Office</div>
+        <div class="work-card-meta">Commercial · Ajman</div>
+      </div>
+    </div>
+    <div class="work-card work-card-tall">
+      <div class="img-placeholder img-p2 work-card-image" style="aspect-ratio:3/4;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">City University</div>
+        <div class="work-card-meta">Educational · Ajman · 62,000 sqm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Three equal -->
+  <div class="works-row-2">
+    <div class="work-card work-card-square">
+      <div class="img-placeholder img-p3 work-card-image" style="aspect-ratio:1/1;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">Woodlem Park School</div>
+        <div class="work-card-meta">Educational · Al Tallah</div>
+      </div>
+    </div>
+    <div class="work-card work-card-square">
+      <div class="img-placeholder img-p4 work-card-image" style="aspect-ratio:1/1;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">CityLife Al-Khor</div>
+        <div class="work-card-meta">Mixed-Use · Ajman</div>
+      </div>
+    </div>
+    <div class="work-card work-card-square">
+      <div class="img-placeholder img-p5 work-card-image" style="aspect-ratio:1/1;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">The BlackSquare</div>
+        <div class="work-card-meta">Commercial · Ajman</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 3: Tall + Large (reversed) -->
+  <div class="works-row-3">
+    <div class="work-card work-card-tall">
+      <div class="img-placeholder img-p6 work-card-image" style="aspect-ratio:3/4;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">FrontLine School</div>
+        <div class="work-card-meta">Educational · Ajman</div>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="img-placeholder img-p7 work-card-image" style="aspect-ratio:16/10;"></div>
+      <div class="work-card-overlay">
+        <div class="work-card-name">CityLife Al-Tallah</div>
+        <div class="work-card-meta">Mixed-Use · Ajman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MANIFESTO — The firm's voice, not a widget -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-left">
+      <div>
+        <div class="manifesto-number">20</div>
+        <div class="manifesto-stat">Years shaping the UAE skyline</div>
+      </div>
+      <div>
+        <div class="manifesto-number" style="color: rgba(139,32,16,0.08);">40+</div>
+        <div class="manifesto-stat">Projects delivered across 7 emirates</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label section-label-light" style="margin-bottom: var(--space-4);">The Practice</div>
+      <p class="manifesto-text">
+        Since 2006, Proarc has shaped Ajman's emerging skyline — from
+        corporate landmarks and university campuses to mixed-use
+        developments that redefine how communities live, work, and learn.
+      </p>
+      <div class="manifesto-divider"></div>
+      <a href="#about-section" class="manifesto-cta">About the Firm →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- APPROACH — Three principles -->
+<section class="approach">
+  <div class="approach-header">
+    <span class="section-label">Approach</span>
+  </div>
+  <div class="approach-grid">
+    <div class="approach-item">
+      <div class="approach-number">01</div>
+      <div class="approach-title">Context First</div>
+      <p class="approach-desc">Every project begins with a deep reading of site, climate, and community. Architecture without context is sculpture.</p>
+    </div>
+    <div class="approach-item">
+      <div class="approach-number">02</div>
+      <div class="approach-title">Material Integrity</div>
+      <p class="approach-desc">We select materials for longevity, beauty, and environmental responsibility. Honesty in construction is honesty in design.</p>
+    </div>
+    <div class="approach-item">
+      <div class="approach-number">03</div>
+      <div class="approach-title">Lasting Impact</div>
+      <p class="approach-desc">We design for decades, not trends. Buildings that age with dignity, serve with generosity, and outlast their architects.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- JOURNAL — Editorial teaser -->
+<section class="journal" id="journal-section">
+  <div class="journal-inner">
+    <div class="journal-header">
+      <span class="section-label">From the Journal</span>
+      <a href="#" class="view-all">All Articles</a>
+    </div>
+    <div class="journal-grid">
+      <div class="journal-card">
+        <div class="journal-card-image">
+          <div class="journal-card-image-inner ji-1"></div>
+        </div>
+        <div class="journal-card-category">Design Philosophy</div>
+        <div class="journal-card-title">Designing for the Desert: Architecture in Ajman's Climate</div>
+        <p class="journal-card-excerpt">How extreme heat, humidity, and sandstorms shape every facade, orientation, and material decision in our practice.</p>
+        <div class="journal-card-date">January 2026</div>
+      </div>
+      <div class="journal-card">
+        <div class="journal-card-image">
+          <div class="journal-card-image-inner ji-2"></div>
+        </div>
+        <div class="journal-card-category">Project Story</div>
+        <div class="journal-card-title">Becoming a Landmark: The Making of Ajman Bank HQ</div>
+        <p class="journal-card-excerpt">The inclined glass facade, the G+M+7 structure, and the challenge of creating an urban landmark on Al-Ittihad Street.</p>
+        <div class="journal-card-date">December 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">Proarc</span>
+      <span class="footer-copy">© 2026 All rights reserved</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">info@proarc.ae</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     ABOUT PAGE CONCEPT (scroll down to see)
+     ══════════════════════════════════════════════ -->
+
+<div class="concept-separator">
+  <div class="concept-separator-label">About Page Concept Below</div>
+</div>
+
+<!-- ABOUT HERO — Refined, more cinematic -->
+<section class="about-hero" id="about-section">
+  <div>
+    <p class="about-hero-quote">
+      We believe architecture is the most visible expression of a society's ambitions. Every line we draw carries that responsibility.
+    </p>
+    <p class="about-hero-attr">— Founding Principal</p>
+  </div>
+</section>
+
+
+<!-- NUMBERS — Breathing room, not a crowded strip -->
+<section class="about-numbers">
+  <div class="numbers-flow">
+    <div class="number-item fade-up">
+      <div class="number-value">20</div>
+      <div class="number-label">Years of Practice</div>
+    </div>
+    <div class="number-item fade-up delay-1">
+      <div class="number-value">40+</div>
+      <div class="number-label">Projects Delivered</div>
+    </div>
+    <div class="number-item fade-up delay-2">
+      <div class="number-value">2M+</div>
+      <div class="number-label">Sq Ft Built</div>
+    </div>
+    <div class="number-item fade-up delay-3">
+      <div class="number-value">7</div>
+      <div class="number-label">Emirates Served</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FIRM STORY — Golden split with room to breathe -->
+<section class="firm-story">
+  <div class="firm-image">
+    <div class="firm-image-inner"></div>
+  </div>
+  <div class="firm-text">
+    <span class="section-label" style="margin-bottom: var(--space-3);">The Practice</span>
+    <h2 class="firm-heading">Proarc</h2>
+    <div class="firm-body">
+      <p>Proarc, one of the leading architectural practices in the UAE, has been an integral contributor to Ajman's emerging iconic skyline since 2006.</p>
+      <p>Over the past two decades we have pioneered a sustainable approach to architecture through a strikingly wide range of work — from urban masterplans and public infrastructure to retail spaces, healthcare facilities, and residential towers.</p>
+      <p>Based in Ajman with buildings across the Emirates, we have transformed our clients' businesses and missions, helping to make them leaders in their fields.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="page-divider"><hr></div>
+
+
+<!-- TIMELINE — VERTICAL. Natural scroll. No scrollbar widget. -->
+<section class="timeline">
+  <div class="timeline-header">
+    <span class="section-label">Landmark Projects</span>
+  </div>
+  <div class="timeline-list">
+    <div class="timeline-item">
+      <span class="timeline-year">2013</span>
+      <div class="timeline-name">Habitat Al Tallah</div>
+      <div class="timeline-note">Educational landmark in Al Tallah</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2015</span>
+      <div class="timeline-name">Ajman Bank HQ</div>
+      <div class="timeline-note">Inclined-glass corporate headquarters — 73,071 sq ft</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2017</span>
+      <div class="timeline-name">City University</div>
+      <div class="timeline-note">62,000 sqm campus in Ajman</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2017</span>
+      <div class="timeline-name">Delhi Private School</div>
+      <div class="timeline-note">31,000 sqm learning environment</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2020</span>
+      <div class="timeline-name">Crown British School</div>
+      <div class="timeline-note">British-curriculum campus</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2021</span>
+      <div class="timeline-name">Woodlem Park Hamidiya</div>
+      <div class="timeline-note">26,000 sqm school campus</div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2024</span>
+      <div class="timeline-name">North Gate British School</div>
+      <div class="timeline-note">Newest educational delivery</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EXPERTISE — Cleaner grid -->
+<section class="expertise">
+  <div class="expertise-inner">
+    <div class="expertise-header">
+      <span class="section-label">Expertise</span>
+    </div>
+    <div class="expertise-grid">
+      <div class="expertise-item">
+        <div class="expertise-name">Educational</div>
+        <p class="expertise-desc">Schools, universities, and learning environments across the Emirates.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-name">Commercial</div>
+        <p class="expertise-desc">Corporate headquarters, offices, and workplace architecture.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-name">Residential</div>
+        <p class="expertise-desc">Towers, villas, and gated communities for modern living.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-name">Mixed-Use &amp; Retail</div>
+        <p class="expertise-desc">Lifestyle malls and retail-residential developments.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-name">Institutional</div>
+        <p class="expertise-desc">Civic, religious, and healthcare buildings.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-name">Urban Planning</div>
+        <p class="expertise-desc">Large-scale planning that shapes neighbourhoods.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER (repeated for about) -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">Proarc</span>
+      <span class="footer-copy">© 2026 All rights reserved</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">info@proarc.ae</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Work cards — stagger entrance
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const cards = e.target.querySelectorAll('.work-card');
+        cards.forEach((card, i) => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = `opacity 0.7s ease ${i * 0.12}s, transform 0.7s ease ${i * 0.12}s`;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        });
+        cardObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.works-row-1, .works-row-2, .works-row-3').forEach(row => {
+    cardObserver.observe(row);
+  });
+
+  // Timeline items — stagger
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateX(0)';
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-12px)';
+    el.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+    tlObserver.observe(el);
+  });
+
+  // Number count-up
+  const numObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target.querySelector('.number-value');
+        const text = el.textContent;
+        const num = parseInt(text);
+        if (!isNaN(num) && num > 0) {
+          const suffix = text.replace(String(num), '');
+          let current = 0;
+          const step = Math.ceil(num / 40);
+          const timer = setInterval(() => {
+            current = Math.min(current + step, num);
+            el.textContent = current + suffix;
+            if (current >= num) clearInterval(timer);
+          }, 35);
+        }
+        numObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.number-item').forEach(el => numObserver.observe(el));
+</script>
+
+</body>
+</html>
