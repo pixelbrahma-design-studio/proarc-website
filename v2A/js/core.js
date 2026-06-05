@@ -257,21 +257,12 @@
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
             }
-            // Store page-specific classes from .content for later application
-            var loadedContentClasses = a(d).find(".content").attr("class");
             $reloadboxIn.addClass(u).css({
                 position: b.positionType,
                 marginLeft: 0,
                 top: j.top,
                 left: n
             }).html(reloadboxInContents);
-            // Apply page-specific classes to .content element after HTML is set
-            if (typeof loadedContentClasses !== 'undefined' && loadedContentClasses) {
-                var contentEl = $reloadboxIn.find('.content');
-                if (contentEl.length) {
-                    contentEl.attr('class', loadedContentClasses);
-                }
-            }
             var v = $reloadboxIn.find("img");
             var w = 0;
             if (v.length && true == b.preloadImages) v.on("load", function() {

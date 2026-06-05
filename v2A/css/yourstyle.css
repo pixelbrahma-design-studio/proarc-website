@@ -797,8 +797,8 @@ footer {
 /* ------------------------------------------------------------------
    1. GLOBAL — reset theme's paragraph padding inside redesigned pages
    ------------------------------------------------------------------ */
-.rd-home p, .rd-about p, .pf-redesign p, .sv-redesign p,
-.rd-home h1, .rd-home h2, .rd-home h3,
+.content p, .rd-home p, .rd-about p, .pf-redesign p, .sv-redesign p,
+.content h1, .content h2, .content h3, .rd-home h1, .rd-home h2, .rd-home h3,
 .rd-about h1, .rd-about h2, .rd-about h3 {
   padding: 0; margin: 0;
 }
