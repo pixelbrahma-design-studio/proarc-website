@@ -203,9 +203,18 @@
         ksLoadPage: function(b, c, d, f, g) {
             var h = a(b.reloadbox);
             if ("" != d) {
-                // Clear all jQuery animations and delays before AJAX navigation
-                // This prevents "Cannot read properties of null (reading 'delaylist')" error
+                // Clean up jQuery plugins and animations before AJAX navigation
+                // Prevents "Cannot read properties of null" errors from niceScroll and others
                 a("*").stop(true, true).clearQueue("fx").clearQueue("delay");
+
+                // Disconnect niceScroll observers if they exist
+                if (window.niceScroll) {
+                    try {
+                        a("*").niceScroll().remove();
+                    } catch (err) {
+                        // Ignore if niceScroll not fully initialized
+                    }
+                }
 
                 e.ksAddreloadboxIn(b, f);
                 a.ajax({
