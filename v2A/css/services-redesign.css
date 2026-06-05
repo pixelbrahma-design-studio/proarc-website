@@ -1,0 +1,77 @@
+/* v2A Services Redesign — 6 Disciplines with Alternating Golden-Ratio Layouts */
+
+.sv-redesign { float: left; width: 100%; background: #fff; }
+
+/* DARK PAGE HERO */
+.sv-hero { background: #0e0e0e; min-height: 50vh; display: flex; align-items: center; padding: var(--space-7) var(--space-5); }
+.sv-hero-inner { max-width: 1400px; margin: 0 auto; width: 100%; display: grid !important; grid-template-columns: 38.2% 61.8% !important; gap: var(--space-6); align-items: center; }
+.sv-hero-left { }
+.sv-hero-left .rd-label { display: block; color: rgba(255,255,255,0.35); margin-bottom: var(--space-2); }
+.sv-hero-num { font-family: var(--display); font-weight: 300; font-size: 96px; color: rgba(255,255,255,0.06); line-height: 0.85; letter-spacing: -0.03em; margin-bottom: var(--space-2); }
+.sv-hero-stat { font-family: var(--font); font-weight: 300; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.sv-hero-right { }
+.sv-hero-text { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(24px, 3vw, 32px); color: rgba(255,255,255,0.8); line-height: 1.5; max-width: 32ch; margin: 0; padding: 0; }
+
+/* STICKY SERVICE NAV */
+.sv-nav-sticky { position: sticky; top: 64px; z-index: 50; background: #fff; border-bottom: 0.5px solid #e0e0e0; }
+.sv-nav-inner { max-width: 1400px; margin: 0 auto; padding: var(--space-3) var(--space-5); display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.sv-nav-link { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.3s; position: relative; padding-bottom: var(--space-1); }
+.sv-nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: #111; transition: width 0.3s; }
+.sv-nav-link:hover { color: #111; }
+.sv-nav-link:hover::after { width: 100%; }
+
+/* SERVICE SECTIONS */
+.sv-section { padding: var(--space-7) var(--space-5); max-width: 1400px; margin: 0 auto; border-top: 0.5px solid #e0e0e0; }
+.sv-section:first-of-type { border-top: none; }
+.sv-section-grid { display: grid !important; gap: var(--space-5); align-items: center; }
+.sv-image { aspect-ratio: 4/3; background-size: cover; background-position: center; filter: saturate(0.9) contrast(1.05); }
+.sv-text { padding: var(--space-4) 0; }
+.sv-num { font-family: var(--display); font-weight: 300; font-size: 48px; color: #eee; line-height: 1; margin-bottom: var(--space-3); }
+.sv-title { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); color: #111; letter-spacing: 0.04em; line-height: 1.15; margin: 0 0 var(--space-3) 0; }
+.sv-rule { width: 34px; height: 1px; background: rgba(139,32,16,0.3); margin-bottom: var(--space-4); }
+.sv-body { margin-bottom: var(--space-5); }
+.sv-body p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.75; color: #444; max-width: 48ch; margin: 0 0 var(--space-3) 0; padding: 0; }
+.sv-body p:last-child { margin-bottom: 0; }
+
+/* SUB-DISCIPLINES */
+.sv-disciplines { }
+.sv-disc-head { font-family: var(--font); font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #888; margin-bottom: var(--space-3); display: block; }
+.sv-disc-list { }
+.sv-disc-item { border-top: 0.5px solid #e8e6e1; padding: var(--space-2) 0; transition: border-color 0.3s ease; }
+.sv-disc-item:last-child { border-bottom: 0.5px solid #e8e6e1; }
+.sv-disc-name { font-family: var(--font); font-weight: 400; font-size: 13px; color: #333; transition: color 0.3s; }
+.sv-disc-item:hover .sv-disc-name { color: #111; }
+.sv-disc-desc { font-family: var(--font); font-weight: 300; font-size: 12px; color: #888; margin-top: 2px; }
+
+/* SERVICES CTA */
+.sv-cta { background: #000; padding: var(--space-6) var(--space-5); }
+.sv-cta-inner { max-width: 1400px; margin: 0 auto; display: grid !important; grid-template-columns: 61.8% 38.2% !important; gap: var(--space-5); align-items: center; }
+.sv-cta-text { }
+.sv-cta-text p { font-family: var(--display); font-weight: 300; font-style: italic; font-size: var(--text-lg); color: rgba(255,255,255,0.7); max-width: 28ch; margin: 0; padding: 0; line-height: 1.5; }
+.sv-cta-contact { }
+.sv-cta-link { display: block; font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: var(--space-3); position: relative; transition: color 0.3s; }
+.sv-cta-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 0.5px; background: rgba(139,32,16,0.7); transition: width 0.4s; }
+.sv-cta-link:hover { color: rgba(255,255,255,0.9); }
+.sv-cta-link:hover::after { width: 100%; }
+.sv-cta-info { }
+.sv-cta-info div { font-family: var(--font); font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+.sv-cta-info div:first-child { color: rgba(255,255,255,0.35); }
+
+@media (max-width: 1024px) {
+  .sv-hero-inner { grid-template-columns: 1fr !important; }
+  .sv-section-grid { grid-template-columns: 1fr !important; }
+  .sv-image { aspect-ratio: 16/9; }
+  .sv-cta-inner { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 768px) {
+  .sv-hero { padding: var(--space-5) var(--space-4); min-height: auto; }
+  .sv-hero-inner { grid-template-columns: 1fr !important; gap: var(--space-4); }
+  .sv-hero-num { font-size: 72px; }
+  .sv-nav-inner { padding: var(--space-2) var(--space-4); gap: var(--space-2); }
+  .sv-nav-link { font-size: 10px; }
+  .sv-section { padding: var(--space-5) var(--space-4); }
+  .sv-section-grid { grid-template-columns: 1fr !important; }
+  .sv-image { aspect-ratio: 16/9; }
+  .sv-cta { padding: var(--space-5) var(--space-4); }
+  .sv-cta-inner { grid-template-columns: 1fr !important; }
+}
