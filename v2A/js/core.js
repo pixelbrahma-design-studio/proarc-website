@@ -203,6 +203,10 @@
         ksLoadPage: function(b, c, d, f, g) {
             var h = a(b.reloadbox);
             if ("" != d) {
+                // Clear all jQuery animations and delays before AJAX navigation
+                // This prevents "Cannot read properties of null (reading 'delaylist')" error
+                a("*").stop(true, true).clearQueue("fx").clearQueue("delay");
+
                 e.ksAddreloadboxIn(b, f);
                 a.ajax({
                     type: "GET",
