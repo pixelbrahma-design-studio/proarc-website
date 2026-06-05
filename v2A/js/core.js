@@ -252,31 +252,26 @@
                 if (b.loadBox) var t = a(d).filter(b.loadBox); else if (loadSelector) var t = a(d).filter(loadSelector); else var t = a(d).filter("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
-                // Extract .content element with page-specific classes from loaded page
-                var loadedContent = a(d).find(".content");
-                if (loadedContent.length) {
-                    var contentHTML = loadedContent.html();
-                    var contentClasses = loadedContent.attr("class");
-                    reloadboxInContents = '<div class="' + contentClasses + '">' + contentHTML + '</div>';
-                }
             } else {
                 if (b.loadBox) var t = a(d).find(b.loadBox); else if (loadSelector) var t = a(d).find(loadSelector); else var t = a(d).find("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
-                // Extract .content element with page-specific classes from loaded page
-                var loadedContent = a(d).find(".content");
-                if (loadedContent.length) {
-                    var contentHTML = loadedContent.html();
-                    var contentClasses = loadedContent.attr("class");
-                    reloadboxInContents = '<div class="' + contentClasses + '">' + contentHTML + '</div>';
-                }
             }
+            // Store page-specific classes from .content for later application
+            var loadedContentClasses = a(d).find(".content").attr("class");
             $reloadboxIn.addClass(u).css({
                 position: b.positionType,
                 marginLeft: 0,
                 top: j.top,
                 left: n
             }).html(reloadboxInContents);
+            // Apply page-specific classes to .content element after HTML is set
+            if (typeof loadedContentClasses !== 'undefined' && loadedContentClasses) {
+                var contentEl = $reloadboxIn.find('.content');
+                if (contentEl.length) {
+                    contentEl.attr('class', loadedContentClasses);
+                }
+            }
             var v = $reloadboxIn.find("img");
             var w = 0;
             if (v.length && true == b.preloadImages) v.on("load", function() {
