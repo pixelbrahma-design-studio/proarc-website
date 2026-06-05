@@ -754,7 +754,7 @@ footer {
 .content.journal-listing, .content.journal-article { float: left; width: 100%; background: var(--bg); }
 .jr-listing-head { text-align: center; padding: var(--space-7) var(--space-5) var(--space-5); }
 .jr-listing-title { font-family: var(--display); font-weight: 300; font-size: var(--text-xl); margin: 0; letter-spacing: 0.04em; }
-.jr-listing-sub { font-family: var(--font); font-weight: 300; font-size: var(--text-base); color: #888; max-width: none; margin: var(--space-2) auto 0; }
+.jr-listing-sub { font-family: var(--font); font-weight: 300; font-size: var(--text-base); color: #888; max-width: none; margin: var(--space-2) auto 0; text-align: center; }
 .jr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-5); max-width: 1240px; margin: 0 auto var(--space-7); padding: 0 var(--space-5); }
 .jr-card { display: block; text-decoration: none; }
 .jr-card-img { aspect-ratio: 16/9; background: #e8e6e1; margin-bottom: var(--space-3); }
