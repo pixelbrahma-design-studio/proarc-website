@@ -198,7 +198,7 @@ footer {
 }
 
 /* Social icons — circular, copper-tinted hover */
-.footer-social { display: block; }
+.footer-social { display: block; padding-top: 10px; }
 .footer-social ul { display: flex; flex-direction: row; align-items: center; gap: var(--space-1); list-style: none; padding: 0; margin: 0; }
 .footer-social li { float: none; display: flex; }
 .footer-social li a {
