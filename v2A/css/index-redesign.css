@@ -160,3 +160,37 @@
   .rdhero-title { font-size: 32px; }
   .rdhero-panel { padding: var(--space-4); }
 }
+
+/* ====================================================================
+   Hero left-image auto-crossfade (Featured Project — Ajman Bank HQ angles)
+   Pure CSS only — never touches the GSAP / IntersectionObserver layer.
+   Subtle dissolve + slow Ken Burns zoom, premium architectural pacing.
+   The existing .rdhero-image inline background (ajmanbank1) stays as the
+   no-JS / pre-paint base so there is zero layout shift; the ::after
+   gradient and ::before copper seam keep painting above these slides.
+   ==================================================================== */
+.rdhero-slideshow { position: absolute; inset: 0; overflow: hidden; }
+.rdhero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; will-change: opacity, transform;
+  animation: rdHeroCrossfade 18s linear infinite;
+  backface-visibility: hidden;
+}
+.rdhero-slide-1 { background-image: url(../images/folio/projects/ajmanbank1.jpg); animation-delay: 0s; }
+.rdhero-slide-2 { background-image: url(../images/folio/projects/ajmanbank2.jpg); animation-delay: 6s; }
+.rdhero-slide-3 { background-image: url(../images/folio/projects/ajmanbank3.jpg); animation-delay: 12s; }
+
+@keyframes rdHeroCrossfade {
+  0%   { opacity: 0; transform: scale(1.0); }
+  5%   { opacity: 1; }
+  33%  { opacity: 1; }
+  39%  { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.09); }
+}
+
+/* Respect reduced-motion: hold a single still frame, no animation. */
+@media (prefers-reduced-motion: reduce) {
+  .rdhero-slide { animation: none; }
+  .rdhero-slide-1 { opacity: 1; transform: none; }
+}
