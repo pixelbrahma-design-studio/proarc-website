@@ -252,16 +252,24 @@
                 if (b.loadBox) var t = a(d).filter(b.loadBox); else if (loadSelector) var t = a(d).filter(loadSelector); else var t = a(d).filter("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
-                // Preserve page-specific classes from .content element
-                var contentClasses = a(d).find(".content").attr("class");
-                if (contentClasses) u = (u || "") + " " + contentClasses;
+                // Extract .content element with page-specific classes from loaded page
+                var loadedContent = a(d).find(".content");
+                if (loadedContent.length) {
+                    var contentHTML = loadedContent.html();
+                    var contentClasses = loadedContent.attr("class");
+                    reloadboxInContents = '<div class="' + contentClasses + '">' + contentHTML + '</div>';
+                }
             } else {
                 if (b.loadBox) var t = a(d).find(b.loadBox); else if (loadSelector) var t = a(d).find(loadSelector); else var t = a(d).find("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
-                // Preserve page-specific classes from .content element
-                var contentClasses = a(d).find(".content").attr("class");
-                if (contentClasses) u = (u || "") + " " + contentClasses;
+                // Extract .content element with page-specific classes from loaded page
+                var loadedContent = a(d).find(".content");
+                if (loadedContent.length) {
+                    var contentHTML = loadedContent.html();
+                    var contentClasses = loadedContent.attr("class");
+                    reloadboxInContents = '<div class="' + contentClasses + '">' + contentHTML + '</div>';
+                }
             }
             $reloadboxIn.addClass(u).css({
                 position: b.positionType,
