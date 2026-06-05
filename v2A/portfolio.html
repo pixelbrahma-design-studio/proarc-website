@@ -25,6 +25,7 @@
         <link type="text/css" rel="stylesheet" href="css/plugins.css">
         <link type="text/css" rel="stylesheet" href="css/style.css">
         <link type="text/css" rel="stylesheet" href="css/yourstyle.css">
+        <link type="text/css" rel="stylesheet" href="css/portfolio-redesign.css">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
     </head>
@@ -80,10 +81,54 @@
                     </div>
                     <!--  Navigation end --> 
                     <!--  Content  --> 
-                    <div class="content ">
+                    <div class="content pf-redesign">
+                        <!-- PAGE HERO -->
+                        <section class="pf-hero">
+                            <div class="pf-hero-inner">
+                                <span class="rd-label">Portfolio</span>
+                                <h1 class="pf-hero-heading">40+ Projects Across the UAE</h1>
+                                <p class="pf-hero-subtitle">Commercial, educational, residential, and mixed-use architecture shaping the emirates since 2006.</p>
+                            </div>
+                        </section>
+
+                        <!-- STICKY FILTER TABS -->
+                        <div class="pf-filters-sticky">
+                            <div class="pf-filters-inner">
+                                <a href="#" class="pf-filter pf-filter-active" data-filter="*">ALL</a>
+                                <a href="#" class="pf-filter" data-filter=".commercial">COMMERCIAL</a>
+                                <a href="#" class="pf-filter" data-filter=".educational">EDUCATIONAL</a>
+                                <a href="#" class="pf-filter" data-filter=".residential">RESIDENTIAL</a>
+                                <a href="#" class="pf-filter" data-filter=".mall">MIXED-USE</a>
+                                <a href="#" class="pf-filter" data-filter=".mall">MALLS</a>
+                            </div>
+                        </div>
+
+                        <!-- FEATURED PROJECTS -->
+                        <section class="pf-featured">
+                            <div class="pf-featured-grid">
+                                <a href="edu-cityuniversity.html" class="pf-featured-card pf-featured-large">
+                                    <img src="images/folio/projects/eduuni1.webp" alt="City University" class="pf-featured-img">
+                                    <div class="pf-featured-overlay">
+                                        <div class="pf-featured-name">City University</div>
+                                        <div class="pf-featured-meta">62,000 sqm · Ajman</div>
+                                    </div>
+                                </a>
+                                <a href="rholding.html" class="pf-featured-card pf-featured-small">
+                                    <img src="images/folio/thumbs/rholding.jpg" alt="R Holding Head Office" class="pf-featured-img">
+                                    <div class="pf-featured-overlay">
+                                        <div class="pf-featured-name">R Holding HQ</div>
+                                        <div class="pf-featured-meta">Commercial · Ajman</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </section>
+
+                        <!-- PROJECT GRID -->
+                        <section class="pf-grid-section">
+                        <div class="pf-grid">
                         <section class="no-padding no-border no-bg">
                             <!-- Filters-->
-                            <div class="filter-holder filter-vis-line">
+                            <div class="filter-holder filter-vis-line" style="display:none;">
                                 <div class="gallery-filters">
                                     <a href="#" class="gallery-filter gallery-filter-active"  data-filter="*">All</a>
                                     <a href="#" class="gallery-filter" data-filter=".commercial">Commercial</a>
@@ -654,8 +699,18 @@
                                 <!-- project end -->                                
                                 
                             </div>
-                            <!-- end gallery items -->					
+                            <!-- end gallery items -->
                         </section>
+                        </div>
+                        </section>
+                        <!-- end pf-grid -->
+
+                        <!-- CTA SECTION -->
+                        <section class="pf-cta">
+                            <p class="pf-cta-text">Have a project in mind?</p>
+                            <a href="contact.html" class="pf-cta-button">Get in Touch</a>
+                        </section>
+
                     </div>
                     <!--  Content  end --> 
                     <!-- share  -->
