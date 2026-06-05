@@ -789,3 +789,153 @@ footer {
 .map-box { width: 100%; height: 100%; min-height: 420px; }
 .osm-map { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; }
 @media (max-width: 1036px){ .map-box, .osm-map { min-height: 320px; } }
+
+/* ====================================================================
+   v2A GLOBAL POLISH — spacing, alignment, color, font-size corrections
+   ==================================================================== */
+
+/* ------------------------------------------------------------------
+   1. GLOBAL — reset theme's paragraph padding inside redesigned pages
+   ------------------------------------------------------------------ */
+.rd-home p, .rd-about p, .pf-redesign p, .sv-redesign p,
+.rd-home h1, .rd-home h2, .rd-home h3,
+.rd-about h1, .rd-about h2, .rd-about h3 {
+  padding: 0; margin: 0;
+}
+
+/* ------------------------------------------------------------------
+   2. HOMEPAGE — hero panel vertical rhythm tightening
+   ------------------------------------------------------------------ */
+.rdhero-panel { padding: var(--space-5) var(--space-5) var(--space-5) var(--space-5) !important; }
+.rdhero-title { font-size: clamp(40px, 4.5vw, 58px) !important; line-height: 1.1 !important; }
+.rdhero-label { font-size: 10px !important; letter-spacing: 0.2em !important; margin-bottom: var(--space-4) !important; }
+.rdhero-featured { padding: var(--space-5) 0; }
+.rdhero-tagline { font-size: 10px !important; letter-spacing: 0.18em !important; }
+/* Works section — correct card-content padding bleed */
+.rd-works { padding-left: var(--space-5) !important; padding-right: var(--space-5) !important; }
+/* Approach items — remove theme padding bleed */
+.rd-approach-item p, .rd-approach-item div { padding: 0; }
+
+/* ------------------------------------------------------------------
+   3. ABOUT PAGE — numbers strip, firm story, timeline
+   ------------------------------------------------------------------ */
+/* Numbers — reduce excessive gap between numbers and labels */
+.rd-about .rda-numbers { padding: var(--space-6) var(--space-5) var(--space-5) !important; }
+.rd-about .rda-number { padding: var(--space-4) var(--space-4) var(--space-3) !important; }
+.rd-about .rda-num { font-size: clamp(48px, 5vw, 72px) !important; margin-bottom: var(--space-1) !important; }
+.rd-about .rda-num-label { font-size: 12px !important; color: #555 !important; letter-spacing: 0.14em !important; }
+/* Firm story — golden split needs height on image */
+.rd-about .rda-firm { padding: var(--space-5) var(--space-5) var(--space-6) !important; }
+.rd-about .rda-firm-img { min-height: 420px !important; }
+.rd-about .rda-firm-head { font-size: var(--text-2xl) !important; color: rgba(139,32,16,0.7) !important; margin-bottom: var(--space-3) !important; }
+.rd-about .rda-firm-body p { font-size: var(--text-base) !important; color: #444 !important; line-height: 1.8 !important; max-width: 52ch !important; }
+/* Timeline — names should be Cormorant title case, not Jost caps */
+.rd-about .rda-mname { font-family: var(--display) !important; font-weight: 400 !important; font-size: 22px !important; text-transform: none !important; letter-spacing: 0.02em !important; color: #111 !important; }
+.rd-about .rda-mnote { font-size: 14px !important; color: #888 !important; margin-top: 4px !important; }
+.rd-about .rda-year { font-size: 28px !important; color: #bbb !important; }
+.rd-about .rda-milestone { padding: var(--space-3) 0 var(--space-3) var(--space-5) !important; }
+/* Expertise grid */
+.rd-about .rda-exp-name { font-size: 14px !important; color: #222 !important; }
+.rd-about .rda-exp-desc { font-size: 13px !important; line-height: 1.65 !important; }
+
+/* ------------------------------------------------------------------
+   4. PORTFOLIO — heading font consistency, hero tightening
+   ------------------------------------------------------------------ */
+.pf-hero-heading { font-size: clamp(34px, 4vw, 52px) !important; letter-spacing: 0.02em !important; text-transform: none !important; color: #111 !important; }
+.pf-hero { padding: var(--space-6) var(--space-5) var(--space-5) !important; }
+/* Grid card text */
+.pf-card-name { font-size: 13px !important; color: #111 !important; margin-top: var(--space-2) !important; }
+.pf-card-location { font-size: 12px !important; color: #888 !important; margin-top: 2px !important; }
+.pf-card-category { font-size: 10px !important; color: rgba(139,32,16,0.6) !important; }
+/* Grid card content area: proper padding */
+.pf-card-content { padding: var(--space-2) 0 var(--space-3) var(--space-2) !important; border-left: 2px solid transparent; transition: border-color 0.3s; }
+.pf-card:hover .pf-card-content { border-left-color: rgba(139,32,16,0.5) !important; }
+/* Featured overlay names */
+.pf-featured-name { font-size: 26px !important; }
+
+/* ------------------------------------------------------------------
+   5. SERVICES — fix blank section gap (images need explicit height)
+   ------------------------------------------------------------------ */
+.sv-image { min-height: 380px !important; background-size: cover !important; background-position: center !important; }
+.sv-section { padding: var(--space-6) var(--space-5) var(--space-6) !important; }
+.sv-section-grid { gap: var(--space-5) !important; }
+.sv-title { font-size: 38px !important; }
+.sv-num { font-size: 52px !important; color: #ddd !important; }
+.sv-body p { font-size: 15px !important; line-height: 1.8 !important; color: #444 !important; padding: 0 !important; }
+.sv-body p + p { margin-top: var(--space-3) !important; }
+.sv-disc-name { font-size: 14px !important; color: #222 !important; }
+.sv-disc-desc { font-size: 12px !important; }
+/* Service nav numbers */
+.sv-nav-link { font-size: 11px !important; letter-spacing: 0.12em !important; }
+/* Hero statement font size */
+.sv-hero-text { font-size: clamp(22px, 2.8vw, 34px) !important; line-height: 1.55 !important; color: rgba(255,255,255,0.85) !important; }
+.sv-hero-num { color: rgba(255,255,255,0.08) !important; }
+.sv-hero-stat { font-size: 13px !important; color: rgba(255,255,255,0.3) !important; letter-spacing: 0.18em !important; margin-top: var(--space-2) !important; }
+/* CTA */
+.sv-cta-text p { font-size: 26px !important; line-height: 1.5 !important; }
+.sv-cta-info div { font-size: 14px !important; line-height: 1.8 !important; }
+
+/* ------------------------------------------------------------------
+   6. JOURNAL LISTING — reduce top whitespace, better card typography
+   ------------------------------------------------------------------ */
+.jr-hero { padding-top: var(--space-5) !important; padding-bottom: var(--space-4) !important; }
+.jr-hero-title { font-size: var(--text-xl) !important; letter-spacing: 0.08em !important; }
+.jr-hero-sub { font-size: var(--text-base) !important; color: #666 !important; margin-top: var(--space-2) !important; }
+.jr-card { padding-bottom: var(--space-4) !important; }
+.jr-card-title { font-size: 22px !important; color: #111 !important; line-height: 1.35 !important; margin: var(--space-2) 0 !important; }
+.jr-card-cat { font-size: 10px !important; color: rgba(139,32,16,0.7) !important; letter-spacing: 0.18em !important; }
+.jr-card-excerpt { font-size: 14px !important; line-height: 1.7 !important; color: #666 !important; }
+.jr-card-date { font-size: 11px !important; color: #aaa !important; margin-top: var(--space-2) !important; }
+/* Journal article image placeholder — make it feel intentional */
+.jr-card-img, .rd-jcard-img { background: #ede9e3 !important; }
+
+/* ------------------------------------------------------------------
+   7. PROJECT DETAIL (case study) — hero height, overview text, metadata
+   ------------------------------------------------------------------ */
+.cs-hero { height: 75vh !important; min-height: 500px !important; background-size: cover !important; background-position: center !important; }
+.cs-hero-title { font-size: clamp(32px, 5vw, 62px) !important; letter-spacing: 0.04em !important; line-height: 1.1 !important; }
+.cs-label { font-size: 10px !important; color: #888 !important; letter-spacing: 0.18em !important; }
+/* Overview section */
+.cs-overview { padding: var(--space-6) var(--space-5) !important; }
+.cs-desc { font-size: 16px !important; line-height: 1.85 !important; color: #333 !important; max-width: 62ch !important; }
+.cs-desc p { padding: 0 !important; margin: 0 0 var(--space-3) !important; }
+/* Metadata sidebar */
+.cs-meta-label { font-size: 10px !important; letter-spacing: 0.16em !important; color: #999 !important; text-transform: uppercase !important; }
+.cs-meta-value { font-size: 14px !important; color: #222 !important; font-family: var(--font) !important; font-weight: 400 !important; }
+.cs-meta-row { padding: var(--space-2) 0 !important; border-bottom-color: #f0f0f0 !important; }
+
+/* ------------------------------------------------------------------
+   8. GLOBAL SECTION LABELS — consistent copper on light, light on dark
+   ------------------------------------------------------------------ */
+.pf-redesign .rd-label,
+.sv-redesign .rd-label { color: rgba(139,32,16,0.6) !important; }
+
+/* --- v2A Polish Pass 2 --- */
+/* Journal listing — reduce top space, fix subtitle color, title size */
+.jr-listing-head { padding: var(--space-5) var(--space-5) var(--space-4) !important; }
+.jr-listing-title { font-size: clamp(32px, 4vw, 52px) !important; letter-spacing: 0.06em !important; color: #111 !important; }
+.jr-listing-sub { font-size: var(--text-base) !important; color: #666 !important; max-width: 52ch !important; line-height: 1.7 !important; }
+.jr-grid { gap: var(--space-5) var(--space-5) !important; }
+/* Journal card image — warm neutral, feels intentional not empty */
+.jr-card-thumb { background: #ede9e3 !important; }
+
+/* Project detail hero — taller, title bigger, subtitle clearer */
+.cs-hero { min-height: 72vh !important; }
+.cs-hero-title { font-size: clamp(34px, 5.5vw, 68px) !important; font-weight: 300 !important; letter-spacing: 0.04em !important; line-height: 1.08 !important; padding-bottom: var(--space-3) !important; }
+.cs-hero-tags { font-size: 11px !important; letter-spacing: 0.16em !important; color: rgba(255,255,255,0.45) !important; }
+/* Overview + metadata */
+.cs-overview { max-width: 1400px !important; margin: 0 auto !important; padding: var(--space-6) var(--space-5) var(--space-5) !important; }
+.cs-desc { font-size: 16px !important; line-height: 1.85 !important; color: #333 !important; }
+.cs-desc p, .cs-desc p:first-child { padding: 0 !important; margin-bottom: var(--space-3) !important; }
+.cs-meta-label { font-size: 9px !important; letter-spacing: 0.2em !important; color: #aaa !important; margin-bottom: 3px !important; }
+.cs-meta-value { font-size: 14px !important; color: #111 !important; font-weight: 400 !important; }
+
+/* About numbers label — warmer color, not just grey */
+.rd-about .rda-num-label { color: #666 !important; font-size: 11px !important; text-transform: uppercase !important; }
+
+/* Services sticky nav — add numbers in copper */
+.sv-nav-link { color: #555 !important; }
+.sv-nav-link:hover { color: #111 !important; }
+
+/* Portfolio hero subtitle — better reading color */
+.pf-hero-subtitle { color: #555 !important; font-size: 16px !important; line-height: 1.75 !important; }
