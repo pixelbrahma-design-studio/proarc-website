@@ -126,7 +126,7 @@
                         <!-- PROJECT GRID -->
                         <section class="pf-grid-section">
                             <div class="pf-grid">
-                                <a href="edu-cityuniversity.html" class="pf-card s    hid-port-info grid-small-pad">
+                                <a href="edu-cityuniversity.html" class="pf-card educational">
                                     <img src="images/folio/projects/eduuni1.webp" alt="City University" class="pf-card-img" loading="lazy">
                                     <div class="pf-card-content">
                                         <div class="pf-card-name">City University</div>
@@ -507,5 +507,38 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
         <script type="text/javascript" src="js/immersive.js"></script>
+        <script>
+        (function () {
+            function initPortfolioFilter() {
+                var filters = document.querySelectorAll('.pf-filter');
+                var cards   = document.querySelectorAll('.pf-card');
+                if (!filters.length || !cards.length) return;
+
+                filters.forEach(function (btn) {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        var sel = this.getAttribute('data-filter');
+
+                        // Update active tab
+                        filters.forEach(function (f) { f.classList.remove('pf-filter-active'); });
+                        this.classList.add('pf-filter-active');
+
+                        // Show/hide cards
+                        cards.forEach(function (card) {
+                            if (sel === '*') {
+                                card.style.display = 'block';
+                            } else {
+                                var cls = sel.replace('.', '');
+                                card.style.display = card.classList.contains(cls) ? 'block' : 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            if (document.readyState !== 'loading') initPortfolioFilter();
+            else document.addEventListener('DOMContentLoaded', initPortfolioFilter);
+        })();
+        </script>
     </body>
 </html>
