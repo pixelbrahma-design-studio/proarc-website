@@ -36,8 +36,8 @@
 /* 1. Hero quote */
 .rd-about .rda-hero { background: #0e0e0e; min-height: 70vh !important; display: flex !important; align-items: center; justify-content: center; text-align: center; padding: var(--space-7) var(--space-5); position: relative; }
 .rd-about .rda-hero::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 1px; height: 120px; background: linear-gradient(180deg, transparent, rgba(139,32,16,0.3), transparent); opacity: 0.5; }
-.rd-about .rda-hero-inner { position: relative; z-index: 1; }
-.rd-about .rda-quote { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(28px, 4vw, var(--text-xl)); line-height: 1.5; color: rgba(255,255,255,0.85); max-width: 18ch; letter-spacing: 0.01em; margin: 0 auto; padding: 0; }
+.rd-about .rda-hero-inner { position: relative; z-index: 1; width: 80%; margin: 0 auto; text-align: center; }
+.rd-about .rda-quote { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(28px, 4vw, var(--text-xl)); line-height: 1.5; color: rgba(255,255,255,0.85); max-width: 100%; letter-spacing: 0.01em; margin: 0 auto; padding: 0; }
 .rd-about .rda-attr { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-top: var(--space-5); max-width: none; padding: 0; }
 
 /* 2. Numbers */
@@ -60,35 +60,37 @@
 
 /* 4. Timeline — vertical */
 .rd-about .rda-timeline { padding: var(--space-5) var(--space-5) var(--space-4); max-width: 1400px; margin: 0 auto; }
-.rd-about .rda-timeline-head { margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 0.5px solid #e0e0e0; }
+.rd-about .rda-timeline-head { margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px solid #d8d8d8; }
 .rd-about .rda-timeline-list { position: relative !important; padding-left: 140px !important; }
 .rd-about .rda-timeline-list::before { content: ''; position: absolute; left: 120px; top: 0; bottom: 0; width: 0.5px; background: #e0e0e0; }
-.rd-about .rda-milestone { position: relative !important; padding: var(--space-3) 0 var(--space-3) var(--space-5); border-bottom: 0.5px solid #f0f0f0; }
+.rd-about .rda-milestone { position: relative !important; padding: var(--space-3) 0 var(--space-3) var(--space-4); border-bottom: 0.5px solid #f0f0f0; text-align: left; }
 .rd-about .rda-milestone:last-child { border-bottom: none; }
-.rd-about .rda-milestone::before { content: ''; position: absolute; left: calc(-1 * var(--space-5) - 2px); top: calc(var(--space-4) + 8px); width: 5px; height: 5px; background: rgba(139,32,16,0.3); border-radius: 0; transition: background 0.3s ease; }
+.rd-about .rda-milestone::before { content: ''; position: absolute; left: calc(-1 * var(--space-4) - 4px); top: 18px; width: 6px; height: 6px; background: rgba(139,32,16,0.3); border-radius: 0; transition: background 0.3s ease; }
 .rd-about .rda-milestone:hover::before { background: rgba(139,32,16,0.8); }
-.rd-about .rda-year { position: absolute !important; left: -140px; top: var(--space-4); font-family: var(--display); font-weight: 300; font-size: 36px; color: #bbb; width: 100px; text-align: right; transition: color 0.3s ease; }
+.rd-about .rda-year { position: absolute !important; left: -140px; top: var(--space-3); font-family: var(--display); font-weight: 300; font-size: 30px; color: #999; width: 100px; text-align: right; transition: color 0.3s ease; letter-spacing: -0.01em; }
 .rd-about .rda-milestone:hover .rda-year { color: #111; }
-.rd-about .rda-mname { font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 0.02em; text-transform: none; color: #111; margin-bottom: 4px; }
-.rd-about .rda-mnote { font-family: var(--font); font-weight: 300; font-size: 14px; color: #888; line-height: 1.6; }
+.rd-about .rda-mname { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: 0.02em; text-transform: none; color: #111; margin-bottom: 6px; text-align: left; }
+.rd-about .rda-mnote { font-family: var(--font); font-weight: 300; font-size: 15px; color: #888; line-height: 1.6; text-align: left; }
 
 /* 5. Expertise */
 .rd-about .rda-expertise { background: #f8f7f5; padding: var(--space-5) var(--space-5); }
 .rd-about .rda-expertise-inner { max-width: 1400px; margin: 0 auto; }
 .rd-about .rda-expertise-head { margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 0.5px solid #ddd; }
 .rd-about .rda-expertise-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0; }
-.rd-about .rda-exp-item { padding: var(--space-4) var(--space-4); border-left: 1px solid rgba(139,32,16,0.3); transition: border-color 0.3s ease; }
+.rd-about .rda-exp-item { padding: var(--space-4) var(--space-4); border-left: 1px solid rgba(139,32,16,0.3); transition: border-color 0.3s ease; text-align: center; }
 .rd-about .rda-exp-item:hover { border-left-color: rgba(139,32,16,0.8); }
+.rd-about .rda-exp-item:first-child { border-left: 0; }
+.rd-about .rda-exp-item:nth-child(4) { border-left: 0; }
 .rd-about .rda-exp-item:nth-child(n+4) { border-top: 0.5px solid #e8e6e1; }
-.rd-about .rda-exp-name { font-family: var(--font); font-weight: 500; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: #111; margin-bottom: var(--space-2); }
-.rd-about .rda-exp-desc { font-family: var(--font); font-weight: 300; font-size: 16px; color: #555; line-height: 1.7; max-width: none; padding: 0; }
+.rd-about .rda-exp-name { font-family: var(--font); font-weight: 500; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: #111; margin-bottom: var(--space-2); text-align: center; }
+.rd-about .rda-exp-desc { font-family: var(--font); font-weight: 300; font-size: 16px; color: #555; line-height: 1.7; max-width: 100%; padding: 0; text-align: center; margin: 0 auto; }
 
 /* 6. Approach */
 .rd-about .rda-approach { padding: var(--space-6) var(--space-5); max-width: 1400px; margin: 0 auto; }
 .rd-about .rda-approach-head { margin-bottom: var(--space-5); padding-bottom: var(--space-4); border-bottom: 1px solid #d8d8d8; }
 .rd-about .rda-approach-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0; }
 .rd-about .rda-approach-item { padding: var(--space-5) var(--space-4); border-left: 0.5px solid #e0e0e0; text-align: center; }
-.rd-about .rda-approach-item:first-child { border-left: 1px solid rgba(139,32,16,0.3); }
+.rd-about .rda-approach-item:first-child { border-left: 0; }
 .rd-about .rda-approach-num { font-family: var(--display); font-weight: 300; font-size: 64px; color: #ccc; line-height: 1; margin-bottom: var(--space-3); text-align: center; }
 .rd-about .rda-approach-title { font-family: var(--font); font-weight: 500; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: #111; margin-bottom: var(--space-2); text-align: center; }
 .rd-about .rda-approach-desc { font-family: var(--font); font-weight: 300; font-size: 16px; line-height: 1.8; color: #555; max-width: 100%; margin: 0 auto; text-align: center; padding: 0; }

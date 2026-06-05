@@ -10,7 +10,13 @@
 .pf-hero-subtitle { font-family: var(--font); font-weight: 300; font-size: var(--text-base); color: #666; line-height: 1.7; max-width: 56ch; margin: var(--space-2) auto 0; }
 
 /* STICKY FILTERS */
-.pf-filters-sticky { position: sticky; top: 64px; z-index: 50; background: #fff; border-bottom: 0.5px solid #e0e0e0; }
+.pf-filters-sticky {
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    background: #fff;
+    border-bottom: 0.5px solid #e0e0e0;
+}
 .pf-filters-inner { max-width: 1400px; margin: 0 auto; padding: var(--space-3) var(--space-5); display: flex; gap: var(--space-4); }
 .pf-filter { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #888; text-decoration: none; padding-bottom: var(--space-2); border-bottom: 1.5px solid transparent; transition: color 0.25s, border-color 0.25s; cursor: pointer; }
 .pf-filter:hover, .pf-filter-active { color: #111; border-bottom-color: #111; }

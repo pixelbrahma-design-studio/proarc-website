@@ -649,42 +649,42 @@ footer {
 .cs-title { font-family: var(--display); font-weight: 300; font-size: clamp(2.4rem, 6vw, var(--text-2xl)); color: #fff; line-height: 1.05; letter-spacing: 0.02em; margin: 0; max-width: none; }
 .cs-type-tag { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: var(--space-2); padding: 0; max-width: none; }
 
-/* Section labels */
-.cs-label { display: block; font-family: var(--font); font-weight: 400; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: #888; margin-bottom: var(--space-2); }
+/* Section labels — consistent styling across all sections */
+.cs-label { display: block; font-family: var(--font); font-weight: 400; font-size: 17px; text-transform: uppercase; letter-spacing: 0.18em; color: #888; margin-bottom: var(--space-3); text-align: left; }
 .cs-label-center { text-align: center; }
 
-/* 2. Overview — golden split */
-.cs-overview { display: flex; gap: var(--space-6); max-width: 1240px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
-.cs-overview-main { flex: 0 0 61.8%; max-width: 61.8%; }
-.cs-overview-side { flex: 0 0 38.2%; max-width: 38.2%; }
-.cs-desc { font-family: var(--display); font-weight: 300; font-size: var(--text-md); line-height: 1.8; color: #333; max-width: 62ch; }
+/* 2. Overview — golden split, left-aligned with balanced spacing */
+.cs-overview { display: flex; gap: var(--space-6); max-width: 1240px; margin: 0 auto; padding: var(--space-6) var(--space-5); align-items: flex-start; }
+.cs-overview-main { flex: 0 0 61.8%; max-width: 61.8%; padding-right: var(--space-5); text-align: left; }
+.cs-overview-side { flex: 0 0 38.2%; max-width: 38.2%; padding-left: var(--space-5); }
+.cs-desc { font-family: var(--font); font-weight: 300; font-size: 20px; line-height: 1.85; color: #333; max-width: 62ch; text-align: left; }
 .cs-meta-row { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 0.5px solid var(--line); }
 .cs-meta-label { font-family: var(--font); font-weight: 400; font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #888; }
 .cs-meta-value { font-family: var(--font); font-weight: 300; font-size: 14px; color: #111; text-align: right; }
 
-/* 3. Design intent */
-.cs-intent { max-width: 72ch; margin: var(--space-6) auto; padding: 0 var(--space-5); text-align: center; }
+/* 3. Design intent — 800px centered, left-aligned text */
+.cs-intent { max-width: 800px; margin: var(--space-4) auto var(--space-3); padding: 0 var(--space-5); text-align: left; }
 .cs-intent .cs-label { text-align: center; }
-.cs-intent p { font-family: var(--font); font-weight: 300; font-size: var(--text-base); line-height: 1.75; color: var(--body); max-width: none; margin: 0 auto var(--space-3); text-align: center; }
+.cs-intent p { font-family: var(--font); font-weight: 300; font-size: 16px; line-height: 1.85; color: #444; max-width: 100%; margin: 0 0 var(--space-4) 0; text-align: center; }
 
 /* 4. Gallery */
-.cs-gallery-wrap { max-width: 1240px; margin: var(--space-6) auto; padding: 0 var(--space-5); }
+.cs-gallery-wrap { max-width: 1240px; margin: var(--space-3) auto var(--space-6); padding: 0 var(--space-5); }
 .cs-gallery { display: grid; gap: 4px; margin-bottom: 4px; }
-.cs-gallery-2 { grid-template-columns: repeat(2, 1fr); }
-.cs-gallery-3 { grid-template-columns: repeat(3, 1fr); }
+.cs-gallery-2 { grid-template-columns: repeat(2, 50%) !important; }
+.cs-gallery-3 { grid-template-columns: repeat(2, 50%) !important; }
 .cs-gallery-item { margin: 0; overflow: hidden; }
 .cs-gallery-item img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; filter: saturate(0.95); transition: filter 0.5s ease; }
 .cs-gallery-item:hover img { filter: saturate(1.05); }
 .cs-caption { display: block; font-family: var(--font); font-weight: 300; font-size: 11px; color: #888; padding-top: 8px; min-height: 8px; }
 
-/* 5. Related projects */
-.cs-related-wrap { max-width: 1240px; margin: var(--space-7) auto var(--space-6); padding: 0 var(--space-5); }
+/* 5. Related projects — consistent section header, content centered */
+.cs-related-wrap { max-width: 1240px; margin: var(--space-5) auto var(--space-6); padding: 0 var(--space-5); }
 .cs-related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
 .cs-related-card { display: block; text-decoration: none; }
 .cs-related-thumb { aspect-ratio: 4/3; overflow: hidden; }
 .cs-related-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
 .cs-related-card:hover .cs-related-thumb img { transform: scale(1.04); }
-.cs-related-name { font-family: var(--font); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: var(--space-2) 0 2px; }
+.cs-related-name { font-family: var(--font); font-weight: 500; font-size: 17px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: var(--space-2) 0 2px; }
 .cs-related-loc { font-family: var(--font); font-weight: 300; font-size: 11px; color: #888; }
 
 /* 6. Back nav */
@@ -912,7 +912,7 @@ footer {
 
 /* --- v2A Polish Pass 2 --- */
 /* Journal listing — reduce top space, fix subtitle color, title size */
-.jr-listing-head { padding: var(--space-5) var(--space-5) var(--space-4) !important; }
+.jr-listing-head { padding: var(--space-5) var(--space-5) var(--space-4) !important; padding-top: 100px !important; }
 .jr-listing-title { font-size: clamp(32px, 4vw, 52px) !important; letter-spacing: 0.06em !important; color: #111 !important; }
 .jr-listing-sub { font-size: var(--text-base) !important; color: #666 !important; max-width: 52ch !important; line-height: 1.7 !important; }
 .jr-grid { gap: var(--space-5) var(--space-5) !important; }
