@@ -252,10 +252,16 @@
                 if (b.loadBox) var t = a(d).filter(b.loadBox); else if (loadSelector) var t = a(d).filter(loadSelector); else var t = a(d).filter("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
+                // Preserve page-specific classes from .content element
+                var contentClasses = a(d).find(".content").attr("class");
+                if (contentClasses) u = (u || "") + " " + contentClasses;
             } else {
                 if (b.loadBox) var t = a(d).find(b.loadBox); else if (loadSelector) var t = a(d).find(loadSelector); else var t = a(d).find("#" + i);
                 reloadboxInContents = t.html();
                 var u = t.attr("class");
+                // Preserve page-specific classes from .content element
+                var contentClasses = a(d).find(".content").attr("class");
+                if (contentClasses) u = (u || "") + " " + contentClasses;
             }
             $reloadboxIn.addClass(u).css({
                 position: b.positionType,
