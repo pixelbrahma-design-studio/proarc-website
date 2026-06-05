@@ -47,7 +47,33 @@
         <link type="text/css" rel="stylesheet" href="css/yourstyle.css">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
-            <style id="rd-inline">
+            <style id="rd-inline">/* 1. Hero Split (Golden Ratio 61.8% image / 38.2% panel) */
+.rdhero-split { display: grid !important; grid-template-columns: 61.8% 38.2% !important; width: 100% !important; height: 100vh !important; overflow: hidden; background: #0a0a0a; }
+.rdhero-image { background-size: cover; background-position: center; position: relative; }
+.rdhero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, transparent 50%, rgba(0,0,0,0.4) 100%); }
+.rdhero-image::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 1px; background: rgba(139,32,16,0.15); }
+.rdhero-panel { display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-6) var(--space-5); background: #0a0a0a; position: relative; z-index: 1; }
+.rdhero-top { }
+.rdhero-tagline { font-family: var(--font); font-weight: 300; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: var(--space-2); }
+.rdhero-since { font-family: var(--font); font-weight: 300; font-size: 11px; letter-spacing: 0.14em; color: rgba(255,255,255,0.2); }
+.rdhero-featured { }
+.rdhero-label { font-family: var(--font); font-weight: 400; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(139,32,16,0.6); margin-bottom: var(--space-3); display: block; }
+.rdhero-title { font-family: var(--display); font-weight: 300; font-size: clamp(36px, 4vw, 52px); color: #fff; line-height: 1.15; letter-spacing: 0.02em; margin: 0; }
+.rdhero-rule { width: 34px; height: 1px; background: rgba(139,32,16,0.4); margin: var(--space-3) 0; }
+.rdhero-type { font-family: var(--font); font-weight: 300; font-size: var(--text-sm); letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-top: var(--space-2); }
+.rdhero-stat { font-family: var(--font); font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.25); margin-top: var(--space-1); }
+.rdhero-bottom { }
+.rdhero-cta { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; display: block; margin-bottom: var(--space-4); position: relative; transition: color 0.3s; }
+.rdhero-cta::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 0.5px; background: rgba(139,32,16,0.7); transition: width 0.4s var(--ease); }
+.rdhero-cta:hover { color: rgba(255,255,255,0.7); }
+.rdhero-cta:hover::after { width: 100%; }
+.rdhero-scroll { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); }
+.rdhero-scroll-line { width: 1px; height: 32px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+.rdhero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.4); animation: rdScrollPulse 2s ease-in-out infinite; }
+.rdhero-scroll span { font-family: var(--font); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.15); writing-mode: vertical-rl; }
+@keyframes rdScrollPulse { 0% { top: -100%; } 100% { top: 100%; } }
+
+
 /* v2A redesign — homepage + about composition (loaded last, page-specific) */
 /* ====================================================================
    v2A — HOMEPAGE REDESIGN (Chipperfield/Olson Kundig composition)
@@ -134,7 +160,7 @@
 .rd-jcard-excerpt { font-family: var(--font); font-weight: 300; font-size: 15px; line-height: 1.7; color: #666; max-width: 50ch; margin: 0 auto; text-align: center; padding: 0; }
 .rd-jcard-date { font-family: var(--font); font-weight: 300; font-size: 11px; color: #aaa; margin-top: var(--space-2); letter-spacing: 0.06em; }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px) { {
   .rd-row-1, .rd-row-3 { grid-template-columns: 1fr; }
   .rd-row-2 { grid-template-columns: 1fr 1fr; }
   .rd-manifesto-inner { grid-template-columns: 1fr; gap: var(--space-5); }
@@ -170,7 +196,18 @@
   .content.rd-home .rd-row-2 { grid-template-columns: 1fr !important; }
 }
 
-        </style>
+        
+@media (max-width: 1024px) {
+  .rdhero-split { display: flex !important; flex-direction: column; height: auto; grid-template-columns: unset; }
+  .rdhero-image { height: 60vh; }
+  .rdhero-panel { height: auto; padding: var(--space-5) var(--space-4); }
+}
+@media (max-width: 768px) {
+  .rdhero-split { height: auto; }
+  .rdhero-image { height: 50vh; }
+  .rdhero-title { font-size: 32px; }
+  .rdhero-panel { padding: var(--space-4); }
+}</style>
     </head>
     <body>
         <div class="loader">
@@ -227,17 +264,27 @@
                 <div class="content rd-home">
 
                     <!-- 1. HERO -->
-                    <section class="rd-hero" style="background-image:url(images/folio/projects/ajmanbank1.jpg)">
-                        <div class="rd-hero-grad"></div>
-                        <div class="rd-hero-accent"></div>
-                        <div class="rd-hero-content">
-                            <div class="rd-hero-tag">Commercial &middot; Ajman &middot; 2015</div>
-                            <h1 class="rd-hero-title">Ajman Bank<br>Headquarters</h1>
-                            <div class="rd-hero-loc">Al-Ittihad Street, Ajman &mdash; 73,071 sq ft</div>
-                        </div>
-                        <div class="rd-hero-scroll">
-                            <span>Scroll</span>
-                            <div class="rd-hero-scroll-line"></div>
+                    <section class="rdhero-split">
+                        <div class="rdhero-image" style="background-image:url(images/folio/projects/ajmanbank1.jpg)"></div>
+                        <div class="rdhero-panel">
+                            <div class="rdhero-top">
+                                <div class="rdhero-tagline">Architecture &amp; Engineering</div>
+                                <div class="rdhero-since">Since 2006, Ajman, UAE</div>
+                            </div>
+                            <div class="rdhero-featured">
+                                <div class="rdhero-label">Featured Project</div>
+                                <h1 class="rdhero-title">Ajman Bank<br>Headquarters</h1>
+                                <div class="rdhero-rule"></div>
+                                <div class="rdhero-type">Commercial · Ajman · 2015</div>
+                                <div class="rdhero-stat">73,071 sq ft · G+M+7 Stories</div>
+                            </div>
+                            <div class="rdhero-bottom">
+                                <a href="ajmanbank.html" class="rdhero-cta">View Project →</a>
+                                <div class="rdhero-scroll">
+                                    <div class="rdhero-scroll-line"></div>
+                                    <span>Scroll</span>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
