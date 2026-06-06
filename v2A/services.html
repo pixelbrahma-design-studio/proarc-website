@@ -364,8 +364,11 @@
                         </section>
 
                         <!-- Smooth-scroll for service nav — INSIDE content so it re-runs on AJAX navigation.
+                             Fixed header = 60px (style.css). Sticky nav sticks at top:60px.
+                             Total scroll offset = 60 + stickyNavHeight + 8 so sections land
+                             at the top (image visible), not buried behind both bars.
                              Three scroll environments:
-                             1. Mobile native-scroll: html.native-scroll → #wrapper is the scroll container
+                             1. Mobile native-scroll: html.native-scroll → #wrapper is scroll container
                              2. Desktop niceScroll: use niceScroll's doScrollTop API
                              3. Desktop fallback: window.scrollTo -->
                         <script>
@@ -375,8 +378,13 @@
                             var stickyNav = document.querySelector('.sv-nav-sticky');
                             var wrapper   = document.getElementById('wrapper');
                             var sections  = document.querySelectorAll('.sv-section');
+                            var HEADER_H  = 60; /* fixed <header> height — style.css line 341 */
 
-                            /* ── Click: smooth-scroll to section ── */
+                            function getOffset() {
+                                return HEADER_H + (stickyNav ? stickyNav.offsetHeight : 0) + 8;
+                            }
+
+                            /* ── Click: smooth-scroll to section top so image is fully visible ── */
                             links.forEach(function (link) {
                                 link.addEventListener('click', function (e) {
                                     var id = (this.getAttribute('href') || '').replace('#', '');
@@ -385,12 +393,12 @@
                                     if (!target) return;
                                     e.preventDefault();
 
-                                    var navH = stickyNav ? stickyNav.offsetHeight : 0;
+                                    var offset = getOffset();
                                     var isNativeScroll = document.documentElement.classList.contains('native-scroll');
 
                                     if (isNativeScroll && wrapper) {
                                         /* Mobile: #wrapper is the scroll container */
-                                        var y = target.getBoundingClientRect().top + wrapper.scrollTop - navH;
+                                        var y = target.getBoundingClientRect().top + wrapper.scrollTop - offset;
                                         try { wrapper.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
                                         catch (err) { wrapper.scrollTop = Math.max(0, y); }
                                         return;
@@ -402,17 +410,17 @@
                                             var nsc = $('#wrapper').getNiceScroll();
                                             if (nsc && nsc.length && nsc[0]) {
                                                 var currentY = nsc[0].getScrollTop();
-                                                var absY = target.getBoundingClientRect().top + currentY - navH;
+                                                var absY = target.getBoundingClientRect().top + currentY - offset;
                                                 nsc[0].doScrollTop(Math.max(0, absY), 600);
                                                 return;
                                             }
                                         } catch (err2) {}
-                                        var docY = $(target).offset().top - navH;
+                                        var docY = $(target).offset().top - offset;
                                         $('html, body').stop(true).animate({ scrollTop: Math.max(0, docY) }, 600);
                                         return;
                                     }
 
-                                    var wy = target.getBoundingClientRect().top + (window.pageYOffset || 0) - navH;
+                                    var wy = target.getBoundingClientRect().top + (window.pageYOffset || 0) - offset;
                                     try { window.scrollTo({ top: Math.max(0, wy), behavior: 'smooth' }); }
                                     catch (e2) { window.scrollTo(0, Math.max(0, wy)); }
                                 });
@@ -424,7 +432,6 @@
                                     var href = (lk.getAttribute('href') || '').replace('#', '');
                                     lk.classList.toggle('is-active', href === id);
                                 });
-                                /* Scroll the active tab into view inside the sticky nav */
                                 var activeLink = document.querySelector('.sv-nav-link.is-active');
                                 if (activeLink && stickyNav) {
                                     activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -432,17 +439,16 @@
                             }
 
                             if ('IntersectionObserver' in window && sections.length) {
-                                var navH = stickyNav ? stickyNav.offsetHeight + 8 : 8;
+                                var ioOffset = getOffset();
                                 var io = new IntersectionObserver(function (entries) {
                                     entries.forEach(function (entry) {
                                         if (entry.isIntersecting) setActive(entry.target.id);
                                     });
                                 }, {
-                                    rootMargin: '-' + navH + 'px 0px -55% 0px',
+                                    rootMargin: '-' + ioOffset + 'px 0px -50% 0px',
                                     threshold: 0
                                 });
                                 sections.forEach(function (sec) { if (sec.id) io.observe(sec); });
-                                /* Highlight first tab immediately */
                                 if (sections[0] && sections[0].id) setActive(sections[0].id);
                             }
                         })();

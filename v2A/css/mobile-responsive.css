@@ -147,8 +147,8 @@ html.native-scroll #wrapper > .content-holder {
     display: inline-flex !important;
     flex-shrink: 0 !important;
     white-space: nowrap;
-    font-size: 9px !important;
-    letter-spacing: 0.1em !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
     min-height: 36px;
     align-items: center;
   }
