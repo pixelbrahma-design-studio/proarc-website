@@ -17,8 +17,10 @@
 .sv-nav-inner { max-width: 1400px; margin: 0 auto; padding: var(--space-3) var(--space-5); display: flex; gap: var(--space-4); flex-wrap: wrap; }
 .sv-nav-link { font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.3s; position: relative; padding-bottom: var(--space-1); }
 .sv-nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: #111; transition: width 0.3s; }
-.sv-nav-link:hover { color: #111; }
-.sv-nav-link:hover::after { width: 100%; }
+.sv-nav-link:hover,
+.sv-nav-link.is-active { color: #111; }
+.sv-nav-link:hover::after,
+.sv-nav-link.is-active::after { width: 100%; }
 
 /* SERVICE SECTIONS */
 .sv-section { padding: var(--space-6) var(--space-5); max-width: 1400px; margin: 0 auto; border-top: 0.5px solid #e0e0e0; }

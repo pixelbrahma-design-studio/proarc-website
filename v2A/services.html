@@ -364,14 +364,19 @@
                         </section>
 
                         <!-- Smooth-scroll for service nav — INSIDE content so it re-runs on AJAX navigation.
-                             niceScroll scrolls #wrapper via CSS translateY, so window.pageYOffset is
-                             always 0 and window.scrollTo does nothing. Use niceScroll's own API instead. -->
+                             Three scroll environments:
+                             1. Mobile native-scroll: html.native-scroll → #wrapper is the scroll container
+                             2. Desktop niceScroll: use niceScroll's doScrollTop API
+                             3. Desktop fallback: window.scrollTo -->
                         <script>
                         (function () {
                             var links = document.querySelectorAll('.sv-nav-link');
                             if (!links.length) return;
                             var stickyNav = document.querySelector('.sv-nav-sticky');
+                            var wrapper   = document.getElementById('wrapper');
+                            var sections  = document.querySelectorAll('.sv-section');
 
+                            /* ── Click: smooth-scroll to section ── */
                             links.forEach(function (link) {
                                 link.addEventListener('click', function (e) {
                                     var id = (this.getAttribute('href') || '').replace('#', '');
@@ -380,7 +385,16 @@
                                     if (!target) return;
                                     e.preventDefault();
 
-                                    var offset = stickyNav ? stickyNav.offsetHeight : 0;
+                                    var navH = stickyNav ? stickyNav.offsetHeight : 0;
+                                    var isNativeScroll = document.documentElement.classList.contains('native-scroll');
+
+                                    if (isNativeScroll && wrapper) {
+                                        /* Mobile: #wrapper is the scroll container */
+                                        var y = target.getBoundingClientRect().top + wrapper.scrollTop - navH;
+                                        try { wrapper.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
+                                        catch (err) { wrapper.scrollTop = Math.max(0, y); }
+                                        return;
+                                    }
 
                                     if (typeof jQuery !== 'undefined') {
                                         var $ = jQuery;
@@ -388,21 +402,49 @@
                                             var nsc = $('#wrapper').getNiceScroll();
                                             if (nsc && nsc.length && nsc[0]) {
                                                 var currentY = nsc[0].getScrollTop();
-                                                var absY = target.getBoundingClientRect().top + currentY - offset;
+                                                var absY = target.getBoundingClientRect().top + currentY - navH;
                                                 nsc[0].doScrollTop(Math.max(0, absY), 600);
                                                 return;
                                             }
-                                        } catch (err) {}
-                                        var docY = $(target).offset().top - offset;
+                                        } catch (err2) {}
+                                        var docY = $(target).offset().top - navH;
                                         $('html, body').stop(true).animate({ scrollTop: Math.max(0, docY) }, 600);
                                         return;
                                     }
 
-                                    var y = target.getBoundingClientRect().top + (window.pageYOffset || 0) - offset;
-                                    try { window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
-                                    catch (e2) { window.scrollTo(0, Math.max(0, y)); }
+                                    var wy = target.getBoundingClientRect().top + (window.pageYOffset || 0) - navH;
+                                    try { window.scrollTo({ top: Math.max(0, wy), behavior: 'smooth' }); }
+                                    catch (e2) { window.scrollTo(0, Math.max(0, wy)); }
                                 });
                             });
+
+                            /* ── Active tab: highlight via IntersectionObserver ── */
+                            function setActive(id) {
+                                links.forEach(function (lk) {
+                                    var href = (lk.getAttribute('href') || '').replace('#', '');
+                                    lk.classList.toggle('is-active', href === id);
+                                });
+                                /* Scroll the active tab into view inside the sticky nav */
+                                var activeLink = document.querySelector('.sv-nav-link.is-active');
+                                if (activeLink && stickyNav) {
+                                    activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                                }
+                            }
+
+                            if ('IntersectionObserver' in window && sections.length) {
+                                var navH = stickyNav ? stickyNav.offsetHeight + 8 : 8;
+                                var io = new IntersectionObserver(function (entries) {
+                                    entries.forEach(function (entry) {
+                                        if (entry.isIntersecting) setActive(entry.target.id);
+                                    });
+                                }, {
+                                    rootMargin: '-' + navH + 'px 0px -55% 0px',
+                                    threshold: 0
+                                });
+                                sections.forEach(function (sec) { if (sec.id) io.observe(sec); });
+                                /* Highlight first tab immediately */
+                                if (sections[0] && sections[0].id) setActive(sections[0].id);
+                            }
                         })();
                         </script>
 
