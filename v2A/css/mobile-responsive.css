@@ -21,7 +21,7 @@ img { max-width: 100%; height: auto; }
 
   /* ── Footer ── */
   footer { padding-left: 20px !important; padding-right: 20px !important; }
-  .footer-social { padding: 12px 0 !important; }
+  .footer-social { padding: 7px 0 !important; }
 
   /* ── Theme wrapper ── */
   .wrapper-inner,
@@ -34,6 +34,17 @@ img { max-width: 100%; height: auto; }
     padding-bottom: var(--space-5);
     float: left;
     width: 100%;
+  }
+
+  /* ── Homepage hero: full-height image ── */
+  .rdhero-split {
+    overflow: visible !important;
+    min-height: 100svh !important;
+  }
+  .rdhero-image {
+    height: 60svh !important;
+    min-height: 60vh !important;
+    flex: none !important;
   }
 
   /* ── Homepage ── */
