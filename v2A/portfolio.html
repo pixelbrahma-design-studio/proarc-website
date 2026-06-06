@@ -107,24 +107,9 @@
                             </div>
                         </div>
 
-                        <!-- FEATURED PROJECTS -->
+                        <!-- FEATURED PROJECTS — populated by JS below -->
                         <section class="pf-featured">
-                            <div class="pf-featured-grid">
-                                <a href="ajmanbank.html" class="pf-featured-card pf-featured-large">
-                                    <img src="images/folio/projects/ajmanbank1.jpg" alt="Ajman Bank Headquarters" class="pf-featured-img">
-                                    <div class="pf-featured-overlay">
-                                        <div class="pf-featured-name">Ajman Bank HQ</div>
-                                        <div class="pf-featured-meta">Commercial · Ajman</div>
-                                    </div>
-                                </a>
-                                <a href="edu-cityuniversity.html" class="pf-featured-card pf-featured-small">
-                                    <img src="images/folio/projects/eduuni1.webp" alt="City University" class="pf-featured-img">
-                                    <div class="pf-featured-overlay">
-                                        <div class="pf-featured-name">City University</div>
-                                        <div class="pf-featured-meta">Educational · Ajman</div>
-                                    </div>
-                                </a>
-                            </div>
+                            <div class="pf-featured-grid"></div>
                         </section>
 
                         <!-- PROJECT GRID -->
@@ -475,9 +460,170 @@
                             <a href="contact.html" class="pf-cta-button">Get in Touch</a>
                         </section>
 
-                        <!-- Filter script — INSIDE content so it re-runs on AJAX navigation -->
+                        <!-- Filter + dynamic featured — INSIDE content so it re-runs on AJAX navigation -->
                         <script>
                         (function () {
+                            'use strict';
+
+                            /* ── Kill previous rotation timer on AJAX re-navigation ── */
+                            if (window._rdFeaturedTimer) { clearInterval(window._rdFeaturedTimer); window._rdFeaturedTimer = null; }
+
+                            /* ─────────────────────────────────────────────────────────
+                               PROJECT DATASET  (built from every grid card in this page)
+                               classes[] mirrors the CSS classes used on .pf-card elements
+                               ───────────────────────────────────────────────────────── */
+                            var P = [
+                                /* Educational — campus / school exteriors */
+                                { name: 'City University',             meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/eduuni1.webp',           url: 'edu-cityuniversity.html',     hasL: true  },
+                                { name: 'Woodlempark Al Jurf School',  meta: 'Educational · Al Jurf, Ajman',     classes: ['educational'], image: 'images/folio/projects/eduwoodaljurf2.webp',    url: 'edu-woodlemparkaljurf.html',  hasL: true  },
+                                { name: 'Ajman American School',       meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/eduajmanamerican1.webp', url: 'edu-ajmanamerican.html',      hasL: true  },
+                                { name: 'Habitat Al Tallah',           meta: 'Educational · Al Tallah, Ajman',   classes: ['educational'], image: 'images/folio/projects/eduhabitat4.webp',       url: 'edu-habitataltallah.html',    hasL: true  },
+                                { name: 'Delhi Private School',        meta: 'Educational · Sharjah',            classes: ['educational'], image: 'images/folio/projects/edudelhi3.webp',         url: 'edu-delhiprivate.html',       hasL: true  },
+                                { name: 'Woodlempark Hamidiya School', meta: 'Educational · Hamidiya, Ajman',    classes: ['educational'], image: 'images/folio/projects/eduwoodhamidiya4.webp',  url: 'edu-woodlemparkhamidiya.html',hasL: true  },
+                                { name: 'North Gate British School',   meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/edunorthgate5.webp',      url: 'edu-northgatebritish.html',   hasL: true  },
+                                { name: 'Metropolitan School',         meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/edumetro1.webp',          url: 'edu-metropolitan.html',       hasL: true  },
+                                { name: 'Crown British School',        meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/educrown1.webp',          url: 'edu-crownbritish.html',       hasL: true  },
+                                { name: 'City American School',        meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/projects/educityamerican1.webp',   url: 'edu-cityamerican.html',       hasL: true  },
+                                { name: 'Frontline School',            meta: 'Educational · Al Tallah',          classes: ['educational'], image: 'images/folio/thumbs/frontlineschool.jpg',       url: 'frontlineschool.html',        hasL: true  },
+                                { name: 'City School',                 meta: 'Educational · Al Tallah',          classes: ['educational'], image: 'images/folio/thumbs/cityschool.jpg',            url: 'cityschool.html',             hasL: true  },
+                                { name: 'Habitat School',              meta: 'Educational · Al Jurf',            classes: ['educational'], image: 'images/folio/thumbs/habitatschool.jpg',         url: 'habitatschool.html',          hasL: true  },
+                                { name: 'City University Campus',      meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/thumbs/cityuniversity.jpg',        url: 'cityuniversity.html',         hasL: true  },
+                                { name: 'Woodlem Park School',         meta: 'Educational · Ajman',              classes: ['educational'], image: 'images/folio/thumbs/woodlem.jpg',               url: 'woodlem.html',                hasL: true  },
+                                /* Commercial */
+                                { name: 'Ajman Bank HQ',               meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/projects/ajmanbank1.jpg',          url: 'ajmanbank.html',              hasL: true  },
+                                { name: 'R Holding Head Office',       meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/thumbs/rholding.jpg',              url: 'rholding.html',               hasL: true  },
+                                { name: 'Royal Furniture',             meta: 'Commercial · Al Jurf, Ajman',      classes: ['commercial'],  image: 'images/folio/projects/royalfurniture1.webp',    url: 'royalfurniture.html',         hasL: true  },
+                                { name: 'Car Souq',                    meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/projects/carsouq1.webp',           url: 'carsouq.html',                hasL: true  },
+                                { name: 'Mark &amp; Save, Rashdiya',   meta: 'Commercial · Rashdiya, Ajman',     classes: ['commercial'],  image: 'images/folio/projects/marksaverashdiya1.webp',  url: 'marksaverashdiya.html',       hasL: true  },
+                                { name: 'Mark &amp; Save, Al Tallah',  meta: 'Commercial · Al Tallah, Ajman',    classes: ['commercial'],  image: 'images/folio/projects/marksavealtallah1.webp',  url: 'marksavealtallah.html',       hasL: true  },
+                                { name: 'Mark &amp; Save, Al Jurf',    meta: 'Commercial · Al Jurf, Ajman',      classes: ['commercial'],  image: 'images/folio/projects/marksavealjurf1.webp',    url: 'marksavealjurf.html',         hasL: true  },
+                                { name: 'Homes R Us',                  meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/projects/homesrus1.webp',          url: 'homesrus.html',               hasL: true  },
+                                { name: 'Daiso Showroom',              meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/projects/daiso1.webp',             url: 'daiso.html',                  hasL: true  },
+                                { name: 'City Life, Al Tallah',        meta: 'Commercial · Al Tallah, Ajman',    classes: ['commercial'],  image: 'images/folio/projects/citylifecomm1.webp',      url: 'citylifealtallah.html',       hasL: true  },
+                                { name: 'The Black Square',            meta: 'Commercial · Ajman',               classes: ['commercial'],  image: 'images/folio/thumbs/blacksquare.jpg',           url: 'blacksquare.html',            hasL: true  },
+                                /* Commercial + Mall */
+                                { name: 'City Mall',                   meta: 'Mall · Umm Al Quwain',             classes: ['commercial','mall'], image: 'images/folio/thumbs/citymalluaq.jpg',    url: 'citymalluaq.html',            hasL: true  },
+                                { name: 'City Life, Al-Khor',          meta: 'Mall · Al Khor',                   classes: ['commercial','mall'], image: 'images/folio/thumbs/citylifekhor.jpg',   url: 'citylifekhor.html',           hasL: true  },
+                                { name: 'City Life, Al-Tallah',        meta: 'Mall · Al Tallah',                 classes: ['commercial','mall'], image: 'images/folio/thumbs/citylifetallah.jpg', url: 'citylifetallah.html',         hasL: true  },
+                                { name: 'City Life Mall',              meta: 'Mall · Jurf, Ajman',               classes: ['commercial','mall'], image: 'images/folio/thumbs/citylifejurf.jpg',   url: 'citylifejurf.html',           hasL: true  },
+                                { name: 'Souk Salah',                  meta: 'Mall · Ajman',                     classes: ['commercial','mall'], image: 'images/folio/thumbs/souksalah.jpg',      url: 'souksalah.html',              hasL: true  },
+                                /* Residential */
+                                { name: 'Rose Tower',                  meta: 'Residential · Ajman',              classes: ['residential'], image: 'images/folio/projects/rosetower4.webp',        url: 'rosetower.html',              hasL: true  },
+                                { name: 'Azha Garden Residence',       meta: 'Residential · Aamra, Ajman',       classes: ['residential'], image: 'images/folio/projects/azhagarden3.webp',       url: 'azhagarden.html',             hasL: true  },
+                                { name: 'Seaside Hills Residence',     meta: 'Residential · Al Zorah, Ajman',    classes: ['residential'], image: 'images/folio/projects/seasidehills1.webp',     url: 'seasidehills.html',           hasL: true  },
+                                { name: 'Green Buildings',             meta: 'Residential · Emirates Properties',classes: ['residential'], image: 'images/folio/projects/greenbuildings1.webp',  url: 'greenbuildings.html',         hasL: false },
+                                { name: 'G+8 Floor + Pent House',      meta: 'Residential · Al Zorah, Ajman',    classes: ['residential'], image: 'images/folio/projects/G-1.webp',              url: 'gfloorpenthouse.html',        hasL: true  },
+                                { name: 'Exclusive Villas',            meta: 'Residential · Al Zorah, Ajman',    classes: ['residential'], image: 'images/folio/projects/Exclusive-villas1.webp', url: 'exclusivevillas.html',        hasL: false },
+                                { name: 'Gateway Residences',          meta: 'Residential · Marina, Ajman',      classes: ['residential'], image: 'images/folio/projects/Gateway-residenc1.webp', url: 'gateway.html',                hasL: true  },
+                                { name: 'Sealine Residences',          meta: 'Residential · Al Zorah, Ajman',    classes: ['residential'], image: 'images/folio/projects/Under-Construction1.webp',url: 'sealine.html',               hasL: false },
+                                { name: 'Jeddah Heights',              meta: 'Residential · Ajman',              classes: ['residential'], image: 'images/folio/thumbs/jeddahheights.jpg',        url: 'jeddahheights.html',          hasL: true  },
+                                { name: 'Emirates City D1 Tower',      meta: 'Residential · Emirates City',      classes: ['residential'], image: 'images/folio/thumbs/emiratescity.jpg',         url: 'emiratescity.html',           hasL: true  }
+                            ];
+
+                            /* ── Helpers ── */
+                            function getPool(sel) {
+                                if (sel === '*') return P;
+                                var cls = sel.replace('.', '');
+                                return P.filter(function (p) { return p.classes.indexOf(cls) !== -1; });
+                            }
+
+                            function pickTwo(sel) {
+                                var pool = getPool(sel);
+                                var landscape = pool.filter(function (p) { return p.hasL; });
+                                var arr = (landscape.length >= 2 ? landscape : pool).slice();
+                                /* Fisher-Yates shuffle */
+                                for (var i = arr.length - 1; i > 0; i--) {
+                                    var j = Math.floor(Math.random() * (i + 1));
+                                    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+                                }
+                                return arr.slice(0, 2);
+                            }
+
+                            /* ── Render two cards into .pf-featured-grid ── */
+                            function renderFeatured(projects) {
+                                var grid = document.querySelector('.pf-featured-grid');
+                                if (!grid || projects.length < 2) return;
+                                function card(p, size) {
+                                    return '<a href="' + p.url + '" class="pf-featured-card pf-featured-' + size + '">' +
+                                        '<img src="' + p.image + '" alt="' + p.name + '" class="pf-featured-img" loading="eager" onerror="this.parentElement.style.display=\'none\'">' +
+                                        '<div class="pf-featured-overlay">' +
+                                        '<div class="pf-featured-name">' + p.name + '</div>' +
+                                        '<div class="pf-featured-meta">' + p.meta + '</div>' +
+                                        '</div></a>';
+                                }
+                                grid.innerHTML = card(projects[0], 'large') + card(projects[1], 'small');
+                            }
+
+                            /* ── Show/hide featured section based on pool size ── */
+                            var featuredSection = document.querySelector('.pf-featured');
+                            function setFeaturedVisible(sel) {
+                                var ok = getPool(sel).length >= 2;
+                                if (featuredSection) featuredSection.style.display = ok ? '' : 'none';
+                                return ok;
+                            }
+
+                            /* ── Fade-swap featured cards ── */
+                            function swapFeatured(sel) {
+                                if (!setFeaturedVisible(sel)) { startRotation(sel); return; }
+                                var grid = document.querySelector('.pf-featured-grid');
+                                var next = pickTwo(sel);
+                                if (!grid) { renderFeatured(next); startRotation(sel); return; }
+                                if (typeof gsap !== 'undefined') {
+                                    gsap.to(grid, { opacity: 0, duration: 0.3, ease: 'power2.inOut', onComplete: function () {
+                                        renderFeatured(next);
+                                        gsap.to(grid, { opacity: 1, duration: 0.5, ease: 'power2.out' });
+                                        startRotation(sel);
+                                    }});
+                                } else {
+                                    grid.style.transition = 'opacity 0.3s ease';
+                                    grid.style.opacity = '0';
+                                    setTimeout(function () {
+                                        renderFeatured(next);
+                                        grid.style.opacity = '1';
+                                        startRotation(sel);
+                                    }, 300);
+                                }
+                            }
+
+                            /* ── Auto-rotation every 10 s ── */
+                            var currentFilter = '*';
+                            var isPaused = false;
+
+                            function startRotation(sel) {
+                                currentFilter = sel || currentFilter;
+                                if (window._rdFeaturedTimer) clearInterval(window._rdFeaturedTimer);
+                                window._rdFeaturedTimer = setInterval(function () {
+                                    if (isPaused) return;
+                                    if (getPool(currentFilter).length < 2) return;
+                                    var grid = document.querySelector('.pf-featured-grid');
+                                    if (!grid) return;
+                                    var next = pickTwo(currentFilter);
+                                    if (typeof gsap !== 'undefined') {
+                                        gsap.to(grid, { opacity: 0, duration: 0.4, ease: 'power2.inOut', onComplete: function () {
+                                            renderFeatured(next);
+                                            gsap.to(grid, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+                                        }});
+                                    } else {
+                                        grid.style.transition = 'opacity 0.4s ease';
+                                        grid.style.opacity = '0';
+                                        setTimeout(function () { renderFeatured(next); grid.style.opacity = '1'; }, 400);
+                                    }
+                                }, 10000);
+                            }
+
+                            /* Pause rotation on hover (event delegation on static parent) */
+                            if (featuredSection) {
+                                featuredSection.addEventListener('mouseenter', function () { isPaused = true; });
+                                featuredSection.addEventListener('mouseleave', function () { isPaused = false; });
+                            }
+
+                            /* ── Initial render ── */
+                            if (setFeaturedVisible('*')) {
+                                renderFeatured(pickTwo('*'));
+                                startRotation('*');
+                            }
+
+                            /* ── Filter tabs — grid + featured ── */
                             var filters = document.querySelectorAll('.pf-filter');
                             var cards   = document.querySelectorAll('.pf-card');
                             if (!filters.length || !cards.length) return;
@@ -487,11 +633,11 @@
                                     e.preventDefault();
                                     var sel = this.getAttribute('data-filter');
 
-                                    /* Update active tab */
+                                    /* Active tab */
                                     filters.forEach(function (f) { f.classList.remove('pf-filter-active'); });
                                     this.classList.add('pf-filter-active');
 
-                                    /* Show only cards in the selected category */
+                                    /* Grid cards */
                                     cards.forEach(function (card) {
                                         if (sel === '*') {
                                             card.style.display = '';
@@ -500,8 +646,13 @@
                                             card.style.display = card.classList.contains(cls) ? '' : 'none';
                                         }
                                     });
+
+                                    /* Re-randomize featured from new pool */
+                                    if (window._rdFeaturedTimer) { clearInterval(window._rdFeaturedTimer); window._rdFeaturedTimer = null; }
+                                    swapFeatured(sel);
                                 });
                             });
+
                         })();
                         </script>
 
