@@ -285,25 +285,38 @@ function initDogma() {
         grabcursorenabled: false,
         horizrailenabled: true
     };
-    $(".nav-inner , .fixed-info-container").niceScroll(b);
-    var wn = {
-        touchbehavior: true,
-        cursoropacitymax: 1,
-        cursorborderradius: "0",
-        background: "#fff",
-        cursorwidth: "6px",
-        cursorborder: "0px",
-        cursorcolor: "#ccc",
-        autohidemode: true,
-        bouncescroll: false,
-        scrollspeed: 120,
-        mousescrollstep: 90,
-        grabcursorenabled: false,
-        horizrailenabled: true,
-		preservenativescrolling: true,
-        cursordragontouch: true,
-    };
-    $("#wrapper").niceScroll(wn);
+    // Touch / mobile detection — niceScroll's touchbehavior emulates scrolling
+    // with JS transforms on touch devices, which is laggy and has no native
+    // momentum. On touch/small screens we skip niceScroll entirely and let the
+    // browser scroll #wrapper natively (GPU-accelerated, smooth). The matching
+    // CSS in mobile-responsive.css makes #wrapper natively scrollable.
+    var ksIsTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 ||
+                    window.matchMedia('(max-width: 1024px)').matches;
+
+    if (ksIsTouch) {
+        // Flag for CSS: make #wrapper natively scrollable (see mobile-responsive.css)
+        document.documentElement.classList.add('native-scroll');
+    } else {
+        $(".nav-inner , .fixed-info-container").niceScroll(b);
+        var wn = {
+            touchbehavior: true,
+            cursoropacitymax: 1,
+            cursorborderradius: "0",
+            background: "#fff",
+            cursorwidth: "6px",
+            cursorborder: "0px",
+            cursorcolor: "#ccc",
+            autohidemode: true,
+            bouncescroll: false,
+            scrollspeed: 120,
+            mousescrollstep: 90,
+            grabcursorenabled: false,
+            horizrailenabled: true,
+            preservenativescrolling: true,
+            cursordragontouch: true,
+        };
+        $("#wrapper").niceScroll(wn);
+    }
 // Map  ------------------
     if ($("#map-canvas").length && window.google && window.google.maps) {
     $("#map-canvas").gmap3({

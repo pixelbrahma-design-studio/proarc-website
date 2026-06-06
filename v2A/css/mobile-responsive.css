@@ -11,6 +11,29 @@ body,
 img { max-width: 100%; height: auto; }
 
 
+/* ─── NATIVE SMOOTH SCROLL (touch devices) ───────────────────────────────
+   scripts.js adds .native-scroll to <html> on touch/mobile and skips
+   niceScroll. The theme's #wrapper is position:absolute; inset:0; height:100%
+   with overflow:hidden — here we turn it into a native scroll container so
+   the browser handles momentum scrolling (GPU-accelerated, smooth).
+   ────────────────────────────────────────────────────────────────────── */
+
+html.native-scroll #wrapper {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;  /* iOS momentum */
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+}
+
+/* niceScroll leaves an inline transform/position on the inner content;
+   ensure it is neutral so native scroll measures real content height. */
+html.native-scroll #wrapper > .content-holder {
+  transform: none !important;
+  position: relative !important;
+}
+
+
 /* ─── GALLERY DOTS: hidden on desktop ────────────────────────────────── */
 
 .gallery-dots { display: none; }
