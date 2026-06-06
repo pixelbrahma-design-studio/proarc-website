@@ -165,24 +165,15 @@
    Hero JS-driven slider — Ken Burns crossfade + project nav + controls
    ==================================================================== */
 
-/* Slide stack */
+/* Slide stack — instant cut, no fade, no Ken Burns */
 .rdhero-slider { position: absolute; inset: 0; overflow: hidden; }
 .rdhero-slide {
     position: absolute; inset: 0;
     background-size: cover; background-position: center;
-    opacity: 0; z-index: 1;
-    transform: scale(1.06);
-    transition: opacity 0.9s ease;
-    will-change: opacity, transform;
-    backface-visibility: hidden;
+    display: none;
 }
 .rdhero-slide.is-active {
-    opacity: 1; z-index: 2;
-    animation: rdKenBurns 8s ease-out forwards;
-}
-@keyframes rdKenBurns {
-    from { transform: scale(1.06); }
-    to   { transform: scale(1.00); }
+    display: block; z-index: 2;
 }
 
 /* Gradient overlay and copper seam must render above slides */
@@ -251,10 +242,7 @@
 .rdhero-dot.is-active { background: rgba(255,255,255,0.85); width: 34px; }
 .rdhero-dot:hover:not(.is-active) { background: rgba(255,255,255,0.45); }
 
-/* Reduced motion: static first frame, instant cut */
-@media (prefers-reduced-motion: reduce) {
-    .rdhero-slide { animation: none !important; transform: scale(1) !important; transition: opacity 0.3s; }
-}
+/* Reduced motion: already instant — no rules needed */
 /* Responsive */
 @media (max-width: 1024px) { .rdhero-proj-nav { display: none; } }
 @media (max-width: 768px) {

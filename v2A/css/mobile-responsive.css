@@ -1,0 +1,218 @@
+/* ======================================================================
+   ProArc v2A — Mobile Responsive Supplement
+   Loaded after all redesign-*.css and yourstyle.css.
+   ====================================================================== */
+
+/* ─── GLOBAL ─────────────────────────────────────────────────────────── */
+
+body,
+#wrapper { overflow-x: hidden; }
+
+img { max-width: 100%; height: auto; }
+
+
+/* ─── MOBILE: 20px SIDE PADDING + BORDER CLEANUP ─────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* ── Footer ── */
+  footer { padding-left: 20px !important; padding-right: 20px !important; }
+  .footer-social { padding: 12px 0 !important; }
+
+  /* ── Theme wrapper ── */
+  .wrapper-inner,
+  .content .wrapper-inner { padding-left: 20px !important; padding-right: 20px !important; }
+
+  .align-content {
+    top: 0 !important;
+    margin-top: 10px !important;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-5);
+    float: left;
+    width: 100%;
+  }
+
+  /* ── Homepage ── */
+  .rd-works,
+  .rd-approach,
+  .rd-manifesto,
+  .rd-journal { padding-left: 20px !important; padding-right: 20px !important; }
+  .rd-hero-content { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: var(--space-5) !important; }
+
+  /* ── Portfolio ── */
+  .pf-hero { padding-left: 20px !important; padding-right: 20px !important; }
+  .pf-featured { padding-left: 20px !important; padding-right: 20px !important; }
+  .pf-grid-section { padding: var(--space-4) 20px !important; }
+
+  /* Filter bar: wrap all tabs into rows, no scroll */
+  .pf-filters-sticky { padding-top: 45px !important; }
+  .pf-filters-inner {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    padding: var(--space-2) 20px !important;
+    gap: 10px 20px !important;
+  }
+  .pf-filter {
+    white-space: nowrap;
+    font-size: 9px !important;
+    letter-spacing: 0.12em !important;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* CTA above footer: consistent vertical spacing */
+  .pf-cta { padding: var(--space-5) 20px !important; }
+
+  /* ── Services ── */
+
+  /* Hero: stack vertically */
+  .sv-hero {
+    padding-left: var(--space-4) !important;
+    padding-right: var(--space-4) !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--space-3) !important;
+  }
+
+  /* Sticky nav: horizontal scroll */
+  .sv-nav-sticky {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+  }
+  .sv-nav-inner {
+    flex-wrap: nowrap !important;
+    overflow-x: visible !important;
+    padding: var(--space-2) var(--space-4) !important;
+    gap: var(--space-3) !important;
+  }
+  .sv-nav-link {
+    display: inline-flex !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap;
+    font-size: 9px !important;
+    letter-spacing: 0.1em !important;
+    min-height: 36px;
+    align-items: center;
+  }
+
+  /* Section container */
+  .sv-section {
+    padding-left: var(--space-4) !important;
+    padding-right: var(--space-4) !important;
+    overflow: hidden !important;
+  }
+
+  /* Section grid: single column flex — overrides inline grid-template-columns */
+  .sv-section-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: var(--space-3) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Image: full width, 16/9, always on top */
+  .sv-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16/9 !important;
+    min-height: unset !important;
+    order: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Text: full width, always below image */
+  .sv-text {
+    width: 100% !important;
+    padding: var(--space-4) 0 !important;
+    order: 1 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Sub-disciplines: full width */
+  .sv-disciplines { max-width: 100% !important; }
+
+  /* CTA: stack vertically, section padding handles left/right */
+  .sv-cta { padding: var(--space-5) var(--space-4) !important; }
+  .sv-cta-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+  .sv-cta-contact { text-align: left !important; padding-right: 0 !important; }
+  .sv-cta-link { text-align: left !important; }
+  .sv-cta-link::after { right: auto !important; left: 0 !important; }
+  .sv-cta-info { text-align: left !important; }
+
+  /* ── About: 45px top spacing on every section ── */
+  .rd-about .rda-hero {
+    min-height: 50vh !important;
+    padding: 45px 20px var(--space-5) !important;
+  }
+  .rd-about .rda-hero-inner { width: 100%; }
+  .rd-about .rda-numbers  { padding: 45px 20px var(--space-4) !important; }
+  .rd-about .rda-number   { border-top: none !important; }
+  .rd-about .rda-firm     { padding: 45px 20px 0 !important; grid-template-columns: 1fr !important; gap: 20px !important; box-sizing: border-box !important; overflow: hidden !important; }
+  .rd-about .rda-expertise{ padding: 45px 20px var(--space-4) !important; }
+  .rd-about .rda-approach { padding: 45px 20px var(--space-4) !important; }
+  .rd-about .rda-timeline { padding: 45px 20px var(--space-4) !important; }
+
+  /* Fix firm-story image overflow on mobile */
+  .rd-about .rda-firm-img {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16/9 !important;
+    min-height: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── Journal listing ── */
+  .jr-listing-head { padding-top: 80px !important; padding-left: 20px !important; padding-right: 20px !important; }
+  .jr-listing-title { font-size: clamp(26px, 7vw, 40px) !important; }
+  .jr-grid { padding: 0 20px; }
+
+  /* ── Journal article ── */
+  .jr-hero { min-height: 40vh; }
+  .jr-hero-inner { padding: var(--space-5) 20px; }
+  .jr-body { padding: 0 20px; }
+  .jr-related { padding: 0 20px; }
+
+  /* ── Case study ── */
+  .cs-hero-inner { padding-left: 20px !important; padding-right: 20px !important; }
+  .cs-overview { padding-left: 20px !important; padding-right: 20px !important; }
+  .cs-gallery-wrap { padding: 0 20px; }
+  .cs-related-wrap { padding: 0 20px; }
+  .cs-intent { padding: 0 20px !important; }
+  .cs-back-wrap { padding: var(--space-4) 20px; }
+
+  /* ── Remove left/right borders from stacked grid items ── */
+  .rd-approach-item { border-left: none !important; border-right: none !important; }
+  .rd-about .rda-exp-item { border-left: none !important; border-right: none !important; }
+  .rd-about .rda-approach-item { border-left: none !important; border-right: none !important; }
+  .ab-sector { border-left: none !important; border-right: none !important; padding-left: 0 !important; }
+  .ab-principle { border-left: none !important; border-right: none !important; padding-left: 0 !important; }
+}
+
+
+/* ─── TOUCH: featured overlay always visible ─────────────────────────── */
+
+@media (hover: none) {
+  .pf-featured-overlay { opacity: 1 !important; }
+}
+
+
+/* ─── VERY SMALL (375 px) ────────────────────────────────────────────── */
+
+@media (max-width: 375px) {
+  .rdhero-title { font-size: 26px !important; }
+  .rd-hero-title { font-size: 32px !important; }
+  .sv-hero-num { font-size: 52px !important; }
+  .pf-hero-heading { font-size: clamp(24px, 7vw, 36px) !important; }
+  .jr-listing-title { font-size: 24px !important; }
+  .cs-title { font-size: clamp(22px, 6vw, 32px) !important; }
+}
