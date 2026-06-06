@@ -53,6 +53,78 @@
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
             <link type="text/css" rel="stylesheet" href="css/mobile-responsive.css">
+        <style>
+@media (max-width: 768px) {
+
+  /* Works section padding */
+  .rd-works {
+    padding: 400px 20px 80px 20px !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Stack all rows to single column */
+  .rd-works-row,
+  .rd-row-1,
+  .rd-row-2,
+  .rd-row-3,
+  .content.rd-home .rd-row-1,
+  .content.rd-home .rd-row-2,
+  .content.rd-home .rd-row-3 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    grid-template-columns: unset !important;
+  }
+
+  /* Each card: full width, no height constraint, no clip */
+  .rd-work {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    position: relative;
+  }
+
+  /* Image: show the COMPLETE photo — natural ratio, no crop, no fixed box.
+     Modifier-class selectors included to match/beat mobile-responsive.css
+     specificity; this <style> loads last so source order wins. */
+  .rd-work-img,
+  .rd-work-large .rd-work-img,
+  .rd-work-tall .rd-work-img,
+  .rd-work-square .rd-work-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    display: block !important;
+    min-height: unset !important;
+    max-height: unset !important;
+  }
+
+  /* Overlay: always visible below image on touch devices */
+  .rd-work-overlay {
+    position: static !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    padding: 8px 0 12px !important;
+  }
+
+  .rd-work-name {
+    color: #111 !important;
+    font-size: 14px !important;
+    transform: none !important;
+  }
+
+  .rd-work-meta {
+    color: #888 !important;
+    transform: none !important;
+  }
+
+}
+        </style>
     </head>
     <body>
         <div class="loader">
