@@ -363,28 +363,36 @@
                             </div>
                         </section>
 
-                        <!-- Smooth-scroll for service nav — INSIDE content so it re-runs on AJAX navigation.
-                             Fixed header = 60px (style.css). Sticky nav sticks at top:60px.
-                             Total scroll offset = 60 + stickyNavHeight + 8 so sections land
-                             at the top (image visible), not buried behind both bars.
-                             Three scroll environments:
-                             1. Mobile native-scroll: html.native-scroll → #wrapper is scroll container
-                             2. Desktop niceScroll: use niceScroll's doScrollTop API
-                             3. Desktop fallback: window.scrollTo -->
+                        <!-- Smooth-scroll for service nav — INSIDE content so jQuery .html() re-runs it on AJAX navigation.
+                             Fixed header = 60px (style.css:341). Sticky nav sits at top:60px.
+                             Uses absoluteTop() (offsetParent chain walk) so scroll position is
+                             correct regardless of current wrapper.scrollTop state (AJAX navigation
+                             can leave wrapper at arbitrary scroll on page entry). -->
                         <script>
                         (function () {
-                            var links = document.querySelectorAll('.sv-nav-link');
+                            var links    = document.querySelectorAll('.sv-nav-link');
                             if (!links.length) return;
                             var stickyNav = document.querySelector('.sv-nav-sticky');
                             var wrapper   = document.getElementById('wrapper');
                             var sections  = document.querySelectorAll('.sv-section');
-                            var HEADER_H  = 60; /* fixed <header> height — style.css line 341 */
+                            var HEADER_H  = 60;
 
                             function getOffset() {
                                 return HEADER_H + (stickyNav ? stickyNav.offsetHeight : 0) + 8;
                             }
 
-                            /* ── Click: smooth-scroll to section top so image is fully visible ── */
+                            /* Walk the offsetParent chain to get the element's absolute top
+                               within the scroll container — immune to current scroll position. */
+                            function absoluteTop(el, container) {
+                                var top = 0, cur = el;
+                                while (cur && cur !== container) {
+                                    top += cur.offsetTop || 0;
+                                    cur = cur.offsetParent;
+                                }
+                                return top;
+                            }
+
+                            /* ── Click: scroll to section top (image visible) ── */
                             links.forEach(function (link) {
                                 link.addEventListener('click', function (e) {
                                     var id = (this.getAttribute('href') || '').replace('#', '');
@@ -398,9 +406,9 @@
 
                                     if (isNativeScroll && wrapper) {
                                         /* Mobile: #wrapper is the scroll container */
-                                        var y = target.getBoundingClientRect().top + wrapper.scrollTop - offset;
-                                        try { wrapper.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
-                                        catch (err) { wrapper.scrollTop = Math.max(0, y); }
+                                        var y = Math.max(0, absoluteTop(target, wrapper) - offset);
+                                        try { wrapper.scrollTo({ top: y, behavior: 'smooth' }); }
+                                        catch (e1) { wrapper.scrollTop = y; }
                                         return;
                                     }
 
@@ -409,9 +417,8 @@
                                         try {
                                             var nsc = $('#wrapper').getNiceScroll();
                                             if (nsc && nsc.length && nsc[0]) {
-                                                var currentY = nsc[0].getScrollTop();
-                                                var absY = target.getBoundingClientRect().top + currentY - offset;
-                                                nsc[0].doScrollTop(Math.max(0, absY), 600);
+                                                var y2 = Math.max(0, absoluteTop(target, wrapper) - offset);
+                                                nsc[0].doScrollTop(y2, 600);
                                                 return;
                                             }
                                         } catch (err2) {}
@@ -426,7 +433,7 @@
                                 });
                             });
 
-                            /* ── Active tab: highlight via IntersectionObserver ── */
+                            /* ── Active tab: IntersectionObserver highlights matching tab ── */
                             function setActive(id) {
                                 links.forEach(function (lk) {
                                     var href = (lk.getAttribute('href') || '').replace('#', '');

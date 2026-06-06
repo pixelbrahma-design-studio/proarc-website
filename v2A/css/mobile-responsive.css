@@ -158,6 +158,7 @@ html.native-scroll #wrapper > .content-holder {
     padding-left: var(--space-4) !important;
     padding-right: var(--space-4) !important;
     overflow: hidden !important;
+    scroll-margin-top: 110px; /* 60px fixed header + ~42px sticky nav + 8px gap */
   }
 
   /* Section grid: single column flex — overrides inline grid-template-columns */
