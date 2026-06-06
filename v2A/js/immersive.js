@@ -70,6 +70,27 @@
     function onScroll() { progress(); parallax(); }
     (wrapper || window).addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 6. Mobile gallery: single combined carousel + dots per .cs-gallery-wrap
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('.cs-gallery-wrap').forEach(function (wrap) {
+        var items = wrap.querySelectorAll('.cs-gallery-item');
+        if (items.length <= 1) return;
+        var dotsEl = document.createElement('div');
+        dotsEl.className = 'gallery-dots';
+        items.forEach(function (_, i) {
+          var dot = document.createElement('div');
+          dot.className = 'gallery-dot' + (i === 0 ? ' is-active' : '');
+          dotsEl.appendChild(dot);
+        });
+        wrap.parentNode.insertBefore(dotsEl, wrap.nextSibling);
+        var dots = dotsEl.querySelectorAll('.gallery-dot');
+        wrap.addEventListener('scroll', function () {
+          var idx = Math.round(wrap.scrollLeft / wrap.offsetWidth);
+          dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === idx); });
+        }, { passive: true });
+      });
+    }
   }
   if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
