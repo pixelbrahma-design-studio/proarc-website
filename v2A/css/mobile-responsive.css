@@ -39,13 +39,27 @@ img { max-width: 100%; height: auto; }
   /* ── Homepage hero: full-height image ── */
   .rdhero-split {
     overflow: visible !important;
-    min-height: 100svh !important;
   }
   .rdhero-image {
-    height: 60svh !important;
+    height: 60vh !important;
     min-height: 60vh !important;
     flex: none !important;
   }
+
+  /* ── Homepage works grid: force single column ── */
+  .content.rd-home .rd-row-1,
+  .content.rd-home .rd-row-2,
+  .content.rd-home .rd-row-3,
+  .rd-works-row {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+  }
+
+  /* Works card images: consistent height */
+  .rd-work-img { aspect-ratio: 16/9 !important; height: auto !important; }
+  .rd-work-large .rd-work-img,
+  .rd-work-tall .rd-work-img,
+  .rd-work-square .rd-work-img { aspect-ratio: 16/9 !important; }
 
   /* ── Homepage ── */
   .rd-works,
