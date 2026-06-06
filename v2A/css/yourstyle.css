@@ -912,9 +912,9 @@ footer {
 
 /* --- v2A Polish Pass 2 --- */
 /* Journal listing — reduce top space, fix subtitle color, title size */
-.jr-listing-head { padding: var(--space-5) var(--space-5) var(--space-4) !important; padding-top: 100px !important; }
-.jr-listing-title { font-size: clamp(32px, 4vw, 52px) !important; letter-spacing: 0.06em !important; color: #111 !important; }
-.jr-listing-sub { font-size: var(--text-base) !important; color: #666 !important; max-width: 52ch !important; line-height: 1.7 !important; }
+.jr-listing-head { padding: var(--space-5) var(--space-5) var(--space-4) !important; padding-top: 100px !important; text-align: center !important; }
+.jr-listing-title { font-size: clamp(32px, 4vw, 52px) !important; letter-spacing: 0.06em !important; color: #111 !important; text-align: center !important; }
+.jr-listing-sub { font-size: var(--text-base) !important; color: #666 !important; max-width: 52ch !important; line-height: 1.7 !important; text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
 .jr-grid { gap: var(--space-5) var(--space-5) !important; }
 /* Journal card image — warm neutral, feels intentional not empty */
 .jr-card-thumb { background: #ede9e3 !important; }

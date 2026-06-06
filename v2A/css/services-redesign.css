@@ -45,17 +45,19 @@
 
 /* SERVICES CTA */
 .sv-cta { background: #000; padding: var(--space-6) var(--space-5); }
-.sv-cta-inner { max-width: 1400px; margin: 0 auto; display: grid !important; grid-template-columns: 61.8% 38.2% !important; gap: var(--space-5); align-items: center; }
+.sv-cta-inner { max-width: 1400px; margin: 0 auto; display: grid !important; grid-template-columns: 61.8% 38.2% !important; gap: var(--space-5); align-items: start; }
 .sv-cta-text { }
 .sv-cta-text p { font-family: var(--display); font-weight: 300; font-style: italic; font-size: var(--text-lg); color: rgba(255,255,255,0.7); max-width: 28ch; margin: 0; padding: 0; line-height: 1.5; }
-.sv-cta-contact { }
-.sv-cta-link { display: block; font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: var(--space-3); position: relative; transition: color 0.3s; }
-.sv-cta-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 0.5px; background: rgba(139,32,16,0.7); transition: width 0.4s; }
+.sv-cta-contact { text-align: right; padding-right: var(--space-5); }
+.sv-cta-link { display: block; font-family: var(--font); font-weight: 400; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: var(--space-3); position: relative; transition: color 0.3s; text-align: right; }
+.sv-cta-link::after { content: ''; position: absolute; bottom: -2px; right: 0; width: 0; height: 0.5px; background: rgba(139,32,16,0.7); transition: width 0.4s; }
 .sv-cta-link:hover { color: rgba(255,255,255,0.9); }
 .sv-cta-link:hover::after { width: 100%; }
-.sv-cta-info { }
-.sv-cta-info div { font-family: var(--font); font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; }
-.sv-cta-info div:first-child { color: rgba(255,255,255,0.35); }
+.sv-cta-info { text-align: right; }
+.sv-cta-info div { font-family: var(--font); font-weight: 300; font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sv-cta-info div:first-child { color: rgba(255,255,255,0.75); }
+.sv-cta-info a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
+.sv-cta-info a:hover { color: #fff; }
 
 @media (max-width: 1024px) {
   .sv-hero-inner { grid-template-columns: 1fr !important; }

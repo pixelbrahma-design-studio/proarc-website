@@ -355,12 +355,55 @@
                                 <div class="sv-cta-contact">
                                     <a href="contact.html" class="sv-cta-link">Start a Conversation</a>
                                     <div class="sv-cta-info">
-                                        <div>info@proarc.ae</div>
-                                        <div>+971 6 744 6633</div>
+                                        <div><a href="mailto:info@proarc.ae">info@proarc.ae</a></div>
+                                        <div><a href="tel:+97167446633">+971 6 744 6633</a></div>
                                     </div>
                                 </div>
                             </div>
                         </section>
+
+                        <!-- Smooth-scroll for service nav — INSIDE content so it re-runs on AJAX navigation.
+                             niceScroll scrolls #wrapper via CSS translateY, so window.pageYOffset is
+                             always 0 and window.scrollTo does nothing. Use niceScroll's own API instead. -->
+                        <script>
+                        (function () {
+                            var links = document.querySelectorAll('.sv-nav-link');
+                            if (!links.length) return;
+                            var stickyNav = document.querySelector('.sv-nav-sticky');
+
+                            links.forEach(function (link) {
+                                link.addEventListener('click', function (e) {
+                                    var id = (this.getAttribute('href') || '').replace('#', '');
+                                    if (!id) return;
+                                    var target = document.getElementById(id);
+                                    if (!target) return;
+                                    e.preventDefault();
+
+                                    var offset = stickyNav ? stickyNav.offsetHeight : 0;
+
+                                    if (typeof jQuery !== 'undefined') {
+                                        var $ = jQuery;
+                                        try {
+                                            var nsc = $('#wrapper').getNiceScroll();
+                                            if (nsc && nsc.length && nsc[0]) {
+                                                var currentY = nsc[0].getScrollTop();
+                                                var absY = target.getBoundingClientRect().top + currentY - offset;
+                                                nsc[0].doScrollTop(Math.max(0, absY), 600);
+                                                return;
+                                            }
+                                        } catch (err) {}
+                                        var docY = $(target).offset().top - offset;
+                                        $('html, body').stop(true).animate({ scrollTop: Math.max(0, docY) }, 600);
+                                        return;
+                                    }
+
+                                    var y = target.getBoundingClientRect().top + (window.pageYOffset || 0) - offset;
+                                    try { window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
+                                    catch (e2) { window.scrollTo(0, Math.max(0, y)); }
+                                });
+                            });
+                        })();
+                        </script>
 
                     </div>
                     <!-- share  -->

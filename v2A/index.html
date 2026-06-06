@@ -109,11 +109,32 @@
 
                     <!-- 1. HERO -->
                     <section class="rdhero-split">
-                        <div class="rdhero-image" style="background-image:url(images/folio/projects/ajmanbank1.jpg)">
-                            <div class="rdhero-slideshow" aria-hidden="true">
-                                <div class="rdhero-slide rdhero-slide-1"></div>
-                                <div class="rdhero-slide rdhero-slide-2"></div>
-                                <div class="rdhero-slide rdhero-slide-3"></div>
+                        <div class="rdhero-image">
+                            <div class="rdhero-slider">
+                                <div class="rdhero-slide is-active" style="background-image:url(images/folio/projects/ajmanbank1.jpg)"></div>
+                                <div class="rdhero-slide" style="background-image:url(images/folio/projects/edudelhi3.webp)"></div>
+                                <div class="rdhero-slide" style="background-image:url(images/folio/projects/royalfurniture2.webp)"></div>
+                                <div class="rdhero-slide" style="background-image:url(images/folio/projects/rholding1.jpg)"></div>
+                                <div class="rdhero-slide" style="background-image:url(images/folio/projects/habitatschool1.jpg)"></div>
+                                <div class="rdhero-slide" style="background-image:url(images/folio/projects/eduuni1.webp)"></div>
+                            </div>
+                            <nav class="rdhero-proj-nav" aria-label="Project navigation">
+                                <a class="rdhero-proj-item is-active" data-slide="0">Ajman Bank HQ</a>
+                                <a class="rdhero-proj-item" data-slide="1">Delhi Private School</a>
+                                <a class="rdhero-proj-item" data-slide="2">Royal Furniture</a>
+                                <a class="rdhero-proj-item" data-slide="3">R Holding Head Office</a>
+                                <a class="rdhero-proj-item" data-slide="4">Habitat School</a>
+                                <a class="rdhero-proj-item" data-slide="5">City University</a>
+                            </nav>
+                            <button class="rdhero-arrow rdhero-arrow--prev" aria-label="Previous project">&#8592;</button>
+                            <button class="rdhero-arrow rdhero-arrow--next" aria-label="Next project">&#8594;</button>
+                            <div class="rdhero-dots" role="group" aria-label="Slide navigation">
+                                <button class="rdhero-dot is-active" aria-label="Slide 1"></button>
+                                <button class="rdhero-dot" aria-label="Slide 2"></button>
+                                <button class="rdhero-dot" aria-label="Slide 3"></button>
+                                <button class="rdhero-dot" aria-label="Slide 4"></button>
+                                <button class="rdhero-dot" aria-label="Slide 5"></button>
+                                <button class="rdhero-dot" aria-label="Slide 6"></button>
                             </div>
                         </div>
                         <div class="rdhero-panel">
@@ -129,7 +150,7 @@
                                 <div class="rdhero-stat">73,071 sq ft · G+M+7 Stories</div>
                             </div>
                             <div class="rdhero-bottom">
-                                <a href="ajmanbank.html" class="rdhero-cta">View Project →</a>
+                                <a href="portfolio.html" class="rdhero-cta ajax">View Projects →</a>
                                 <div class="rdhero-scroll">
                                     <div class="rdhero-scroll-line"></div>
                                     <span>Scroll</span>
@@ -273,6 +294,109 @@
 
                 </div>
                 <!--  Content end -->
+                <script>
+(function () {
+    'use strict';
+
+    /* Kill any previous timer AND keyboard handler on AJAX re-navigation */
+    if (window._rdHeroTimer)  { clearInterval(window._rdHeroTimer); window._rdHeroTimer = null; }
+    if (window._rdKeyHandler) { document.removeEventListener('keydown', window._rdKeyHandler); window._rdKeyHandler = null; }
+
+    var SLIDES = [
+        { title: 'Ajman Bank<br>Headquarters', type: 'Commercial · Ajman · 2015',      stat: '73,071 sq ft · G+M+7 Stories'   },
+        { title: 'Delhi Private<br>School',    type: 'Educational · Sharjah',               stat: 'G+3 · Multi-campus facility'     },
+        { title: 'Royal<br>Furniture',         type: 'Commercial · Al Jurf, Ajman',         stat: '4,000 sqm · Ground + First'      },
+        { title: 'R Holding<br>Head Office',   type: 'Commercial · Ajman · Proposal',  stat: 'Landmark Cube Design'                 },
+        { title: 'Habitat<br>School',          type: 'Educational · UAE',                   stat: 'G+2 · Full-campus design'        },
+        { title: 'City<br>University',         type: 'Educational · Ajman',                 stat: '62,000 sqm · University Campus'  }
+    ];
+
+    var INTERVAL  = 5000;
+    var TRANS_MS  = 900;
+    var current   = 0;
+    var animating = false;
+
+    var slider   = document.querySelector('.rdhero-slider');
+    if (!slider) return;
+
+    var slides   = slider.querySelectorAll('.rdhero-slide');
+    var dots     = document.querySelectorAll('.rdhero-dot');
+    var navItems = document.querySelectorAll('.rdhero-proj-item');
+    var titleEl  = document.querySelector('.rdhero-title');
+    var typeEl   = document.querySelector('.rdhero-type');
+    var statEl   = document.querySelector('.rdhero-stat');
+    var featured = document.querySelector('.rdhero-featured');
+
+    if (featured) { featured.style.transition = 'opacity 0.28s ease'; }
+
+    function goTo(idx) {
+        if (animating || idx === current) return;
+        animating = true;
+
+        current = idx;
+
+        /* Slides: clear ALL is-active, then activate target + restart Ken Burns */
+        slides.forEach(function (s) { s.classList.remove('is-active'); });
+        slides[current].style.animation = 'none';
+        void slides[current].offsetWidth;
+        slides[current].style.animation = '';
+        slides[current].classList.add('is-active');
+
+        /* Dots: clear ALL, activate current */
+        dots.forEach(function (d) { d.classList.remove('is-active'); });
+        if (dots[current]) dots[current].classList.add('is-active');
+
+        /* Project nav: clear ALL, activate current — name always matches the image */
+        navItems.forEach(function (n) { n.classList.remove('is-active'); });
+        if (navItems[current]) navItems[current].classList.add('is-active');
+
+        /* Fade panel text: out → update to THIS project → in */
+        if (featured) featured.style.opacity = '0';
+        var snap = current;
+        setTimeout(function () {
+            if (titleEl) titleEl.innerHTML  = SLIDES[snap].title;
+            if (typeEl)  typeEl.textContent = SLIDES[snap].type;
+            if (statEl)  statEl.textContent = SLIDES[snap].stat;
+            if (featured) featured.style.opacity = '1';
+        }, 260);
+
+        setTimeout(function () { animating = false; }, TRANS_MS);
+    }
+
+    function nextSlide() { goTo((current + 1) % SLIDES.length); }
+    function prevSlide() { goTo((current - 1 + SLIDES.length) % SLIDES.length); }
+
+    function resetTimer() {
+        clearInterval(window._rdHeroTimer);
+        window._rdHeroTimer = setInterval(nextSlide, INTERVAL);
+    }
+
+    /* Arrow controls */
+    var prevBtn = document.querySelector('.rdhero-arrow--prev');
+    var nextBtn = document.querySelector('.rdhero-arrow--next');
+    if (prevBtn) prevBtn.addEventListener('click', function () { prevSlide(); resetTimer(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { nextSlide(); resetTimer(); });
+
+    /* Dot controls */
+    dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { goTo(i); resetTimer(); });
+    });
+
+    /* Project nav controls */
+    navItems.forEach(function (item, i) {
+        item.addEventListener('click', function (e) { e.preventDefault(); goTo(i); resetTimer(); });
+    });
+
+    /* Keyboard support — stored globally so the previous instance is removed on re-navigation */
+    window._rdKeyHandler = function (e) {
+        if (e.key === 'ArrowLeft')  { prevSlide(); resetTimer(); }
+        if (e.key === 'ArrowRight') { nextSlide(); resetTimer(); }
+    };
+    document.addEventListener('keydown', window._rdKeyHandler);
+
+    resetTimer();
+}());
+                </script>
                 	 
                     <!-- share  -->
                     <div class="share-inner">

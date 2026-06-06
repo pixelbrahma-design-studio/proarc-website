@@ -113,15 +113,15 @@
                                 <a href="ajmanbank.html" class="pf-featured-card pf-featured-large">
                                     <img src="images/folio/projects/ajmanbank1.jpg" alt="Ajman Bank Headquarters" class="pf-featured-img">
                                     <div class="pf-featured-overlay">
-                                        <div class="pf-featured-name">City University</div>
-                                        <div class="pf-featured-meta">62,000 sqm · Ajman</div>
+                                        <div class="pf-featured-name">Ajman Bank HQ</div>
+                                        <div class="pf-featured-meta">Commercial · Ajman</div>
                                     </div>
                                 </a>
                                 <a href="edu-cityuniversity.html" class="pf-featured-card pf-featured-small">
                                     <img src="images/folio/projects/eduuni1.webp" alt="City University" class="pf-featured-img">
                                     <div class="pf-featured-overlay">
-                                        <div class="pf-featured-name">R Holding HQ</div>
-                                        <div class="pf-featured-meta">Commercial · Ajman</div>
+                                        <div class="pf-featured-name">City University</div>
+                                        <div class="pf-featured-meta">Educational · Ajman</div>
                                     </div>
                                 </a>
                             </div>
@@ -135,7 +135,7 @@
                                     <div class="pf-card-content">
                                         <div class="pf-card-name">City University</div>
                                         <div class="pf-card-location">Ajman</div>
-                                        <div class="pf-card-category">Commercial</div>
+                                        <div class="pf-card-category">Educational</div>
                                     </div>
                                 </a>
                                 <a href="edu-woodlemparkaljurf.html" class="pf-card educational">
@@ -458,12 +458,12 @@
                                         <div class="pf-card-category">Residential</div>
                                     </div>
                                 </a>
-                                <a href="alghalamosque.html" class="pf-card ">
+                                <a href="alghalamosque.html" class="pf-card">
                                     <img src="images/folio/thumbs/alghalamosque.jpg" alt="Al Ghala Mosque" class="pf-card-img" loading="lazy">
                                     <div class="pf-card-content">
                                         <div class="pf-card-name">Al Ghala Mosque</div>
                                         <div class="pf-card-location">Ajman</div>
-                                        <div class="pf-card-category">Commercial</div>
+                                        <div class="pf-card-category">Religious</div>
                                     </div>
                                 </a>
                             </div>
@@ -475,8 +475,38 @@
                             <a href="contact.html" class="pf-cta-button">Get in Touch</a>
                         </section>
 
+                        <!-- Filter script — INSIDE content so it re-runs on AJAX navigation -->
+                        <script>
+                        (function () {
+                            var filters = document.querySelectorAll('.pf-filter');
+                            var cards   = document.querySelectorAll('.pf-card');
+                            if (!filters.length || !cards.length) return;
+
+                            filters.forEach(function (btn) {
+                                btn.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    var sel = this.getAttribute('data-filter');
+
+                                    /* Update active tab */
+                                    filters.forEach(function (f) { f.classList.remove('pf-filter-active'); });
+                                    this.classList.add('pf-filter-active');
+
+                                    /* Show only cards in the selected category */
+                                    cards.forEach(function (card) {
+                                        if (sel === '*') {
+                                            card.style.display = '';
+                                        } else {
+                                            var cls = sel.replace('.', '');
+                                            card.style.display = card.classList.contains(cls) ? '' : 'none';
+                                        }
+                                    });
+                                });
+                            });
+                        })();
+                        </script>
+
                     </div>
-                    <!--  Content  end --> 
+                    <!--  Content  end -->
                     <!-- share  -->
                     <div class="share-inner">
                         <div class="share-container  isShare"  data-share="['facebook','googleplus','twitter','linkedin']"></div>
@@ -511,38 +541,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
         <script type="text/javascript" src="js/immersive.js"></script>
-        <script>
-        (function () {
-            function initPortfolioFilter() {
-                var filters = document.querySelectorAll('.pf-filter');
-                var cards   = document.querySelectorAll('.pf-card');
-                if (!filters.length || !cards.length) return;
-
-                filters.forEach(function (btn) {
-                    btn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        var sel = this.getAttribute('data-filter');
-
-                        // Update active tab
-                        filters.forEach(function (f) { f.classList.remove('pf-filter-active'); });
-                        this.classList.add('pf-filter-active');
-
-                        // Show/hide cards
-                        cards.forEach(function (card) {
-                            if (sel === '*') {
-                                card.style.display = 'block';
-                            } else {
-                                var cls = sel.replace('.', '');
-                                card.style.display = card.classList.contains(cls) ? 'block' : 'none';
-                            }
-                        });
-                    });
-                });
-            }
-
-            if (document.readyState !== 'loading') initPortfolioFilter();
-            else document.addEventListener('DOMContentLoaded', initPortfolioFilter);
-        })();
-        </script>
     </body>
 </html>
