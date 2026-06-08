@@ -712,112 +712,12 @@ $(function() {
         $(".res-filter").removeClass("gallery-filter-active");
         $(this).addClass("gallery-filter-active");
     });
-    // Services sticky-nav tabs — delegated on document so a single binding
-    // survives every AJAX page swap (no refresh needed). See initServicesNav().
-    $(document).off("click.svnav").on("click.svnav", ".sv-nav-link", function(e) {
-        e.preventDefault();
-        var stickyEl = document.querySelector('.sv-nav-sticky');
-        var wrapper = document.getElementById('wrapper');
-        var id = (this.getAttribute('href') || '').replace('#', '');
-        var target = id ? document.getElementById(id) : null;
-        if (!target) return;
-        var offset = 60 + (stickyEl ? stickyEl.offsetHeight : 0) + 8;
-        var isNative = document.documentElement.classList.contains('native-scroll');
-
-        if (isNative && wrapper) {
-            // Mobile: #wrapper is the native scroll container.
-            var y = target.getBoundingClientRect().top - wrapper.getBoundingClientRect().top
-                  + wrapper.scrollTop - offset;
-            try { wrapper.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
-            catch (e1) { wrapper.scrollTop = Math.max(0, y); }
-        } else {
-            // Desktop: niceScroll controls #wrapper.
-            try {
-                var nsc = $('#wrapper').getNiceScroll();
-                if (nsc && nsc.length && nsc[0]) {
-                    var ny = target.getBoundingClientRect().top + nsc[0].getScrollTop() - offset;
-                    nsc[0].doScrollTop(Math.max(0, ny), 600);
-                } else {
-                    var dy = $(target).offset().top - offset;
-                    $('html, body').stop(true).animate({ scrollTop: Math.max(0, dy) }, 600);
-                }
-            } catch (err) {}
-        }
-
-        // Immediate active highlight (don't wait for scroll event).
-        var links = document.querySelectorAll('.sv-nav-link');
-        for (var i = 0; i < links.length; i++) links[i].classList.remove('is-active');
-        this.classList.add('is-active');
-        var navInner = stickyEl && (stickyEl.querySelector('.sv-nav-inner') || stickyEl);
-        if (navInner) {
-            navInner.scrollLeft = this.offsetLeft - (navInner.offsetWidth / 2) + (this.offsetWidth / 2);
-        }
-    });
 });
 // Init all functions  ------------------
 function readyFunctions() {
     initDogma();
     initvideo();
     initGolden();
-    initServicesNav();
-}
-
-// ── Services page: sticky-nav tab navigation ──────────────────────────────
-// This theme swaps the whole #wrapper innerHTML via .html() on AJAX
-// navigation, and inline <script>s in the swapped content don't reliably
-// re-run on first navigation (works only after a hard refresh). So the
-// click handler is DELEGATED on document (registered once below, survives
-// every AJAX swap) and the active-state init re-runs here on each load via
-// readyFunctions()/ksctbCallback. Mirrors the .res-filter fix pattern.
-function initServicesNav() {
-    "use strict";
-    var stickyEl = document.querySelector('.sv-nav-sticky');
-    if (!stickyEl) return; // only on the services page
-    var wrapper = document.getElementById('wrapper');
-
-    function isNative() { return document.documentElement.classList.contains('native-scroll'); }
-    function navOffset() { return 60 + stickyEl.offsetHeight + 8; } // fixed header + sticky nav + gap
-
-    function centerActiveTab(linkEl) {
-        var navInner = stickyEl.querySelector('.sv-nav-inner') || stickyEl;
-        if (!linkEl || !navInner) return;
-        navInner.scrollLeft = linkEl.offsetLeft - (navInner.offsetWidth / 2) + (linkEl.offsetWidth / 2);
-    }
-
-    function setActive(id) {
-        var links = document.querySelectorAll('.sv-nav-link');
-        for (var i = 0; i < links.length; i++) {
-            var active = links[i].getAttribute('href') === '#' + id;
-            links[i].classList.toggle('is-active', active);
-            if (active) centerActiveTab(links[i]);
-        }
-    }
-
-    function updateActive() {
-        var sections = document.querySelectorAll('.sv-section');
-        if (!sections.length) return;
-        var offset = navOffset() + 12;
-        var currentId = sections[0].id; // default → tab 01 active on load
-        for (var i = 0; i < sections.length; i++) {
-            var r = sections[i].getBoundingClientRect();
-            if (r.top <= offset && r.bottom > offset) currentId = sections[i].id;
-        }
-        // Bottom edge → last section (guard scrollTop>0 so it never fires on load).
-        var sc = (isNative() && wrapper) ? wrapper : (document.scrollingElement || document.documentElement);
-        if (sc && sc.scrollTop > 0 && (sc.scrollTop + sc.clientHeight) >= (sc.scrollHeight - 10)) {
-            currentId = sections[sections.length - 1].id;
-        }
-        if (currentId) setActive(currentId);
-    }
-
-    // Bind the scroll listener to #wrapper ONCE (it persists across AJAX swaps).
-    if (wrapper && !wrapper._svNavBound) {
-        wrapper.addEventListener('scroll', updateActive, { passive: true });
-        window.addEventListener('scroll', updateActive, { passive: true });
-        wrapper._svNavBound = true;
-    }
-
-    updateActive(); // set initial active state for this load
 }
 
 // Golden refresh — nav scroll border + opacity-only fade-in.
