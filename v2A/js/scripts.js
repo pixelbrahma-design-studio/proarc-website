@@ -718,6 +718,7 @@ function readyFunctions() {
     initDogma();
     initvideo();
     initGolden();
+    initServicesNav();
 }
 
 // Golden refresh — nav scroll border + opacity-only fade-in.
@@ -762,4 +763,102 @@ function initGolden() {
         // root is a niceScroll-transformed container that doesn't intersect.
         setTimeout(function () { el.classList.add("in"); }, 900);
     });
+}
+
+// Services sticky-nav: tab click + active-highlight.
+// Called from readyFunctions() so it runs on direct load AND every AJAX navigation.
+function initServicesNav() {
+    var navLinks = document.querySelectorAll('.sv-nav-link');
+    if (!navLinks.length) return;
+
+    var sections = Array.from(navLinks).map(function(link) {
+        var id = link.getAttribute('href').replace('#', '');
+        return document.getElementById(id);
+    }).filter(Boolean);
+
+    var wrapper  = document.getElementById('wrapper');
+    var stickyEl = document.querySelector('.sv-nav-sticky');
+    var navInner = stickyEl ? (stickyEl.querySelector('.sv-nav-inner') || stickyEl) : null;
+
+    function isNative() { return document.documentElement.classList.contains('native-scroll'); }
+    function offsetTop() { return 60 + (stickyEl ? stickyEl.offsetHeight : 0) + 8; }
+
+    // Remove stale scroll listeners from a previous init (AJAX re-navigation)
+    if (wrapper && wrapper._svNavScroll) {
+        wrapper.removeEventListener('scroll', wrapper._svNavScroll);
+    }
+    if (window._svNavScrollWin) {
+        window.removeEventListener('scroll', window._svNavScrollWin);
+    }
+
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var id = this.getAttribute('href').replace('#', '');
+            var target = document.getElementById(id);
+            if (!target) return;
+            var offset = offsetTop();
+
+            if (isNative() && wrapper) {
+                var y = target.getBoundingClientRect().top
+                      - wrapper.getBoundingClientRect().top
+                      + wrapper.scrollTop - offset;
+                try { wrapper.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
+                catch(err) { wrapper.scrollTop = Math.max(0, y); }
+            } else if (typeof jQuery !== 'undefined' && jQuery('#wrapper').getNiceScroll) {
+                var nsc = jQuery('#wrapper').getNiceScroll();
+                if (nsc && nsc.length && nsc[0]) {
+                    var yN = target.getBoundingClientRect().top + nsc[0].getScrollTop() - offset;
+                    nsc[0].doScrollTop(Math.max(0, yN), 600);
+                } else {
+                    var yF = jQuery(target).offset().top - offset;
+                    jQuery('html, body').stop(true).animate({ scrollTop: Math.max(0, yF) }, 600);
+                }
+            } else {
+                var yW = target.getBoundingClientRect().top + (window.pageYOffset || 0) - offset;
+                try { window.scrollTo({ top: Math.max(0, yW), behavior: 'smooth' }); }
+                catch(err) { window.scrollTo(0, Math.max(0, yW)); }
+            }
+
+            navLinks.forEach(function(l) { l.classList.remove('is-active'); });
+            this.classList.add('is-active');
+            centerActiveTab(this);
+        });
+    });
+
+    function centerActiveTab(linkEl) {
+        if (!linkEl || !navInner) return;
+        navInner.scrollLeft = linkEl.offsetLeft - (navInner.offsetWidth / 2) + (linkEl.offsetWidth / 2);
+    }
+
+    function updateActiveOnScroll() {
+        var offset = offsetTop() + 12;
+        var currentId = sections[0] ? sections[0].id : null;
+
+        sections.forEach(function(section) {
+            var r = section.getBoundingClientRect();
+            if (r.top <= offset && r.bottom > offset) currentId = section.id;
+        });
+
+        // Bottom-edge guard: sc.scrollTop > 0 prevents false trigger on initial load
+        // (niceScroll keeps scrollHeight ≈ clientHeight, which would always match)
+        var sc = (isNative() && wrapper) ? wrapper : (document.scrollingElement || document.documentElement);
+        if (sc && sc.scrollTop > 0 && (sc.scrollTop + sc.clientHeight) >= (sc.scrollHeight - 10) && sections.length) {
+            currentId = sections[sections.length - 1].id;
+        }
+
+        if (currentId) {
+            navLinks.forEach(function(link) {
+                var active = link.getAttribute('href') === '#' + currentId;
+                link.classList.toggle('is-active', active);
+                if (active) centerActiveTab(link);
+            });
+        }
+    }
+
+    wrapper._svNavScroll    = updateActiveOnScroll;
+    window._svNavScrollWin  = updateActiveOnScroll;
+    if (wrapper) wrapper.addEventListener('scroll', updateActiveOnScroll, { passive: true });
+    window.addEventListener('scroll', updateActiveOnScroll, { passive: true });
+    updateActiveOnScroll();
 }
