@@ -1,161 +1,325 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!--=============== basic  ===============-->
-        <meta charset="UTF-8">
-        <title>Proarc | Services</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="robots" content="index, follow"/>
-        <meta name="keywords" content=""/>
-        <meta name="description" content=""/>
-        <!--=============== css  ===============-->	
-        <link type="text/css" rel="stylesheet" href="css/reset.css">
-        <link type="text/css" rel="stylesheet" href="css/plugins.css">
-        <link type="text/css" rel="stylesheet" href="css/style.css">
-        <link type="text/css" rel="stylesheet" href="css/yourstyle.css">
-        <!--=============== favicons ===============-->
-        <link rel="shortcut icon" href="images/favicon.ico">
-    </head>
-    <body>
-        <div class="loader">
-            <div class="tm-loader">
-                <div id="circle"></div>
+<head>
+<meta charset="UTF-8">
+<title>Services — Proarc | Architecture & Engineering, UAE</title>
+<meta name="description" content="Architecture design, engineering, master planning, project management and interior design — five disciplines delivered by one in-house team at Proarc.">
+<link rel="canonical" href="https://proarc.ae/services.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Services — Proarc | Architecture & Engineering, UAE">
+<meta property="og:description" content="Architecture design, engineering, master planning, project management and interior design — five disciplines delivered by one in-house team at Proarc.">
+<meta property="og:image" content="images/projects/deca-035/hero-md.webp">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="shortcut icon" href="images/ui/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/pages/services.css">
+
+</head>
+<body>
+<header class="site-header" data-nav>
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="images/ui/logo-mark.webp" alt="Proarc" class="brand-logo">
+    </a>
+  </div>
+</header>
+
+<div class="nav-toggle-wrap">
+  <button class="nav-edge-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="nav-toggle-label" id="nav-toggle-label">Menu</span>
+</div>
+
+<div class="nav-overlay" id="nav-overlay">
+  <div class="nav-overlay-inner container">
+
+    <div class="nav-main-row">
+      <nav class="nav-links-lg" id="nav-links">
+        <div class="nav-links-col">
+          <a href="index.html" id="nav-home-link" class=""><span>Home</span></a>
+          <a href="about.html" class=""><span>About</span></a>
+          <a href="services.html" class="is-active"><span>Services</span></a>
+
+          <div class="nav-mega">
+            <button type="button" class="nav-mega-trigger " id="nav-mega-trigger" aria-expanded="false" aria-controls="nav-mega-panel">
+              <span>Projects</span>
+            </button>
+            <div class="nav-mega-panel" id="nav-mega-panel">
+              <div class="nav-mega-grid">
+                <a href="projects/azhagarden.html" class="nav-mega-item">
+                  <img src="images/projects/azhagarden/thumb.webp" alt="" loading="lazy">
+                  <span>Azha Garden Residence</span>
+                </a>
+                <a href="projects/one-678.html" class="nav-mega-item">
+                  <img src="images/projects/one-678/thumb.webp" alt="" loading="lazy">
+                  <span>One 678</span>
+                </a>
+                <a href="projects/ajmanbank.html" class="nav-mega-item">
+                  <img src="images/projects/ajmanbank/thumb.webp" alt="" loading="lazy">
+                  <span>Ajman Bank Headquarters</span>
+                </a>
+                <a href="projects/citymalluaq.html" class="nav-mega-item">
+                  <img src="images/projects/citymalluaq/thumb.webp" alt="" loading="lazy">
+                  <span>City Mall, Umm Al Quwain</span>
+                </a>
+                <a href="projects/blacksquare.html" class="nav-mega-item">
+                  <img src="images/projects/blacksquare/thumb.webp" alt="" loading="lazy">
+                  <span>The Black Square</span>
+                </a>
+                <a href="projects/cityuniversity.html" class="nav-mega-item">
+                  <img src="images/projects/cityuniversity/thumb.webp" alt="" loading="lazy">
+                  <span>City University Campus</span>
+                </a>
+                <a href="projects/zamzam-tower.html" class="nav-mega-item">
+                  <img src="images/projects/zamzam-tower/thumb.webp" alt="" loading="lazy">
+                  <span>Zamzam Tower</span>
+                </a>
+                <a href="projects/seasidehills.html" class="nav-mega-item">
+                  <img src="images/projects/seasidehills/thumb.webp" alt="" loading="lazy">
+                  <span>Seaside Hills Residence</span>
+                </a>
+                <a href="projects/rosetower.html" class="nav-mega-item">
+                  <img src="images/projects/rosetower/thumb.webp" alt="" loading="lazy">
+                  <span>Rose Tower</span>
+                </a>
+                <a href="projects/citylifealtallah.html" class="nav-mega-item">
+                  <img src="images/projects/citylifealtallah/thumb.webp" alt="" loading="lazy">
+                  <span>City Life, Al Tallah</span>
+                </a>
+              </div>
+              <a href="projects.html" class="nav-mega-viewall">View All 47 Projects <span class="btn-arrow">→</span></a>
             </div>
+          </div>
         </div>
-        <!--================= main start ================-->
-        <div id="main">
-            <!--=============== header ===============-->
-            <header>
-                <!-- Nav button-->
-                <div class="nav-button">
-                    <span  class="nos"></span>
-                    <span class="ncs"></span>
-                    <span class="nbs"></span>
-                </div>
-                <!-- Nav button end -->
-                <!-- Logo--> 
-                <div class="logo-holder">
-                    <a href="index.html" class="ajax"><img src="images/logo-new.png" alt=""></a>
-                </div>
-                <!-- Logo  end--> 
-                <!-- Header  title --> 
-                <div class="header-title">
-                    <h2><a class="ajax" href="#"></a>Menu</h2>
-                </div>
-                <!-- Header  title  end-->
-            </header>
-            <!-- Header   end-->
-            <!--=============== wrapper ===============-->	
-            <div id="wrapper">
-                <!--=============== content-holder ===============-->
-                <div class="content-holder elem scale-bg2 transition3">
-                    <!--  Navigation --> 
-                     <div class="nav-inner isDown">
-                        <nav>
-                            <ul>
-                                <li><a href="index.html" class="ajax">Home</a></li>
-                                <li><a href="about.html" class="ajax">About</a></li>
-                                <li><a href="portfolio.html" class="ajax">Projects</a></li>
-                                <li><a href="services.html" class="ajax active">Services</a></li>
-                                <li><a href="contact.html" class="ajax">Contact</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!--  Navigation end -->  
-                    <!--  Content -->
-                    <div class="content">
-                        <section>
-                            <!--  container -->
-                            <div class="container">
-                                <!--  services-holder -->
-                                <div class="services-holder">
-                                    <!-- services-item -->
-                                    <div class="services-item">
-                                        <div class="serv-img lft-img">
-                                            <div class="bg" style="background-image:url(images/services/residential.jpg)"></div>
-                                        </div>
-                                        <div class="services-box-info rft-info">
-                                            <h4>Architecture Design</h4>
-                                            <p>Proarc is driven by a belief that the quality of our surroundings has a direct influence on the quality of our lives, whether at home, in the workplace, the cultural building or the public realm.</p>
-                                            <ul>
-                                                <li><span>Concept Design</span></li>
-                                                <li><span>Structural Design</span></li>
-                                                <li><span>Interior Design</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- services-item  end-->
-                                    <!-- services-item  -->
-                                    <div class="services-item">
-                                        <div class="serv-img rft-img">
-                                            <div class="bg" style="background-image:url(images/services/commercial.jpg)"></div>
-                                        </div>
-                                        <div class="services-box-info lft-info">
-                                            <h4>Project Management</h4>
-                                            <p>Proarc provides an integrated service to clients through the lifecycle of a project – from concept, through construction to completion, whether Commercial, Residential, Mixed-use, Hospitality, Health-Care or Institutional.</p>
-                                            <ul>
-                                                <li><span>Research &amp; Analysis</span></li>
-                                                <li><span>MEP Engineering/Consultancy</span></li>
-                                                <li><span>Project Management</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- services-item  end-->
-                                    <!-- services-item  end-->
-                                    <div class="services-item">
-                                        <div class="serv-img lft-img">
-                                            <div class="bg" style="background-image:url(images/services/skyscrapper.jpg)"></div>
-                                        </div>
-                                        <div class="services-box-info rft-info">
-                                            <h4>Skyscrapper Design</h4>
-                                            <p>With rigorous design approach and deep understanding of the forces that govern skyscrappers, Proarc creates ground breaking towers that are elegant and timeless.</p>
-                                            <ul>
-                                                <li><span>Urban planning</span></li>
-                                                <li><span>Sustainable Design</span></li>
-                                                <li><span>Social Responsibility</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- services-item  end-->
-                                </div>
-                                <!-- services-holder  end-->
-                            </div>
-                            <!-- Container-->
-                        </section>
-                    </div>
-                    <!--  Content  end --> 
-                    <!-- share  -->
-                    <div class="share-inner">
-                        <div class="share-container  isShare"  data-share="['facebook','googleplus','twitter','linkedin']"></div>
-                        <div class="close-share"></div>
-                    </div>
-                    <!-- share end -->
-                </div>
-                <!-- Content holder  end -->
-            </div>
-            <!-- wrapper end -->
-            <!--=============== footer ===============-->
-            <footer>
-                <div class="policy-box">
-                    <span>&#169; Proarc 2026 / All rights reserved.</span>
-                </div>
-                <div class="footer-social">
-                    <ul>
-                        <li><a href="https://www.facebook.com/proarcarchitects/" target="_blank" ><i class="fa fa-facebook"></i><span>facebook</span></a></li>
-                        <li><a href="https://twitter.com/aneesmoideen" target="_blank"><i class="fa fa-twitter"></i><span>twitter</span></a></li>
-                        <li><a href="https://www.instagram.com/proarchitects/" target="_blank" ><i class="fa fa-instagram"></i><span>instagram</span></a></li>
-                    </ul>
-                </div>
-            </footer>
-            <!-- footer end -->
+
+        <div class="nav-links-col">
+          <a href="testimonials.html" class=""><span>Testimonials</span></a>
+          <a href="careers.html" class=""><span>Careers</span></a>
+          <a href="contact.html" class=""><span>Contact</span></a>
         </div>
-        <!-- Main end -->
-        <!--=============== google map ===============-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" type="text/javascript"></script> 
-        <!--=============== scripts  ===============-->
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/core.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
-    </body>
+      </nav>
+
+      <div class="nav-overlay-side">
+        <span class="eyebrow">Contact</span>
+        <p class="nav-overlay-tagline">Love to discuss something? Feel free to reach out to us by phone, or drop us a line.</p>
+        <div class="nav-overlay-contact">
+          <a href="tel:+97167446633">+971 6 744 6633</a>
+          <a href="mailto:info@proarc.ae">info@proarc.ae</a>
+        </div>
+        <span class="nav-overlay-address">13003, Ajman, UAE</span>
+        <a href="contact.html" class="btn btn-on-dark" style="margin-top:var(--space-lg);">Get in Touch <span class="btn-arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="nav-overlay-bottom">
+      <div class="nav-overlay-social">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter / X</a>
+      </div>
+      <span class="nav-overlay-legal">© 2026 Proarc. All Rights Reserved.</span>
+    </div>
+
+  </div>
+</div>
+
+
+<main>
+
+  <section class="page-hero" style="height:88svh; align-items:center;">
+    <img src="images/projects/citylifealtallah/gallery-01.webp" alt="">
+    <div class="container page-hero-body" style="padding-bottom:0;">
+      <div class="split">
+        <div data-reveal>
+          <span class="eyebrow" style="margin-bottom:var(--space-sm);">Five Disciplines, One Team</span>
+          <h1>Our Services</h1>
+        </div>
+        <div data-reveal data-reveal-delay="0.2">
+          <p class="lead">Proarc is driven by a belief that the quality of our surroundings has a direct influence on the quality of our lives. Every service we offer, from first sketch to final handover, is built around that principle.</p>
+        </div>
+      </div>
+    </div>
+    <span class="hero-scroll-cue" data-reveal data-reveal-delay="0.4">&darr;</span>
+  </section>
+
+  <section class="section section--tight" style="padding-bottom:0;">
+    <div class="container">
+      <div class="grid grid-3 divided-cols" data-reveal-stagger>
+        <div data-reveal><h4>Five Disciplines</h4><p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">Architecture, engineering, master planning, project management and interior design, under one roof.</p></div>
+        <div data-reveal><h4>47+ Projects</h4><p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">Completed and ongoing, across commercial, educational, retail, residential and religious sectors.</p></div>
+        <div data-reveal><h4>19+ Years</h4><p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">Shaping Ajman&rsquo;s skyline since 2006, with buildings across the wider Emirates.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="alt-row" data-reveal-stagger>
+        <div class="aspect-hero" data-reveal="image"><img class="img-cover" src="images/projects/one-678/hero.webp" alt="Architecture Design" loading="lazy"></div>
+        <div class="copy-cell" data-reveal>
+          <span class="num">01</span>
+          <h3>Architecture Design</h3>
+          <p style="margin-top:var(--space-sm); color:var(--text-body);">Our architecture team shapes every project from first concept through to a fully resolved, buildable design — driven by how people actually live and work.</p>
+          <span class="deliverables-label">Key Deliverables</span>
+          <div class="deliverables"><span class="deliverable-tag">Concept Design</span><span class="deliverable-tag">Structural Design</span><span class="deliverable-tag">Urban Context Analysis</span></div>
+        </div>
+      </div>
+
+      <div class="alt-row rev" data-reveal-stagger>
+        <div class="aspect-hero" data-reveal="image"><img class="img-cover" src="images/projects/star-giga-tower/hero.webp" alt="Engineering" loading="lazy"></div>
+        <div class="copy-cell" data-reveal>
+          <span class="num">02</span>
+          <h3>Engineering</h3>
+          <p style="margin-top:var(--space-sm); color:var(--text-body);">In-house mechanical, electrical and plumbing engineering, coordinated directly with the design team from concept stage — reducing clashes and keeping every project buildable and efficient.</p>
+          <span class="deliverables-label">Key Deliverables</span>
+          <div class="deliverables"><span class="deliverable-tag">MEP System Design</span><span class="deliverable-tag">Coordination &amp; Clash Detection</span><span class="deliverable-tag">Consultancy &amp; Compliance</span></div>
+        </div>
+      </div>
+
+      <div class="alt-row" data-reveal-stagger>
+        <div class="aspect-hero" data-reveal="image"><img class="img-cover" src="images/projects/azha-park-residences/gallery-17.webp" alt="Master Planning" loading="lazy"></div>
+        <div class="copy-cell" data-reveal>
+          <span class="num">03</span>
+          <h3>Master Planning</h3>
+          <p style="margin-top:var(--space-sm); color:var(--text-body);">Urban masterplans and site-wide strategies that balance density, movement and long-term growth — setting the framework that every building on a site must work within.</p>
+          <span class="deliverables-label">Key Deliverables</span>
+          <div class="deliverables"><span class="deliverable-tag">Urban Planning</span><span class="deliverable-tag">Site Strategy &amp; Zoning</span><span class="deliverable-tag">Density &amp; Growth Planning</span></div>
+        </div>
+      </div>
+
+      <div class="alt-row rev" data-reveal-stagger>
+        <div class="aspect-hero" data-reveal="image"><img class="img-cover" src="images/projects/bluebell-residence/hero.webp" alt="Project Management" loading="lazy"></div>
+        <div class="copy-cell" data-reveal>
+          <span class="num">04</span>
+          <h3>Project Management</h3>
+          <p style="margin-top:var(--space-sm); color:var(--text-body);">An integrated service through the full lifecycle of a project — from concept, through construction, to completion — across commercial, residential, mixed-use, hospitality, health-care and institutional sectors.</p>
+          <span class="deliverables-label">Key Deliverables</span>
+          <div class="deliverables"><span class="deliverable-tag">Research &amp; Analysis</span><span class="deliverable-tag">Scheduling &amp; Cost Control</span><span class="deliverable-tag">Site Supervision</span></div>
+        </div>
+      </div>
+
+      <div class="alt-row" data-reveal-stagger>
+        <div class="aspect-hero" data-reveal="image"><img class="img-cover" src="images/projects/azha-park-residences/gallery-12.webp" alt="Interior Design" loading="lazy"></div>
+        <div class="copy-cell" data-reveal>
+          <span class="num">05</span>
+          <h3>Interior Design</h3>
+          <p style="margin-top:var(--space-sm); color:var(--text-body);">Interior spaces detailed with the same rigour as the building envelope — material palettes, lighting design and spatial planning that carry the architectural concept through to every finished room.</p>
+          <span class="deliverables-label">Key Deliverables</span>
+          <div class="deliverables"><span class="deliverable-tag">Space Planning</span><span class="deliverable-tag">Material &amp; Finish Selection</span><span class="deliverable-tag">Lighting Design</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ RELATED WORK ============ -->
+  <section class="section section--panel">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Work Across All Five Disciplines</h2>
+        <p class="lead">A sample of projects where these services came together.</p>
+      </div>
+      <div class="grid grid-3" data-reveal-stagger>
+        <a href="projects/one-678.html" class="card" data-reveal>
+          <div class="card-media aspect-card" data-reveal="image"><img class="img-cover" src="images/projects/one-678/thumb.webp" alt="One 678" loading="lazy"></div>
+          <div class="card-body"><h4>One 678</h4><span class="card-tag">Residential — Aamra, Ajman</span></div>
+        </a>
+        <a href="projects/cityuniversity.html" class="card" data-reveal>
+          <div class="card-media aspect-card" data-reveal="image"><img class="img-cover" src="images/projects/cityuniversity/thumb.webp" alt="City University Campus" loading="lazy"></div>
+          <div class="card-body"><h4>City University Campus</h4><span class="card-tag">Educational — Ajman, UAE</span></div>
+        </a>
+        <a href="projects/blacksquare.html" class="card" data-reveal>
+          <div class="card-media aspect-card" data-reveal="image"><img class="img-cover" src="images/projects/blacksquare/thumb.webp" alt="The Black Square" loading="lazy"></div>
+          <div class="card-body"><h4>The Black Square</h4><span class="card-tag">Commercial — Ajman, UAE</span></div>
+        </a>
+      </div>
+      <div style="margin-top:var(--space-xl); text-align:center;" data-reveal>
+        <a href="projects.html" class="btn">View All Projects <span class="btn-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section section--dark">
+    <div class="container" style="text-align:center;">
+      <h2 data-reveal style="max-width:22ch; margin-inline:auto;">Ready to start a conversation about your project?</h2>
+      <div style="margin-top:var(--space-lg);" data-reveal data-reveal-delay="0.1">
+        <a href="contact.html" class="btn btn-on-dark">Get in Touch <span class="btn-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand">Proarc</span>
+        <p>Designing Ajman's Skyline Since 2006. A UAE-based architecture, engineering and project management consultancy.</p>
+        <div class="footer-social">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter / X</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <p>13003, Ajman, UAE</p>
+        <a href="tel:+97167446633">+971 6 744 6633</a>
+        <a href="mailto:info@proarc.ae">info@proarc.ae</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Stay Updated</h5>
+        <p>Occasional notes on new projects and the practice.</p>
+        <form class="newsletter-form" action="php/contact.php" method="post">
+          <input type="email" name="email" placeholder="Your email address" required>
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Proarc. All Rights Reserved.</span>
+      <span>Privacy Policy · Terms of Use</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<script src="js/smooth-scroll.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/reveals.js"></script>
+
+
+</body>
 </html>

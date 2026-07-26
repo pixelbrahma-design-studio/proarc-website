@@ -1,23 +1,7 @@
-# Claude Code
-.claude/
-
-# BMad tooling
-_bmad/
-_bmad-output/
+node_modules/
+images/_raw/
+images/manifest.json
 
 # OS
 Thumbs.db
 .DS_Store
-
-# PHP logs & server artifacts
-php/error_log
-cgi-bin/error_log
-error_log
-.ftpquota
-
-# Raw source asset folders (cleaned copies live in images/folio/projects)
-/Apartment building/
-/High rise residential towers/
-/Commercial/
-node_modules/
-/Educational/
