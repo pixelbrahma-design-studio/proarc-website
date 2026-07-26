@@ -1,0 +1,82 @@
+/* ===========================================================
+   Layout — containers, section rhythm, grid utilities.
+   =========================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section--tight { padding-block: var(--space-xl); }
+.section--dark { background: var(--bg-dark); color: var(--text-on-dark); }
+/* base.css pins h1-h6 to the light-page heading color; an explicit
+   override here is required to win back on-dark headings inside a
+   dark panel (inherited color never beats an explicit rule). */
+.section--dark h1, .section--dark h2, .section--dark h3,
+.section--dark h4, .section--dark h5, .section--dark h6 { color: var(--text-on-dark); }
+.section--panel { background: var(--bg-panel); }
+
+.section-head {
+  display: flex;
+  align-items: normal;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.section-head h2 { max-width: 40ch; }
+.section-head .lead { margin: 0; }
+
+.grid {
+  display: grid;
+  gap: var(--gutter);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.split--reverse { direction: rtl; }
+.split--reverse > * { direction: ltr; }
+
+.stack-sm > * + * { margin-top: var(--space-sm); }
+.stack-md > * + * { margin-top: var(--space-md); }
+.stack-lg > * + * { margin-top: var(--space-lg); }
+
+.aspect-hero  { aspect-ratio: 16 / 10; overflow: hidden; }
+.aspect-card  { aspect-ratio: 4 / 5; overflow: hidden; }
+.aspect-wide  { aspect-ratio: 16 / 7; overflow: hidden; }
+.aspect-square{ aspect-ratio: 1 / 1; overflow: hidden; }
+
+.img-cover { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 1024px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 780px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .split, .split--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+  .section-head { align-items: flex-start; }
+}

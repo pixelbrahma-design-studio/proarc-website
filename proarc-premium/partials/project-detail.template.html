@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- @include head -->
+</head>
+<body>
+<!-- @include header -->
+
+<main>
+  <section class="pd-hero">
+    <img src="{{assetPrefix}}{{hero}}" srcset="{{assetPrefix}}{{heroMd}} 1600w, {{assetPrefix}}{{hero}} 2400w" sizes="100vw" alt="{{title}}">
+    <div class="container pd-hero-body">
+      <span class="eyebrow">{{category}} &middot; {{location}}</span>
+      <h1>{{title}}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <nav class="pd-breadcrumb" data-reveal aria-label="Breadcrumb">
+        <a href="{{assetPrefix}}index.html">Home</a><span>/</span>
+        <a href="{{assetPrefix}}projects.html">Projects</a><span>/</span>
+        <span class="is-current">{{title}}</span>
+      </nav>
+      <div class="pd-overview">
+        <div class="stack-md">
+          <span class="eyebrow pd-label" data-reveal>Overview</span>
+          {{#each descriptionParagraphs}}<p class="lead" data-reveal>{{this}}</p>{{/each}}
+        </div>
+        <aside class="pd-specs-panel" data-reveal data-reveal-delay="0.1">
+          <span class="eyebrow pd-label" style="margin-bottom:var(--space-md); display:inline-flex;">Project Data</span>
+          <div class="pd-specs">
+            {{#each specs}}<div class="pd-spec-row"><span>{{label}}</span><span>{{value}}</span></div>{{/each}}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {{#if hasGallery}}
+  <section class="section section--panel">
+    <div class="container">
+      <span class="eyebrow pd-label" data-reveal style="margin-bottom:var(--space-lg); display:inline-flex;">Gallery</span>
+      <div class="pd-gallery" data-reveal-stagger>
+        {{#each galleryItems}}<a href="{{assetPrefix}}{{this}}" target="_blank" rel="noopener" data-reveal><img src="{{assetPrefix}}{{this}}" alt="{{title}}" loading="lazy"></a>{{/each}}
+      </div>
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if hasRelated}}
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Related Projects</h2>
+      </div>
+      <div class="grid grid-3" data-reveal-stagger>
+        {{#each relatedProjects}}
+        <a href="{{assetPrefix}}projects/{{slug}}.html" class="card" data-reveal>
+          <div class="card-media aspect-card" data-reveal="image"><img class="img-cover" src="{{assetPrefix}}{{thumb}}" alt="{{title}}" loading="lazy"></div>
+          <div class="card-body"><h4>{{title}}</h4><span class="card-tag">{{category}} &mdash; {{location}}</span></div>
+        </a>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+  {{/if}}
+
+  <section class="section section--dark">
+    <div class="container pd-nav">
+      {{#if prevProject}}
+      <a href="{{assetPrefix}}projects/{{prevProject.slug}}.html" class="pd-nav-link">
+        <div class="pd-nav-thumb"><img src="{{assetPrefix}}{{prevProject.thumb}}" alt="" loading="lazy"></div>
+        <div class="pd-nav-text">
+          <span class="eyebrow" style="color:var(--text-on-dark-muted);">&larr; Previous</span>
+          <span class="pd-nav-title">{{prevProject.title}}</span>
+          <span class="pd-nav-category">{{prevProject.category}}</span>
+        </div>
+      </a>
+      {{/if}}
+      {{#if nextProject}}
+      <a href="{{assetPrefix}}projects/{{nextProject.slug}}.html" class="pd-nav-link pd-nav-link--next">
+        <div class="pd-nav-text">
+          <span class="eyebrow" style="color:var(--text-on-dark-muted);">Next &rarr;</span>
+          <span class="pd-nav-title">{{nextProject.title}}</span>
+          <span class="pd-nav-category">{{nextProject.category}}</span>
+        </div>
+        <div class="pd-nav-thumb"><img src="{{assetPrefix}}{{nextProject.thumb}}" alt="" loading="lazy"></div>
+      </a>
+      {{/if}}
+    </div>
+  </section>
+
+</main>
+
+<!-- @include footer -->
+<!-- @include scripts -->
+</body>
+</html>

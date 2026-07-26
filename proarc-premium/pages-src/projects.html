@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- @include head -->
+</head>
+<body>
+<!-- @include header -->
+
+<main>
+
+  <section class="page-hero" style="height:88svh; align-items:center;">
+    <img src="images/projects/edu-delhiprivate/gallery-01.webp" alt="">
+    <div class="container page-hero-body" style="padding-bottom:0;">
+      <div class="split">
+        <div data-reveal>
+          <span class="eyebrow" style="margin-bottom:var(--space-sm);">47 Projects Across the UAE</span>
+          <h1>Our Projects</h1>
+        </div>
+        <div data-reveal data-reveal-delay="0.2">
+          <p class="lead">Commercial, educational, retail, residential and religious buildings — completed, under construction, and in design across Ajman and the wider Emirates.</p>
+        </div>
+      </div>
+    </div>
+    <span class="hero-scroll-cue" data-reveal data-reveal-delay="0.4">&darr;</span>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="projects-layout">
+
+        <aside class="projects-rail" data-reveal>
+          <div class="projects-rail-inner">
+
+            <div class="filter-block">
+              <h5>Location</h5>
+              <ul class="filter-list">
+                <li><button type="button" class="filter-opt is-active" data-location-opt data-value="All">All</button></li>
+                <li><button type="button" class="filter-opt" data-location-opt data-value="Ajman">Ajman</button></li>
+                <li><button type="button" class="filter-opt" data-location-opt data-value="Al Zorah">Al Zorah</button></li>
+                <li><button type="button" class="filter-opt" data-location-opt data-value="Umm Al Quwain">Umm Al Quwain</button></li>
+                <li><button type="button" class="filter-opt" data-location-opt data-value="Emirates City">Emirates City</button></li>
+              </ul>
+            </div>
+
+            <div class="filter-block">
+              <h5>By Sector</h5>
+              <ul class="filter-list">
+                <li><button type="button" class="filter-opt is-active" data-category-opt data-value="All">All</button></li>
+                <li><button type="button" class="filter-opt" data-category-opt data-value="Commercial">Commercial</button></li>
+                <li><button type="button" class="filter-opt" data-category-opt data-value="Educational">Educational</button></li>
+                <li><button type="button" class="filter-opt" data-category-opt data-value="Residential">Residential</button></li>
+                <li><button type="button" class="filter-opt" data-category-opt data-value="Retail & Mixed-Use">Retail &amp; Mixed-Use</button></li>
+                <li><button type="button" class="filter-opt" data-category-opt data-value="Religious">Religious</button></li>
+              </ul>
+            </div>
+
+            <div class="filter-block">
+              <h5>Search by Project Name</h5>
+              <div class="search-wrap">
+                <input type="text" id="project-search" placeholder="Type a project name…" autocomplete="off">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        <div class="projects-main">
+          <div id="results-meta" class="results-meta">47 projects</div>
+          <div id="projects-grid" class="projects-grid"></div>
+          <div id="no-results" class="no-results" hidden>No projects match this combination of filters — try clearing the search or a filter.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="projects-data">{{projectsDataJson}}</script>
+
+</main>
+
+<!-- @include footer -->
+<!-- @include scripts -->
+</body>
+</html>

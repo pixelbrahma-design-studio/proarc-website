@@ -1,0 +1,14 @@
+{
+  "name": "proarc-premium",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build scripts for the Proarc premium redesign (static output, no runtime deps)",
+  "scripts": {
+    "build:images": "node build/process-images.js",
+    "build:pages": "node build/generate-projects.js",
+    "build": "npm run build:images && npm run build:pages"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}
