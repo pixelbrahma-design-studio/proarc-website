@@ -1,0 +1,132 @@
+.pd-hero {
+  position: relative;
+  height: 78svh;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--c-offwhite);
+}
+.pd-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pd-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(11,11,10,0.05) 0%, rgba(11,11,10,0.75) 100%);
+}
+/* z-index:2 is load-bearing: ::after is generated content, which paints
+   after (on top of) real DOM siblings like this body — without an
+   explicit stack order the gradient meant to darken the photo behind
+   the title was instead darkening the title itself. */
+.pd-hero-body { position: relative; z-index: 2; padding-bottom: var(--space-xl); }
+.pd-hero-body .eyebrow { color: var(--text-on-dark-muted); }
+.pd-hero-body .eyebrow::before { background: var(--c-accent); }
+.pd-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--text-on-dark); }
+
+/* Breadcrumb — sits above the Overview grid, a small navigation aid
+   more common on premium project/portfolio pages than a bare title. */
+.pd-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin-bottom: var(--space-xl);
+}
+.pd-breadcrumb a { color: var(--text-muted); transition: color var(--dur-fast) var(--ease-out); }
+.pd-breadcrumb a:hover { color: var(--text-primary); }
+.pd-breadcrumb .is-current { color: var(--text-body); }
+
+/* Section labels (Overview / Project Data / Gallery / Related Projects)
+   sized up and colored like headings rather than the muted small-caps
+   eyebrow used for captions elsewhere — these are acting as section
+   titles on this page, not secondary metadata. */
+.pd-label {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.pd-overview { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.pd-overview .lead { color: var(--text-body); max-width: 70ch; }
+
+/* Specs sidebar as a defined bordered panel rather than a bare list —
+   .pd-specs/.pd-spec-row themselves stay untouched since About's intro
+   section also uses them (plain, no panel). */
+.pd-specs-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+.pd-specs-panel .pd-specs { border-top: none; padding-top: 0; }
+.pd-specs-panel .pd-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.pd-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+.pd-gallery a { display: block; overflow: hidden; border-radius: var(--radius-md); aspect-ratio: 4/3; }
+.pd-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-lux); }
+.pd-gallery a:hover img { transform: scale(1.06); }
+.pd-gallery a:nth-child(3n+1) { grid-column: span 2; aspect-ratio: 8/5; }
+
+@media (max-width: 900px) {
+  .pd-overview { grid-template-columns: 1fr; }
+  .pd-gallery { grid-template-columns: repeat(2, 1fr); }
+  .pd-gallery a:nth-child(3n+1) { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .pd-gallery { grid-template-columns: 1fr; }
+  .pd-gallery a:nth-child(3n+1) { grid-column: span 1; }
+}
+
+.pd-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+.pd-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: 46%;
+  padding: var(--space-sm);
+  margin: calc(var(--space-sm) * -1);
+  border-radius: var(--radius-md);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.pd-nav-link:hover { background: rgba(245, 242, 234, 0.06); }
+.pd-nav-link--next { flex-direction: row-reverse; text-align: right; }
+.pd-nav-thumb {
+  flex: 0 0 auto;
+  width: 84px;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+.pd-nav-thumb img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter var(--dur-fast) var(--ease-out), transform var(--dur-slow) var(--ease-lux); }
+.pd-nav-link:hover .pd-nav-thumb img { filter: brightness(1); transform: scale(1.05); }
+.pd-nav-text { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; }
+.pd-nav-link--next .pd-nav-text { align-items: flex-end; }
+.pd-nav .eyebrow { font-size: 11px; }
+.pd-nav-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  color: var(--text-on-dark);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.pd-nav-link:hover .pd-nav-title { color: var(--c-accent); }
+.pd-nav-category {
+  font-size: var(--fs-small);
+  color: var(--text-on-dark-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 700px) {
+  .pd-nav { flex-direction: column; }
+  .pd-nav-link, .pd-nav-link--next { max-width: 100%; flex-direction: row; text-align: left; }
+  .pd-nav-link--next .pd-nav-text { align-items: flex-start; }
+}

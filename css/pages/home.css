@@ -1,0 +1,335 @@
+.hero {
+  position: relative;
+  /* exactly one screen tall — the centered composition below is
+     deliberately compact (short eyebrow, centered title, one-line lead,
+     small bottom captions) specifically so it fits real viewports
+     without needing to grow or clip. */
+  height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  color: var(--text-on-dark);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-lux);
+}
+.hero-slide.is-active { opacity: 1; z-index: 1; }
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 2;
+  /* same darkening levels as the Featured Projects slider, for a
+     consistent look between the two full-height sections — plus a
+     soft radial dip behind the centered title. */
+  background:
+    radial-gradient(60% 50% at 50% 42%, rgba(11,11,10,0.5) 0%, rgba(11,11,10,0) 70%),
+    linear-gradient(180deg, rgba(11,11,10,0.65) 0%, rgba(11,11,10,0.22) 20%, rgba(11,11,10,0.2) 55%, rgba(11,11,10,0.86) 100%);
+}
+
+/* ---- Centered title block (grid row 1, fills remaining height) ---- */
+.hero-center {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* biased toward the bottom of the available row (not true-center) —
+     more breathing room above the title, less dead space between the
+     buttons and the slide-caption/strip below */
+  justify-content: flex-end;
+  text-align: center;
+  padding-inline: var(--gutter);
+  padding-bottom: var(--space-lg);
+  text-shadow: 0 2px 20px rgba(11, 11, 10, 0.5);
+}
+
+.hero-center .eyebrow { color: var(--text-on-dark); }
+.hero-center .eyebrow::before { background: var(--c-accent); }
+
+.hero-center h1 {
+  font-size: clamp(2.25rem, 2.6vw + 1.75rem, 5.75rem);
+  margin-top: var(--space-sm);
+  max-width: 18ch;
+  color: var(--text-on-dark);
+}
+
+.hero-center .lead {
+  color: #FFFDF8;
+  margin-top: var(--space-sm);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+@media (max-height: 760px) {
+  .hero-center h1 { font-size: clamp(2rem, 2vw + 1.5rem, 4rem); margin-top: var(--space-xs); }
+  .hero-center .lead { margin-top: var(--space-xs); }
+  .hero-actions { margin-top: var(--space-sm); }
+}
+
+/* ---- Hero bottom (grid row 2) — slide caption + small quick-link strip,
+   both deliberately compact so the whole hero stays one screen tall ---- */
+.hero-bottom { position: relative; }
+
+.hero-slide-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm) var(--gutter);
+}
+
+.hero-slide-dots {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+.hero-slide-dots button {
+  width: 18px;
+  height: 2px;
+  background: rgba(245, 242, 234, 0.35);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.hero-slide-dots button.is-active { background: var(--text-on-dark); }
+
+.hero-slide-info {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  color: var(--text-on-dark);
+  min-width: 0;
+}
+.hero-slide-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero-slide-sub {
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .hero-slide-meta { flex-wrap: wrap; gap: var(--space-sm); }
+  .hero-slide-sub { display: none; }
+}
+
+/* Benoy-style small caption row along the very base of the hero */
+.hero-strip {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--c-line-on-dark);
+}
+
+.hero-strip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--gutter);
+  border-left: 1px solid var(--c-line-on-dark);
+  color: var(--text-on-dark-muted);
+  font-size: 12px;
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.hero-strip-item:first-child { border-left: none; }
+.hero-strip-item span:first-child { letter-spacing: 0.01em; }
+.hero-strip-item .btn-arrow { font-size: 12px; }
+.hero-strip-item:hover { color: var(--text-on-dark); background: rgba(245, 242, 234, 0.06); }
+
+@media (max-width: 860px) {
+  .hero-strip { grid-template-columns: 1fr; }
+  .hero-strip-item { border-left: none; border-top: 1px solid var(--c-line-on-dark); padding-block: 8px; }
+  .hero-strip-item:first-child { border-top: none; }
+}
+
+/* ---- About strip ---- */
+.about-strip-num {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 1;
+  color: var(--c-charcoal);
+}
+
+/* ---- Featured projects — full-height horizontal slider ------------
+   One screen tall (matches the hero's 100svh treatment), Michaelis-Boyd
+   style: no separate heading block, just the slider with small overlaid
+   labels (eyebrow + view-all top, arrows/progress bottom). ------------ */
+.featured-full {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--c-black);
+  color: var(--text-on-dark);
+}
+
+.featured-full-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--gutter) 0;
+  pointer-events: none;
+  text-shadow: 0 1px 12px rgba(11, 11, 10, 0.6);
+}
+.featured-full-eyebrow { color: var(--text-on-dark); pointer-events: none; }
+.featured-full-eyebrow::before { content: none; }
+.featured-full-top a {
+  pointer-events: auto;
+  flex: 0 0 auto;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+  border-bottom: 1px solid var(--c-line-on-dark);
+  padding-bottom: 2px;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.featured-full-top a:hover { border-color: var(--text-on-dark); }
+
+.featured-scroll {
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+.featured-scroll::-webkit-scrollbar { display: none; }
+.featured-scroll.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+
+.featured-scroll-track {
+  display: flex;
+  height: 100%;
+  width: max-content;
+}
+
+.featured-item {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  height: 100%;
+  width: 100vw;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+.featured-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+  /* no hover-scale here on purpose — with items at 100vw and a slow
+     1.6s transition, moving the mouse in/out repeatedly while scanning
+     the slide made the image visibly wobble/zoom in and out; a static
+     image reads calmer for a full-bleed slide anyway. */
+}
+.featured-item::after {
+  content: "";
+  position: absolute; inset: 0;
+  /* strong, deliberate darkening top+bottom (where the overlaid labels/
+     controls/title always sit, regardless of slide) — previously this
+     was far too light (5-15% opacity) and the top labels disappeared
+     against bright skies or light-colored facades. */
+  background: linear-gradient(180deg, rgba(11,11,10,0.65) 0%, rgba(11,11,10,0.22) 20%, rgba(11,11,10,0.2) 55%, rgba(11,11,10,0.86) 100%);
+}
+/* The controls strip (progress bar + arrows) is a reserved band pinned
+   to the very bottom. */
+.featured-full { --featured-controls-h: 76px; }
+
+.featured-item-caption {
+  position: absolute;
+  left: var(--space-lg);
+  right: var(--space-lg);
+  bottom: calc(var(--featured-controls-h) + var(--space-lg));
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-shadow: 0 2px 20px rgba(11, 11, 10, 0.55);
+}
+.featured-item-caption h4 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.75rem); font-weight: 500; margin-bottom: var(--space-2xs); color: var(--text-on-dark); }
+.featured-item-caption .card-tag { color: var(--text-on-dark-muted); font-size: var(--fs-small); letter-spacing: 0.04em; text-transform: uppercase; }
+
+.featured-full-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: var(--featured-controls-h);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: 0 var(--gutter);
+  background: linear-gradient(180deg, rgba(11,11,10,0) 0%, rgba(11,11,10,0.55) 40%, rgba(11,11,10,0.55) 100%);
+  pointer-events: none;
+}
+.featured-progress {
+  flex: 1;
+  height: 2px;
+  background: var(--c-line-on-dark);
+  pointer-events: none;
+}
+.featured-progress-bar {
+  height: 100%;
+  width: 20%;
+  background: var(--text-on-dark);
+  transition: transform 0.15s linear;
+  transform-origin: left;
+}
+.featured-arrows { display: flex; gap: var(--space-sm); flex: 0 0 auto; pointer-events: auto; }
+.featured-arrows button {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-on-dark);
+  color: var(--text-on-dark);
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.featured-arrows button:hover { background: var(--text-on-dark); color: var(--c-black); border-color: var(--text-on-dark); }
+.featured-arrows button:disabled { opacity: 0.35; pointer-events: none; }
+
+@media (max-width: 700px) {
+  /* enough top clearance to sit fully below the fixed mobile header (a
+     toggle-only bar, but still ~70-80px) — was rendering partly behind it */
+  .featured-full-top { padding: 5rem var(--space-sm) 0; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
+  .featured-full-bottom { padding: 0 var(--space-sm); }
+  .featured-item-caption h4 { font-size: 1.1rem; }
+}
+
+/* ---- Client wall ---- */
+.client-intro { max-width: 60ch; }

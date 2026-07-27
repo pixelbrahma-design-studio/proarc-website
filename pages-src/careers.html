@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- @include head -->
+</head>
+<body>
+<!-- @include header -->
+
+<main>
+
+  <section class="page-hero" style="height:88svh; align-items:center;">
+    <img src="images/projects/seasidehills/gallery-01.webp" alt="">
+    <div class="container page-hero-body" style="padding-bottom:0;">
+      <div class="split">
+        <div data-reveal>
+          <span class="eyebrow" style="margin-bottom:var(--space-sm);">Join Our Team</span>
+          <h1>Careers at Proarc</h1>
+        </div>
+        <div data-reveal data-reveal-delay="0.2">
+          <p class="lead">At Proarc, our collaborative team of architects, engineers, MEP engineers and site engineers has shaped Ajman&rsquo;s skyline since 2006 — we work enthusiastically, creatively and curiously, on projects rarely the same brief twice.</p>
+        </div>
+      </div>
+    </div>
+    <span class="hero-scroll-cue" data-reveal data-reveal-delay="0.4">&darr;</span>
+  </section>
+
+  <!-- ============ WHY WORK WITH US ============ -->
+  <section class="section section--panel">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Why Work With Us</h2>
+        <p class="lead" style="color:var(--text-body);">At Proarc, our collaborative team of architects, engineers, MEP engineers and site engineers has shaped Ajman&rsquo;s skyline since 2006. We work enthusiastically, creatively and curiously, taking on projects of every type and scale — from skyscrapers to schools — with the same commitment to thoroughness and lasting impact.</p>
+      </div>
+      <div class="grid grid-3 divided-cols" style="margin-top:var(--space-xl);" data-reveal-stagger>
+        <div data-reveal>
+          <span class="col-index">01</span>
+          <h4>Creative Environment</h4>
+          <p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">Work across urban masterplans, skyscrapers, schools, malls and private homes — rarely the same brief twice.</p>
+        </div>
+        <div data-reveal>
+          <span class="col-index">02</span>
+          <h4>Growth Opportunities</h4>
+          <p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">A multidisciplinary in-house team means real cross-training across architecture, MEP and project management.</p>
+        </div>
+        <div data-reveal>
+          <span class="col-index">03</span>
+          <h4>Landmark Projects</h4>
+          <p style="color:var(--text-body); font-size:16.5px; line-height:1.7;">Contribute to buildings that define Ajman&rsquo;s skyline and are recognised across the UAE.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRENT OPENINGS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Current Openings</h2>
+      </div>
+      <div class="grid grid-2" data-reveal-stagger>
+        <div class="icon-card" data-reveal>
+          <span class="num">01</span>
+          <h4 class="ph-text">[ Job Title ]</h4>
+          <span class="card-tag" style="display:block; margin-top:var(--space-2xs);">Department &middot; Location &middot; Full-time / Contract</span>
+          <p class="ph-text" style="margin-top:var(--space-sm); color:var(--text-muted); font-size:16.5px; line-height:1.6;">[ 2&ndash;3 line job description pending confirmation from Proarc ]</p>
+          <a href="#apply" class="btn" style="margin-top:var(--space-md);">Apply Now <span class="btn-arrow">→</span></a>
+        </div>
+        <div class="icon-card" data-reveal data-reveal-delay="0.1">
+          <span class="num">02</span>
+          <h4 class="ph-text">[ Job Title ]</h4>
+          <span class="card-tag" style="display:block; margin-top:var(--space-2xs);">Department &middot; Location &middot; Full-time / Contract</span>
+          <p class="ph-text" style="margin-top:var(--space-sm); color:var(--text-muted); font-size:16.5px; line-height:1.6;">[ 2&ndash;3 line job description pending confirmation from Proarc ]</p>
+          <a href="#apply" class="btn" style="margin-top:var(--space-md);">Apply Now <span class="btn-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLICATION FORM ============ -->
+  <section class="section section--panel" id="apply">
+    <div class="container container--narrow">
+      <div data-reveal style="text-align:center; max-width:640px; margin-inline:auto; margin-bottom:var(--space-lg);">
+        <h2>Apply Now</h2>
+        <p class="lead" style="margin-top:var(--space-sm); margin-inline:auto;">Tell us a bit about yourself — we&rsquo;ll be in touch if there&rsquo;s a fit.</p>
+      </div>
+      <form id="careers-form" action="php/contact.php" method="post" data-reveal style="max-width:640px; margin-inline:auto;">
+        <div class="grid grid-2" style="gap:var(--space-md);">
+          <div class="form-field">
+            <label for="careerName">Full Name</label>
+            <input type="text" id="careerName" name="careerName" required>
+          </div>
+          <div class="form-field">
+            <label for="careerEmail">Email</label>
+            <input type="email" id="careerEmail" name="careerEmail" required>
+          </div>
+        </div>
+        <div class="grid grid-2" style="gap:var(--space-md);">
+          <div class="form-field">
+            <label for="careerPhone">Phone</label>
+            <input type="tel" id="careerPhone" name="careerPhone" required>
+          </div>
+          <div class="form-field">
+            <label for="careerCountry">Country of Origin</label>
+            <select id="careerCountry" name="careerCountry" required>
+              <option value="" disabled selected>Select a country</option>
+              <option>United Arab Emirates</option>
+              <option>India</option>
+              <option>Pakistan</option>
+              <option>Egypt</option>
+              <option>Philippines</option>
+              <option>Jordan</option>
+              <option>Lebanon</option>
+              <option>Syria</option>
+              <option>United Kingdom</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Nigeria</option>
+              <option>Kenya</option>
+              <option>Sri Lanka</option>
+              <option>Bangladesh</option>
+              <option>Nepal</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="careerPosition">Position Applying For</label>
+          <input type="text" id="careerPosition" name="careerPosition" placeholder="e.g. Architect, MEP Engineer, Site Engineer" required>
+        </div>
+        <div class="form-field">
+          <label for="careerCv">CV / Resume</label>
+          <input type="file" id="careerCv" name="careerCv" accept=".pdf,.doc,.docx">
+          <p class="form-note">PDF, DOC or DOCX, max 5MB. Please also email it to <a href="mailto:info@proarc.ae" style="text-decoration:underline;">info@proarc.ae</a>.</p>
+        </div>
+        <div class="form-field">
+          <label for="careerCover">Cover Letter <span style="text-transform:none;">(optional)</span></label>
+          <textarea id="careerCover" name="careerCover"></textarea>
+        </div>
+        <button type="submit" class="btn btn-filled">Submit Application <span class="btn-arrow">→</span></button>
+        <p id="careers-form-status" class="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ GENERAL APPLICATIONS ============ -->
+  <section class="section--tight">
+    <div class="container container--narrow">
+      <div data-reveal>
+        <span class="eyebrow">General Applications</span>
+        <p class="lead" style="margin-top:var(--space-md);">If no current opening matches your background, send us your CV anyway — use the form above with the position field left open, and we&rsquo;ll keep it on file.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- @include footer -->
+<!-- @include scripts -->
+</body>
+</html>

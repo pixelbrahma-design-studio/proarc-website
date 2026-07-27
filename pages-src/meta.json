@@ -1,0 +1,71 @@
+{
+  "home": {
+    "outFile": "index.html",
+    "activePage": "home",
+    "title": "Proarc — Architecture & Engineering, Ajman, UAE",
+    "description": "Proarc is a UAE-based architecture, engineering and project management consultancy that has shaped Ajman's skyline since 2006 — landmark commercial, educational, retail and residential buildings across the Emirates.",
+    "canonical": "https://proarc.ae/",
+    "ogImage": "images/projects/ajmanbank/hero-md.webp",
+    "pageStylesheet": "home",
+    "pageScript": "home"
+  },
+  "projects": {
+    "outFile": "projects.html",
+    "activePage": "projects",
+    "title": "Projects — Proarc | Architecture & Engineering, UAE",
+    "description": "47 completed, ongoing and proposed projects across Ajman and the UAE — commercial, educational, retail, residential and religious. Filter by sector, location, or search by name.",
+    "canonical": "https://proarc.ae/projects.html",
+    "ogImage": "images/projects/star-giga-tower/hero-md.webp",
+    "pageStylesheet": "projects",
+    "pageScript": "projects-filter"
+  },
+  "about": {
+    "outFile": "about.html",
+    "activePage": "about",
+    "title": "About — Proarc | Architecture & Engineering, UAE",
+    "description": "Proarc has been an integral contributor to Ajman's emerging iconic skyline since 2006 — a multidisciplinary in-house team of architects, engineers, MEP engineers and site engineers.",
+    "canonical": "https://proarc.ae/about.html",
+    "ogImage": "images/projects/one-678/hero-md.webp",
+    "pageStylesheet": "about",
+    "pageScript": "home"
+  },
+  "services": {
+    "outFile": "services.html",
+    "activePage": "services",
+    "title": "Services — Proarc | Architecture & Engineering, UAE",
+    "description": "Architecture design, engineering, master planning, project management and interior design — five disciplines delivered by one in-house team at Proarc.",
+    "canonical": "https://proarc.ae/services.html",
+    "ogImage": "images/projects/deca-035/hero-md.webp",
+    "pageStylesheet": "services"
+  },
+  "contact": {
+    "outFile": "contact.html",
+    "activePage": "contact",
+    "title": "Contact — Proarc | Architecture & Engineering, UAE",
+    "description": "Get in touch with Proarc — 13003, Ajman, United Arab Emirates. +971 6 744 6633 · info@proarc.ae",
+    "canonical": "https://proarc.ae/contact.html",
+    "ogImage": "images/projects/citymalluaq/hero-md.webp",
+    "pageStylesheet": "contact",
+    "pageScript": "contact"
+  },
+  "testimonials": {
+    "outFile": "testimonials.html",
+    "activePage": "testimonials",
+    "title": "Testimonials — Proarc | Architecture & Engineering, UAE",
+    "description": "Feedback from the clients Proarc has worked alongside since 2006, across commercial, educational, retail and residential projects in Ajman and the wider UAE.",
+    "canonical": "https://proarc.ae/testimonials.html",
+    "ogImage": "images/projects/cityuniversity/hero-md.webp",
+    "pageStylesheet": "",
+    "pageScript": "testimonials"
+  },
+  "careers": {
+    "outFile": "careers.html",
+    "activePage": "careers",
+    "title": "Careers — Proarc | Architecture & Engineering, UAE",
+    "description": "Join Proarc's in-house team of architects, engineers, MEP engineers and site engineers shaping Ajman's skyline since 2006.",
+    "canonical": "https://proarc.ae/careers.html",
+    "ogImage": "images/projects/rholding/hero-md.webp",
+    "pageStylesheet": "",
+    "pageScript": "careers"
+  }
+}

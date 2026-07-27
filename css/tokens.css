@@ -1,0 +1,94 @@
+/* ===========================================================
+   Design tokens — single source of truth for the premium site.
+   Every other stylesheet references these variables only.
+   =========================================================== */
+
+:root {
+  /* ---- Palette ------------------------------------------- */
+  /* Anchored in the Proarc wordmark, which is pure black/white —
+     no brand color to key off, so charcoal/off-white/stone carries
+     the "premium architecture" mood instead. The single warm-taupe
+     accent is carried forward from the wireframe's own --accent. */
+  --c-black:     #0B0B0A;
+  --c-charcoal:  #171715;
+  --c-ink:       #272625;
+  --c-stone:     #8A8578;
+  --c-stone-lt:  #B7B2A4;
+  --c-beige:     #E9E4D8;
+  --c-offwhite:  #F5F2EA;
+  --c-white:     #FFFFFF;
+  --c-accent:    #B0AA8F;
+  --c-accent-dk: #948D6F;
+  --c-line:      rgba(11, 11, 10, 0.12);
+  --c-line-on-dark: rgba(245, 242, 234, 0.16);
+
+  /* Semantic aliases */
+  --bg-page:      var(--c-offwhite);
+  --bg-panel:     var(--c-white);
+  --bg-dark:      var(--c-black);
+  /* Heading/body text colors are pinned to their own hex values (not
+     aliased to --c-charcoal/--c-ink) so they can change independently
+     of the charcoal used for button/footer/nav-toggle backgrounds. */
+  --text-primary: #272625;
+  --text-body:    #252525;
+  --text-muted:   var(--c-stone);
+  --text-on-dark: #FFFDF8;
+  --text-on-dark-muted: var(--c-stone-lt);
+
+  /* ---- Typography ------------------------------------------ */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --fs-hero:  clamp(2.75rem, 3.2vw + 2rem, 7.5rem);
+  --fs-h1:    clamp(2.25rem, 1.8vw + 1.6rem, 4.25rem);
+  --fs-h2:    clamp(1.75rem, 1.2vw + 1.3rem, 3rem);
+  --fs-h3:    clamp(1.25rem, 0.6vw + 1.05rem, 1.75rem);
+  --fs-h4:    clamp(1.05rem, 0.3vw + 0.95rem, 1.25rem);
+  --fs-lead:  clamp(1.05rem, 0.3vw + 0.95rem, 1.375rem);
+  --fs-body:  17.5px;
+  --fs-small: 0.8125rem;
+  --fs-label: 0.75rem;
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.7;
+
+  --ls-label: 0.14em;
+
+  /* ---- Spacing / layout ------------------------------------ */
+  --container: 1440px;
+  --container-narrow: 900px;
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.875rem;
+  --space-sm:  1.25rem;
+  --space-md:  2rem;
+  --space-lg:  3.5rem;
+  --space-xl:  clamp(3.5rem, 6vw, 6.5rem);
+  --space-2xl: clamp(5rem, 9vw, 9.5rem);
+  --space-section: 100px;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* ---- Motion ------------------------------------------------ */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.4s;
+  --dur-reveal: 1.1s;
+  --dur-slow: 1.6s;
+
+  /* ---- Z-index scale ------------------------------------------ */
+  /* --z-nav sits above --z-overlay on purpose: .site-header is
+     position:fixed with its own z-index, which makes it a stacking
+     context — everything inside it (including .brand, which has its
+     own higher z-index meant to keep the logo visible above the open
+     nav overlay) is confined to that context and painted as one unit
+     at the header's z-level. With --z-nav below --z-overlay, the
+     header's own elevated z-index never had a chance to apply and the
+     logo was invisible any time the overlay was open. */
+  --z-nav: 210;
+  --z-overlay: 200;
+  --z-cursor: 300;
+}
