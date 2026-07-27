@@ -8,7 +8,7 @@
   display: grid;
   grid-template-rows: 1fr auto;
   overflow: hidden;
-  color: var(--text-on-dark);
+  color: var(--color-on-dark);
 }
 
 .hero-media {
@@ -40,8 +40,8 @@
      consistent look between the two full-height sections — plus a
      soft radial dip behind the centered title. */
   background:
-    radial-gradient(60% 50% at 50% 42%, rgba(11,11,10,0.5) 0%, rgba(11,11,10,0) 70%),
-    linear-gradient(180deg, rgba(11,11,10,0.65) 0%, rgba(11,11,10,0.22) 20%, rgba(11,11,10,0.2) 55%, rgba(11,11,10,0.86) 100%);
+    radial-gradient(60% 50% at 50% 42%, rgb(0 0 0 / 50%) 0%, rgb(0 0 0 / 0%) 70%),
+    linear-gradient(180deg, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 22%) 20%, rgb(0 0 0 / 20%) 55%, rgb(0 0 0 / 86%) 100%);
 }
 
 /* ---- Centered title block (grid row 1, fills remaining height) ---- */
@@ -59,21 +59,25 @@
   text-align: center;
   padding-inline: var(--gutter);
   padding-bottom: var(--space-lg);
-  text-shadow: 0 2px 20px rgba(11, 11, 10, 0.5);
+  /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
+     carries legibility, per guideline §3.9. */
 }
 
-.hero-center .eyebrow { color: var(--text-on-dark); }
-.hero-center .eyebrow::before { background: var(--c-accent); }
+.hero-center .eyebrow { color: var(--color-on-dark); }
+.hero-center .eyebrow::before { background: var(--color-on-dark); }
 
+/* Mega Splash register — the hero's single largest, one-per-page
+   headline (guideline §2). Fixed rem, no fluid vw clamp. */
 .hero-center h1 {
-  font-size: clamp(2.25rem, 2.6vw + 1.75rem, 5.75rem);
+  font-size: var(--fs-mega);
+  line-height: var(--lh-mega);
   margin-top: var(--space-sm);
   max-width: 18ch;
-  color: var(--text-on-dark);
+  color: var(--color-on-dark);
 }
 
 .hero-center .lead {
-  color: #FFFDF8;
+  color: var(--color-on-dark);
   margin-top: var(--space-sm);
   max-width: 52ch;
   margin-inline: auto;
@@ -88,8 +92,6 @@
 }
 
 @media (max-height: 760px) {
-  .hero-center h1 { font-size: clamp(2rem, 2vw + 1.5rem, 4rem); margin-top: var(--space-xs); }
-  .hero-center .lead { margin-top: var(--space-xs); }
   .hero-actions { margin-top: var(--space-sm); }
 }
 
@@ -112,30 +114,30 @@
 .hero-slide-dots button {
   width: 18px;
   height: 2px;
-  background: rgba(245, 242, 234, 0.35);
+  background: rgb(255 255 255 / 35%);
   transition: background var(--dur-fast) var(--ease-out);
 }
-.hero-slide-dots button.is-active { background: var(--text-on-dark); }
+.hero-slide-dots button.is-active { background: var(--color-on-dark); }
 
 .hero-slide-info {
   display: flex;
   align-items: baseline;
   gap: var(--space-sm);
-  color: var(--text-on-dark);
+  color: var(--color-on-dark);
   min-width: 0;
 }
 .hero-slide-title {
-  font-family: var(--font-display);
-  font-size: 1rem;
+  font-family: var(--font-latin);
+  font-size: var(--fs-body);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .hero-slide-sub {
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-caption);
   text-transform: uppercase;
-  color: var(--text-on-dark-muted);
+  color: var(--color-on-dark-secondary);
   white-space: nowrap;
 }
 
@@ -149,7 +151,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--c-line-on-dark);
+  border-top: 1px solid var(--color-hairline-dark);
 }
 
 .hero-strip-item {
@@ -158,28 +160,29 @@
   justify-content: space-between;
   gap: var(--space-sm);
   padding: var(--space-xs) var(--gutter);
-  border-left: 1px solid var(--c-line-on-dark);
-  color: var(--text-on-dark-muted);
-  font-size: 12px;
+  border-inline-start: 1px solid var(--color-hairline-dark);
+  color: var(--color-on-dark-secondary);
+  font-size: var(--fs-caption);
   transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
-.hero-strip-item:first-child { border-left: none; }
+.hero-strip-item:first-child { border-inline-start: none; }
 .hero-strip-item span:first-child { letter-spacing: 0.01em; }
-.hero-strip-item .btn-arrow { font-size: 12px; }
-.hero-strip-item:hover { color: var(--text-on-dark); background: rgba(245, 242, 234, 0.06); }
+.hero-strip-item .btn-arrow { font-size: var(--fs-caption); }
+.hero-strip-item:hover { color: var(--color-on-dark); background: rgb(255 255 255 / 6%); }
 
 @media (max-width: 860px) {
   .hero-strip { grid-template-columns: 1fr; }
-  .hero-strip-item { border-left: none; border-top: 1px solid var(--c-line-on-dark); padding-block: 8px; }
+  .hero-strip-item { border-inline-start: none; border-top: 1px solid var(--color-hairline-dark); padding-block: 8px; }
   .hero-strip-item:first-child { border-top: none; }
 }
 
 /* ---- About strip ---- */
 .about-strip-num {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 9vw, 9rem);
+  font-family: var(--font-latin);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-mega);
   line-height: 1;
-  color: var(--c-charcoal);
+  color: var(--color-hairline);
 }
 
 /* ---- Featured projects — full-height horizontal slider ------------
@@ -190,8 +193,8 @@
   position: relative;
   height: 100svh;
   overflow: hidden;
-  background: var(--c-black);
-  color: var(--text-on-dark);
+  background: var(--color-surface-dark);
+  color: var(--color-on-dark);
 }
 
 .featured-full-top {
@@ -203,23 +206,23 @@
   justify-content: space-between;
   padding: var(--space-lg) var(--gutter) 0;
   pointer-events: none;
-  text-shadow: 0 1px 12px rgba(11, 11, 10, 0.6);
+  /* No text-shadow (Hard Rule 10) — sits inside the slide's own scrim. */
 }
-.featured-full-eyebrow { color: var(--text-on-dark); pointer-events: none; }
+.featured-full-eyebrow { color: var(--color-on-dark); pointer-events: none; }
 .featured-full-eyebrow::before { content: none; }
 .featured-full-top a {
   pointer-events: auto;
   flex: 0 0 auto;
-  font-size: var(--fs-small);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caption);
   text-transform: uppercase;
-  color: var(--text-on-dark);
-  border-bottom: 1px solid var(--c-line-on-dark);
+  color: var(--color-on-dark);
+  border-bottom: 1px solid var(--color-hairline-dark);
   padding-bottom: 2px;
   transition: border-color var(--dur-fast) var(--ease-out);
 }
-.featured-full-top a:hover { border-color: var(--text-on-dark); }
+.featured-full-top a:hover { border-color: var(--color-on-dark); }
 
 .featured-scroll {
   height: 100%;
@@ -265,7 +268,7 @@
      controls/title always sit, regardless of slide) — previously this
      was far too light (5-15% opacity) and the top labels disappeared
      against bright skies or light-colored facades. */
-  background: linear-gradient(180deg, rgba(11,11,10,0.65) 0%, rgba(11,11,10,0.22) 20%, rgba(11,11,10,0.2) 55%, rgba(11,11,10,0.86) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 22%) 20%, rgb(0 0 0 / 20%) 55%, rgb(0 0 0 / 86%) 100%);
 }
 /* The controls strip (progress bar + arrows) is a reserved band pinned
    to the very bottom. */
@@ -281,10 +284,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  text-shadow: 0 2px 20px rgba(11, 11, 10, 0.55);
+  /* No text-shadow (Hard Rule 10) — .featured-item::after is the scrim. */
 }
-.featured-item-caption h4 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.75rem); font-weight: 500; margin-bottom: var(--space-2xs); color: var(--text-on-dark); }
-.featured-item-caption .card-tag { color: var(--text-on-dark-muted); font-size: var(--fs-small); letter-spacing: 0.04em; text-transform: uppercase; }
+/* Editorial Display register (project narrative, guideline §3.2) —
+   fixed rem, no fluid vw clamp. */
+.featured-item-caption h4 { font-family: var(--font-latin); font-size: var(--fs-h1); font-weight: var(--fw-light); line-height: var(--lh-editorial); margin-bottom: var(--space-2xs); color: var(--color-on-dark); }
+.featured-item-caption .card-tag { color: var(--color-on-dark-secondary); font-size: var(--fs-caption); letter-spacing: var(--ls-caption); text-transform: uppercase; }
 
 .featured-full-bottom {
   position: absolute;
@@ -295,19 +300,19 @@
   align-items: center;
   gap: var(--space-lg);
   padding: 0 var(--gutter);
-  background: linear-gradient(180deg, rgba(11,11,10,0) 0%, rgba(11,11,10,0.55) 40%, rgba(11,11,10,0.55) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 55%) 40%, rgb(0 0 0 / 55%) 100%);
   pointer-events: none;
 }
 .featured-progress {
   flex: 1;
   height: 2px;
-  background: var(--c-line-on-dark);
+  background: var(--color-hairline-dark);
   pointer-events: none;
 }
 .featured-progress-bar {
   height: 100%;
   width: 20%;
-  background: var(--text-on-dark);
+  background: var(--color-on-dark);
   transition: transform 0.15s linear;
   transform-origin: left;
 }
@@ -316,11 +321,11 @@
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  border: 1px solid var(--c-line-on-dark);
-  color: var(--text-on-dark);
+  border: 1px solid var(--color-hairline-dark);
+  color: var(--color-on-dark);
   transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
-.featured-arrows button:hover { background: var(--text-on-dark); color: var(--c-black); border-color: var(--text-on-dark); }
+.featured-arrows button:hover { background: var(--color-on-dark); color: var(--color-surface-dark); border-color: var(--color-on-dark); }
 .featured-arrows button:disabled { opacity: 0.35; pointer-events: none; }
 
 @media (max-width: 700px) {
@@ -328,7 +333,7 @@
      toggle-only bar, but still ~70-80px) — was rendering partly behind it */
   .featured-full-top { padding: 5rem var(--space-sm) 0; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
   .featured-full-bottom { padding: 0 var(--space-sm); }
-  .featured-item-caption h4 { font-size: 1.1rem; }
+  .featured-item-caption h4 { font-size: var(--fs-h3); }
 }
 
 /* ---- Client wall ---- */

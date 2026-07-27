@@ -18,13 +18,13 @@
 }
 
 .section--tight { padding-block: var(--space-xl); }
-.section--dark { background: var(--bg-dark); color: var(--text-on-dark); }
+.section--dark { background: var(--color-surface-dark); color: var(--color-on-dark-body); }
 /* base.css pins h1-h6 to the light-page heading color; an explicit
    override here is required to win back on-dark headings inside a
    dark panel (inherited color never beats an explicit rule). */
 .section--dark h1, .section--dark h2, .section--dark h3,
-.section--dark h4, .section--dark h5, .section--dark h6 { color: var(--text-on-dark); }
-.section--panel { background: var(--bg-panel); }
+.section--dark h4, .section--dark h5, .section--dark h6 { color: var(--color-on-dark); }
+.section--panel { background: var(--color-surface); }
 
 .section-head {
   display: flex;

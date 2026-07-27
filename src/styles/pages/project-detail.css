@@ -5,23 +5,23 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  color: var(--c-offwhite);
+  color: var(--color-on-dark);
 }
 .pd-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pd-hero::after {
   content: "";
   position: absolute; inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(11,11,10,0.05) 0%, rgba(11,11,10,0.75) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 75%) 100%);
 }
 /* z-index:2 is load-bearing: ::after is generated content, which paints
    after (on top of) real DOM siblings like this body — without an
    explicit stack order the gradient meant to darken the photo behind
    the title was instead darkening the title itself. */
 .pd-hero-body { position: relative; z-index: 2; padding-bottom: var(--space-xl); }
-.pd-hero-body .eyebrow { color: var(--text-on-dark-muted); }
-.pd-hero-body .eyebrow::before { background: var(--c-accent); }
-.pd-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--text-on-dark); }
+.pd-hero-body .eyebrow { color: var(--color-on-dark-secondary); }
+.pd-hero-body .eyebrow::before { background: var(--color-on-dark); }
+.pd-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
 
 /* Breadcrumb — sits above the Overview grid, a small navigation aid
    more common on premium project/portfolio pages than a bare title. */
@@ -30,13 +30,13 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-2xs);
-  font-size: var(--fs-small);
-  color: var(--text-muted);
+  font-size: var(--fs-caption);
+  color: var(--color-ink-secondary);
   margin-bottom: var(--space-xl);
 }
-.pd-breadcrumb a { color: var(--text-muted); transition: color var(--dur-fast) var(--ease-out); }
-.pd-breadcrumb a:hover { color: var(--text-primary); }
-.pd-breadcrumb .is-current { color: var(--text-body); }
+.pd-breadcrumb a { color: var(--color-ink-secondary); transition: color var(--dur-fast) var(--ease-out); }
+.pd-breadcrumb a:hover { color: var(--color-ink); }
+.pd-breadcrumb .is-current { color: var(--color-ink); }
 
 /* Section labels (Overview / Project Data / Gallery / Related Projects)
    sized up and colored like headings rather than the muted small-caps
@@ -44,18 +44,18 @@
    titles on this page, not secondary metadata. */
 .pd-label {
   font-size: 0.9375rem;
-  color: var(--text-primary);
+  color: var(--color-ink);
 }
 
 .pd-overview { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
-.pd-overview .lead { color: var(--text-body); max-width: 70ch; }
+.pd-overview .lead { color: var(--color-ink); max-width: 70ch; }
 
 /* Specs sidebar as a defined bordered panel rather than a bare list —
    .pd-specs/.pd-spec-row themselves stay untouched since About's intro
    section also uses them (plain, no panel). */
 .pd-specs-panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--c-line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
 }
@@ -97,8 +97,8 @@
   border-radius: var(--radius-md);
   transition: background var(--dur-fast) var(--ease-out);
 }
-.pd-nav-link:hover { background: rgba(245, 242, 234, 0.06); }
-.pd-nav-link--next { flex-direction: row-reverse; text-align: right; }
+.pd-nav-link:hover { background: rgb(255 255 255 / 6%); }
+.pd-nav-link--next { flex-direction: row-reverse; text-align: end; }
 .pd-nav-thumb {
   flex: 0 0 auto;
   width: 84px;
@@ -110,23 +110,28 @@
 .pd-nav-link:hover .pd-nav-thumb img { filter: brightness(1); transform: scale(1.05); }
 .pd-nav-text { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; }
 .pd-nav-link--next .pd-nav-text { align-items: flex-end; }
-.pd-nav .eyebrow { font-size: 11px; }
+.pd-nav .eyebrow { font-size: var(--fs-caption); }
+/* No H4 role in the locked scale — Body size, Semibold (same
+   substitution as base.css's h4). */
 .pd-nav-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-h4);
-  color: var(--text-on-dark);
-  transition: color var(--dur-fast) var(--ease-out);
+  font-family: var(--font-latin);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--color-on-dark);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+  text-decoration: underline;
+  text-decoration-color: transparent;
 }
-.pd-nav-link:hover .pd-nav-title { color: var(--c-accent); }
+.pd-nav-link:hover .pd-nav-title { text-decoration-color: currentColor; }
 .pd-nav-category {
-  font-size: var(--fs-small);
-  color: var(--text-on-dark-muted);
+  font-size: var(--fs-caption);
+  color: var(--color-on-dark-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-caption);
 }
 
 @media (max-width: 700px) {
   .pd-nav { flex-direction: column; }
-  .pd-nav-link, .pd-nav-link--next { max-width: 100%; flex-direction: row; text-align: left; }
+  .pd-nav-link, .pd-nav-link--next { max-width: 100%; flex-direction: row; text-align: start; }
   .pd-nav-link--next .pd-nav-text { align-items: flex-start; }
 }

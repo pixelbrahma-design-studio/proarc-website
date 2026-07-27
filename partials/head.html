@@ -13,11 +13,17 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Interim: hot-linked, per docs/ProArc-Typography-Guideline-v1.1.md ("Loading rules").
+     Self-hosted WOFF2 for both families is the specified end state; revisit once the
+     fonts are downloaded and subset (SETUP-FOR-DEVELOPER.md step 2). -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="{{assetPrefix}}css/tokens.css">
-<link rel="stylesheet" href="{{assetPrefix}}css/base.css">
-<link rel="stylesheet" href="{{assetPrefix}}css/layout.css">
-<link rel="stylesheet" href="{{assetPrefix}}css/components.css">
-<link rel="stylesheet" href="{{assetPrefix}}css/animations.css">
-{{#if pageStylesheet}}<link rel="stylesheet" href="{{assetPrefix}}css/pages/{{pageStylesheet}}.css">{{/if}}
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/tokens.css">
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/tokens-layout.css">
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/base.css">
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/layout.css">
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/components.css">
+<link rel="stylesheet" href="{{assetPrefix}}src/styles/animations.css">
+{{#if pageStylesheet}}<link rel="stylesheet" href="{{assetPrefix}}src/styles/pages/{{pageStylesheet}}.css">{{/if}}

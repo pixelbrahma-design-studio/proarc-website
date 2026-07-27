@@ -1,0 +1,70 @@
+/* ---- Numbered contact method list — echoes the same ghost-numeral
+   device used by .alt-row/.icon-card .num (components.css): hairline
+   fill + ink stroke, no hue. ------------------------------------------ */
+.contact-method {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding-block: var(--space-lg);
+  border-top: 1px solid var(--color-hairline);
+  transition: padding-inline-start var(--dur-fast) var(--ease-out);
+}
+.contact-method:first-child { border-top: none; padding-top: 0; }
+.contact-method:hover { padding-inline-start: 4px; }
+.contact-method .num {
+  flex: 0 0 auto;
+  width: 2.2ch;
+  font-family: var(--font-latin);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--color-hairline);
+  -webkit-text-stroke: 1px var(--color-ink);
+}
+.contact-method-label {
+  display: block;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-caption);
+  text-transform: uppercase;
+  color: var(--color-ink-secondary);
+  margin-bottom: 4px;
+}
+.contact-method-value { font-size: var(--fs-body); color: var(--color-ink); }
+.contact-method-value a { transition: color var(--dur-fast) var(--ease-out); }
+.contact-method-value a:hover { color: var(--color-ink-secondary); }
+
+#contact-form.form-panel { padding: 45px; }
+
+.social-row { display: flex; gap: var(--space-md); margin-top: var(--space-lg); }
+.social-row a { font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: var(--ls-caption); border-bottom: 1px solid var(--color-hairline); padding-bottom: 2px; }
+.social-row a:hover { border-color: var(--color-ink); }
+
+/* ---- Studio image-band caption — address + directions link sitting
+   under the full-bleed reception photo, in the same "small caps label
+   + underlined link" language as .social-row. ------------------------ */
+.studio-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.studio-caption span { font-size: var(--fs-caption); color: var(--color-ink-secondary); }
+.studio-caption a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caption);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-hairline);
+  padding-bottom: 2px;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.studio-caption a:hover { border-color: var(--color-ink); color: var(--color-ink-secondary); }
+
+@media (max-width: 640px) {
+  .studio-caption { flex-direction: column; align-items: flex-start; }
+}
