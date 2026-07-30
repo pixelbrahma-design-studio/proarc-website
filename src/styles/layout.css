@@ -35,6 +35,9 @@
 .section--major:last-child { padding-bottom: calc(var(--gap-section) - var(--space-2xl)); }
 
 .section--tight { padding-block: var(--space-xl); }
+/* Repeated inline on three "trust strip" sections directly under a page
+   hero (contact/services/testimonials) — task 4.6 inline-style cleanup. */
+.section--flush-bottom { padding-bottom: 0; }
 .section--dark { background: var(--color-surface-dark); color: var(--color-on-dark-body); }
 /* base.css pins h1-h6 to the light-page heading color; an explicit
    override here is required to win back on-dark headings inside a

@@ -1,0 +1,6 @@
+/* ---- "What our clients say" heading (task 4.6 inline-style cleanup) ---- */
+.testimonial-heading-wrap { text-align: center; margin-bottom: var(--space-2xs); }
+
+/* ---- Head Office CTA (task 4.6 inline-style cleanup) ---- */
+.cta-heading { max-width: 24ch; }
+.cta-lead { margin-top: var(--space-md); max-width: 52ch; margin-inline: auto; color: var(--color-on-dark-secondary); }

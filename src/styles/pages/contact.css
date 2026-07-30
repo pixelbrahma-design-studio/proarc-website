@@ -68,3 +68,14 @@
 @media (max-width: 640px) {
   .studio-caption { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---- Section-head H2 gap from its eyebrow (task 4.6 inline-style
+   cleanup) — this page's three section-head H2s all repeat it. ---- */
+.section-head h2 { margin-top: var(--space-sm); }
+
+/* ---- Trust-strip supporting text (task 4.6 inline-style cleanup) ---- */
+.contact-trust-text { margin-top: var(--space-2xs); }
+
+/* ---- Two-up form row: 0 row-gap avoids doubling up with each
+   .form-field's own margin-bottom (task 4.6 inline-style cleanup) ---- */
+.form-row { gap: 0 var(--space-md); }

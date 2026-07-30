@@ -28,7 +28,7 @@
           {{#each descriptionParagraphs}}<p class="lead" data-reveal>{{this}}</p>{{/each}}
         </div>
         <aside class="pd-specs-panel" data-reveal data-reveal-delay="0.1">
-          <span class="eyebrow pd-label" style="margin-bottom:var(--space-md); display:inline-flex;">Project Data</span>
+          <span class="eyebrow pd-label">Project Data</span>
           <div class="pd-specs">
             {{#each specs}}<div class="pd-spec-row"><span>{{label}}</span><span>{{value}}</span></div>{{/each}}
           </div>
@@ -40,7 +40,7 @@
   {{#if hasGallery}}
   <section class="section section--panel">
     <div class="container">
-      <span class="eyebrow pd-label" data-reveal style="margin-bottom:var(--space-lg); display:inline-flex;">Gallery</span>
+      <span class="eyebrow pd-label pd-label--gallery" data-reveal>Gallery</span>
       <div class="pd-gallery" data-reveal-stagger>
         {{#each galleryItems}}<a href="{{assetPrefix}}{{this}}" target="_blank" rel="noopener" data-reveal><img src="{{assetPrefix}}{{this}}" alt="{{title}}" loading="lazy"></a>{{/each}}
       </div>
@@ -52,7 +52,7 @@
   <section class="section">
     <div class="container">
       <div class="section-head" data-reveal>
-        <h2>Related Projects</h2>
+        <h2>Related projects</h2>
       </div>
       <div class="grid grid-3" data-reveal-stagger>
         {{#each relatedProjects}}
@@ -72,7 +72,7 @@
       <a href="{{assetPrefix}}projects/{{prevProject.slug}}.html" class="pd-nav-link">
         <div class="pd-nav-thumb"><img src="{{assetPrefix}}{{prevProject.thumb}}" alt="" loading="lazy"></div>
         <div class="pd-nav-text">
-          <span class="eyebrow" style="color:var(--text-on-dark-muted);">&larr; Previous</span>
+          <span class="eyebrow">&larr; Previous</span>
           <span class="pd-nav-title">{{prevProject.title}}</span>
           <span class="pd-nav-category">{{prevProject.category}}</span>
         </div>
@@ -81,7 +81,7 @@
       {{#if nextProject}}
       <a href="{{assetPrefix}}projects/{{nextProject.slug}}.html" class="pd-nav-link pd-nav-link--next">
         <div class="pd-nav-text">
-          <span class="eyebrow" style="color:var(--text-on-dark-muted);">Next &rarr;</span>
+          <span class="eyebrow">Next &rarr;</span>
           <span class="pd-nav-title">{{nextProject.title}}</span>
           <span class="pd-nav-category">{{nextProject.category}}</span>
         </div>

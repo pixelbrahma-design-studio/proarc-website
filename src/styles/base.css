@@ -110,6 +110,9 @@ html:lang(ar) .eyebrow { text-transform: none; }
 
 html:lang(ar) .lead { font-weight: var(--fw-regular); } /* Light is never used in Arabic, §6.4 */
 
+/* An eyebrow directly followed by a lead paragraph (task 4.6 inline-style cleanup). */
+.eyebrow + .lead { margin-top: var(--space-md); }
+
 ::selection { background: var(--color-surface-dark); color: var(--color-on-dark); }
 
 :focus-visible {

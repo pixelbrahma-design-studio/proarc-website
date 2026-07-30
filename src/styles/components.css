@@ -38,6 +38,20 @@
 .btn-on-dark:hover { background: var(--color-on-dark); color: var(--color-surface-dark); }
 
 .btn-arrow { transition: transform var(--dur-fast) var(--ease-out); display: inline-block; }
+
+/* Repeated inline across closing-CTA sections and standalone buttons —
+   task 4.6 inline-style cleanup. */
+.cta-action { margin-top: var(--space-lg); }
+
+/* Closing-CTA sections (home/about/services/testimonials): centered
+   statement heading + button. Default measure (20ch) covers home and
+   about; services/testimonials override in their own page stylesheet. */
+.cta-block { text-align: center; }
+.cta-heading { margin-inline: auto; max-width: 20ch; }
+
+/* Underlined inline text link inside a lead paragraph (e.g. "View All
+   Services →") — task 4.6 inline-style cleanup. */
+.text-link { text-decoration: underline; text-underline-offset: 3px; }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
 /* ---- Header / Nav ------------------------------------------- */
@@ -1118,12 +1132,19 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
    and §3.9's exception calls for pure #FFFFFF there, never a tint. */
 .page-hero-body .eyebrow {
     color: var(--color-on-dark);
+    margin-bottom: var(--space-sm);
 }
 .page-hero-body .eyebrow::before {
     background: var(--color-on-dark);
 }
 .page-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
 .page-hero-body .lead { color: var(--color-on-dark); margin-top: var(--space-sm); }
+
+/* Modifiers repeated identically (inline) across six interior-page
+   heroes (about/careers/contact/projects/services/testimonials) —
+   task 4.6 inline-style cleanup. */
+.page-hero--tall { height: 88svh; align-items: center; }
+.page-hero-body--flush { padding-bottom: 0; }
 
 /* ---- Forms ------------------------------------------------------- */
 .form-field { margin-bottom: var(--space-md); }
@@ -1135,6 +1156,9 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   color: var(--color-ink-secondary);
   margin-bottom: var(--space-2xs);
 }
+/* "(optional)" inside a label shouldn't inherit the uppercase transform
+   (task 4.6 inline-style cleanup; repeated on contact + careers forms). */
+.label-note { text-transform: none; }
 .form-field input, .form-field textarea, .form-field select {
   width: 100%;
   background: none;

@@ -369,5 +369,9 @@
   .services-grid { grid-template-columns: 1fr; }
 }
 
+/* ---- About strip (task 4.6 inline-style cleanup) ---- */
+.about-strip-num + .eyebrow { margin-top: var(--space-2xs); }
+.about-strip-text { margin-top: var(--space-md); max-width: 56ch; }
+
 /* ---- Client wall ---- */
 .client-intro { max-width: 60ch; }

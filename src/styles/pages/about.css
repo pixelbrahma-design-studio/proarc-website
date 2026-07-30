@@ -8,3 +8,10 @@
 .story-block { margin-top: var(--gap-component); }
 .story-prose { margin-top: var(--gap-heading); }
 .story-specs { margin-top: var(--gap-component); max-width: 640px; }
+
+/* ---- Task 4.6 inline-style cleanup ---- */
+.page-hero-body .lead + .lead { margin-top: var(--space-md); }
+.image-duo { gap: 2px; }
+.image-duo > div { aspect-ratio: 6 / 5; overflow: hidden; }
+.mission-vision p { margin-top: var(--space-md); }
+.awards-box { aspect-ratio: 16 / 4; }

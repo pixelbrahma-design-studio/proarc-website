@@ -55,7 +55,7 @@
     "description": "Feedback from the clients Proarc has worked alongside since 2006, across commercial, educational, retail and residential projects in Ajman and the wider UAE.",
     "canonical": "https://proarc.ae/testimonials.html",
     "ogImage": "images/projects/cityuniversity/hero-md.webp",
-    "pageStylesheet": "",
+    "pageStylesheet": "testimonials",
     "pageScript": "testimonials"
   },
   "careers": {
@@ -65,7 +65,7 @@
     "description": "Join Proarc's in-house team of architects, engineers, MEP engineers and site engineers shaping Ajman's skyline since 2006.",
     "canonical": "https://proarc.ae/careers.html",
     "ogImage": "images/projects/rholding/hero-md.webp",
-    "pageStylesheet": "",
+    "pageStylesheet": "careers",
     "pageScript": "careers"
   }
 }

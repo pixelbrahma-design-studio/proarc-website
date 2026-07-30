@@ -54,6 +54,11 @@
 
 .pd-overview { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
 .pd-overview .lead { color: var(--color-ink); max-width: 70ch; }
+/* "Overview" label's gap to its first paragraph comes from .stack-md;
+   these two labels sit outside a stack and need their own gap
+   (task 4.6 inline-style cleanup). */
+.pd-specs-panel .pd-label { margin-bottom: var(--space-md); }
+.pd-label--gallery { margin-bottom: var(--space-lg); }
 
 /* Specs sidebar as a defined bordered panel rather than a bare list —
    .pd-specs/.pd-spec-row themselves stay untouched since About's intro
@@ -115,7 +120,10 @@
 .pd-nav-link:hover .pd-nav-thumb img { filter: brightness(1); transform: scale(1.05); }
 .pd-nav-text { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; }
 .pd-nav-link--next .pd-nav-text { align-items: flex-end; }
-.pd-nav .eyebrow { font-size: var(--fs-caption); }
+/* .pd-nav sits in a section--dark; secondary grey on this flat dark
+   surface measures 8.63:1 (fine — this isn't the over-photography case
+   from Phase 1). Was the undefined var(--text-on-dark-muted) token. */
+.pd-nav .eyebrow { font-size: var(--fs-caption); color: var(--color-on-dark-secondary); }
 /* No H4 role in the locked scale — Body size, Semibold (same
    substitution as base.css's h4). */
 .pd-nav-title {

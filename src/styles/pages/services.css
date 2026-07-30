@@ -1,2 +1,8 @@
-/* Services page composes the shared .alt-row component (components.css)
-   — no page-specific overrides needed yet. Kept as a hook for future additions. */
+/* ---- Discipline copy (task 4.6 inline-style cleanup) ---- */
+.alt-row .copy-cell p { margin-top: var(--space-sm); }
+
+/* ---- "View All Projects" action below the project cards ---- */
+.view-all-action { margin-top: var(--space-xl); text-align: center; }
+
+/* ---- Closing CTA (task 4.6 inline-style cleanup) ---- */
+.cta-heading { max-width: 22ch; }
