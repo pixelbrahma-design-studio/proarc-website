@@ -136,25 +136,20 @@ body.nav-open .site-header .brand-logo { filter: none; }
    there (e.g. covering a client-logo card once you scrolled to that
    section). Anchoring it just below the header keeps it clear of page
    content while still reading as "left-side" navigation. --- */
-.nav-toggle-wrap {
+/* One pill (icon + label together) — guideline §4.7: the trigger was
+   previously two stacked pills (.nav-edge-toggle + a separate
+   .nav-toggle-label beneath it via .nav-toggle-wrap); consolidated into
+   a single black pill containing both. */
+.nav-edge-toggle {
   position: fixed;
   top: calc(var(--space-lg) + 28px);
   left: var(--space-sm);
   z-index: calc(var(--z-overlay) + 2);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-}
-
-.nav-edge-toggle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 44px;
-  height: 64px;
+  gap: 10px;
+  height: 44px;
+  padding-inline: 14px;
   border-radius: 999px;
   background: var(--color-surface-dark);
   transition: background var(--dur-fast) var(--ease-out);
@@ -162,7 +157,16 @@ body.nav-open .site-header .brand-logo { filter: none; }
 /* Was an accent-fill hover; a lightness shift (ink-secondary grey) reads
    as clearly interactive without introducing a hue. */
 .nav-edge-toggle:hover { background: var(--color-ink-secondary); }
-.nav-edge-toggle span {
+.nav-edge-toggle-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 20px;
+  flex: none;
+}
+.nav-edge-toggle-icon span {
   display: block;
   width: 20px;
   height: 2px;
@@ -170,9 +174,9 @@ body.nav-open .site-header .brand-logo { filter: none; }
   background: var(--color-on-dark);
   transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
-body.nav-open .nav-edge-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-body.nav-open .nav-edge-toggle span:nth-child(2) { opacity: 0; }
-body.nav-open .nav-edge-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+body.nav-open .nav-edge-toggle-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+body.nav-open .nav-edge-toggle-icon span:nth-child(2) { opacity: 0; }
+body.nav-open .nav-edge-toggle-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 .nav-toggle-label {
   font-size: var(--fs-caption);
@@ -180,20 +184,16 @@ body.nav-open .nav-edge-toggle span:nth-child(3) { transform: translateY(-8px) r
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-on-dark);
-  background: var(--color-surface-dark);
-  padding: 3px 10px;
-  border-radius: 999px;
   white-space: nowrap;
 }
 
 @media (max-width: 780px) {
   /* Top-left collides with the brand mark on narrow screens — pin it to
      the top-right corner instead (conventional mobile menu-button spot). */
-  .nav-toggle-wrap { top: var(--space-md); left: auto; right: var(--space-sm); }
+  .nav-edge-toggle { top: var(--space-md); left: auto; right: var(--space-sm); }
 }
 @media (max-width: 640px) {
-  .nav-edge-toggle { width: 38px; height: 54px; }
-  .nav-toggle-wrap { right: var(--space-xs); }
+  .nav-edge-toggle { right: var(--space-xs); padding-inline: 12px; gap: 8px; }
 }
 
 /* ---- Full-screen nav overlay ------------------------------------- */
@@ -398,6 +398,10 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
        expressible in pure CSS since both depend on sibling elements
        outside .nav-mega's own box. Values below are just the
        pre-JS/fallback state. */
+    /* No bordered/shadowed panel here (guideline §4.7) — the mega-menu
+       already sits inside the full-screen black overlay; a bordered box
+       floating on top of it read as a card inside a card. Separated
+       from the surrounding nav by space (padding) alone. */
     position: absolute;
     top: 0;
     left: calc(100% + var(--space-2xs));
@@ -408,10 +412,6 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: var(--color-surface-dark);
-    border: 1px solid var(--color-hairline-dark);
-    border-radius: var(--radius-md);
-    box-shadow: 0 24px 60px rgb(0 0 0 / 35%);
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -668,18 +668,6 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 .icon-card:hover { border-color: var(--color-ink); transform: translateY(-4px); }
-/* Ghost-numeral treatment: hairline fill + ink stroke, the same
-   monochrome device used by .alt-row/.contact-method numerals — no hue,
-   just weight of line. */
-.icon-card .num {
-  font-family: var(--font-latin);
-  font-size: var(--fs-h2);
-  font-weight: var(--fw-bold);
-  color: var(--color-hairline);
-  -webkit-text-stroke: 1px var(--color-ink);
-  display: block;
-  margin-bottom: var(--space-sm);
-}
 .icon-card h4 { margin-bottom: var(--space-2xs); }
 .icon-card p { color: var(--color-ink); font-size: var(--fs-body); line-height: 1.6; }
 
@@ -779,14 +767,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   .divided-cols > div + div { padding-inline-start: 0; border-inline-start: none; margin-top: var(--space-lg); }
 }
 
-.col-index {
-  display: block;
-  font-family: var(--font-latin);
-  font-size: var(--fs-caption);
-  letter-spacing: var(--ls-caption);
-  color: var(--color-ink-secondary);
-  margin-bottom: var(--space-sm);
-}
 .divided-cols h4 { margin-bottom: var(--space-xs); }
 
 /* ---- Hero scroll cue (About page) — a small bobbing chevron hinting
@@ -1055,17 +1035,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .alt-row:last-child { border-bottom: 1px solid var(--color-hairline); }
 .alt-row.rev { direction: rtl; }
 .alt-row.rev > * { direction: ltr; }
-/* Ghost-numeral treatment — see .icon-card .num above. */
-.alt-row .num {
-  font-family: var(--font-latin);
-  font-size: var(--fs-mega);
-  font-weight: var(--fw-bold);
-  line-height: 1;
-  color: var(--color-hairline);
-  -webkit-text-stroke: 1px var(--color-ink);
-  display: block;
-  margin-bottom: var(--space-md);
-}
 .alt-row h3 { max-width: 20ch; }
 
 .deliverables-label {

@@ -45,18 +45,20 @@
 }
 
 /* ---- Centered title block (grid row 1, fills remaining height) ---- */
+/* Left-aligned (guideline §9 rule 1) — the About hero is the model.
+   Was centered; no headline/lead/prose is ever centered. */
 .hero-center {
   position: relative;
   min-height: 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   /* biased toward the bottom of the available row (not true-center) —
      more breathing room above the title, less dead space between the
      buttons and the slide-caption/strip below */
   justify-content: flex-end;
-  text-align: center;
+  text-align: start;
   padding-inline: var(--gutter);
   padding-bottom: var(--space-lg);
   /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
@@ -80,12 +82,11 @@
   color: var(--color-on-dark);
   margin-top: var(--space-sm);
   max-width: 52ch;
-  margin-inline: auto;
 }
 
 .hero-actions {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-md);
   margin-top: var(--space-md);
   flex-wrap: wrap;
@@ -279,6 +280,8 @@
    to the very bottom. */
 .featured-full { --featured-controls-h: 76px; }
 
+/* Left-aligned (guideline §9 rule 1) — was centered; project-slide
+   captions are a headline + tag, not standalone UI. */
 .featured-item-caption {
   position: absolute;
   left: var(--space-lg);
@@ -287,8 +290,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: start;
   /* No text-shadow (Hard Rule 10) — .featured-item::after is the scrim. */
 }
 /* Editorial Display register (project narrative, guideline §3.2) —
@@ -341,6 +344,29 @@
   .featured-full-top { padding: 5rem var(--space-sm) 0; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
   .featured-full-bottom { padding: 0 var(--space-sm); }
   .featured-item-caption h4 { font-size: var(--fs-h3); }
+}
+
+/* ---- Services overview (5 disciplines, task 3.5) -------------------
+   A plain 3-column grid over 5 items leaves an empty sixth cell and
+   reads as an identical-card grid (guideline §9 rule 11). Weighted by
+   importance instead: Architecture Design and Engineering — the two
+   disciplines the practice is named for — run wider; the other three
+   run narrower. Six column-units fill exactly, no empty cell. ------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--gutter);
+}
+.services-grid .icon-card--core { grid-column: span 3; }
+.services-grid .icon-card:not(.icon-card--core) { grid-column: span 2; }
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid .icon-card--core,
+  .services-grid .icon-card:not(.icon-card--core) { grid-column: span 1; }
+}
+@media (max-width: 780px) {
+  .services-grid { grid-template-columns: 1fr; }
 }
 
 /* ---- Client wall ---- */
