@@ -662,7 +662,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 
 /* ---- Icon / service cards --------------------------------------- */
 .icon-card {
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--pad-card);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-md);
   transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);

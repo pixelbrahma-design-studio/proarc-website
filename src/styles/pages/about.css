@@ -1,3 +1,10 @@
-/* About page currently composes shared components (split, icon-card,
-   stat-row, logo-marquee) with inline utility styles — no page-specific
-   overrides needed yet. Kept as a hook for future additions. */
+/* ---- Our Story (guideline v1.2 §2.5, work order Task 2.3) --------
+   Previously grid-template-columns:1fr 2fr put the heading and two
+   narrow prose columns side by side as three near-equal columns,
+   running body copy at 32-35 characters per line — below the
+   45-character floor. The heading now sits full-width above; the two
+   prose columns each get the full half-container measure; the
+   metadata table is a separate full-width row below the prose. ---- */
+.story-block { margin-top: var(--gap-component); }
+.story-prose { margin-top: var(--gap-heading); }
+.story-specs { margin-top: var(--gap-component); max-width: 640px; }

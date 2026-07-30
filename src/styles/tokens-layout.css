@@ -35,4 +35,52 @@
   --z-nav: 210;
   --z-overlay: 200;
   --z-cursor: 300;
+
+  /* ---- v1.2 §2.2 semantic gaps — new code uses these, not the legacy
+     --space-* steps above. --space-xs/xl/2xl collide with v1.2's own
+     names at different values (see docs/ProArc-Work-Order-R1-FINAL.md
+     Phase 2); this block adds only the collision-free v1.2 names. ---- */
+  --gap-inline:        12px;
+  --gap-tight:         16px;
+  --gap-block:         24px;
+  --gap-heading:       64px;
+  --gap-component:     64px;
+  --gap-section:      200px;
+  --gap-section-major:280px;
+
+  /* ---- v1.2 §2.4 layout frame ---- */
+  --container-max:  1120px;
+  --gutter-desktop:   80px;
+  --gutter-tablet:    40px;
+  --gutter-mobile:    20px;
+
+  /* ---- v1.2 §2.6 component padding ---- */
+  --pad-card:          40px;
+  --pad-overlay-panel: 48px;
+  --pad-table-row:     12px;
+}
+
+/* v1.2 §2.3 responsive spacing — same breakpoints as tokens.css's own
+   tablet/mobile steps. Only the --gap- and --pad- aliases move; the
+   legacy --space-* scale above is untouched in this pass. */
+@media (max-width: 1023px) {
+  :root {
+    --gap-section:       144px;
+    --gap-section-major: 200px;
+    --gap-heading:        40px;
+    --gap-component:      40px;
+    --pad-card:           32px;
+    --pad-overlay-panel:  32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gap-section:        96px;
+    --gap-section-major: 144px;
+    --gap-heading:        24px;
+    --gap-component:      40px;
+    --pad-card:           24px;
+    --pad-overlay-panel:  24px;
+  }
 }

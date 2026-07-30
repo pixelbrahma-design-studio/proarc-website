@@ -2,20 +2,37 @@
    Layout — containers, section rhythm, grid utilities.
    =========================================================== */
 
+/* v1.2 §2.4: container narrowed from 1440px/clamp gutters to a fixed
+   1120px max-width with explicit gutter minimums — the build measured
+   1301px/177px gutters, the tightest thing on the page. Full-bleed
+   sections (heroes, sliders, dark bands) stay 100% width; only inner
+   text wrappers use .container. */
 .container {
   width: 100%;
-  max-width: var(--container);
+  max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-desktop);
 }
 
 .container--narrow {
   max-width: var(--container-narrow);
 }
 
+/* v1.2 §2.2: section separation now comes from the semantic --gap-section
+   alias (200px total between two sections) rather than the old flat
+   --space-section (96px each side, ~192px measured total — already
+   close; this just standardises on the token). */
 .section {
-  padding-block: var(--space-section);
+  padding-block: calc(var(--gap-section) / 2);
 }
+
+/* Statement sections only (guideline §2.2): mission/vision, closing
+   CTAs. --last-child sections (the closing CTAs, which sit directly
+   against the footer) get their bottom padding solved so the CTA's own
+   padding plus the footer's own top padding nets exactly --gap-section
+   (200px) — the review measured ~250px of dead space here. */
+.section--major { padding-block: calc(var(--gap-section-major) / 2); }
+.section--major:last-child { padding-bottom: calc(var(--gap-section) - var(--space-2xl)); }
 
 .section--tight { padding-block: var(--space-xl); }
 .section--dark { background: var(--color-surface-dark); color: var(--color-on-dark-body); }
@@ -70,6 +87,7 @@
 
 @media (max-width: 1024px) {
   .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .container { padding-inline: var(--gutter-tablet); }
 }
 
 @media (max-width: 780px) {
@@ -79,4 +97,5 @@
     direction: ltr;
   }
   .section-head { align-items: flex-start; }
+  .container { padding-inline: var(--gutter-mobile); }
 }
