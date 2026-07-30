@@ -7,6 +7,7 @@
   var header = document.querySelector("[data-nav]");
   var toggle = document.getElementById("nav-toggle");
   var toggleLabel = document.getElementById("nav-toggle-label");
+  var overlay = document.getElementById("nav-overlay");
   var megaWrap = document.querySelector(".nav-mega");
   var megaTrigger = document.getElementById("nav-mega-trigger");
 
@@ -42,6 +43,7 @@
   }
 
   function setOpen(isOpen) {
+    var wasOpen = document.body.classList.contains("nav-open");
     document.body.classList.toggle("nav-open", isOpen);
     if (toggle) toggle.setAttribute("aria-expanded", String(isOpen));
     if (toggleLabel) toggleLabel.textContent = isOpen ? "Close" : "Menu";
@@ -49,8 +51,46 @@
     if (window.__lenis) {
       if (isOpen) window.__lenis.stop(); else window.__lenis.start();
     }
-    if (!isOpen) closeMega();
+    if (!isOpen) {
+      closeMega();
+      // Escape and the toggle button itself both close the overlay this
+      // way — clicking a nav link also routes through here, but the
+      // page navigation that follows makes the focus move moot there.
+      if (wasOpen && toggle) toggle.focus();
+    }
   }
+
+  // Focus trap while the overlay is open (guideline §4.7): Escape closes
+  // it, and Tab/Shift+Tab cycle within the overlay's own focusable
+  // elements instead of escaping into the page behind it.
+  function getOverlayFocusable() {
+    if (!overlay) return [];
+    return Array.prototype.slice
+      .call(overlay.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ))
+      .filter(function (el) { return el.offsetParent !== null; });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (!document.body.classList.contains("nav-open")) return;
+    if (e.key === "Escape" || e.key === "Esc") {
+      setOpen(false);
+      return;
+    }
+    if (e.key !== "Tab") return;
+    var focusable = getOverlayFocusable();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   if (toggle) {
     toggle.addEventListener("click", function () {

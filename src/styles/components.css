@@ -783,6 +783,32 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 
 .divided-cols h4 { margin-bottom: var(--space-xs); }
 
+/* ---- 2-up + a full-width third item (Phase 6 verification finding) ----
+   Four "short labelled item" 3-up blocks (About Why Proarc, Careers Why
+   Work With Us, Contact quick facts, Testimonials trust strip) measured
+   22-29ch against the guideline's 32ch floor for that exception (§2.5
+   rule 3) once the container narrowed to 1120px in Phase 2. Reflowed to
+   two columns plus a full-width third row instead of a third column. */
+.grid-2plus1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+}
+.grid-2plus1 > :nth-child(2) {
+  padding-inline-start: var(--space-lg);
+  border-inline-start: 1px solid var(--color-hairline);
+}
+.grid-2plus1 > :nth-child(3) {
+  grid-column: 1 / -1;
+  padding-top: var(--space-lg);
+  margin-top: var(--space-lg);
+  border-top: 1px solid var(--color-hairline);
+}
+@media (max-width: 780px) {
+  .grid-2plus1 { grid-template-columns: 1fr; }
+  .grid-2plus1 > :nth-child(2) { padding-inline-start: 0; border-inline-start: none; margin-top: var(--space-lg); }
+}
+
 /* ---- Hero scroll cue (About page) — a small bobbing chevron hinting
    there's more below a tall, mostly-empty opening section. */
 .hero-scroll-cue {
