@@ -60,3 +60,49 @@ Run through this list and state the result:
 ## Asking rather than guessing
 
 If a design need is not covered by the guideline, do not improvise a value. Say what is missing and ask. The specification is versioned; extending it is a deliberate act, not a build-time decision.
+
+## Typography and layout — v1.2 additions
+
+The authoritative spec is now `docs/ProArc-Typography-Guideline-v1.2.md` (supersedes v1.1; v1.1
+stays in docs/ for history). Everything in the v1.1 rules above still holds. New in v1.2:
+
+### Spacing — use the semantic aliases, never raw values
+
+`--gap-inline` (12) · `--gap-tight` (16) · `--gap-block` (24) · `--gap-heading` (64) ·
+`--gap-component` (64) · `--gap-section` (200) · `--gap-section-major` (280 — statement
+sections only: mission/vision, closing CTA. Do not inflate every gap).
+Container: `--container-max` (1120px), gutters `--gutter-desktop/tablet/mobile` (80/40/20).
+Padding: `--pad-card` (40), `--pad-overlay-panel` (48), `--pad-table-row` (12).
+The legacy `--space-*` scale in tokens-layout.css pre-dates v1.2 — do not extend its usage;
+new code uses the aliases above. Migration of old usages is a planned, separate task.
+
+### Measure
+
+Running prose sits between 45 and 68 characters per line. Below 45, reduce the column count,
+not the type size. Maximum two prose columns on desktop; three-up only for labelled items
+under 25 words at a 32ch minimum.
+
+### Third-party logos (§1.5a) — the second colour exception
+
+Reproduce client marks exactly as supplied: no recolour, greyscale, invert, or hover-to-colour.
+Never typeset a client's name in place of their mark — obtain the asset or omit the client.
+All marks on white, 32px optical height, uniform container treatment, and no mark within
+96px of `--color-signal`.
+
+### Desktop navigation (§4.7)
+
+Full-screen overlay, no horizontal top bar. One black pill trigger (icon + 12px uppercase
+label in the same pill), hit target ≥44×44. Nav items 52px, 300 rest / 700 active, weight
+plus brightness only. No bordered container around the mega-menu grid. Focus trapped while
+open, restored on close, Escape closes, `aria-current="page"` on the active item.
+
+### Additional prohibitions
+
+No numbered markers on non-sequences. No grids of identical cards. No inline `style=""`
+attributes in pages-src/ or partials/ — every styled value lives in `src/styles/` where
+stylelint can see it. No border-radius (no radius tokens exist in the system).
+
+### Build discipline
+
+Root pages and projects/ pages are build outputs. Edit pages-src/, partials/, src/styles/,
+data/ only, then run `node build/inject-partials.js && npm run build:pages`.
