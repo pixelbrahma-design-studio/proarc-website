@@ -8,7 +8,6 @@
 
 <button class="nav-edge-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
   <span class="nav-edge-toggle-icon"><span></span><span></span><span></span></span>
-  <span class="nav-toggle-label" id="nav-toggle-label">Menu</span>
 </button>
 
 <div class="nav-overlay" id="nav-overlay">
@@ -20,60 +19,7 @@
           <a href="{{assetPrefix}}index.html" id="nav-home-link" class="{{navActiveHome}}"><span>Home</span></a>
           <a href="{{assetPrefix}}about.html" class="{{navActiveAbout}}"><span>About</span></a>
           <a href="{{assetPrefix}}services.html" class="{{navActiveServices}}"><span>Services</span></a>
-
-          <div class="nav-mega">
-            <button type="button" class="nav-mega-trigger {{navActiveProjects}}" id="nav-mega-trigger" aria-expanded="false" aria-controls="nav-mega-panel">
-              <span>Projects</span>
-            </button>
-            <div class="nav-mega-panel" id="nav-mega-panel">
-              <div class="nav-mega-grid">
-                <a href="{{assetPrefix}}projects/azhagarden.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/azhagarden/thumb.webp" alt="" loading="lazy">
-                  <span>Azha Garden Residence</span>
-                </a>
-                <a href="{{assetPrefix}}projects/one-678.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/one-678/thumb.webp" alt="" loading="lazy">
-                  <span>One 678</span>
-                </a>
-                <a href="{{assetPrefix}}projects/ajmanbank.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/ajmanbank/thumb.webp" alt="" loading="lazy">
-                  <span>Ajman Bank Headquarters</span>
-                </a>
-                <a href="{{assetPrefix}}projects/citymalluaq.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/citymalluaq/thumb.webp" alt="" loading="lazy">
-                  <span>City Mall, Umm Al Quwain</span>
-                </a>
-                <a href="{{assetPrefix}}projects/blacksquare.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/blacksquare/thumb.webp" alt="" loading="lazy">
-                  <span>The Black Square</span>
-                </a>
-                <a href="{{assetPrefix}}projects/cityuniversity.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/cityuniversity/thumb.webp" alt="" loading="lazy">
-                  <span>City University Campus</span>
-                </a>
-                <a href="{{assetPrefix}}projects/zamzam-tower.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/zamzam-tower/thumb.webp" alt="" loading="lazy">
-                  <span>Zamzam Tower</span>
-                </a>
-                <a href="{{assetPrefix}}projects/seasidehills.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/seasidehills/thumb.webp" alt="" loading="lazy">
-                  <span>Seaside Hills Residence</span>
-                </a>
-                <a href="{{assetPrefix}}projects/rosetower.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/rosetower/thumb.webp" alt="" loading="lazy">
-                  <span>Rose Tower</span>
-                </a>
-                <a href="{{assetPrefix}}projects/citylifealtallah.html" class="nav-mega-item">
-                  <img src="{{assetPrefix}}images/projects/citylifealtallah/thumb.webp" alt="" loading="lazy">
-                  <span>City Life, Al Tallah</span>
-                </a>
-              </div>
-              <a href="{{assetPrefix}}projects.html" class="nav-mega-viewall">View All 47 Projects <span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="nav-links-col">
+          <a href="{{assetPrefix}}projects.html" class="{{navActiveProjects}}"><span>Projects</span></a>
           <a href="{{assetPrefix}}testimonials.html" class="{{navActiveTestimonials}}"><span>Testimonials</span></a>
           <a href="{{assetPrefix}}careers.html" class="{{navActiveCareers}}"><span>Careers</span></a>
           <a href="{{assetPrefix}}contact.html" class="{{navActiveContact}}"><span>Contact</span></a>
@@ -81,24 +27,30 @@
       </nav>
 
       <div class="nav-overlay-side">
-        <span class="eyebrow">Contact</span>
-        <p class="nav-overlay-tagline">Love to discuss something? Feel free to reach out to us by phone, or drop us a line.</p>
-        <div class="nav-overlay-contact">
-          <a href="tel:+97167446633">+971 6 744 6633</a>
-          <a href="mailto:info@proarc.ae">info@proarc.ae</a>
+        <div class="nav-overlay-side-top">
+          <img src="{{assetPrefix}}images/ui/logo-mark.webp" alt="Proarc" class="nav-overlay-logo">
+          <span class="nav-overlay-side-label">Contact</span>
+          <span class="nav-overlay-address">13003, Ajman, United Arab Emirates</span>
         </div>
-        <span class="nav-overlay-address">13003, Ajman, UAE</span>
-        <a href="{{assetPrefix}}contact.html" class="btn btn-on-dark cta-action">Get in Touch <span class="btn-arrow">→</span></a>
-      </div>
-    </div>
 
-    <div class="nav-overlay-bottom">
-      <div class="nav-overlay-social">
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-        <a href="#">Twitter / X</a>
+        <div class="nav-overlay-side-bottom">
+          <div class="nav-overlay-bottom-group">
+            <span class="nav-overlay-bottom-label">Careers</span>
+            <a href="{{assetPrefix}}careers.html">Current Openings</a>
+          </div>
+          <div class="nav-overlay-bottom-group">
+            <span class="nav-overlay-bottom-label">General Enquiries</span>
+            <a href="mailto:info@proarc.ae">info@proarc.ae</a>
+          </div>
+
+          <div class="nav-overlay-social">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter / X</a>
+          </div>
+          <span class="nav-overlay-legal">© 2026 Proarc. All Rights Reserved.</span>
+        </div>
       </div>
-      <span class="nav-overlay-legal">© 2026 Proarc. All Rights Reserved.</span>
     </div>
 
   </div>

@@ -23,11 +23,9 @@
   grid.insertAdjacentElement("afterend", loadMoreBtn);
 
   function cardHtml(p) {
-    var statusBadge = p.status ? '<span class="card-status">' + p.status + "</span>" : "";
     return (
       '<a href="projects/' + p.slug + '.html" class="card project-card">' +
       '<div class="card-media aspect-card">' +
-      statusBadge +
       '<img class="img-cover" src="' + p.thumb + '" alt="' + p.title + '" loading="lazy">' +
       "</div>" +
       '<div class="card-body"><h4>' + p.title + "</h4>" +

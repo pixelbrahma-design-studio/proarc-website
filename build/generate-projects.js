@@ -25,7 +25,6 @@ function buildSpecs(project) {
   push('Sector', project.category);
   push('Built-up Area', project.builtUpArea);
   push('Configuration', project.configuration);
-  push('Status', project.status);
   push('Completion / Year', project.year);
   return specs;
 }

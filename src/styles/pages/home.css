@@ -32,33 +32,26 @@
   transform: scale(1.08);
 }
 
-.hero-media::after {
-  content: "";
-  position: absolute; inset: 0;
-  z-index: 2;
-  /* same darkening levels as the Featured Projects slider, for a
-     consistent look between the two full-height sections — plus a
-     soft radial dip behind the centered title. */
-  background:
-    radial-gradient(60% 50% at 50% 42%, rgb(0 0 0 / 50%) 0%, rgb(0 0 0 / 0%) 70%),
-    linear-gradient(180deg, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 22%) 20%, rgb(0 0 0 / 20%) 55%, rgb(0 0 0 / 86%) 100%);
-}
+/* Scrim removed per client request. Note: the wordmark/eyebrow/hero
+   text and the on-dark contrast measurements from Phase 1 assumed this
+   scrim's darkening — removing it means contrast over a bright photo
+   is no longer guaranteed. */
 
-/* ---- Centered title block (grid row 1, fills remaining height) ---- */
-/* Centered per client request — overrides guideline §9 rule 1's
-   left-align default (approved in Phase 3 review), reverted 2026-07-30. */
+/* ---- Title block (grid row 1, fills remaining height) ---- */
+/* Left-aligned per client request (2026-07-31) — back to guideline §9
+   rule 1's default, after a brief centered detour on 2026-07-30. */
 .hero-center {
   position: relative;
   min-height: 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   /* biased toward the bottom of the available row (not true-center) —
-     more breathing room above the title, less dead space between the
-     buttons and the slide-caption/strip below */
+     more breathing room above the title, less dead space before the
+     slide-caption/strip below */
   justify-content: flex-end;
-  text-align: center;
+  text-align: start;
   padding-inline: var(--gutter);
   padding-bottom: var(--space-lg);
   /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
@@ -78,23 +71,20 @@
   color: var(--color-on-dark);
 }
 
+/* Buttons removed per client request — the lead now stands alone,
+   tucked into the bottom-right corner instead of centered under the
+   title. align-self overrides the column's centered cross-axis just
+   for this child; h1 above is unaffected and stays centered. */
 .hero-center .lead {
   color: var(--color-on-dark);
-  margin-top: var(--space-sm);
-  max-width: 52ch;
-  margin-inline: auto;
+  align-self: flex-end;
+  text-align: end;
+  margin-top: var(--space-lg);
+  max-width: 46ch;
 }
 
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-  flex-wrap: wrap;
-}
-
-@media (max-height: 760px) {
-  .hero-actions { margin-top: var(--space-sm); }
+@media (max-width: 700px) {
+  .hero-center .lead { align-self: center; text-align: center; }
 }
 
 /* ---- Hero bottom (grid row 2) — slide caption + small quick-link strip,
@@ -156,16 +146,18 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--color-hairline-dark);
+  /* White per client request — the dark hairline token was nearly
+     invisible against a bright sky photo. */
+  border-top: 1px solid var(--color-on-dark);
 }
 
 .hero-strip-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--space-sm);
   padding: var(--space-xs) var(--gutter);
-  border-inline-start: 1px solid var(--color-hairline-dark);
+  border-inline-start: 1px solid var(--color-on-dark);
   /* Pure white over the hero photo's scrim — secondary grey measured
      4.10:1 here (guideline §4.9/§6.3: over imagery, pure white only). */
   color: var(--color-on-dark);
@@ -179,7 +171,7 @@
 
 @media (max-width: 860px) {
   .hero-strip { grid-template-columns: 1fr; }
-  .hero-strip-item { border-inline-start: none; border-top: 1px solid var(--color-hairline-dark); padding-block: 8px; }
+  .hero-strip-item { border-inline-start: none; border-top: 1px solid var(--color-on-dark); padding-block: 8px; }
   .hero-strip-item:first-child { border-top: none; }
 }
 
@@ -211,9 +203,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-lg) var(--gutter) 0;
+  padding-block-start: var(--space-lg);
+  padding-inline: var(--gutter);
+  /* Boost inline-start to clear the permanent nav-edge-toggle strip —
+     see .container in layout.css for the full explanation. Flipped
+     under [dir="rtl"] below, since the toggle never moves for RTL. */
+  padding-inline-start: max(var(--gutter), var(--edge-safe));
   pointer-events: none;
   /* No text-shadow (Hard Rule 10) — sits inside the slide's own scrim. */
+}
+[dir="rtl"] .featured-full-top {
+  padding-inline-start: var(--gutter);
+  padding-inline-end: max(var(--gutter), var(--edge-safe));
 }
 .featured-full-eyebrow { color: var(--color-on-dark); pointer-events: none; }
 .featured-full-eyebrow::before { content: none; }
@@ -285,7 +286,10 @@
    captions are a headline + tag, not standalone UI. */
 .featured-item-caption {
   position: absolute;
-  left: var(--space-lg);
+  /* max(): clears the permanent nav-edge-toggle strip pinned to the
+     true physical left edge — see .container in layout.css. left/right
+     are physical already, so no [dir="rtl"] split is needed here. */
+  left: max(var(--space-lg), var(--edge-safe));
   right: var(--space-lg);
   bottom: calc(var(--featured-controls-h) + var(--space-lg));
   z-index: 1;
@@ -310,9 +314,15 @@
   display: flex;
   align-items: center;
   gap: var(--space-lg);
-  padding: 0 var(--gutter);
+  padding-inline: var(--gutter);
+  /* Same nav-edge-toggle clearance as .featured-full-top above. */
+  padding-inline-start: max(var(--gutter), var(--edge-safe));
   background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 55%) 40%, rgb(0 0 0 / 55%) 100%);
   pointer-events: none;
+}
+[dir="rtl"] .featured-full-bottom {
+  padding-inline-start: var(--gutter);
+  padding-inline-end: max(var(--gutter), var(--edge-safe));
 }
 .featured-progress {
   flex: 1;
@@ -342,8 +352,20 @@
 @media (max-width: 700px) {
   /* enough top clearance to sit fully below the fixed mobile header (a
      toggle-only bar, but still ~70-80px) — was rendering partly behind it */
-  .featured-full-top { padding: 5rem var(--space-sm) 0; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
-  .featured-full-bottom { padding: 0 var(--space-sm); }
+  .featured-full-top {
+    padding-block: 5rem 0;
+    padding-inline: var(--space-sm);
+    padding-inline-start: max(var(--space-sm), var(--edge-safe));
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+  }
+  .featured-full-bottom { padding-inline: var(--space-sm); padding-inline-start: max(var(--space-sm), var(--edge-safe)); }
+  [dir="rtl"] .featured-full-top,
+  [dir="rtl"] .featured-full-bottom {
+    padding-inline-start: var(--space-sm);
+    padding-inline-end: max(var(--space-sm), var(--edge-safe));
+  }
   .featured-item-caption h4 { font-size: var(--fs-h3); }
 }
 

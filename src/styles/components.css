@@ -93,18 +93,19 @@
   color: var(--color-ink);
 }
 
-/* the nav overlay is always solid black, regardless of scroll state —
-   force the brand wordmark back to light text so it stays legible against
-   it, and drop the scrolled header's own light backing (it'd otherwise
-   flash behind the overlay's higher z-index for one frame) */
+/* The nav overlay is now white (Benoy reference) — the header sitting
+   above it needs the scrolled/light-background treatment, not the
+   on-dark one, and drop the scrolled header's own backing (it'd
+   otherwise flash behind the overlay's higher z-index for one frame) */
 body.nav-open .site-header {
-  color: var(--color-on-dark);
+  color: var(--color-ink);
   background: transparent;
 }
 
 .site-header .container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .brand {
@@ -126,95 +127,103 @@ body.nav-open .site-header {
   z-index: calc(var(--z-overlay) + 1);
 }
 
+/* Original plain logo image, restored per client request — position
+   stays top-right (.site-header .container's justify-content:flex-end)
+   but the white-card/tagline treatment is gone. */
 .brand-logo {
   display: block;
   height: 42px;
   width: auto;
   /* the source art is light lines-on-transparent, made for dark
-     backdrops (the hero/overlay). Invert it for the scrolled header's
-     light background; force it back for the (always-dark) nav overlay
-     even if the page was already scrolled when it opened. */
+     backdrops. The overlay is only 70vw wide, so this logo (right-
+     aligned, outside the overlay's own white panel) always sits over
+     the actual page background, not the overlay — invert only for the
+     scrolled header's light background, never for nav-open by itself. */
   filter: none;
   transition: filter var(--dur-fast) var(--ease-out);
 }
 .site-header.is-scrolled .brand-logo { filter: invert(1) brightness(0.85); }
-body.nav-open .site-header .brand-logo { filter: none; }
 
-/* ---- Edge toggle — a persistent floating tab, not part of the header row,
-   always a solid filled pill so it stays legible over any background,
-   with a small "Menu" caption so it reads as clickable navigation rather
-   than a mystery icon.
-   Pinned near the top-left corner rather than the viewport's vertical
-   center — at top:50% it stayed mid-screen at every scroll position and
-   would land directly on top of whatever content happened to be centered
-   there (e.g. covering a client-logo card once you scrolled to that
-   section). Anchoring it just below the header keeps it clear of page
-   content while still reading as "left-side" navigation. --- */
-/* One pill (icon + label together) — guideline §4.7: the trigger was
-   previously two stacked pills (.nav-edge-toggle + a separate
-   .nav-toggle-label beneath it via .nav-toggle-wrap); consolidated into
-   a single black pill containing both. */
+/* ---- Edge toggle (client reference: Benoy) — a plain three-bar icon
+   on a permanent white strip (#fff background, #000 bars — always the
+   same regardless of what's behind it).
+   Vertically centered on the left edge at rest; when the overlay opens,
+   it hops to the right edge of the 70vw panel (desktop only — see the
+   min-width:900px rule below), matching the reference's open state. --- */
+/* Full-height vertical strip per client request — was a small 44x44
+   floating tile; the white background now spans the full viewport
+   height, with the icon centered inside it. */
 .nav-edge-toggle {
   position: fixed;
-  top: calc(var(--space-lg) + 28px);
-  left: var(--space-sm);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--edge-toggle-w);
   z-index: calc(var(--z-overlay) + 2);
   display: flex;
   align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding-inline: 14px;
-  border-radius: 999px;
-  background: var(--color-surface-dark);
-  transition: background var(--dur-fast) var(--ease-out);
+  justify-content: center;
+  background: var(--color-surface);
+  overflow: hidden;
+  transition: left var(--dur-fast) var(--ease-out);
 }
-/* Was an accent-fill hover; a lightness shift (ink-secondary grey) reads
-   as clearly interactive without introducing a hue. */
-.nav-edge-toggle:hover { background: var(--color-ink-secondary); }
 .nav-edge-toggle-icon {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 20px;
-  flex: none;
+  gap: 7px;
+  height: 30px;
 }
 .nav-edge-toggle-icon span {
   display: block;
-  width: 20px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--color-on-dark);
-  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
-}
-body.nav-open .nav-edge-toggle-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-body.nav-open .nav-edge-toggle-icon span:nth-child(2) { opacity: 0; }
-body.nav-open .nav-edge-toggle-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-.nav-toggle-label {
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-on-dark);
-  white-space: nowrap;
+  width: 3px;
+  height: 100%;
+  border-radius: 1px;
+  background: var(--color-ink);
 }
 
-@media (max-width: 780px) {
-  /* Top-left collides with the brand mark on narrow screens — pin it to
-     the top-right corner instead (conventional mobile menu-button spot). */
-  .nav-edge-toggle { top: var(--space-md); left: auto; right: var(--space-sm); }
+/* No hover colour/background change per client request — the wiggle
+   below is the only hover feedback. */
+
+@keyframes nav-edge-toggle-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
 }
-@media (max-width: 640px) {
-  .nav-edge-toggle { right: var(--space-xs); padding-inline: 12px; gap: 8px; }
+.nav-edge-toggle:hover .nav-edge-toggle-icon {
+  animation: nav-edge-toggle-wiggle 0.4s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-edge-toggle:hover .nav-edge-toggle-icon { animation: none; }
+}
+
+@media (min-width: 900px) {
+  /* Flush against the overlay's right edge (70vw) — no reveal-gap
+     sliver of the page behind showing through. */
+  body.nav-open .nav-edge-toggle { left: 70vw; }
 }
 
 /* ---- Full-screen nav overlay ------------------------------------- */
 .nav-overlay {
+  /* White menu per client request (Benoy reference, 2026-07-31) —
+     every rule below this point was authored against the on-dark/
+     hairline-dark tokens, so redefining them locally flips the whole
+     overlay from black to white without touching each declaration. */
+  --color-on-dark: var(--color-ink);
+  --color-on-dark-secondary: var(--color-ink-secondary);
+  --color-on-dark-body: var(--color-ink);
+  --color-surface-dark: var(--color-surface);
+  --color-hairline-dark: var(--color-hairline);
+
+  /* 70% width per client request (Benoy reference) — left-anchored, not
+     full-screen, so the remaining 30% keeps showing the page behind it. */
   position: fixed;
-  inset: 0;
-  width: 100vw;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 70vw;
   height: 100dvh;
   z-index: var(--z-overlay);
   background: var(--color-surface-dark);
@@ -272,21 +281,14 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   gap: clamp(0.3rem, 1vw, 0.65rem);
 }
 
-/* Direct-child combinator only — .nav-mega-item / .nav-mega-viewall are
-   also <a> tags nested (deeper) inside this nav, via .nav-mega, and must
-   NOT inherit the giant nav-link type styles below.
-   Sized a step smaller than before (was clamp(2rem,5vw,3.75rem)) — with
-   Testimonials and Careers added the list is 7 items deep, and the old
-   size left too little headroom on shorter viewports (900px-tall
-   laptops especially). */
+/* Smaller per client request (Benoy reference) — was var(--fs-h1)
+   (52px), too large now that the panel is 70vw instead of full-screen.
+   Steps down at the same breakpoints as the rest of this file. */
 .nav-links-col > a {
   display: block;
   width: fit-content;
   font-family: var(--font-latin);
-  /* var(--fs-h1) already steps down at tokens.css's own tablet/mobile
-     breakpoints (see below) — no local clamp() needed, and font-size
-     is rem/em only per the linter. */
-  font-size: var(--fs-h1);
+  font-size: 2.25rem;
   font-weight: var(--fw-medium);
   color: var(--color-on-dark-secondary);
   transition: color var(--dur-fast) var(--ease-out);
@@ -309,235 +311,78 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   text-underline-offset: 6px;
 }
 
-/* ---- Mega menu (Projects) ----------------------------------------
-   Mobile/narrow: expands in place below the trigger (accordion).
-   Desktop (900px+): the trigger's own vertical stack position is
-   unpredictable (4th item in the list), so rather than expand downward
-   and risk pushing "View All" off-screen, the panel becomes a small,
-   absolutely-positioned side panel anchored to the right of the trigger
-   — always fully visible, no scrolling required. --------------------- */
-.nav-mega { display: flex; flex-direction: column; align-items: flex-start; width: fit-content; }
-
-.nav-mega-trigger {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-family: var(--font-latin);
-  font-size: var(--fs-h1);
-  font-weight: var(--fw-medium);
-  color: var(--color-on-dark-secondary);
-  transition: color var(--dur-fast) var(--ease-out);
-}
-.nav-mega-trigger::after {
-  content: "+";
-  font-family: var(--font-latin);
-  font-size: 1.25rem;
-  color: var(--color-on-dark-secondary);
-  transition: transform var(--dur-fast) var(--ease-out);
-}
-.nav-mega-trigger:hover, .nav-mega-trigger.is-active { color: var(--color-on-dark); }
-.nav-mega.is-open .nav-mega-trigger { color: var(--color-on-dark); }
-.nav-mega.is-open .nav-mega-trigger::after { content: "—"; transform: rotate(180deg); }
-
-.nav-mega-panel {
-  display: grid;
-  /* Two explicit rows, matching the panel's two direct children
-     (.nav-mega-grid, .nav-mega-viewall) — with only one row defined,
-     the second child fell into an auto-sized implicit row that never
-     collapsed, so "View All 47 Projects" stayed visible even while
-     the accordion read as closed. */
-  grid-template-rows: 0fr 0fr;
-  transition: grid-template-rows var(--dur-slow) var(--ease-lux);
-  width: min(720px, 82vw);
-}
-.nav-mega.is-open .nav-mega-panel { grid-template-rows: 1fr 1fr; }
-.nav-mega-panel > * { overflow: hidden; }
-
-.nav-mega-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-sm);
-  padding-top: var(--space-md);
-}
-
-.nav-mega-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-.nav-mega-item img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  filter: brightness(0.85);
-  transition: filter var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
-}
-.nav-mega-item:hover img { filter: brightness(1); transform: scale(1.03); }
-.nav-mega-item span {
-  font-family: var(--font-latin);
-  /* 14px floor for overlay thumbnail captions (guideline §3/§4) — was
-     fs-caption (12px), a confirmed Phase 1 type-size breach. */
-  font-size: var(--fs-metadata);
-  line-height: 1.3;
-  color: var(--color-on-dark-secondary);
-}
-.nav-mega-item:hover span { color: var(--color-on-dark); }
-
-/* Was accent-coloured; underline carries the "this is a link" signal
-   instead (guideline §3.8's footer-link rule, reused here). */
-.nav-mega-viewall {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  margin-top: var(--space-md);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-caption);
-  text-transform: uppercase;
-  color: var(--color-on-dark-secondary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.nav-mega-viewall:hover { color: var(--color-on-dark); }
-
-@media (min-width: 900px) {
-  .nav-mega { position: relative; }
-  .nav-mega-panel {
-    /* top/width/height are set inline by nav.js: flex centering on
-       .nav-links-lg means this box's top isn't naturally level with
-       "Home", and its right/bottom edges need to land exactly on the
-       divider in front of the contact panel — neither is reliably
-       expressible in pure CSS since both depend on sibling elements
-       outside .nav-mega's own box. Values below are just the
-       pre-JS/fallback state. */
-    /* No bordered/shadowed panel here (guideline §4.7) — the mega-menu
-       already sits inside the full-screen black overlay; a bordered box
-       floating on top of it read as a card inside a card. Separated
-       from the surrounding nav by space (padding) alone. */
-    position: absolute;
-    top: 0;
-    left: calc(100% + var(--space-2xs));
-    transform: translateX(-8px);
-    width: min(680px, 44vw);
-    max-height: 70vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    /* Scroll stays functional as a fallback on very short viewports, but
-       the visible track/thumb reads as a UI glitch on a menu that's
-       supposed to fit in one view — hide it, don't disable it. */
-    scrollbar-width: none;
-    grid-template-rows: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
-  }
-  .nav-mega.is-open .nav-mega-panel {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0);
-  }
-  .nav-mega-panel > * { overflow: visible; }
-  .nav-mega-panel::-webkit-scrollbar { display: none; }
-  .nav-mega-grid { grid-template-columns: repeat(5, 1fr); gap: var(--space-sm); padding-top: 0; flex: 0 0 auto; align-content: start; }
-  .nav-mega-item span { font-size: var(--fs-caption); }
-
-  /* Back to sitting below the grid, full-width, with a top divider —
-     the right-hand rail treatment left too little width per thumbnail
-     once a 5th column was added. */
-  .nav-mega-viewall {
-    flex: 0 0 auto;
-    align-self: stretch;
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    margin-top: var(--space-lg);
-    padding-inline-start: 0;
-    padding-top: var(--space-md);
-    border-inline-start: none;
-    border-top: 1px solid var(--color-hairline-dark);
-  }
-}
-
-@media (max-width: 899px) {
-  /* Matches nav.js's own `window.innerWidth < 900` cutoff and the
-     min-width:900px desktop panel below exactly — previously this was
-     780px, leaving a 781-899px dead zone where the panel fell through
-     to the base (pre-two-column) grid/accordion styles: position:static,
-     width:min(720px,82vw), in-flow inside the now-narrow nav column,
-     overflowing badly. */
-  .nav-mega-panel { width: 100%; }
-  .nav-mega-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-2xs); }
-  .nav-mega-item span { font-size: var(--fs-caption); }
-}
-@media (max-width: 460px) {
-  .nav-mega-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
+/* ---- Contact side panel (client reference: Benoy) — one consolidated
+   right-hand column, stretched the full height of the overlay: address
+   at the top (near the logo), everything else grouped at the bottom. */
 .nav-overlay-side {
   flex: 0 0 auto;
+  align-self: center;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   text-align: start;
   width: 340px;
+  gap: 12rem;
   padding-inline-start: var(--space-xl);
+  padding-block: 0 var(--space-lg);
   border-inline-start: 1px solid var(--color-hairline-dark);
 }
-.nav-overlay-side .eyebrow { color: var(--color-on-dark-secondary); margin-bottom: var(--space-md); }
-/* This is the "overlay contact paragraph" from Phase 1 task 1.4 — the
-   work order couldn't locate it in source; it's this rule. Was
-   fs-caption (12px), under the 16px body floor. */
-.nav-overlay-tagline {
-  font-size: var(--fs-body);
-  line-height: 1.6;
-  color: var(--color-on-dark-secondary);
-  margin-bottom: var(--space-lg);
-}
-.nav-overlay-contact { display: flex; flex-direction: column; gap: 4px; }
-.nav-overlay-contact a {
-  display: block;
-  white-space: nowrap;
-  font-family: var(--font-latin);
-  font-size: 1.15rem;
-  color: var(--color-on-dark);
-  transition: text-decoration-color var(--dur-fast) var(--ease-out);
-  text-decoration: underline;
-  text-decoration-color: transparent;
-}
-.nav-overlay-contact a:hover { text-decoration-color: currentColor; }
-.nav-overlay-address { display: block; font-size: var(--fs-caption); color: var(--color-on-dark-secondary); margin-top: var(--space-sm); }
-
-.nav-overlay-bottom {
+.nav-overlay-side-top,
+.nav-overlay-side-bottom {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  border-top: 1px solid var(--color-hairline-dark);
-  padding-top: var(--space-md);
+  flex-direction: column;
+  /* flex-start, not the flex default (stretch) — stretch was forcing
+     the logo image to the full panel width, distorting its aspect
+     ratio since its height is fixed. */
+  align-items: flex-start;
 }
+.nav-overlay-side-bottom { gap: var(--space-sm); }
+/* Shown only inside the (always-light) overlay panel, so the inverted
+   filter can be permanent rather than scroll/open-state dependent. */
+.nav-overlay-logo {
+  display: block;
+  height: 50px;
+  width: auto;
+  filter: invert(1) brightness(0.85);
+  margin-bottom: var(--space-sm);
+}
+/* Plain bold label, not the rule-marked uppercase eyebrow used
+   elsewhere — matches the reference's "Contact" heading exactly. */
+.nav-overlay-side-label {
+  display: block;
+  font-family: var(--font-latin);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body);
+  color: var(--color-ink);
+  margin-bottom: var(--space-2xs);
+}
+.nav-overlay-address { display: block; font-size: var(--fs-caption); color: var(--color-on-dark-secondary); }
+
 .nav-overlay-social { display: flex; gap: var(--space-md); }
 .nav-overlay-social a, .nav-overlay-legal { font-size: var(--fs-caption); color: var(--color-on-dark-secondary); }
-.nav-overlay-social a:hover { color: var(--color-on-dark); }
+.nav-overlay-social a:hover { color: var(--color-ink); }
+.nav-overlay-bottom-group { display: flex; flex-direction: column; gap: 2px; }
+.nav-overlay-bottom-label {
+  font-family: var(--font-latin);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-caption);
+  color: var(--color-ink);
+}
+.nav-overlay-bottom-group a { font-size: var(--fs-caption); color: var(--color-on-dark-secondary); }
+.nav-overlay-bottom-group a:hover { color: var(--color-ink); }
 
 @media (max-width: 899px) {
-  /* Same 899px cutoff as the mega-panel block above, for the same
-     reason: must switch to the stacked/accordion nav layout in lockstep
-     with it, not at a different (780px) breakpoint. */
+  /* 899px matches the point at which the two nav-links-col columns and
+     the contact panel no longer comfortably fit side by side. The 70vw
+     width stays desktop-only — a partial-width flyout is too cramped
+     once the layout stacks, so this reverts to full-screen. */
+  .nav-overlay { width: 100vw; }
   .nav-overlay-inner { padding-top: 6rem; }
   .nav-main-row { flex-direction: column; align-items: flex-start; justify-content: center; height: auto; gap: var(--space-xl); }
-  .nav-overlay-side { order: 1; width: 100%; padding-inline-start: 0; border-inline-start: none; }
+  .nav-overlay-side { order: 1; align-self: auto; width: 100%; padding-inline-start: 0; padding-block: 0; border-inline-start: none; gap: var(--space-lg); }
   .nav-links-lg { order: 2; flex-direction: column; gap: clamp(0.3rem, 1vw, 0.65rem); }
-  /* var(--fs-h1) already drops to 34px at this width via tokens.css's
-     own mobile breakpoint — no local override needed. */
-  .nav-overlay-bottom { flex-direction: column; align-items: flex-start; }
+  .nav-links-col > a { font-size: 1.75rem; }
 }
 
 /* ---- Footer -------------------------------------------------- */
@@ -660,18 +505,6 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--color-ink-secondary);
-}
-
-.card-status {
-  position: absolute;
-  top: var(--space-sm); left: var(--space-sm);
-  padding: 5px 12px;
-  font-size: var(--fs-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: rgb(255 255 255 / 92%);
-  color: var(--color-surface-dark);
-  border-radius: 999px;
 }
 
 /* ---- Icon / service cards --------------------------------------- */
@@ -1129,20 +962,11 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   color: var(--color-on-dark);
 }
 .page-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Scrim, not a text-shadow (Hard Rule 10 / guideline §3.9): >=60% black
-   across the whole text bounding box, not a fade-to-nothing gradient.
-   The 40%->62% ramp front-loads the floor well above where the
-   bottom-anchored .page-hero-body text actually sits.
-   Top stop raised from 0% to 70% (guideline §4.9/§8, Phase 1 task 1.3):
-   the fixed header/wordmark sits transparently at the very top of this
-   hero, and a 0%-opacity top stop measured 2.76:1 there — bare photo in
-   practice. 70% clears 4.5:1 regardless of viewport height. */
-.page-hero::after {
-  content: "";
-  position: absolute; inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 62%) 40%, rgb(0 0 0 / 85%) 100%);
-}
+/* Scrim removed per client request. Note: the wordmark and
+   .page-hero-body text (eyebrow/h1/lead, all set to on-dark colours)
+   assumed this scrim for contrast — Phase 1 measured 2.76:1 (fail)
+   without it. Removing it means contrast over a bright photo is no
+   longer guaranteed. */
 /* z-index:2 is load-bearing: ::after is generated content, which paints
    after (on top of) real DOM siblings like this body — without an
    explicit stack order the gradient meant to darken the photo behind

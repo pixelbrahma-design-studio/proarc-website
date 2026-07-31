@@ -12,6 +12,16 @@
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--gutter-desktop);
+  /* Boost inline-start to clear the permanent nav-edge-toggle strip,
+     which sits at the true physical left edge no matter the text
+     direction (components.css .nav-edge-toggle) — flipped to
+     inline-end under [dir="rtl"] below, since the toggle itself never
+     moves for RTL. */
+  padding-inline-start: max(var(--gutter-desktop), var(--edge-safe));
+}
+[dir="rtl"] .container {
+  padding-inline-start: var(--gutter-desktop);
+  padding-inline-end: max(var(--gutter-desktop), var(--edge-safe));
 }
 
 .container--narrow {
@@ -90,7 +100,8 @@
 
 @media (max-width: 1024px) {
   .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .container { padding-inline: var(--gutter-tablet); }
+  .container { padding-inline: var(--gutter-tablet); padding-inline-start: max(var(--gutter-tablet), var(--edge-safe)); }
+  [dir="rtl"] .container { padding-inline-start: var(--gutter-tablet); padding-inline-end: max(var(--gutter-tablet), var(--edge-safe)); }
 }
 
 @media (max-width: 780px) {
@@ -100,5 +111,6 @@
     direction: ltr;
   }
   .section-head { align-items: flex-start; }
-  .container { padding-inline: var(--gutter-mobile); }
+  .container { padding-inline: var(--gutter-mobile); padding-inline-start: max(var(--gutter-mobile), var(--edge-safe)); }
+  [dir="rtl"] .container { padding-inline-start: var(--gutter-mobile); padding-inline-end: max(var(--gutter-mobile), var(--edge-safe)); }
 }

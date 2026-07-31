@@ -8,15 +8,8 @@
   color: var(--color-on-dark);
 }
 .pd-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Top stop raised from 5% to 70% (guideline §4.9/§8, Phase 1 task 1.3):
-   the fixed header/wordmark sits transparently over this hero too, and
-   a near-0% top stop leaves it on bare photo. 70% clears 4.5:1. */
-.pd-hero::after {
-  content: "";
-  position: absolute; inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 75%) 100%);
-}
+/* Scrim removed per client request. Note: .pd-hero-body text and the
+   wordmark assumed this scrim for contrast over the project photo. */
 /* z-index:2 is load-bearing: ::after is generated content, which paints
    after (on top of) real DOM siblings like this body — without an
    explicit stack order the gradient meant to darken the photo behind
