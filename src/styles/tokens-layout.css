@@ -21,17 +21,6 @@
   --space-2xl: clamp(5rem, 9vw, 9.5rem);
   --space-section: 96px;
 
-  /* Permanent nav-edge-toggle strip (components.css .nav-edge-toggle)
-     is a fixed-width column pinned to the true physical left edge on
-     every breakpoint. Any left-aligned content nearer to the edge than
-     this renders underneath it — keep --edge-toggle-w in sync with the
-     toggle's own width. */
-  --edge-toggle-w: 64px;
-  --edge-safe: calc(var(--edge-toggle-w) + var(--space-2xs));
-
-  --radius-sm: 2px;
-  --radius-md: 4px;
-
   /* ---- Motion -------------------------------------------------- */
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -57,7 +46,7 @@
   --gap-section-major:280px;
 
   /* ---- v1.2 §2.4 layout frame ---- */
-  --container-max:  1250px;
+  --container-max:  1120px;
   --gutter-desktop:   80px;
   --gutter-tablet:    40px;
   --gutter-mobile:    20px;

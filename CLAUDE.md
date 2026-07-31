@@ -2,7 +2,7 @@
 
 ## Typography and colour
 
-The authoritative specification is `docs/ProArc-Typography-Guideline-v1.1.md`. **Read it before writing or changing any CSS, any component style, or any markup that renders text.** The rules below are the enforceable summary, not a replacement for it.
+The authoritative specification is `docs/ProArc-Typography-Guideline-v1.2.md` (supersedes v1.1 — see "Typography and layout — v1.2 additions" below; v1.1 stays in docs/ for history). **Read it before writing or changing any CSS, any component style, or any markup that renders text.** The rules below are the enforceable summary, not a replacement for it.
 
 Design tokens live in `src/styles/tokens.css`. Every type and colour value in the codebase comes from a token. If a value you need is not a token, stop and ask — do not invent one.
 
@@ -106,3 +106,14 @@ stylelint can see it. No border-radius (no radius tokens exist in the system).
 
 Root pages and projects/ pages are build outputs. Edit pages-src/, partials/, src/styles/,
 data/ only, then run `node build/inject-partials.js && npm run build:pages`.
+
+## v1.2.1 — deviation from §4.7 trigger side (reviewer decision, 31 Jul 2026)
+
+§4.7 places the desktop nav trigger inline-start. Per the reviewer's punch list (item 2.6),
+the build now places the trigger immediately inline-start of the boxed wordmark, with both
+forming one fixed cluster at the top **inline-end** (top-right in LTR) instead. This is a
+conscious, recorded spec deviation, not a silent build-time call — the underlying rule
+(single black pill, icon + 12px uppercase MENU label, ≥44×44 hit target, one persistent black
+element on the page) is otherwise followed exactly. Everything else in §4.7 (overlay regions,
+nav item weights, focus trap) is unchanged. Written with logical properties
+(`inset-inline-end`), so the Arabic build mirrors the cluster to the top-left automatically.

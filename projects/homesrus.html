@@ -28,16 +28,14 @@
 </head>
 <body>
 <header class="site-header" data-nav>
-  <div class="container">
-    <a href="../index.html" class="brand">
-      <img src="../images/ui/logo-mark.webp" alt="Proarc" class="brand-logo">
-    </a>
-  </div>
+  <button class="nav-trigger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+    <span class="nav-trigger-icon"><span></span><span></span><span></span></span>
+    <span class="nav-trigger-label">Menu</span>
+  </button>
+  <a href="../index.html" class="brand-box">
+    <img src="../images/ui/logo-mark.webp" alt="Proarc" class="brand-logo">
+  </a>
 </header>
-
-<button class="nav-edge-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
-  <span class="nav-edge-toggle-icon"><span></span><span></span><span></span></span>
-</button>
 
 <div class="nav-overlay" id="nav-overlay">
   <div class="nav-overlay-inner container">
@@ -45,13 +43,12 @@
     <div class="nav-main-row">
       <nav class="nav-links-lg" id="nav-links">
         <div class="nav-links-col">
-          <a href="../index.html" id="nav-home-link" class=""><span>Home</span></a>
-          <a href="../about.html" class=""><span>About</span></a>
-          <a href="../services.html" class=""><span>Services</span></a>
-          <a href="../projects.html" class="is-active"><span>Projects</span></a>
-          <a href="../testimonials.html" class=""><span>Testimonials</span></a>
-          <a href="../careers.html" class=""><span>Careers</span></a>
-          <a href="../contact.html" class=""><span>Contact</span></a>
+          <a href="../index.html" id="nav-home-link" class="" data-text="Home"><span>Home</span></a>
+          <a href="../about.html" class="" data-text="About"><span>About</span></a>
+          <a href="../services.html" class="" data-text="Services"><span>Services</span></a>
+          <a href="../projects.html" class="is-active" data-text="Projects"><span>Projects</span></a>
+          <a href="../careers.html" class="" data-text="Careers"><span>Careers</span></a>
+          <a href="../contact.html" class="" data-text="Contact"><span>Contact</span></a>
         </div>
       </nav>
 
@@ -65,7 +62,7 @@
         <div class="nav-overlay-side-bottom">
           <div class="nav-overlay-bottom-group">
             <span class="nav-overlay-bottom-label">Careers</span>
-            <a href="../careers.html">Current Openings</a>
+            <a href="../careers.html">Current openings</a>
           </div>
           <div class="nav-overlay-bottom-group">
             <span class="nav-overlay-bottom-label">General Enquiries</span>
@@ -90,8 +87,8 @@
   <section class="pd-hero">
     <img src="../images/projects/homesrus/hero.webp" srcset="../images/projects/homesrus/hero-md.webp 1600w, ../images/projects/homesrus/hero.webp 2400w" sizes="100vw" alt="Homes R Us">
     <div class="container pd-hero-body">
-      <span class="eyebrow">Commercial &middot; Ajman, U.A.E</span>
       <h1>Homes R Us</h1>
+      <span class="eyebrow">Commercial &middot; Ajman, U.A.E</span>
     </div>
   </section>
 
@@ -187,7 +184,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand">Proarc</span>
+        <span class="footer-wordmark">ProArc</span>
         <p>Designing Ajman's Skyline Since 2006. A UAE-based architecture, engineering and project management consultancy.</p>
         <div class="footer-social">
           <a href="#">Facebook</a>
@@ -202,7 +199,6 @@
         <a href="../about.html">About</a>
         <a href="../services.html">Services</a>
         <a href="../projects.html">Projects</a>
-        <a href="../testimonials.html">Testimonials</a>
         <a href="../careers.html">Careers</a>
         <a href="../contact.html">Contact</a>
       </div>

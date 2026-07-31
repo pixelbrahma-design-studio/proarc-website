@@ -32,14 +32,20 @@
   transform: scale(1.08);
 }
 
-/* Scrim removed per client request. Note: the wordmark/eyebrow/hero
-   text and the on-dark contrast measurements from Phase 1 assumed this
-   scrim's darkening — removing it means contrast over a bright photo
-   is no longer guaranteed. */
+/* Scrim restored per guideline §4.9 (fallback: scrim, full-bleed heroes
+   only) — clean above the text zone, ≥62% (the table's floor is 60%)
+   across the bounding box the H1 + CTA occupy plus bleed, never fading
+   inside it. */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 0%) 42%, rgb(0 0 0 / 62%) 58%, rgb(0 0 0 / 80%) 100%);
+}
 
 /* ---- Title block (grid row 1, fills remaining height) ---- */
-/* Left-aligned per client request (2026-07-31) — back to guideline §9
-   rule 1's default, after a brief centered detour on 2026-07-30. */
+/* Start-aligned per guideline §9 rule 1 (the R1 home hero was centred;
+   the About hero is the spec's named correct model). */
 .hero-center {
   position: relative;
   min-height: 0;
@@ -55,37 +61,25 @@
   padding-inline: var(--gutter);
   padding-bottom: var(--space-lg);
   /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
-     carries legibility, per guideline §3.9. */
+     carries legibility, per guideline §4.9. */
 }
 
-.hero-center .eyebrow { color: var(--color-on-dark); }
-.hero-center .eyebrow::before { background: var(--color-on-dark); }
-
-/* Mega Splash register — the hero's single largest, one-per-page
-   headline (guideline §2). Fixed rem, no fluid vw clamp. */
+/* Hero Display register (guideline §4 table, §4.1) — never Mega Splash
+   over a photograph; that register has no over-photo role. */
 .hero-center h1 {
-  font-size: var(--fs-mega);
-  line-height: var(--lh-mega);
-  margin-top: var(--space-sm);
-  max-width: 18ch;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-hero);
+  line-height: var(--lh-hero);
+  text-transform: uppercase;
+  max-width: 20ch;
   color: var(--color-on-dark);
 }
 
-/* Buttons removed per client request — the lead now stands alone,
-   tucked into the bottom-right corner instead of centered under the
-   title. align-self overrides the column's centered cross-axis just
-   for this child; h1 above is unaffected and stays centered. */
-.hero-center .lead {
-  color: var(--color-on-dark);
-  align-self: flex-end;
-  text-align: end;
-  margin-top: var(--space-lg);
-  max-width: 46ch;
-}
-
-@media (max-width: 700px) {
-  .hero-center .lead { align-self: center; text-align: center; }
-}
+/* One CTA (guideline reviewer directive) — the headline and a single
+   button is the whole hero; "Get in touch" already lives in the menu,
+   the closing band, the footer and the contact page. */
+.hero-cta { margin-top: var(--space-lg); }
 
 /* ---- Hero bottom (grid row 2) — slide caption + small quick-link strip,
    both deliberately compact so the whole hero stays one screen tall ---- */
@@ -205,16 +199,8 @@
   justify-content: space-between;
   padding-block-start: var(--space-lg);
   padding-inline: var(--gutter);
-  /* Boost inline-start to clear the permanent nav-edge-toggle strip —
-     see .container in layout.css for the full explanation. Flipped
-     under [dir="rtl"] below, since the toggle never moves for RTL. */
-  padding-inline-start: max(var(--gutter), var(--edge-safe));
   pointer-events: none;
   /* No text-shadow (Hard Rule 10) — sits inside the slide's own scrim. */
-}
-[dir="rtl"] .featured-full-top {
-  padding-inline-start: var(--gutter);
-  padding-inline-end: max(var(--gutter), var(--edge-safe));
 }
 .featured-full-eyebrow { color: var(--color-on-dark); pointer-events: none; }
 .featured-full-eyebrow::before { content: none; }
@@ -286,10 +272,7 @@
    captions are a headline + tag, not standalone UI. */
 .featured-item-caption {
   position: absolute;
-  /* max(): clears the permanent nav-edge-toggle strip pinned to the
-     true physical left edge — see .container in layout.css. left/right
-     are physical already, so no [dir="rtl"] split is needed here. */
-  left: max(var(--space-lg), var(--edge-safe));
+  left: var(--space-lg);
   right: var(--space-lg);
   bottom: calc(var(--featured-controls-h) + var(--space-lg));
   z-index: 1;
@@ -315,14 +298,10 @@
   align-items: center;
   gap: var(--space-lg);
   padding-inline: var(--gutter);
-  /* Same nav-edge-toggle clearance as .featured-full-top above. */
-  padding-inline-start: max(var(--gutter), var(--edge-safe));
-  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 55%) 40%, rgb(0 0 0 / 55%) 100%);
+  /* 62%, not 55% — guideline §4.9's table rejects 55% (4.74:1, "margin
+     too thin"); 60% is the floor, 62% keeps a small safety margin. */
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 62%) 40%, rgb(0 0 0 / 62%) 100%);
   pointer-events: none;
-}
-[dir="rtl"] .featured-full-bottom {
-  padding-inline-start: var(--gutter);
-  padding-inline-end: max(var(--gutter), var(--edge-safe));
 }
 .featured-progress {
   flex: 1;
@@ -341,7 +320,6 @@
 .featured-arrows button {
   width: 44px;
   height: 44px;
-  border-radius: 999px;
   border: 1px solid var(--color-hairline-dark);
   color: var(--color-on-dark);
   transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
@@ -350,22 +328,16 @@
 .featured-arrows button:disabled { opacity: 0.35; pointer-events: none; }
 
 @media (max-width: 700px) {
-  /* enough top clearance to sit fully below the fixed mobile header (a
-     toggle-only bar, but still ~70-80px) — was rendering partly behind it */
+  /* enough top clearance to sit fully below the fixed mobile header
+     cluster — was rendering partly behind it */
   .featured-full-top {
     padding-block: 5rem 0;
     padding-inline: var(--space-sm);
-    padding-inline-start: max(var(--space-sm), var(--edge-safe));
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2xs);
   }
-  .featured-full-bottom { padding-inline: var(--space-sm); padding-inline-start: max(var(--space-sm), var(--edge-safe)); }
-  [dir="rtl"] .featured-full-top,
-  [dir="rtl"] .featured-full-bottom {
-    padding-inline-start: var(--space-sm);
-    padding-inline-end: max(var(--space-sm), var(--edge-safe));
-  }
+  .featured-full-bottom { padding-inline: var(--space-sm); }
   .featured-item-caption h4 { font-size: var(--fs-h3); }
 }
 

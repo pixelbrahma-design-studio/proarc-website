@@ -1,37 +1,12 @@
 /**
- * Header scroll state and the nav toggle. No animation-library
- * dependency so the nav still works if GSAP/Lenis fail to load.
+ * The nav toggle: open/close state, focus trap, and Lenis scroll lock.
+ * No animation-library dependency so the nav still works if GSAP/Lenis
+ * fail to load. The trigger is a permanent fixed element (guideline
+ * §4.7) — no scroll-driven show/hide or colour-state logic needed.
  */
 (function () {
-  var header = document.querySelector("[data-nav]");
   var toggle = document.getElementById("nav-toggle");
   var overlay = document.getElementById("nav-overlay");
-
-  // Hides the header on scroll-down, brings it back on scroll-up (never
-  // hides while still near the top, or while the nav overlay is open).
-  var lastScroll = 0;
-  function onScroll() {
-    if (!header) return;
-    var current = window.__lenis ? window.__lenis.scroll : window.scrollY;
-    header.classList.toggle("is-scrolled", current > 40);
-
-    if (!document.body.classList.contains("nav-open")) {
-      var scrollingDown = current > lastScroll;
-      if (scrollingDown && current > 140) {
-        header.classList.add("header-hidden");
-      } else if (!scrollingDown) {
-        header.classList.remove("header-hidden");
-      }
-    }
-    lastScroll = current;
-  }
-
-  if (window.__lenis) {
-    window.__lenis.on("scroll", onScroll);
-  } else {
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-  onScroll();
 
   function setOpen(isOpen) {
     var wasOpen = document.body.classList.contains("nav-open");
@@ -40,7 +15,6 @@
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
     }
-    if (isOpen && header) header.classList.remove("header-hidden");
     if (window.__lenis) {
       if (isOpen) window.__lenis.stop(); else window.__lenis.start();
     }
@@ -83,6 +57,12 @@
       first.focus();
     }
   });
+
+  // aria-current="page" on the active item (guideline §4.7) — set here
+  // rather than in the build templates, which only conditionally set a
+  // class, not a whole extra attribute.
+  var activeLink = document.querySelector("#nav-links a.is-active");
+  if (activeLink) activeLink.setAttribute("aria-current", "page");
 
   if (toggle) {
     toggle.addEventListener("click", function () {

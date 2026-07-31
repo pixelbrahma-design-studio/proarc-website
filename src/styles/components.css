@@ -19,7 +19,6 @@
   letter-spacing: var(--ls-caption);
   text-transform: uppercase;
   border: 1px solid currentColor;
-  border-radius: 999px;
   color: var(--color-ink);
   transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
@@ -43,11 +42,12 @@
    task 4.6 inline-style cleanup. */
 .cta-action { margin-top: var(--space-lg); }
 
-/* Closing-CTA sections (home/about/services/testimonials): centered
-   statement heading + button. Default measure (20ch) covers home and
-   about; services/testimonials override in their own page stylesheet. */
-.cta-block { text-align: center; }
-.cta-heading { margin-inline: auto; max-width: 20ch; }
+/* Closing-CTA sections (home/about/services/testimonials): start-
+   aligned statement heading + button (guideline §9 rule 1 — no centred
+   headlines). Default measure (20ch) covers home and about;
+   services/testimonials override in their own page stylesheet. */
+.cta-block { text-align: start; }
+.cta-heading { max-width: 20ch; }
 
 /* Underlined inline text link inside a lead paragraph (e.g. "View All
    Services →") — task 4.6 inline-style cleanup. */
@@ -55,154 +55,80 @@
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
 /* ---- Header / Nav ------------------------------------------- */
+/* Top inline-end cluster (guideline §4.7, trigger side amended by
+   v1.2.1 — see CLAUDE.md changelog): a hamburger trigger immediately
+   inline-start of the boxed wordmark, one fixed line, no horizontal
+   top bar. Both sit permanently on --color-surface-dark, so there is
+   exactly one header state — no scroll-based colour swap, no
+   transparent/blurred variant, no filter-derived light-mode logo. */
 .site-header {
   position: fixed;
-  inset: 0 0 auto 0;
-  z-index: var(--z-nav);
-  padding-block: var(--space-sm);
-  transition: background var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
-  border-bottom: 1px solid transparent;
-  /* --z-nav sits above --z-overlay (see tokens-layout.css) so the logo
-     stays visible over the open nav overlay — but that also puts this
-     whole (mostly empty) header box above the nav-toggle button on
-     mobile, where the toggle repositions into the header's own vertical
-     span and its clicks were getting captured by the header instead.
-     Let clicks pass through the empty header and re-enable them only on
-     the actual logo link. */
-  pointer-events: none;
-}
-.site-header .brand { pointer-events: auto; }
-
-/* hidden on scroll-down, slides back in on scroll-up (see nav.js) */
-.site-header.header-hidden { transform: translateY(-100%); }
-
-/* Every page opens on a full-bleed photo or dark hero, so the header
-   defaults to light (on-dark) text and only flips to ink once scrolled
-   onto the page's white body background. No text-shadow (Hard Rule 10)
-   — legibility over photography is the hero's own scrim, not a shadow
-   on the header text. */
-.site-header {
-  color: var(--color-on-dark);
-}
-
-.site-header.is-scrolled {
-  background: rgb(255 255 255 / 86%);
-  backdrop-filter: blur(10px);
-  padding-block: var(--space-2xs);
-  border-color: var(--color-hairline);
-  color: var(--color-ink);
-}
-
-/* The nav overlay is now white (Benoy reference) — the header sitting
-   above it needs the scrolled/light-background treatment, not the
-   on-dark one, and drop the scrolled header's own backing (it'd
-   otherwise flash behind the overlay's higher z-index for one frame) */
-body.nav-open .site-header {
-  color: var(--color-ink);
-  background: transparent;
-}
-
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.brand {
-  display: block;
-  font-family: var(--font-latin);
-  font-size: 1.35rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-/* Scoped to the header specifically — the nav overlay is meant to sit
-   above the page, but the header's own logo should stay visible on top
-   of it too. .brand is reused by the footer's plain wordmark, which
-   must NOT get this elevation: it isn't a stacking context problem
-   there, and the raised z-index let the footer's "Proarc" text bleed
-   through the open mobile nav overlay whenever the page was scrolled
-   near the bottom when the menu was opened. */
-.site-header .brand {
-  position: relative;
-  z-index: calc(var(--z-overlay) + 1);
-}
-
-/* Original plain logo image, restored per client request — position
-   stays top-right (.site-header .container's justify-content:flex-end)
-   but the white-card/tagline treatment is gone. */
-.brand-logo {
-  display: block;
-  height: 42px;
-  width: auto;
-  /* the source art is light lines-on-transparent, made for dark
-     backdrops. The overlay is only 70vw wide, so this logo (right-
-     aligned, outside the overlay's own white panel) always sits over
-     the actual page background, not the overlay — invert only for the
-     scrolled header's light background, never for nav-open by itself. */
-  filter: none;
-  transition: filter var(--dur-fast) var(--ease-out);
-}
-.site-header.is-scrolled .brand-logo { filter: invert(1) brightness(0.85); }
-
-/* ---- Edge toggle (client reference: Benoy) — a plain three-bar icon
-   on a permanent white strip (#fff background, #000 bars — always the
-   same regardless of what's behind it).
-   Vertically centered on the left edge at rest; when the overlay opens,
-   it hops to the right edge of the 70vw panel (desktop only — see the
-   min-width:900px rule below), matching the reference's open state. --- */
-/* Full-height vertical strip per client request — was a small 44x44
-   floating tile; the white background now spans the full viewport
-   height, with the icon centered inside it. */
-.nav-edge-toggle {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--edge-toggle-w);
+  top: var(--gap-block);
+  inset-inline-end: var(--gap-block);
   z-index: calc(var(--z-overlay) + 2);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-surface);
-  overflow: hidden;
-  transition: left var(--dur-fast) var(--ease-out);
+  align-items: stretch;
 }
-.nav-edge-toggle-icon {
-  position: relative;
-  z-index: 1;
+
+.nav-trigger {
   display: flex;
   align-items: center;
+  gap: var(--gap-inline);
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: var(--gap-block);
+  background: var(--color-surface-dark);
+  color: var(--color-on-dark);
+}
+.nav-trigger-icon {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 7px;
-  height: 30px;
+  gap: 5px;
+  width: 20px;
+  height: 14px;
+  flex: 0 0 auto;
 }
-.nav-edge-toggle-icon span {
+.nav-trigger-icon span {
   display: block;
-  width: 3px;
-  height: 100%;
-  border-radius: 1px;
-  background: var(--color-ink);
+  width: 100%;
+  height: 2px;
+  background: var(--color-on-dark);
+  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
-
-/* No hover colour/background change per client request — the wiggle
-   below is the only hover feedback. */
-
-@keyframes nav-edge-toggle-wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
+/* Menu trigger label, guideline §4.7 table row. */
+.nav-trigger-label {
+  font-family: var(--font-latin);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
 }
-.nav-edge-toggle:hover .nav-edge-toggle-icon {
-  animation: nav-edge-toggle-wiggle 0.4s ease-in-out;
-}
+body.nav-open .nav-trigger-icon span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.nav-open .nav-trigger-icon span:nth-child(2) { opacity: 0; }
+body.nav-open .nav-trigger-icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (prefers-reduced-motion: reduce) {
-  .nav-edge-toggle:hover .nav-edge-toggle-icon { animation: none; }
+  .nav-trigger-icon span { transition: none; }
 }
 
-@media (min-width: 900px) {
-  /* Flush against the overlay's right edge (70vw) — no reveal-gap
-     sliver of the page behind showing through. */
-  body.nav-open .nav-edge-toggle { left: 70vw; }
+/* The wordmark's own field (guideline §4.9/§8) — the mark's native
+   art is light lines-on-transparent, made for exactly this dark
+   backdrop, so it needs no filter or inversion in any state. */
+.brand-box {
+  display: flex;
+  align-items: center;
+  padding: var(--gap-block);
+  background: var(--color-surface-dark);
+}
+.brand-logo {
+  display: block;
+  height: 36px; /* ~101px rendered wide at this asset's aspect ratio — clears the 96px desktop minimum (§8) */
+  width: auto;
+}
+
+@media (max-width: 767px) {
+  .site-header { top: var(--gap-inline); inset-inline-end: var(--gap-inline); }
+  .brand-logo { height: 30px; } /* ~85px wide — clears the 80px mobile minimum (§8) */
 }
 
 /* ---- Full-screen nav overlay ------------------------------------- */
@@ -283,13 +209,15 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 
 /* Smaller per client request (Benoy reference) — was var(--fs-h1)
    (52px), too large now that the panel is 70vw instead of full-screen.
-   Steps down at the same breakpoints as the rest of this file. */
+   Steps down at the same breakpoints as the rest of this file. Light
+   300 at rest / Bold 700 active, guideline §4.7 table row. */
 .nav-links-col > a {
-  display: block;
+  display: grid;
+  grid-template-areas: "label";
   width: fit-content;
   font-family: var(--font-latin);
   font-size: 2.25rem;
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-light);
   color: var(--color-on-dark-secondary);
   transition: color var(--dur-fast) var(--ease-out);
   overflow: hidden;
@@ -299,16 +227,27 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   padding-inline-end: 0.4em;
   margin-inline-end: -0.4em;
 }
-.nav-links-col > a span { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
+.nav-links-col > a span {
+  grid-area: label;
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+/* Reserves the active (bold) width so the list doesn't reflow between
+   pages (guideline §4.7) — stacked in the same grid cell as the visible
+   label via CSS Grid, sized into the layout but never shown. */
+.nav-links-col > a::after {
+  content: attr(data-text);
+  grid-area: label;
+  font-weight: var(--fw-bold);
+  visibility: hidden;
+  pointer-events: none;
+}
 .nav-links-col > a:hover, .nav-links-col > a.is-active { color: var(--color-on-dark); }
 .nav-links-col > a:hover span { transform: translateX(0.35em); }
-/* Active state = weight step (500 to 700) plus underline, guideline
-   §3.7 — replaces the old accent-coloured "—" dash marker. */
+/* Active state = weight plus brightness only, guideline §4.7 — no
+   colour, no underline, no marker. */
 .nav-links-col > a.is-active {
   font-weight: var(--fw-bold);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
 }
 
 /* ---- Contact side panel (client reference: Benoy) — one consolidated
@@ -405,7 +344,9 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 }
 .footer-grid > div:first-child { padding-inline-start: 0; border-inline-start: none; }
 
-.footer-brand .brand { display: block; margin-bottom: var(--space-md); font-size: 1.75rem; }
+/* Plain body text, not a re-set wordmark (guideline §8/2.3) — no
+   General Sans display styling, no uppercase, no tracking. */
+.footer-wordmark { display: block; margin-bottom: var(--space-md); font-weight: var(--fw-semibold); }
 .footer-brand p { color: var(--color-on-dark-secondary); max-width: 30ch; line-height: 1.6; }
 .footer-social { display: flex; gap: var(--space-md); margin-top: var(--space-lg); }
 .footer-social a { position: relative; padding-bottom: 2px; }
@@ -480,7 +421,6 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 .card-media {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-md);
 }
 
 .card-media img {
@@ -511,7 +451,6 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 .icon-card {
   padding: var(--pad-card);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-md);
   transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 .icon-card:hover { border-color: var(--color-ink); transform: translateY(-4px); }
@@ -564,7 +503,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .testimonial-arrow {
   width: 40px;
   height: 40px;
-  border-radius: 999px;
   border: 1px solid var(--color-hairline);
   color: var(--color-ink);
   transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
@@ -574,7 +512,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .testimonial-dots button {
   width: 8px;
   height: 8px;
-  border-radius: 999px;
   background: var(--color-hairline);
   transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
@@ -591,7 +528,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
    pending instead of showing invented people. */
 .team-card {
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-md);
   overflow: hidden;
   transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
@@ -757,7 +693,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   padding: 8px;
   background: var(--color-surface);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
 }
@@ -840,7 +775,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   letter-spacing: 0.01em;
   color: var(--color-ink-secondary);
   border: 1px solid var(--color-hairline);
-  border-radius: 999px;
   padding: 7px 16px;
   transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
@@ -925,7 +859,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   font-size: var(--fs-caption);
   color: var(--color-ink);
   border: 1px solid var(--color-hairline);
-  border-radius: 999px;
   padding: 7px 16px;
   transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
@@ -962,38 +895,35 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   color: var(--color-on-dark);
 }
 .page-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Scrim removed per client request. Note: the wordmark and
-   .page-hero-body text (eyebrow/h1/lead, all set to on-dark colours)
-   assumed this scrim for contrast — Phase 1 measured 2.76:1 (fail)
-   without it. Removing it means contrast over a bright photo is no
-   longer guaranteed. */
-/* z-index:2 is load-bearing: ::after is generated content, which paints
-   after (on top of) real DOM siblings like this body — without an
-   explicit stack order the gradient meant to darken the photo behind
-   the title was instead darkening the title itself, and cranking the
-   gradient darker (above) just made that worse. Same fix applied to
-   .pd-hero-body (project detail pages) below. */
+/* Scrim restored per guideline §4.9 — clean above the text zone, ≥62%
+   across the H1 + lead bounding box. z-index:2 below is load-bearing:
+   ::after is generated content, which paints after (on top of) real DOM
+   siblings like .page-hero-body — without an explicit stack order the
+   gradient meant to darken the photo behind the title instead darkened
+   the title itself. Same fix applied to .pd-hero (project detail pages). */
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 0%) 40%, rgb(0 0 0 / 62%) 58%, rgb(0 0 0 / 80%) 100%);
+}
 .page-hero-body {
   position: relative;
   z-index: 2;
   padding-bottom: var(--space-xl);
 }
-/* Pure white, not the usual secondary grey — text sits over a scrim,
-   and §3.9's exception calls for pure #FFFFFF there, never a tint. */
-.page-hero-body .eyebrow {
-    color: var(--color-on-dark);
-    margin-bottom: var(--space-sm);
-}
-.page-hero-body .eyebrow::before {
-    background: var(--color-on-dark);
-}
-.page-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
-.page-hero-body .lead { color: var(--color-on-dark); margin-top: var(--space-sm); }
+.page-hero-body h1 { max-width: 22ch; color: var(--color-on-dark); }
+/* Pure white, not the usual secondary grey — text sits over a scrim
+   (guideline §4.9/§6.3: over imagery, pure white only). Max 40ch, the
+   "scrim supporting line" register (§4 table). */
+.page-hero-body .lead { color: var(--color-on-dark); margin-top: var(--space-sm); max-width: 40ch; }
 
-/* Modifiers repeated identically (inline) across six interior-page
-   heroes (about/careers/contact/projects/services/testimonials) —
-   task 4.6 inline-style cleanup. */
-.page-hero--tall { height: 88svh; align-items: center; }
+/* Height-only modifier (guideline §4.9/1.10) — must stay bottom-anchored
+   like the component default so text lands in the scrim's dark zone;
+   align-items:center previously floated it mid-frame, in the thin part
+   of the wash. */
+.page-hero--tall { height: 88svh; }
 .page-hero-body--flush { padding-bottom: 0; }
 
 /* ---- Forms ------------------------------------------------------- */
@@ -1013,7 +943,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   width: 100%;
   background: none;
   border: none;
-  border-radius: 0;
   border-bottom: 1px solid var(--color-hairline);
   padding-block: var(--space-2xs);
   font-size: var(--fs-body);
@@ -1043,7 +972,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   color: var(--color-ink);
   background: none;
   border: 1px solid var(--color-hairline);
-  border-radius: 999px;
   padding: 0.55em 1.2em;
   margin-inline-end: var(--space-sm);
   cursor: pointer;
@@ -1066,7 +994,6 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .form-panel {
   background: var(--color-surface);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-md);
   padding: var(--space-xl) var(--space-lg);
 }
 .form-section-label {

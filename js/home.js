@@ -13,11 +13,17 @@
     }
   }
 
-  var counters = document.querySelectorAll("[data-count-to]");
+  var counters = document.querySelectorAll("[data-count-to], [data-count-since]");
   if (!counters.length) return;
 
   function animateCount(el) {
-    var target = parseFloat(el.getAttribute("data-count-to"));
+    // data-count-since computes from the current year so a "years in
+    // practice" style stat never goes stale (guideline fact-check —
+    // "19+" drifted wrong the year after it was written).
+    var sinceYear = el.getAttribute("data-count-since");
+    var target = sinceYear
+      ? new Date().getFullYear() - parseInt(sinceYear, 10)
+      : parseFloat(el.getAttribute("data-count-to"));
     var suffix = el.getAttribute("data-count-suffix") || "";
 
     if (reduceMotion || typeof gsap === "undefined") {

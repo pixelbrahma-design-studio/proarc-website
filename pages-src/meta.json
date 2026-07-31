@@ -48,16 +48,6 @@
     "pageStylesheet": "contact",
     "pageScript": "contact"
   },
-  "testimonials": {
-    "outFile": "testimonials.html",
-    "activePage": "testimonials",
-    "title": "Testimonials — Proarc | Architecture & Engineering, UAE",
-    "description": "Feedback from the clients Proarc has worked alongside since 2006, across commercial, educational, retail and residential projects in Ajman and the wider UAE.",
-    "canonical": "https://proarc.ae/testimonials.html",
-    "ogImage": "images/projects/cityuniversity/hero-md.webp",
-    "pageStylesheet": "testimonials",
-    "pageScript": "testimonials"
-  },
   "careers": {
     "outFile": "careers.html",
     "activePage": "careers",

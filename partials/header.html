@@ -1,14 +1,12 @@
 <header class="site-header" data-nav>
-  <div class="container">
-    <a href="{{assetPrefix}}index.html" class="brand">
-      <img src="{{assetPrefix}}images/ui/logo-mark.webp" alt="Proarc" class="brand-logo">
-    </a>
-  </div>
+  <button class="nav-trigger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+    <span class="nav-trigger-icon"><span></span><span></span><span></span></span>
+    <span class="nav-trigger-label">Menu</span>
+  </button>
+  <a href="{{assetPrefix}}index.html" class="brand-box">
+    <img src="{{assetPrefix}}images/ui/logo-mark.webp" alt="Proarc" class="brand-logo">
+  </a>
 </header>
-
-<button class="nav-edge-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
-  <span class="nav-edge-toggle-icon"><span></span><span></span><span></span></span>
-</button>
 
 <div class="nav-overlay" id="nav-overlay">
   <div class="nav-overlay-inner container">
@@ -16,13 +14,12 @@
     <div class="nav-main-row">
       <nav class="nav-links-lg" id="nav-links">
         <div class="nav-links-col">
-          <a href="{{assetPrefix}}index.html" id="nav-home-link" class="{{navActiveHome}}"><span>Home</span></a>
-          <a href="{{assetPrefix}}about.html" class="{{navActiveAbout}}"><span>About</span></a>
-          <a href="{{assetPrefix}}services.html" class="{{navActiveServices}}"><span>Services</span></a>
-          <a href="{{assetPrefix}}projects.html" class="{{navActiveProjects}}"><span>Projects</span></a>
-          <a href="{{assetPrefix}}testimonials.html" class="{{navActiveTestimonials}}"><span>Testimonials</span></a>
-          <a href="{{assetPrefix}}careers.html" class="{{navActiveCareers}}"><span>Careers</span></a>
-          <a href="{{assetPrefix}}contact.html" class="{{navActiveContact}}"><span>Contact</span></a>
+          <a href="{{assetPrefix}}index.html" id="nav-home-link" class="{{navActiveHome}}" data-text="Home"><span>Home</span></a>
+          <a href="{{assetPrefix}}about.html" class="{{navActiveAbout}}" data-text="About"><span>About</span></a>
+          <a href="{{assetPrefix}}services.html" class="{{navActiveServices}}" data-text="Services"><span>Services</span></a>
+          <a href="{{assetPrefix}}projects.html" class="{{navActiveProjects}}" data-text="Projects"><span>Projects</span></a>
+          <a href="{{assetPrefix}}careers.html" class="{{navActiveCareers}}" data-text="Careers"><span>Careers</span></a>
+          <a href="{{assetPrefix}}contact.html" class="{{navActiveContact}}" data-text="Contact"><span>Contact</span></a>
         </div>
       </nav>
 
@@ -36,7 +33,7 @@
         <div class="nav-overlay-side-bottom">
           <div class="nav-overlay-bottom-group">
             <span class="nav-overlay-bottom-label">Careers</span>
-            <a href="{{assetPrefix}}careers.html">Current Openings</a>
+            <a href="{{assetPrefix}}careers.html">Current openings</a>
           </div>
           <div class="nav-overlay-bottom-group">
             <span class="nav-overlay-bottom-label">General Enquiries</span>
