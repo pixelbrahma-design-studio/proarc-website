@@ -300,13 +300,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
      as a clearer three-tier climb: 300 rest → 500 hover → 700 active. */
   font-weight: var(--fw-light);
   color: var(--color-on-dark-secondary);
-  transition: color var(--dur-fast) var(--ease-out), font-weight var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
-  overflow: hidden;
-  /* the hover state slides the label text right by 0.35em — without this,
-     overflow:hidden (needed for that slide-reveal effect) clips the end
-     of the word off as soon as it moves (e.g. "About" hovers into "Abou") */
-  padding-inline-end: 0.4em;
-  margin-inline-end: -0.4em;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
   /* Hairline divider between items (professional/editorial list look) —
      no rule after the last item, nothing to divide it from. */
   padding-block-end: var(--space-sm);
@@ -316,7 +310,25 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   padding-block-end: 0;
   border-block-end: none;
 }
-.nav-links-col > a span { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
+/* The slide-reveal clip lives on the span, not the anchor: the anchor
+   is fixed at the full column width (for the divider/click-target
+   above), so if the widest word (Testimonials) grows wider on hover —
+   font-weight steps up 300→500 here — a clip on the anchor would chop
+   it at the column's edge. The span sizes to its own (state-dependent)
+   text, so it can grow freely and still clip only its own slide zone. */
+.nav-links-col > a span {
+  display: inline-block;
+  /* Without this, the atomic inline-block box aligns on its baseline
+     against the surrounding (empty) line box, and the font's own
+     half-leading/descent metrics inflate the anchor's line-height by
+     10-15px per row — enough to break the left/right column height
+     match below. Top-aligning removes that extra reserved space. */
+  vertical-align: top;
+  overflow: hidden;
+  padding-inline-end: 0.4em;
+  margin-inline-end: -0.4em;
+  transition: transform var(--dur-fast) var(--ease-out), font-weight var(--dur-fast) var(--ease-out);
+}
 .nav-links-col > a:hover, .nav-links-col > a.is-active { color: var(--color-on-dark); }
 .nav-links-col > a:hover span { transform: translateX(0.35em); }
 /* Hover gets its own mid-weight step + underline so every item feels
