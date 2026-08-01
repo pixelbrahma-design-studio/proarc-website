@@ -277,10 +277,12 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
      "Testimonials" starting lower than "Home" — top-aligning both
      columns keeps their first items level with each other. */
   justify-content: flex-start;
-  /* Grown to match .nav-overlay-side's height (client request) — was
-     clamp(0.3rem, 1vw, 0.65rem), too tight to reach the same total
-     height as the contact column opposite it. */
-  gap: clamp(0.5rem, 1.5vw, 1.25rem);
+  /* Tightened from clamp(0.5rem, 1.5vw, 1.25rem): each item's own
+     padding-block-end (below) now carries most of the vertical rhythm,
+     with a hairline divider filling the gap — the flex gap only adds
+     the remainder so the column still lands at the same total height
+     as .nav-overlay-side opposite it (client request, unchanged). */
+  gap: 0.85rem;
 }
 
 /* Smaller per client request (Benoy reference) — was var(--fs-h1)
@@ -288,27 +290,39 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
    Steps down at the same breakpoints as the rest of this file. */
 .nav-links-col > a {
   display: block;
-  width: fit-content;
+  /* Full column width (was fit-content) so the hairline divider below
+     spans the whole list, not just the width of each word, and so the
+     click target covers the full row, not just the text glyphs. */
+  width: 100%;
   font-family: var(--font-latin);
   font-size: 1.75rem;
   /* Light at rest (was regular 400) so the hover/active steps below read
      as a clearer three-tier climb: 300 rest → 500 hover → 700 active. */
   font-weight: var(--fw-light);
   color: var(--color-on-dark-secondary);
-  transition: color var(--dur-fast) var(--ease-out), font-weight var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out), font-weight var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
   overflow: hidden;
   /* the hover state slides the label text right by 0.35em — without this,
      overflow:hidden (needed for that slide-reveal effect) clips the end
      of the word off as soon as it moves (e.g. "About" hovers into "Abou") */
   padding-inline-end: 0.4em;
   margin-inline-end: -0.4em;
+  /* Hairline divider between items (professional/editorial list look) —
+     no rule after the last item, nothing to divide it from. */
+  padding-block-end: var(--space-sm);
+  border-block-end: 1px solid var(--color-hairline-dark);
+}
+.nav-links-col > a:last-child {
+  padding-block-end: 0;
+  border-block-end: none;
 }
 .nav-links-col > a span { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
 .nav-links-col > a:hover, .nav-links-col > a.is-active { color: var(--color-on-dark); }
 .nav-links-col > a:hover span { transform: translateX(0.35em); }
 /* Hover gets its own mid-weight step + underline so every item feels
    responsive, not just the active one — active still reads as heavier
-   (700 vs 500) so the two states stay visually distinct.
+   (700 vs 500) so the two states stay visually distinct. The divider
+   also brightens to the same secondary tone as the active/hover text.
    The underline properties are set on the inner span, not the anchor:
    the span is display:inline-block (needed for the translateX slide
    above), and an inline-block descendant is an atomic box that a
@@ -316,6 +330,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
    the line computes but silently never draws. */
 .nav-links-col > a:hover {
   font-weight: var(--fw-medium);
+  border-color: var(--color-on-dark-secondary);
 }
 .nav-links-col > a:hover span {
   text-decoration: underline;
