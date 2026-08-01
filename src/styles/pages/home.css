@@ -255,9 +255,7 @@
   text-align: start;
   /* No text-shadow (Hard Rule 10) — .featured-item::after is the scrim. */
 }
-/* Bold per client request (was the Editorial Display register's light
-   300) — fixed rem, no fluid vw clamp. */
-.featured-item-caption h4 { font-family: var(--font-latin); font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-editorial); margin-bottom: var(--space-xs); color: var(--color-on-dark); }
+.featured-item-caption h4 { font-family: var(--font-latin); font-size: var(--fs-h1); font-weight: var(--fw-light); line-height: var(--lh-editorial); margin-bottom: var(--space-xs); color: var(--color-on-dark); }
 /* Pure white, not secondary grey — sits over the slide photo's scrim,
    same failure mode as .hero-slide-sub/.hero-strip-item above. */
 .featured-item-caption .card-tag { color: var(--color-on-dark); font-size: var(--fs-caption); font-weight: var(--fw-medium); letter-spacing: var(--ls-caption); text-transform: uppercase; }

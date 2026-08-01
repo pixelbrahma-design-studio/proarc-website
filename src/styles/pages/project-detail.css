@@ -21,7 +21,9 @@
    scrim (guideline §4.9/§6.3: over imagery, pure white only). */
 .pd-hero-body .eyebrow { color: var(--color-on-dark); }
 .pd-hero-body .eyebrow::before { background: var(--color-on-dark); }
-.pd-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
+/* Light per client request, matching the home slider's caption weight
+   — was the sitewide h1 default (bold, base.css). */
+.pd-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); font-weight: var(--fw-light); }
 
 /* Breadcrumb — sits above the Overview grid, a small navigation aid
    more common on premium project/portfolio pages than a bare title. */

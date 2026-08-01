@@ -1035,15 +1035,14 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .page-hero-body .eyebrow::before {
     background: var(--color-on-dark);
 }
-.page-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
+/* Light per client request, matching the home slider's caption weight
+   — was the sitewide h1 default (bold, base.css). */
+.page-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); font-weight: var(--fw-light); }
 /* Bottom-align the two .split columns per client request — the lead
    column was top-aligned (the shared .split default), sitting higher
    than the title column instead of matching its baseline. */
 .page-hero-body .split { align-items: end; }
-/* Weight bumped from the shared .lead's light 300 to regular 400, also
-   per client request — a little heavier reads more clearly over a
-   photo than plain text elsewhere on the page. */
-.page-hero-body .lead { color: var(--color-on-dark); font-weight: var(--fw-regular); margin-top: var(--space-sm); }
+.page-hero-body .lead { color: var(--color-on-dark); margin-top: var(--space-sm); }
 
 /* Modifiers repeated identically (inline) across six interior-page
    heroes (about/careers/contact/projects/services/testimonials) —
