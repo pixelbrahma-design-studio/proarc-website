@@ -162,17 +162,12 @@
   align-items: center;
   justify-content: space-between;
   padding-block-start: var(--space-lg);
-  padding-inline: var(--gutter);
-  /* Boost inline-start to clear the permanent nav-edge-toggle strip —
-     see .container in layout.css for the full explanation. Flipped
-     under [dir="rtl"] below, since the toggle never moves for RTL. */
-  padding-inline-start: max(var(--gutter), var(--edge-safe));
+  /* Same inset on both sides as .featured-item-caption's left edge, per
+     client request — equal on both sides, so no [dir="rtl"] split is
+     needed (the value doesn't change with direction). */
+  padding-inline: calc(var(--edge-safe) + var(--space-lg));
   pointer-events: none;
   /* No text-shadow (Hard Rule 10) — sits inside the slide's own scrim. */
-}
-[dir="rtl"] .featured-full-top {
-  padding-inline-start: var(--gutter);
-  padding-inline-end: max(var(--gutter), var(--edge-safe));
 }
 .featured-full-eyebrow { color: var(--color-on-dark); pointer-events: none; }
 .featured-full-eyebrow::before { content: none; }
@@ -184,7 +179,9 @@
   letter-spacing: var(--ls-caption);
   text-transform: uppercase;
   color: var(--color-on-dark);
-  border-bottom: 1px solid var(--color-hairline-dark);
+  /* White per client request — the dark hairline token was nearly
+     invisible against a bright sky photo. */
+  border-bottom: 1px solid var(--color-on-dark);
   padding-bottom: 2px;
   transition: border-color var(--dur-fast) var(--ease-out);
 }
@@ -244,10 +241,11 @@
    captions are a headline + tag, not standalone UI. */
 .featured-item-caption {
   position: absolute;
-  /* max(): clears the permanent nav-edge-toggle strip pinned to the
-     true physical left edge — see .container in layout.css. left/right
-     are physical already, so no [dir="rtl"] split is needed here. */
-  left: max(var(--space-lg), var(--edge-safe));
+  /* Clears the permanent nav-edge-toggle strip pinned to the true
+     physical left edge (see .container in layout.css), plus extra
+     breathing room per client request — left/right are physical
+     already, so no [dir="rtl"] split is needed here. */
+  left: calc(var(--edge-safe) + var(--space-lg));
   right: var(--space-lg);
   bottom: calc(var(--featured-controls-h) + var(--space-lg));
   z-index: 1;
@@ -257,12 +255,12 @@
   text-align: start;
   /* No text-shadow (Hard Rule 10) — .featured-item::after is the scrim. */
 }
-/* Editorial Display register (project narrative, guideline §3.2) —
-   fixed rem, no fluid vw clamp. */
-.featured-item-caption h4 { font-family: var(--font-latin); font-size: var(--fs-h1); font-weight: var(--fw-light); line-height: var(--lh-editorial); margin-bottom: var(--space-2xs); color: var(--color-on-dark); }
+/* Bold per client request (was the Editorial Display register's light
+   300) — fixed rem, no fluid vw clamp. */
+.featured-item-caption h4 { font-family: var(--font-latin); font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-editorial); margin-bottom: var(--space-xs); color: var(--color-on-dark); }
 /* Pure white, not secondary grey — sits over the slide photo's scrim,
    same failure mode as .hero-slide-sub/.hero-strip-item above. */
-.featured-item-caption .card-tag { color: var(--color-on-dark); font-size: var(--fs-caption); letter-spacing: var(--ls-caption); text-transform: uppercase; }
+.featured-item-caption .card-tag { color: var(--color-on-dark); font-size: var(--fs-caption); font-weight: var(--fw-medium); letter-spacing: var(--ls-caption); text-transform: uppercase; }
 
 .featured-full-bottom {
   position: absolute;

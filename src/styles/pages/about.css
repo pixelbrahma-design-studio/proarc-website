@@ -7,7 +7,7 @@
    metadata table is a separate full-width row below the prose. ---- */
 .story-block { margin-top: var(--gap-component); }
 .story-prose { margin-top: var(--gap-heading); }
-.story-specs { margin-top: var(--gap-component); max-width: 640px; }
+.story-specs { margin-top: var(--gap-component); max-width: 640px; margin-inline-start: auto; }
 
 /* ---- Task 4.6 inline-style cleanup ---- */
 .page-hero-body .lead + .lead { margin-top: var(--space-md); }

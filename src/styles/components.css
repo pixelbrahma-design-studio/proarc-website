@@ -95,13 +95,11 @@
   color: var(--color-ink);
 }
 
-/* The nav overlay is now white (Benoy reference) — the header sitting
-   above it needs the scrolled/light-background treatment, not the
-   on-dark one, and drop the scrolled header's own backing (it'd
-   otherwise flash behind the overlay's higher z-index for one frame) */
+/* Hidden while the overlay is open, at rest or scrolled — the contact
+   panel inside the overlay already carries its own logo, so the fixed
+   header's boxed logo was just a redundant duplicate sitting on top. */
 body.nav-open .site-header {
-  color: var(--color-ink);
-  background: transparent;
+  display: none;
 }
 
 .site-header .container {
@@ -279,7 +277,10 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
      "Testimonials" starting lower than "Home" — top-aligning both
      columns keeps their first items level with each other. */
   justify-content: flex-start;
-  gap: clamp(0.3rem, 1vw, 0.65rem);
+  /* Grown to match .nav-overlay-side's height (client request) — was
+     clamp(0.3rem, 1vw, 0.65rem), too tight to reach the same total
+     height as the contact column opposite it. */
+  gap: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 
 /* Smaller per client request (Benoy reference) — was var(--fs-h1)
@@ -289,8 +290,8 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   display: block;
   width: fit-content;
   font-family: var(--font-latin);
-  font-size: 2.25rem;
-  font-weight: var(--fw-medium);
+  font-size: 1.75rem;
+  font-weight: var(--fw-regular);
   color: var(--color-on-dark-secondary);
   transition: color var(--dur-fast) var(--ease-out);
   overflow: hidden;
@@ -324,7 +325,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   align-items: flex-start;
   text-align: start;
   width: 340px;
-  gap: 12rem;
+  gap: 10rem;
   padding-inline-start: var(--space-xl);
   padding-block: 0 var(--space-lg);
   border-inline-start: 1px solid var(--color-hairline-dark);
@@ -383,7 +384,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   .nav-main-row { flex-direction: column; align-items: flex-start; justify-content: center; height: auto; gap: var(--space-xl); }
   .nav-overlay-side { order: 1; align-self: auto; width: 100%; padding-inline-start: 0; padding-block: 0; border-inline-start: none; gap: var(--space-lg); }
   .nav-links-lg { order: 2; flex-direction: column; gap: clamp(0.3rem, 1vw, 0.65rem); }
-  .nav-links-col > a { font-size: 1.75rem; }
+  .nav-links-col > a { font-size: 1.6rem; }
 }
 
 /* ---- Footer -------------------------------------------------- */
@@ -500,7 +501,7 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 .card:hover .card-media::after { opacity: 1; }
 
 .card-body { padding-top: var(--space-sm); }
-.card-body h4 { margin-bottom: 4px; }
+.card-body h4 { margin-bottom: var(--space-2xs); }
 .card-tag {
   font-size: var(--fs-caption);
   letter-spacing: 0.05em;
@@ -628,6 +629,10 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   grid-template-columns: 1fr 1fr;
   gap: var(--gutter);
 }
+/* Spacing only — the heading and its paragraph had no gap at all
+   (h4's base rule carries no margin), so the two ran together with no
+   breathing room. */
+.grid-2plus1 h4 { margin-bottom: var(--space-2xs); }
 .grid-2plus1 > :nth-child(2) {
   padding-inline-start: var(--space-lg);
   border-inline-start: 1px solid var(--color-hairline);
@@ -963,21 +968,14 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   color: var(--color-on-dark);
 }
 .page-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Scrim removed per client request. Note: the wordmark and
-   .page-hero-body text (eyebrow/h1/lead, all set to on-dark colours)
-   assumed this scrim for contrast — Phase 1 measured 2.76:1 (fail)
-   without it. Removing it means contrast over a bright photo is no
-   longer guaranteed. */
-/* z-index:2 is load-bearing: ::after is generated content, which paints
-   after (on top of) real DOM siblings like this body — without an
-   explicit stack order the gradient meant to darken the photo behind
-   the title was instead darkening the title itself, and cranking the
-   gradient darker (above) just made that worse. Same fix applied to
-   .pd-hero-body (project detail pages) below. */
+/* No gradient over these hero photos per client request (the home
+   hero's own gradient stays as-is — this is scoped to the interior
+   page heroes only). */
 .page-hero-body {
   position: relative;
   z-index: 2;
-  padding-bottom: var(--space-xl);
+  /* Exact 90px per client request — was the responsive --space-xl. */
+  padding-bottom: 90px;
 }
 /* Pure white, not the usual secondary grey — text sits over a scrim,
    and §3.9's exception calls for pure #FFFFFF there, never a tint. */
@@ -989,13 +987,26 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
     background: var(--color-on-dark);
 }
 .page-hero-body h1 { margin-top: var(--space-sm); max-width: 22ch; color: var(--color-on-dark); }
-.page-hero-body .lead { color: var(--color-on-dark); margin-top: var(--space-sm); }
+/* Bottom-align the two .split columns per client request — the lead
+   column was top-aligned (the shared .split default), sitting higher
+   than the title column instead of matching its baseline. */
+.page-hero-body .split { align-items: end; }
+/* Weight bumped from the shared .lead's light 300 to regular 400, also
+   per client request — a little heavier reads more clearly over a
+   photo than plain text elsewhere on the page. */
+.page-hero-body .lead { color: var(--color-on-dark); font-weight: var(--fw-regular); margin-top: var(--space-sm); }
 
 /* Modifiers repeated identically (inline) across six interior-page
    heroes (about/careers/contact/projects/services/testimonials) —
-   task 4.6 inline-style cleanup. */
-.page-hero--tall { height: 88svh; align-items: center; }
-.page-hero-body--flush { padding-bottom: 0; }
+   task 4.6 inline-style cleanup. Used by all six, so this is the value
+   that actually reaches every page — the base .page-hero-body rule's
+   own padding-bottom above never survives past this override.
+   align-items:flex-end (not the old :center) per client request — a
+   vertically centred block in an 88svh section left a large dead gap
+   below the text; bottom-anchoring (the base .page-hero default, and
+   how every other hero on the site behaves) removes it by construction. */
+.page-hero--tall { height: 88svh; align-items: flex-end; }
+.page-hero-body--flush { padding-bottom: 74px; }
 
 /* ---- Forms ------------------------------------------------------- */
 .form-field { margin-bottom: var(--space-md); }

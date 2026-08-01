@@ -8,13 +8,15 @@
   color: var(--color-on-dark);
 }
 .pd-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Scrim removed per client request. Note: .pd-hero-body text and the
-   wordmark assumed this scrim for contrast over the project photo. */
-/* z-index:2 is load-bearing: ::after is generated content, which paints
-   after (on top of) real DOM siblings like this body — without an
-   explicit stack order the gradient meant to darken the photo behind
-   the title was instead darkening the title itself. */
-.pd-hero-body { position: relative; z-index: 2; padding-bottom: var(--space-xl); }
+/* No gradient over the project photo per client request (the home
+   hero's own gradient stays as-is — this is scoped to project-detail
+   heroes only). */
+.pd-hero-body {
+  position: relative;
+  z-index: 2;
+  /* Exact 90px per client request — was the responsive --space-xl. */
+  padding-bottom: 90px;
+}
 /* Pure white, not secondary grey — sits over the project hero photo's
    scrim (guideline §4.9/§6.3: over imagery, pure white only). */
 .pd-hero-body .eyebrow { color: var(--color-on-dark); }
