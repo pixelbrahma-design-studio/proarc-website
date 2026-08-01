@@ -32,10 +32,18 @@
   transform: scale(1.08);
 }
 
-/* Scrim removed per client request. Note: the wordmark/eyebrow/hero
-   text and the on-dark contrast measurements from Phase 1 assumed this
-   scrim's darkening — removing it means contrast over a bright photo
-   is no longer guaranteed. */
+/* Scrim restored per client request — the headline was unreadable over
+   bright sky/cloud photos. z-index:2 is load-bearing: .hero-slide.is-active
+   sits at z-index:1, and this ::after has no stacking context of its own
+   without one — every earlier pass of this gradient was rendering, just
+   invisibly, behind the slide image. */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 15%) 30%, rgb(0 0 0 / 38%) 55%, rgb(0 0 0 / 52%) 100%);
+}
 
 /* ---- Title block (grid row 1, fills remaining height) ---- */
 /* Left-aligned per client request (2026-07-31) — back to guideline §9
@@ -87,59 +95,9 @@
   .hero-center .lead { align-self: center; text-align: center; }
 }
 
-/* ---- Hero bottom (grid row 2) — slide caption + small quick-link strip,
-   both deliberately compact so the whole hero stays one screen tall ---- */
+/* ---- Hero bottom (grid row 2) — small quick-link strip, deliberately
+   compact so the whole hero stays one screen tall ---- */
 .hero-bottom { position: relative; }
-
-.hero-slide-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-lg);
-  padding: var(--space-sm) var(--gutter);
-}
-
-.hero-slide-dots {
-  display: flex;
-  gap: 8px;
-  flex: 0 0 auto;
-}
-.hero-slide-dots button {
-  width: 18px;
-  height: 2px;
-  background: rgb(255 255 255 / 35%);
-  transition: background var(--dur-fast) var(--ease-out);
-}
-.hero-slide-dots button.is-active { background: var(--color-on-dark); }
-
-.hero-slide-info {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-sm);
-  color: var(--color-on-dark);
-  min-width: 0;
-}
-.hero-slide-title {
-  font-family: var(--font-latin);
-  font-size: var(--fs-body);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.hero-slide-sub {
-  font-size: var(--fs-caption);
-  letter-spacing: var(--ls-caption);
-  text-transform: uppercase;
-  /* Pure white, not the usual secondary grey — this sits over the hero
-     photo's scrim, and secondary grey collapses as low as 3.46:1 there
-     (guideline §4.9/§6.3: over imagery, pure white only). */
-  color: var(--color-on-dark);
-  white-space: nowrap;
-}
-
-@media (max-width: 700px) {
-  .hero-slide-meta { flex-wrap: wrap; gap: var(--space-sm); }
-  .hero-slide-sub { display: none; }
-}
 
 /* Benoy-style small caption row along the very base of the hero */
 .hero-strip {

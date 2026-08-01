@@ -59,7 +59,9 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: var(--z-nav);
-  padding-block: var(--space-sm);
+  /* Flush to the top per client request — no top space above the boxed
+     logo, at rest or scrolled. */
+  padding-block: 0 var(--space-sm);
   transition: background var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
   border-bottom: 1px solid transparent;
   /* --z-nav sits above --z-overlay (see tokens-layout.css) so the logo
@@ -88,7 +90,7 @@
 .site-header.is-scrolled {
   background: rgb(255 255 255 / 86%);
   backdrop-filter: blur(10px);
-  padding-block: var(--space-2xs);
+  padding-block: 0 var(--space-2xs);
   border-color: var(--color-hairline);
   color: var(--color-ink);
 }
@@ -122,27 +124,26 @@ body.nav-open .site-header {
    there, and the raised z-index let the footer's "Proarc" text bleed
    through the open mobile nav overlay whenever the page was scrolled
    near the bottom when the menu was opened. */
+/* Dark field behind the logo per client request — makes it read clearly
+   regardless of what photo is behind the header, instead of relying on
+   a scroll-state filter swap. */
 .site-header .brand {
   position: relative;
   z-index: calc(var(--z-overlay) + 1);
+  background: rgb(0 0 0 / 72%);
+  /* 20px extra on top of the base --space-xs padding, per client
+     request — top only, the other three sides are unchanged. */
+  padding: calc(var(--space-xs) + 20px) var(--space-sm) var(--space-xs);
 }
-
-/* Original plain logo image, restored per client request — position
-   stays top-right (.site-header .container's justify-content:flex-end)
-   but the white-card/tagline treatment is gone. */
 .brand-logo {
   display: block;
   height: 42px;
   width: auto;
-  /* the source art is light lines-on-transparent, made for dark
-     backdrops. The overlay is only 70vw wide, so this logo (right-
-     aligned, outside the overlay's own white panel) always sits over
-     the actual page background, not the overlay — invert only for the
-     scrolled header's light background, never for nav-open by itself. */
+  /* the source art is light lines-on-transparent, made for exactly this
+     dark field — always native colour now, no scroll-state filter swap
+     needed. */
   filter: none;
-  transition: filter var(--dur-fast) var(--ease-out);
 }
-.site-header.is-scrolled .brand-logo { filter: invert(1) brightness(0.85); }
 
 /* ---- Edge toggle (client reference: Benoy) — a plain three-bar icon
    on a permanent white strip (#fff background, #000 bars — always the
