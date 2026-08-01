@@ -291,9 +291,11 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
   width: fit-content;
   font-family: var(--font-latin);
   font-size: 1.75rem;
-  font-weight: var(--fw-regular);
+  /* Light at rest (was regular 400) so the hover/active steps below read
+     as a clearer three-tier climb: 300 rest → 500 hover → 700 active. */
+  font-weight: var(--fw-light);
   color: var(--color-on-dark-secondary);
-  transition: color var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out), font-weight var(--dur-fast) var(--ease-out);
   overflow: hidden;
   /* the hover state slides the label text right by 0.35em — without this,
      overflow:hidden (needed for that slide-reveal effect) clips the end
@@ -304,10 +306,30 @@ body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
 .nav-links-col > a span { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
 .nav-links-col > a:hover, .nav-links-col > a.is-active { color: var(--color-on-dark); }
 .nav-links-col > a:hover span { transform: translateX(0.35em); }
+/* Hover gets its own mid-weight step + underline so every item feels
+   responsive, not just the active one — active still reads as heavier
+   (700 vs 500) so the two states stay visually distinct.
+   The underline properties are set on the inner span, not the anchor:
+   the span is display:inline-block (needed for the translateX slide
+   above), and an inline-block descendant is an atomic box that a
+   parent's text-decoration never paints across — set on the anchor,
+   the line computes but silently never draws. */
+.nav-links-col > a:hover {
+  font-weight: var(--fw-medium);
+}
+.nav-links-col > a:hover span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--color-on-dark-secondary);
+}
 /* Active state = weight step (500 to 700) plus underline, guideline
-   §3.7 — replaces the old accent-coloured "—" dash marker. */
+   §3.7 — replaces the old accent-coloured "—" dash marker. Underline
+   set on the span for the same atomic-inline-box reason as hover above. */
 .nav-links-col > a.is-active {
   font-weight: var(--fw-bold);
+}
+.nav-links-col > a.is-active span {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
