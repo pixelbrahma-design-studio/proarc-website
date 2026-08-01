@@ -55,15 +55,23 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* biased toward the bottom of the available row (not true-center) —
-     more breathing room above the title, less dead space before the
-     slide-caption/strip below */
-  justify-content: flex-end;
+  /* Vertically centered in the row (was flex-end/bottom-anchored) — with
+     the lead paragraph removed, bottom-anchoring the title alone left a
+     large empty gap above it; centering removes that dead space. */
+  justify-content: center;
   text-align: start;
-  padding-inline: var(--gutter);
-  padding-bottom: var(--space-lg);
+  /* max(), not plain var(--gutter): below ~1350px the fluid gutter dips
+     under the fixed nav-edge-toggle's width, letting the title (and,
+     worse, the small strip captions below) render under/behind it.
+     +70px extra per client request, on top of that safe minimum. */
+  padding-inline-start: calc(max(var(--gutter), var(--edge-safe)) + 70px);
+  padding-inline-end: var(--gutter);
   /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
      carries legibility, per guideline §3.9. */
+}
+[dir="rtl"] .hero-center {
+  padding-inline-start: var(--gutter);
+  padding-inline-end: calc(max(var(--gutter), var(--edge-safe)) + 70px);
 }
 
 .hero-center .eyebrow { color: var(--color-on-dark); }
@@ -77,22 +85,6 @@
   margin-top: var(--space-sm);
   max-width: 18ch;
   color: var(--color-on-dark);
-}
-
-/* Buttons removed per client request — the lead now stands alone,
-   tucked into the bottom-right corner instead of centered under the
-   title. align-self overrides the column's centered cross-axis just
-   for this child; h1 above is unaffected and stays centered. */
-.hero-center .lead {
-  color: var(--color-on-dark);
-  align-self: flex-end;
-  text-align: end;
-  margin-top: var(--space-lg);
-  max-width: 46ch;
-}
-
-@media (max-width: 700px) {
-  .hero-center .lead { align-self: center; text-align: center; }
 }
 
 /* ---- Hero bottom (grid row 2) — small quick-link strip, deliberately
@@ -112,15 +104,28 @@
 .hero-strip-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* Left-aligned (was centered) so "47 projects across the UAE" starts
+     at the same inset as the title above it, per client request. */
+  justify-content: flex-start;
   gap: var(--space-sm);
-  padding: var(--space-xs) var(--gutter);
+  padding-block: var(--space-xs);
+  /* max(), not plain var(--gutter) — same nav-edge-toggle clearance
+     issue as .hero-center above, and far more visible here: at caption
+     size the toggle can hide the item's first word entirely.
+     +70px extra per client request, matching .hero-center's inset so
+     "47 projects across the UAE" stays aligned under the title. */
+  padding-inline-start: calc(max(var(--gutter), var(--edge-safe)) + 70px);
+  padding-inline-end: var(--gutter);
   border-inline-start: 1px solid var(--color-on-dark);
   /* Pure white over the hero photo's scrim — secondary grey measured
      4.10:1 here (guideline §4.9/§6.3: over imagery, pure white only). */
   color: var(--color-on-dark);
   font-size: var(--fs-caption);
   transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+[dir="rtl"] .hero-strip-item {
+  padding-inline-start: var(--gutter);
+  padding-inline-end: calc(max(var(--gutter), var(--edge-safe)) + 70px);
 }
 .hero-strip-item:first-child { border-inline-start: none; }
 .hero-strip-item span:first-child { letter-spacing: 0.01em; }
