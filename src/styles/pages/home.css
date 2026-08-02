@@ -52,22 +52,15 @@
   position: relative;
   min-height: 0;
   min-width: 0;
+  padding-bottom: 80px !important;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* Vertically centered in the row (was flex-end/bottom-anchored) — with
-     the lead paragraph removed, bottom-anchoring the title alone left a
-     large empty gap above it; centering removes that dead space. */
-  justify-content: center;
+  justify-content: end;
   text-align: start;
-  /* max(), not plain var(--gutter): below ~1350px the fluid gutter dips
-     under the fixed nav-edge-toggle's width, letting the title (and,
-     worse, the small strip captions below) render under/behind it.
-     +70px extra per client request, on top of that safe minimum. */
+  padding-block-end: var(--space-lg);
   padding-inline-start: calc(max(var(--gutter), var(--edge-safe)) + 70px);
   padding-inline-end: var(--gutter);
-  /* No text-shadow (Hard Rule 10) — the scrim above (.hero-media::after)
-     carries legibility, per guideline §3.9. */
 }
 [dir="rtl"] .hero-center {
   padding-inline-start: var(--gutter);
@@ -77,11 +70,15 @@
 .hero-center .eyebrow { color: var(--color-on-dark); }
 .hero-center .eyebrow::before { background: var(--color-on-dark); }
 
-/* Mega Splash register — the hero's single largest, one-per-page
-   headline (guideline §2). Fixed rem, no fluid vw clamp. */
+/* Matches the "Featured Projects" caption register (.featured-item-caption
+   h4) per client request — was the Mega Splash display register
+   (guideline §2): var(--fs-mega), bold, uppercase. Text-transform and
+   font-weight overrides here undo the sitewide h1 default (base.css). */
 .hero-center h1 {
-  font-size: var(--fs-mega);
-  line-height: var(--lh-mega);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  text-transform: none;
+  line-height: var(--lh-editorial);
   margin-top: var(--space-sm);
   max-width: 18ch;
   color: var(--color-on-dark);
@@ -131,6 +128,11 @@
 .hero-strip-item span:first-child { letter-spacing: 0.01em; }
 .hero-strip-item .btn-arrow { font-size: var(--fs-caption); }
 .hero-strip-item:hover { color: var(--color-on-dark); background: rgb(255 255 255 / 6%); }
+/* base.css's default :focus-visible ring is --color-ink (dark) — barely
+   visible, and looks like a stray box, on this dark photo. Tabbing
+   between the three links otherwise reads as a border randomly
+   appearing/disappearing rather than a clear focus indicator. */
+.hero-strip-item:focus-visible { outline-color: var(--color-on-dark); }
 
 @media (max-width: 860px) {
   .hero-strip { grid-template-columns: 1fr; }

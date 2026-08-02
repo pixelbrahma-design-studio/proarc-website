@@ -894,12 +894,15 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
   font-size: var(--fs-caption);
   letter-spacing: 0.01em;
   color: var(--color-ink-secondary);
-  border: 1px solid var(--color-hairline);
+  /* Lighter than --color-hairline, same reasoning as .deliverable-tag
+     above — this is the same pill-tag pattern reused on the Projects
+     filter rail. */
+  border: 1px solid rgb(17 17 17 / 8%);
   border-radius: 999px;
   padding: 7px 16px;
-  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
-.filter-opt:hover { color: var(--color-ink); border-color: var(--color-ink); }
+.filter-opt:hover { color: var(--color-ink); }
 .filter-opt.is-active {
   color: var(--color-on-dark);
   background: var(--color-surface-dark);
@@ -979,12 +982,13 @@ html:lang(ar) .testimonial-quote { font-weight: var(--fw-regular); } /* Light is
 .deliverable-tag {
   font-size: var(--fs-caption);
   color: var(--color-ink);
-  border: 1px solid var(--color-hairline);
+  /* Lighter than --color-hairline (the lightest defined border token) per
+     client request — a low-opacity ink tint, same monochrome family as
+     the token, not a new hue (guideline hard rule 3). */
+  border: 1px solid rgb(17 17 17 / 8%);
   border-radius: 999px;
   padding: 7px 16px;
-  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
-.alt-row:hover .deliverable-tag { border-color: var(--color-ink); }
 
 @media (max-width: 780px) {
   .alt-row, .alt-row.rev { grid-template-columns: 1fr; direction: ltr; }

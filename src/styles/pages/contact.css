@@ -9,7 +9,14 @@
   border-top: 1px solid var(--color-hairline);
   transition: padding-inline-start var(--dur-fast) var(--ease-out);
 }
-.contact-method:first-child { border-top: none; padding-top: 0; }
+/* :first-of-type, not :first-child — the "Get In Touch" eyebrow now
+   sits before the list as this column's own leading label, so the
+   first .contact-method is no longer literally the first child. */
+.contact-method:first-of-type { border-top: none; padding-top: 0; }
+/* Matches .section-head's own margin-bottom (layout.css) so this
+   column's eyebrow and the form column's H2 sit at the same distance
+   above their respective content, keeping both columns top-aligned. */
+#get-in-touch .split > div:first-child > .eyebrow { margin-bottom: var(--space-lg); }
 .contact-method:hover { padding-inline-start: 4px; }
 .contact-method .num {
   flex: 0 0 auto;
@@ -70,7 +77,15 @@
 }
 
 /* ---- Section-head H2 gap from its eyebrow (task 4.6 inline-style
-   cleanup) — this page's three section-head H2s all repeat it. ---- */
+   cleanup) — this page's three section-head H2s all repeat it.
+   .section-head's shared default is a flex ROW with justify-content:
+   space-between, built for a heading + .lead pair sitting side by
+   side (as used elsewhere on the site) — with only an eyebrow + h2
+   here (no second element), that pushed the h2 to the opposite end
+   of the row instead of stacking under the eyebrow. Column + start
+   alignment, scoped to this page, fixes it without touching the
+   shared component default other pages rely on. */
+.section-head { flex-direction: column; align-items: flex-start; }
 .section-head h2 { margin-top: var(--space-sm); }
 
 /* ---- Trust-strip supporting text (task 4.6 inline-style cleanup) ---- */
