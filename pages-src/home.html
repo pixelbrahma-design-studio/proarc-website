@@ -11,8 +11,37 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero-media" id="hero-slideshow">
-      <div class="hero-slide is-active" data-title="Ajman Bank Headquarters" data-meta="Commercial — Ajman, UAE" data-href="projects/ajmanbank.html">
-        <img src="images/projects/ajmanbank/gallery-01.webp" sizes="100vw" alt="Ajman Bank Headquarters">
+      <div class="hero-slide hero-slide--citylifekhor is-active">
+        <a href="projects/citylifekhor.html" class="hero-slide-link" aria-label="View the City Life, Al Khor project" tabindex="0">
+          <picture>
+            <source media="(max-width: 700px)" srcset="images/home-hero/citylifekhor-hero-phone.webp">
+            <img src="images/home-hero/citylifekhor-hero.webp" sizes="100vw" alt="City Life, Al Khor — Retail &amp; Mixed-Use project in Al Khor, Ajman">
+          </picture>
+        </a>
+      </div>
+      <div class="hero-slide hero-slide--exclusivevillas">
+        <a href="projects/exclusivevillas.html" class="hero-slide-link" aria-label="View the Exclusive Villas project" tabindex="-1" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="images/home-hero/exclusivevillas-hero-phone.webp">
+            <img src="images/home-hero/exclusivevillas-hero.webp" sizes="100vw" alt="Exclusive Villas — Residential project in Al Zorah, Ajman">
+          </picture>
+        </a>
+      </div>
+      <div class="hero-slide hero-slide--blacksquare">
+        <a href="projects/blacksquare.html" class="hero-slide-link" aria-label="View the The Black Square project" tabindex="-1" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="images/home-hero/blacksquare-hero-phone.webp">
+            <img src="images/home-hero/blacksquare-hero.webp" sizes="100vw" alt="The Black Square — Commercial project in Ajman">
+          </picture>
+        </a>
+      </div>
+      <div class="hero-slide hero-slide--edu-delhiprivate">
+        <a href="projects/edu-delhiprivate.html" class="hero-slide-link" aria-label="View the Delhi Private School project" tabindex="-1" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="images/home-hero/edu-delhiprivate-hero-phone.webp">
+            <img src="images/home-hero/edu-delhiprivate-hero.webp" sizes="100vw" alt="Delhi Private School — Educational project in Ajman">
+          </picture>
+        </a>
       </div>
     </div>
 
@@ -23,7 +52,7 @@
     <div class="hero-bottom" data-reveal data-reveal-delay="0.35">
       <div class="hero-strip">
         <a href="projects.html" class="hero-strip-item">
-          <span>47 projects across the UAE</span>
+          <span>View all works</span>
           <span class="btn-arrow">→</span>
         </a>
         <a href="services.html" class="hero-strip-item">
@@ -34,6 +63,12 @@
           <span>19+ years shaping Ajman&rsquo;s skyline</span>
           <span class="btn-arrow">→</span>
         </a>
+      </div>
+      <div class="hero-slide-dots" id="hero-slide-dots" role="tablist" aria-label="Hero background image">
+        <button type="button" class="is-active" role="tab" aria-selected="true" aria-label="Show City Life, Al Khor"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Show Exclusive Villas"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Show The Black Square"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Show Delhi Private School"></button>
       </div>
     </div>
   </section>

@@ -14,7 +14,15 @@
 .hero-media {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  /* 0, not a negative value: negative z-index on a positioned descendant
+     has a real hit-testing quirk in Chromium/Firefox — elementFromPoint
+     (and real clicks) can resolve to the .hero ancestor itself instead of
+     descending into this subtree, even though nothing visibly covers it.
+     Confirmed by testing the actual click target, not assumed. Visual
+     stacking (media behind the headline/strip) is unaffected: those are
+     later siblings in the DOM, so they still win the tie at equal
+     z-index — this only had to stop being negative, not become higher. */
+  z-index: 0;
 }
 
 .hero-slide {
@@ -25,6 +33,15 @@
 }
 .hero-slide.is-active { opacity: 1; z-index: 1; }
 
+/* Full-bleed link to that slide's own project page — a sibling of the
+   CTA in the strip below (a completely separate section of the DOM),
+   never nested inside it. Confined to .hero-media's own stacking
+   context, so it sits BEHIND .hero-center and .hero-bottom wherever
+   they visually overlap the photo — the headline and the strip's own
+   three links keep first claim on clicks there for free. */
+.hero-slide-link, .hero-slide-link picture { display: block; width: 100%; height: 100%; }
+.hero-slide-link:focus-visible { outline-color: var(--color-on-dark); }
+
 .hero-media img {
   width: 100%;
   height: 100%;
@@ -32,18 +49,43 @@
   transform: scale(1.08);
 }
 
-/* Scrim restored per client request — the headline was unreadable over
-   bright sky/cloud photos. z-index:2 is load-bearing: .hero-slide.is-active
-   sits at z-index:1, and this ::after has no stacking context of its own
-   without one — every earlier pass of this gradient was rendering, just
-   invisibly, behind the slide image. */
-.hero-media::after {
+/* Desktop object-position per slide — measured against each source photo
+   (image sheet §5). These apply above the 700px <picture> breakpoint;
+   below it a separately hand-cut portrait file loads instead (its own
+   object-position isn't needed — it was cut to be shown centred).
+   NOTE, a known gap: a single value can't be exactly right at every
+   width above 700px (the crop-window fraction changes continuously with
+   viewport width, so the true centre drifts slightly across tablet vs
+   desktop) — accepted per the sheet's own allowance ("or decide the
+   drift is acceptable and say so"), since the phone breakpoint carries
+   the one case the drift was large enough to matter. */
+.hero-slide--citylifekhor img { object-position: 0% center; }
+.hero-slide--exclusivevillas img { object-position: 17% center; }
+.hero-slide--blacksquare img { object-position: 0% center; }
+.hero-slide--edu-delhiprivate img { object-position: 0% center; }
+
+/* Per-slide scrim (image sheet §1/§3) — replaces the old shared gradient.
+   Flat across the whole box, not a gradient: a gradient that thins out
+   exactly where the headline sits reads as deliberate darkening while
+   doing least where it's needed most (client's own instruction: "no
+   gradient over these hero photos"). Values are the measured minimum
+   flat black that carries white type to 4.5:1 on BOTH the desktop and
+   phone crop, sampling the lightest patch inside the headline's box —
+   three of four slides need almost none. z-index:2 is load-bearing,
+   same reason as the old shared version: .hero-slide.is-active sits at
+   z-index:1, and a ::after with no z-index of its own would render
+   behind it, invisibly. */
+.hero-slide::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(180deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 15%) 30%, rgb(0 0 0 / 38%) 55%, rgb(0 0 0 / 52%) 100%);
+  pointer-events: none;
 }
+.hero-slide--citylifekhor::after { background: transparent; } /* measured 5.28 desktop / 5.61 phone bare — no scrim needed */
+.hero-slide--exclusivevillas::after { background: rgb(0 0 0 / 5%); } /* measured 4.80 desktop / 4.27 phone bare */
+.hero-slide--blacksquare::after { background: rgb(0 0 0 / 5%); } /* measured 4.48 desktop / 5.73 phone bare */
+.hero-slide--edu-delhiprivate::after { background: rgb(0 0 0 / 35%); } /* measured 2.83 desktop / 2.27 phone bare — brightest subject in the set, no crop clears AA without a real scrim */
 
 /* ---- Title block (grid row 1, fills remaining height) ---- */
 /* Left-aligned per client request (2026-07-31) — back to guideline §9
@@ -61,6 +103,12 @@
   padding-block-end: var(--space-lg);
   padding-inline-start: calc(max(var(--gutter), var(--edge-safe)) + 70px);
   padding-inline-end: var(--gutter);
+  /* The h1 is bottom-anchored but this box still fills the whole grid
+     row above it — without this, that empty upper space swallows clicks
+     meant for .hero-slide-link underneath (found by testing the actual
+     click target, not assuming it). The text itself isn't interactive,
+     so passing clicks through here costs nothing. */
+  pointer-events: none;
 }
 [dir="rtl"] .hero-center {
   padding-inline-start: var(--gutter);
@@ -139,6 +187,48 @@
   .hero-strip-item { border-inline-start: none; border-top: 1px solid var(--color-on-dark); padding-block: 8px; }
   .hero-strip-item:first-child { border-top: none; }
 }
+
+/* ---- Discreet slide indicator (client brief §8.3: "dots only, no
+   counter; small enough not to compete with the headline"). The client's
+   instruction stands — this only fixes readability, not the concept:
+   - active state reads on TWO channels (fill opacity + size), not one,
+     so it isn't relying on colour/opacity alone;
+   - the dark ring around each dot holds it visible against the lightest
+     patch on any slide (a plain white dot disappears into a bright sky);
+   - the <button> itself is a 24x24 hit target — the painted dot stays
+     small via a ::before, the button's own box is what's padded;
+   - variable count: this is plain CSS, no child count is assumed —
+     the JS builds the list from however many .hero-slide-dots button
+     elements exist in the markup. */
+.hero-slide-dots {
+  position: absolute;
+  inset-block-end: var(--space-sm);
+  inset-inline-end: var(--gutter);
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+.hero-slide-dots button {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-slide-dots button::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-on-dark);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 35%);
+  opacity: 0.55;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.hero-slide-dots button.is-active::before { opacity: 1; transform: scale(1.5); }
+.hero-slide-dots button:hover::before { opacity: 0.85; }
+.hero-slide-dots button:focus-visible { outline-color: var(--color-on-dark); }
 
 /* ---- About strip ---- */
 .about-strip-num {

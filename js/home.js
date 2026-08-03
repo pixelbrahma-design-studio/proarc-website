@@ -7,10 +7,15 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!reduceMotion && typeof gsap !== "undefined") {
-    var heroImg = document.querySelector(".hero-media img");
-    if (heroImg) {
-      gsap.to(heroImg, { scale: 1, duration: 2.2, ease: "power2.out", delay: 0.15 });
-    }
+    /* querySelectorAll, not querySelector — with one slide this only ever
+       grabbed that slide's image; with several, only the first slide's
+       image ever settled from its 108% CSS starting scale, and slides
+       2+ stayed permanently zoomed in 8% (a real, measurable difference
+       from their intended framing, not just a missed animation). */
+    var heroImgs = document.querySelectorAll(".hero-media img");
+    heroImgs.forEach(function (img) {
+      gsap.to(img, { scale: 1, duration: 2.2, ease: "power2.out", delay: 0.15 });
+    });
   }
 
   var counters = document.querySelectorAll("[data-count-to]");
@@ -44,10 +49,15 @@
 })();
 
 /**
- * Hero project slideshow — crossfades through a handful of real projects
- * every 4s and keeps the name/meta label + dots in sync. Auto-advance is
- * skipped under prefers-reduced-motion (an auto-rotating carousel with no
- * pause control is a real accessibility smell); dots stay clickable either way.
+ * Hero project slideshow — crossfades through the featured project photos
+ * behind the (fixed, brand-line) headline and strip. Each slide is itself
+ * a link to that project's page; the dots are a discreet indicator only
+ * (client brief §8.3), not a caption. Takes a variable number of slides —
+ * nothing here assumes a fixed count, so a future delivery of more (or
+ * fewer) photos just works. Auto-advance pauses on hover AND on keyboard
+ * focus — a full-slide click target that changes destination mid-hover/
+ * mid-tab is a real misnavigation risk — and is skipped entirely under
+ * prefers-reduced-motion.
  */
 (function () {
   var slideshow = document.getElementById("hero-slideshow");
@@ -55,27 +65,24 @@
 
   var slides = Array.prototype.slice.call(slideshow.querySelectorAll(".hero-slide"));
   var dots = Array.prototype.slice.call(document.querySelectorAll("#hero-slide-dots button"));
-  var infoLink = document.getElementById("hero-slide-info");
-  if (!slides.length || !infoLink) return;
+  if (!slides.length) return;
 
-  var titleEl = infoLink.querySelector(".hero-slide-title");
-  var subEl = infoLink.querySelector(".hero-slide-sub");
+  var links = slides.map(function (s) { return s.querySelector(".hero-slide-link"); });
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var index = 0;
   var timer = null;
-  var INTERVAL = 4000;
+  var INTERVAL = 5000;
 
   function goTo(i) {
     slides[index].classList.remove("is-active");
-    if (dots[index]) dots[index].classList.remove("is-active");
-    index = i;
-    slides[index].classList.add("is-active");
-    if (dots[index]) dots[index].classList.add("is-active");
+    if (dots[index]) { dots[index].classList.remove("is-active"); dots[index].setAttribute("aria-selected", "false"); }
+    if (links[index]) { links[index].setAttribute("tabindex", "-1"); links[index].setAttribute("aria-hidden", "true"); }
 
-    var s = slides[index];
-    titleEl.textContent = s.getAttribute("data-title");
-    subEl.textContent = s.getAttribute("data-meta");
-    infoLink.setAttribute("href", s.getAttribute("data-href"));
+    index = i;
+
+    slides[index].classList.add("is-active");
+    if (dots[index]) { dots[index].classList.add("is-active"); dots[index].setAttribute("aria-selected", "true"); }
+    if (links[index]) { links[index].setAttribute("tabindex", "0"); links[index].removeAttribute("aria-hidden"); }
   }
 
   function next() { goTo((index + 1) % slides.length); }
@@ -90,10 +97,14 @@
     dot.addEventListener("click", function () { goTo(i); start(); });
   });
 
-  var metaWrap = document.querySelector(".hero-slide-meta");
-  if (metaWrap) {
-    metaWrap.addEventListener("mouseenter", stop);
-    metaWrap.addEventListener("mouseleave", start);
+  var hero = document.querySelector(".hero");
+  if (hero) {
+    hero.addEventListener("mouseenter", stop);
+    hero.addEventListener("mouseleave", start);
+    hero.addEventListener("focusin", stop);
+    hero.addEventListener("focusout", function (e) {
+      if (!hero.contains(e.relatedTarget)) start();
+    });
   }
 
   start();
